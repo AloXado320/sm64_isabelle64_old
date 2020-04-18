@@ -3,7 +3,7 @@
 A SM64 Decomp Mod that let's you play as the yellow dog from Animal Crossing, Isabelle.
 Source contains progress of the next release, version 1.3
 
-https://i.imgur.com/s8VB6vq.png
+<img src="https://i.imgur.com/s8VB6vq.png"/></a>
 
 ## Installation
 Follow the same steps as the readme here:
