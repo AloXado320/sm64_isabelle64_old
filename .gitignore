@@ -74,8 +74,12 @@ build/*
 
 # SM64DS Bowser Key
 !/actors/bowser_key/*
-# From RGBA16 to IA4
+# SM64DS Coins
+!/actors/coin/*
+# Exclamation Box Outline (from RGBA16 to IA4)
 !/actors/exclamation_box_outline/*
+# Power Meter
+!/actors/power_meter/*
 # Isabelle model
 !/actors/isabelle/*
 # Gold Leaf
