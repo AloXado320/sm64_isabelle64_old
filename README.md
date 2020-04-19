@@ -13,11 +13,11 @@ Source contains progress of the next release, version 1.3
 
 ## Quick Installation
 
-If is the first time you build you first need to run these commands:
+If is the first time doing this you first need to run these commands:
 
-`make -j4 -C tools` then `./extract_assets.py us`
+`make -C tools` then `./extract_assets.py us`
 
-Then to actually build the rom, run `make` and wait.
+Then after you do the step above, build the rom, running `make` and wait until it's done.
 
 It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those or things will break.
 
