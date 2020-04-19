@@ -7,16 +7,18 @@ Source contains progress of the next release, version 1.3
 <img src="https://i.imgur.com/s8VB6vq.png"/></a>
 
 ## Info
-* Intially made as a tribute for her reveal in Smash Ultimate.
-* First version was made using binary edits and other tools.
-* Version 1.2 was the first version made in decomp, however 1.3 is not based of it because it's an old repo.
+* Initially made as a tribute for her reveal in Smash Ultimate (September 2018).
+* First versions (1.0 and 1.1) were made using binary edits and other tools.
+* Version 1.2 was the first version made in Decomp, however 1.3 is not based of it because it uses an old repo.
 
-## Installation
-Follow the same steps as the readme here:
-https://github.com/n64decomp/sm64/blob/master/README.md
+## Quick Installation
 
-But beware that in order to build the rom, you only need to run `make`
+If is the first time you build you first need to run these commands:
 
-It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those.
+`make -j4 -C tools` then `./extract_assets.py us`
+
+Then to actually build the rom, run `make` and wait.
+
+It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those or things will break.
 
 My Discord: https://discord.gg/KHU9YHw

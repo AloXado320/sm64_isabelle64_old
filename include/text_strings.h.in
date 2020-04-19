@@ -1,0 +1,780 @@
+#ifndef TEXT_STRINGS_H
+#define TEXT_STRINGS_H
+
+#include "text_menu_strings.h"
+
+/**
+ * Global Symbols
+ */
+#define TEXT_ZERO _("0")
+#define TEXT_COIN _("$")
+#define TEXT_STAR _("★")
+#define TEXT_COIN_X _("$×")
+#define TEXT_STAR_X _("★×")
+#define TEXT_VARIABLE_X _("×")
+#define TEXT_UNFILLED_STAR _("☆")
+
+/**
+ * Global Text
+ */
+// File Select
+#define TEXT_NEW _("NEW") // New File Text
+
+// Ingame Menu
+#define TEXT_PAUSE _("PAUSE") // Pause text, Castle Courses
+#define TEXT_PAUSA _("PAUSA") // Pause text, Castle Courses
+
+#define TEXT_HUD_CONGRATULATIONS _("CONGRATULATIONS") // Course Complete Text, Bowser Courses
+
+#if defined(VERSION_JP) || defined(VERSION_SH)
+
+/**
+ * File Select Text
+ */
+// Main Screens
+// JPHUD menu strings are defined in "text_menu_strings.h.in"
+#define TEXT_MARIO TEXT_JPHUD_MARIO // View Score Menu
+#define TEXT_SELECT_FILE TEXT_JPHUD_SELECT_FILE
+#define TEXT_CHECK_FILE TEXT_JPHUD_CHECK_FILE
+#define TEXT_COPY_FILE TEXT_JPHUD_COPY_FILE
+#define TEXT_ERASE_FILE TEXT_JPHUD_ERASE_FILE
+#define TEXT_SOUND_SELECT TEXT_JPHUD_SOUND_SELECT
+
+#define TEXT_FILE_MARIO_A _("しずえＡ")
+#define TEXT_FILE_MARIO_B _("しずえＢ")
+#define TEXT_FILE_MARIO_C _("しずえＣ")
+#define TEXT_FILE_MARIO_D _("しずえＤ")
+
+// Menu Options
+#define TEXT_SCORE _("スコア")
+#define TEXT_COPY _("コピー")
+#define TEXT_ERASE _("けす")
+
+// Sound Options
+#define TEXT_STEREO _("ステレオ")
+#define TEXT_MONO _("モノラル")
+#define TEXT_HEADSET _("ヘッドホン")
+
+// Misc Menu Text
+#define TEXT_SAVED_DATA_EXISTS _("ファイルにデータがはいってます")
+#define TEXT_NO_SAVED_DATA_EXISTS _("ファイルにデータがありません")
+
+// Inside a Menu
+#define TEXT_RETURN _("もどる")
+#define TEXT_CHECK_SCORE _("スコアをみる")
+#define TEXT_COPY_FILE_BUTTON _("ファイルコピー")
+#define TEXT_ERASE_FILE_BUTTON _("ファイルけす")
+
+// Score Menu
+#define TEXT_HI_SCORE _("ハイスコア")
+#define TEXT_MY_SCORE _("マイスコア")
+
+// Copy Menu
+#define TEXT_COPY_IT_TO_WHERE _("どこにコピーしますか？")
+#define TEXT_COPYING_COMPLETED _("コピーおわりました")
+#define TEXT_NO_FILE_TO_COPY_FROM _("からのファイルがありません")
+
+// Erase Menu
+#define TEXT_SURE _("ほんと？")
+#define TEXT_YES _("はい")
+#define TEXT_NO _("いいえ")
+#define TEXT_FILE_MARIO_A_JUST_ERASED _("しずえＡをけしました")
+
+/**
+ * Menus Text (Pause, Course Completed)
+ */
+// Main Courses
+#define TEXT_COURSE _("コース")
+#define TEXT_MYSCORE _("マイスコア")
+#define TEXT_CONTINUE _("つづけて　しずえする？")
+#define TEXT_EXIT_COURSE _("コースからでる？")
+#define TEXT_CAMERA_ANGLE_R _("Ｒボタンのカメラきりかえ")
+
+// Camera Options
+#define TEXT_LAKITU_MARIO _("ジュゲム↔しずえ")
+#define TEXT_LAKITU_STOP _("ジュゲム↔ストップ")
+#define TEXT_NORMAL_UPCLOSE _("（おすすめ）（リアル）")
+#define TEXT_NORMAL_FIXED _("（おすすめ）（とまる）")
+
+// Course Completed Misc Text
+#define TEXT_CATCH _("キャッチ！")
+#define TEXT_CLEAR _("クリア！")
+#define TEXT_HUD_HI_SCORE _("ＨＩＳＣＯＲＥ")
+
+// Save Options
+#define TEXT_SAVE_AND_CONTINUE _("セーブしてつづける？")
+#define TEXT_SAVE_AND_QUIT _("セーブしておわる？")
+#define TEXT_CONTINUE_WITHOUT_SAVING _("セーブしないでつづける？")
+
+/**
+ * Ending Peach cutscene text.
+ */
+#define TEXT_FILE_MARIO_EXCLAMATION _("しずえ！！")
+#define TEXT_POWER_STARS_RESTORED _("おしろにスターが　もどったのね")
+#define TEXT_THANKS_TO_YOU _("みんな　あなたのおかげだわ！")
+#define TEXT_THANK_YOU_MARIO _("ありがとう　しずえ")
+#define TEXT_SOMETHING_SPECIAL _("なにか　おれいをしなくちゃ・・")
+#define TEXT_LISTEN_EVERYBODY _("さあ　みんな")
+#define TEXT_LETS_HAVE_CAKE _("おいしいケーキを　やきましょう")
+#define TEXT_FOR_MARIO _("しずえの　ために・・・")
+#define TEXT_FILE_MARIO_QUESTION _("しずえ？")
+#endif
+
+/**
+ * JP NPC Names
+ */
+
+#define JP_NO_NPCTEXT _("")
+#define JP_NPCTEXTKTQ _("ノコノコ")
+#define JP_NPCTEXTTOAD _("キノピオ")
+
+/**
+ * Misc Names
+ */
+
+#define JP_SHIZUE64_TXT _("しずえ64")
+#define JP_PRESS_START_TXT _("PRESS START BUTTON")
+#define JP_NO_CONTROLLER_TEXT _("NO CONTROLLER")
+
+#if defined(VERSION_US) || defined(MULTILANGUAGE)
+
+// #define TEXT_MI_NINA_BONITA _("Mi niña bonita UwU")
+
+#define TEXT_ALT_COSTUME_TITLE _("Select a costume")
+#define TEXT_ALT_COSTUME_TITLE_FR _("Choisir un costume")
+#define TEXT_ALT_COSTUME_TITLE_DE _("Wähle ein Kostüm")
+#define TEXT_ALT_COSTUME_TITLE_IT _("Seleziona un costume")
+#define TEXT_ALT_COSTUME_TITLE_ES _("Elije un disfraz")
+
+#define TEXT_ALT_COSTUME_GREEN _("Green")
+#define TEXT_ALT_COSTUME_YELLOW _("Yellow")
+#define TEXT_ALT_COSTUME_PINK _("Pink")
+#define TEXT_ALT_COSTUME_RED _("Red")
+#define TEXT_ALT_COSTUME_PURPLE _("Purple")
+#define TEXT_ALT_COSTUME_TEAL _("Teal")
+#define TEXT_ALT_COSTUME_GRAY _("Gray")
+#define TEXT_ALT_COSTUME_BLUE _("Blue")
+
+#define TEXT_ALT_COSTUME_GREEN_FR _("Vert")
+#define TEXT_ALT_COSTUME_YELLOW_FR _("Jaune")
+#define TEXT_ALT_COSTUME_PINK_FR _("Rose")
+#define TEXT_ALT_COSTUME_RED_FR _("Rouge")
+#define TEXT_ALT_COSTUME_PURPLE_FR _("Violet")
+#define TEXT_ALT_COSTUME_TEAL_FR _("Sarcelle")
+#define TEXT_ALT_COSTUME_GRAY_FR _("Gris")
+#define TEXT_ALT_COSTUME_BLUE_FR _("Bleu")
+
+#define TEXT_ALT_COSTUME_GREEN_DE _("Grün")
+#define TEXT_ALT_COSTUME_YELLOW_DE _("Gelb")
+#define TEXT_ALT_COSTUME_PINK_DE _("Rosa")
+#define TEXT_ALT_COSTUME_RED_DE _("Rot")
+#define TEXT_ALT_COSTUME_PURPLE_DE _("Lila")
+#define TEXT_ALT_COSTUME_TEAL_DE _("Blaugrün")
+#define TEXT_ALT_COSTUME_GRAY_DE _("Grau")
+#define TEXT_ALT_COSTUME_BLUE_DE _("Blau")
+
+#define TEXT_ALT_COSTUME_GREEN_IT _("Verde")
+#define TEXT_ALT_COSTUME_YELLOW_IT _("Giallo")
+#define TEXT_ALT_COSTUME_PINK_IT _("Rosa")
+#define TEXT_ALT_COSTUME_RED_IT _("Rosso")
+#define TEXT_ALT_COSTUME_PURPLE_IT _("Viola")
+#define TEXT_ALT_COSTUME_TEAL_IT _("Teal")
+#define TEXT_ALT_COSTUME_GRAY_IT _("Grigio")
+#define TEXT_ALT_COSTUME_BLUE_IT _("Blu")
+
+#define TEXT_ALT_COSTUME_GREEN_ES _("Verde")
+#define TEXT_ALT_COSTUME_YELLOW_ES _("Amarillo")
+#define TEXT_ALT_COSTUME_PINK_ES _("Rosado")
+#define TEXT_ALT_COSTUME_RED_ES _("Rojo")
+#define TEXT_ALT_COSTUME_PURPLE_ES _("Purpura")
+#define TEXT_ALT_COSTUME_TEAL_ES _("Cerceta")
+#define TEXT_ALT_COSTUME_GRAY_ES _("Gris")
+#define TEXT_ALT_COSTUME_BLUE_ES _("Azul")
+
+
+#define NO_NPCTEXT _("")
+#define NPCTEXT_BUDDY _("Bob-omb Buddy")
+#define NPCTEXT_KTQ _("Koopa the Quick")
+#define NPCTEXT_KBB _("King Bob-omb")
+#define NPCTEXT_BOWSER _("Bowser")
+#define NPCTEXT_LAKITU _("Lakitu")
+#define NPCTEXT_HOOT _("Hoot")
+#define NPCTEXT_PENGUIN _("Penguin")
+#define NPCTEXT_TOAD _("Toad")
+#define NPCTEXT_UKIKI _("Ukiki")
+#define NPCTEXT_MIPS _("Mips")
+#define NPCTEXT_SNOWMAN _("Snowman")
+#define NPCTEXT_WHOMP _("Whomp King")
+#define NPCTEXT_EYEROK _("Eyerok")
+#define NPCTEXT_WIGGLER _("Wiggler")
+#define NPCTEXT_YOSHI _("Yoshi")
+
+#define NPCTEXT_BUDDY_FR _("Bob-omb Rose")
+#define NPCTEXT_KTQ_FR _("Koopa Rapido")
+#define NPCTEXT_KBB_FR _("Roi Bob-omb")
+#define NPCTEXT_BOWSER_FR _("Bowser")
+#define NPCTEXT_LAKITU_FR _("Lakitu")
+#define NPCTEXT_HOOT_FR _("Hiboulul")
+#define NPCTEXT_PENGUIN_FR _("Pingouin")
+#define NPCTEXT_TOAD_FR _("Toad")
+#define NPCTEXT_UKIKI_FR _("Ukiki")
+#define NPCTEXT_MIPS_FR _("Mips")
+#define NPCTEXT_SNOWMAN_FR _("Snowman")
+#define NPCTEXT_WHOMP_FR _("Roi Whomp")
+#define NPCTEXT_EYEROK_FR _("Cyrock")
+#define NPCTEXT_WIGGLER_FR _("Wiggler")
+#define NPCTEXT_YOSHI_FR _("Yoshi")
+
+#define NPCTEXT_BUDDY_DE _("Rosa Bob-omb")
+#define NPCTEXT_KTQ_DE _("Schneller Koopa")
+#define NPCTEXT_KBB_DE _("König Bob-omb")
+#define NPCTEXT_BOWSER_DE _("Bowser")
+#define NPCTEXT_LAKITU_DE _("Lakitu")
+#define NPCTEXT_HOOT_DE _("Eule")
+#define NPCTEXT_PENGUIN_DE _("Pinguin")
+#define NPCTEXT_TOAD_DE _("Toad")
+#define NPCTEXT_UKIKI_DE _("Ukiki")
+#define NPCTEXT_MIPS_DE _("Mips")
+#define NPCTEXT_SNOWMAN_DE _("Snowman")
+#define NPCTEXT_WHOMP_DE _("König Wummp")
+#define NPCTEXT_EYEROK_DE _("Zyklaps")
+#define NPCTEXT_WIGGLER_DE _("Wiggler")
+#define NPCTEXT_YOSHI_DE _("Yoshi")
+
+#define NPCTEXT_BUDDY_IT _("Buon-omba")
+#define NPCTEXT_KTQ_IT _("Koopa il Veloce")
+#define NPCTEXT_KBB_IT _("Boss Bob-omba")
+#define NPCTEXT_BOWSER_IT _("Bowser")
+#define NPCTEXT_LAKITU_IT _("Lakitu")
+#define NPCTEXT_HOOT_IT _("Guffy")
+#define NPCTEXT_PENGUIN_IT _("Pinguotto")
+#define NPCTEXT_TOAD_IT _("Toad")
+#define NPCTEXT_UKIKI_IT _("Ukiki")
+#define NPCTEXT_MIPS_IT _("Mips")
+#define NPCTEXT_SNOWMAN_IT _("Snowman")
+#define NPCTEXT_WHOMP_IT _("Re Womp")
+#define NPCTEXT_EYEROK_IT _("Rocciocchio")
+#define NPCTEXT_WIGGLER_IT _("Torcibruco")
+#define NPCTEXT_YOSHI_IT _("Yoshi")
+
+#define NPCTEXT_BUDDY_ES _("Bob-omb Rojo")
+#define NPCTEXT_KTQ_ES _("Koopa el Rápido")
+#define NPCTEXT_KBB_ES _("Rey Bob-omba")
+#define NPCTEXT_BOWSER_ES _("Bowser")
+#define NPCTEXT_LAKITU_ES _("Lakitu")
+#define NPCTEXT_HOOT_ES _("Búho")
+#define NPCTEXT_PENGUIN_ES _("Pingüi")
+#define NPCTEXT_TOAD_ES _("Toad")
+#define NPCTEXT_UKIKI_ES _("Ukiki")
+#define NPCTEXT_MIPS_ES _("Mips")
+#define NPCTEXT_SNOWMAN_ES _("Snowman")
+#define NPCTEXT_WHOMP_ES _("Rey Roco")
+#define NPCTEXT_EYEROK_ES _("Tutanmanón")
+#define NPCTEXT_WIGGLER_ES _("Floruga")
+#define NPCTEXT_YOSHI_ES _("Yoshi")
+
+/**
+ * File Select Text
+ */
+// Main Screens
+
+#define TEXT_MARIO _("ISABELLE") // View Score Menu
+#define TEXT_MARIO_FR _("MARIE") // View Score Menu
+#define TEXT_MARIO_DE _("MELINDA") // View Score Menu
+#define TEXT_MARIO_IT _("FUFFI") // View Score Menu
+#define TEXT_MARIO_ES _("CANELA") // View Score Menu
+
+#define TEXT_SELECT_FILE _("SELECT FILE")
+#define TEXT_CHECK_FILE _("CHECK FILE")
+#define TEXT_COPY_FILE _("COPY FILE")
+#define TEXT_ERASE_FILE _("ERASE FILE")
+#define TEXT_SOUND_SELECT _("SOUND SELECT")
+
+#define TEXT_FILE_MARIO_A _("ISABELLE A")
+#define TEXT_FILE_MARIO_B _("ISABELLE B")
+#define TEXT_FILE_MARIO_C _("ISABELLE C")
+#define TEXT_FILE_MARIO_D _("ISABELLE D")
+
+#define TEXT_FILE_MARIO_A_FR _("MARIE A")
+#define TEXT_FILE_MARIO_B_FR _("MARIE B")
+#define TEXT_FILE_MARIO_C_FR _("MARIE C")
+#define TEXT_FILE_MARIO_D_FR _("MARIE D")
+
+#define TEXT_FILE_MARIO_A_DE _("MELINDA A")
+#define TEXT_FILE_MARIO_B_DE _("MELINDA B")
+#define TEXT_FILE_MARIO_C_DE _("MELINDA C")
+#define TEXT_FILE_MARIO_D_DE _("MELINDA D")
+
+#define TEXT_FILE_MARIO_A_IT _("FUFFI A")
+#define TEXT_FILE_MARIO_B_IT _("FUFFI B")
+#define TEXT_FILE_MARIO_C_IT _("FUFFI C")
+#define TEXT_FILE_MARIO_D_IT _("FUFFI D")
+
+#define TEXT_FILE_MARIO_A_ES _("CANELA A")
+#define TEXT_FILE_MARIO_B_ES _("CANELA B")
+#define TEXT_FILE_MARIO_C_ES _("CANELA C")
+#define TEXT_FILE_MARIO_D_ES _("CANELA D")
+
+// Menu Options
+#define TEXT_SCORE _("Score")
+#define TEXT_COPY _("Copy")
+#define TEXT_ERASE _("Erase")
+
+// Sound Options
+#define TEXT_STEREO _("Stereo")
+#define TEXT_MONO _("Mono")
+#define TEXT_HEADSET _("Headset")
+
+// Misc Menu Text
+#define TEXT_SAVED_DATA_EXISTS _("Saved data exists") // Misspell
+#define TEXT_NO_SAVED_DATA_EXISTS _("No save data exists")
+
+// Inside a Menu
+#define TEXT_RETURN _("Return")
+#define TEXT_CHECK_SCORE _("Check score")
+#define TEXT_COPY_FILE_BUTTON _("Copy file")
+#define TEXT_ERASE_FILE_BUTTON _("Erase file")
+
+// Score Menu
+#define TEXT_HI_SCORE _("HI SCORE")
+#define TEXT_MY_SCORE _("MY SCORE")
+
+// Copy Menu
+#define TEXT_COPY_IT_TO_WHERE _("Copy it to where?")
+#define TEXT_COPYING_COMPLETED _("Copying completed")
+#define TEXT_NO_FILE_TO_COPY_FROM _("No empty file")
+
+// Erase Menu
+#define TEXT_SURE _("Sure?")
+#define TEXT_YES _("Yes")
+#define TEXT_NO _("No")
+#define TEXT_FILE_MARIO_A_JUST_ERASED _("Isabelle A just erased")
+
+/**
+ * Menus Text (Pause, Course Completed)
+ */
+// Main Courses
+#define TEXT_COURSE _("COURSE")
+#define TEXT_MYSCORE _("MYSCORE")
+#define TEXT_CONTINUE _("CONTINUE")
+#define TEXT_EXIT_COURSE _("EXIT COURSE")
+#ifndef MULTILANGUAGE // "R" text is different in EU
+#define TEXT_CAMERA_ANGLE_R _("SET CAMERA ANGLE WITH R")
+#endif
+
+// Camera Options
+#define TEXT_LAKITU_MARIO _("LAKITU + MARIO")
+#define TEXT_LAKITU_STOP _("LAKITU + STOP")
+#define TEXT_NORMAL_UPCLOSE __("(NORMAL)(UP-CLOSE)")
+#define TEXT_NORMAL_FIXED __("(NORMAL)(FIXED)")
+
+// Course Completed Misc Text
+#define TEXT_CATCH _("CATCH")
+#define TEXT_CLEAR _("CLEAR")
+#define TEXT_HUD_HI_SCORE _("HI SCORE")
+
+// Save Options
+#define TEXT_SAVE_AND_CONTINUE _("SAVE & CONTINUE")
+#define TEXT_SAVE_AND_QUIT _("SAVE & QUIT")
+#define TEXT_CONTINUE_WITHOUT_SAVING _("CONTINUE, DON'T SAVE")
+
+/**
+ * Ending Peach cutscene text.
+ */
+#define TEXT_FILE_MARIO_EXCLAMATION _("Mario!")
+#define TEXT_POWER_STARS_RESTORED __("The power of the Stars is restored to the castle...")
+#define TEXT_THANKS_TO_YOU __("...and it's all thanks to you!")
+#define TEXT_THANK_YOU_MARIO __("Thank you, Mario!")
+#define TEXT_SOMETHING_SPECIAL __("We have to do something special for you...")
+#define TEXT_LISTEN_EVERYBODY _("Listen, everybody,")
+#define TEXT_LETS_HAVE_CAKE _("let's bake a delicious cake...")
+#define TEXT_FOR_MARIO _("...for Mario...")
+#define TEXT_FILE_MARIO_QUESTION _("Mario!")
+
+#endif
+
+#ifdef MULTILANGUAGE
+/**
+ * File Select Text
+ */
+#define TEXT_RETURN_FR _("Retour")
+#define TEXT_RETURN_DE _("Zurück")
+#define TEXT_RETURN_IT _("Torna")
+#define TEXT_RETURN_ES _("Regresar")
+
+#define TEXT_CHECK_SCORE_FR _("Score")
+#define TEXT_CHECK_SCORE_DE _("Leistung")
+#define TEXT_CHECK_SCORE_IT _("Punteggio")
+#define TEXT_CHECK_SCORE_ES _("Ver puntos")
+
+#define TEXT_COPY_FILE_BUTTON_FR _("Copier")
+#define TEXT_COPY_FILE_BUTTON_DE _("Kopieren")
+#define TEXT_COPY_FILE_BUTTON_IT _("Copia")
+#define TEXT_COPY_FILE_BUTTON_ES _("Copiar")
+
+#define TEXT_ERASE_FILE_BUTTON_FR _("Effacer")
+#define TEXT_ERASE_FILE_BUTTON_DE _("Löschen")
+#define TEXT_ERASE_FILE_BUTTON_IT _("Cancella")
+#define TEXT_ERASE_FILE_BUTTON_ES _("Borrar")
+
+#define TEXT_SELECT_FILE_FR _("CHOISIR  FICHIER")
+#define TEXT_SELECT_FILE_DE _("WwHLE SPIEL")
+#define TEXT_SELECT_FILE_IT _("SCEGLI FILE")
+#define TEXT_SELECT_FILE_ES _("ELEGIR ARCHIVO")
+
+#define TEXT_SCORE_FR _("Score")
+#define TEXT_SCORE_DE _("Leistung")
+#define TEXT_SCORE_IT _("Punteggi")
+#define TEXT_SCORE_ES _("Puntos")
+
+#define TEXT_COPY_FR _("Copier")
+#define TEXT_COPY_DE _("Kopieren")
+#define TEXT_COPY_IT _("Copia")
+#define TEXT_COPY_ES _("Copiar")
+
+#define TEXT_ERASE_FR _("Effacer")
+#define TEXT_ERASE_DE _("Löschen")
+#define TEXT_ERASE_IT _("Elimina")
+#define TEXT_ERASE_ES _("Borrar")
+
+#define TEXT_OPTION _("Option")  // new in EU
+#define TEXT_OPTION_FR _("Option")
+#define TEXT_OPTION_DE _("Optionen")
+#define TEXT_OPTION_IT _("Opzioni")
+#define TEXT_OPTION_ES _("Opciones")
+
+#define TEXT_CHECK_FILE_FR _("VOIR  SCORE")
+#define TEXT_CHECK_FILE_DE _("VON WELCHEM SPIEL")
+#define TEXT_CHECK_FILE_IT _("ESAMINA FILE")
+#define TEXT_CHECK_FILE_ES _("VER PUNTOS")
+
+#define TEXT_NO_SAVED_DATA_EXISTS_FR _("Aucune sauvegarde disponible")
+#define TEXT_NO_SAVED_DATA_EXISTS_DE _("Kein spiel vorhanden")
+#define TEXT_NO_SAVED_DATA_EXISTS_IT _("Dati non trovati!")
+#define TEXT_NO_SAVED_DATA_EXISTS_ES _("No existe datos guardados")
+
+#define TEXT_COPY_FILE_FR _("COPIER  FICHIER")
+#define TEXT_COPY_FILE_DE _("SPIEL KOPIEREN")
+#define TEXT_COPY_FILE_IT _("COPIA FILE")
+#define TEXT_COPY_FILE_ES _("COPIAR ARCHIVO")
+
+#define TEXT_COPY_IT_TO_WHERE_FR _("Copier sur?")
+#define TEXT_COPY_IT_TO_WHERE_DE _("Wohin kopieren?")
+#define TEXT_COPY_IT_TO_WHERE_IT _("Dove vuoi copiare?")
+#define TEXT_COPY_IT_TO_WHERE_ES _("¿Copiarlo a dónde?")
+
+#define TEXT_COPYING_COMPLETED_FR _("Copie acheveé")
+#define TEXT_COPYING_COMPLETED_DE _("Spiel kopiert")
+#define TEXT_COPYING_COMPLETED_IT _("Copia completata")
+#define TEXT_COPYING_COMPLETED_ES _("Copia completada")
+
+#define TEXT_SAVED_DATA_EXISTS_FR _("Savegarde existante")
+#define TEXT_SAVED_DATA_EXISTS_DE _("Bereits belegt")
+#define TEXT_SAVED_DATA_EXISTS_IT _("Dati gia' esistenti")
+#define TEXT_SAVED_DATA_EXISTS_ES _("Existe datos guardados")
+
+#define TEXT_NO_FILE_TO_COPY_FROM_FR _("Aucun fichier vide")
+#define TEXT_NO_FILE_TO_COPY_FROM_DE _("Kein platz vorhanden")
+#define TEXT_NO_FILE_TO_COPY_FROM_IT _("File pieno!")
+#define TEXT_NO_FILE_TO_COPY_FROM_ES _("No hay archivo")
+
+#define TEXT_YES_FR _("Oui")
+#define TEXT_YES_DE _("Ja")
+#define TEXT_YES_IT _("Si'")
+#define TEXT_YES_ES _("Sí")
+
+#define TEXT_NO_FR _("Non")
+#define TEXT_NO_DE _("Nein")
+#define TEXT_NO_IT _("No")
+#define TEXT_NO_ES _("No")
+
+#define TEXT_ERASE_FILE_FR _("EFFACER  FICHIER")
+#define TEXT_ERASE_FILE_DE _("SPIEL LxSCHEN")
+#define TEXT_ERASE_FILE_IT _("CANCELLA FILE")
+#define TEXT_ERASE_FILE_ES _("BORRAR ARCHIVO")
+
+#define TEXT_SURE_FR _("Ok?")
+#define TEXT_SURE_DE _("Sicher?")
+#define TEXT_SURE_IT _("Vero?")
+#define TEXT_SURE_ES _("¿Seguro?")
+
+#define TEXT_FILE_MARIO_A_JUST_ERASED_FR _("Marie A effacé")
+#define TEXT_FILE_MARIO_A_JUST_ERASED_DE _("Melinda A gelöscht")
+#define TEXT_FILE_MARIO_A_JUST_ERASED_IT _("Fuffi A cancellati")
+#define TEXT_FILE_MARIO_A_JUST_ERASED_ES _("Canela A fue borrada")
+
+#define TEXT_SOUND_SELECT_FR _("SON")
+#define TEXT_SOUND_SELECT_DE _("SOUND")
+#define TEXT_SOUND_SELECT_IT _("SCEGLI AUDIO")
+#define TEXT_SOUND_SELECT_ES _("ELEGIR SONIDO")
+
+#define TEXT_LANGUAGE_SELECT _("LANGUAGE SELECT")  // new in EU
+#define TEXT_LANGUAGE_SELECT_FR _("SELECTION LANGUE")
+#define TEXT_LANGUAGE_SELECT_DE _("WwHLE SPRACHE")
+#define TEXT_LANGUAGE_SELECT_IT _("SELEZIONE LINGUA")
+#define TEXT_LANGUAGE_SELECT_ES _("SELECCIONA IDIOMA")
+
+#define TEXT_STEREO_FR _("Stéréo")
+#define TEXT_MONO_FR _("Mono")
+#define TEXT_HEADSET_FR _("Casque")
+
+#define TEXT_STEREO_DE _("Stereo")
+#define TEXT_MONO_DE _("Mono")
+#define TEXT_HEADSET_DE _("Phones")
+
+#define TEXT_STEREO_IT _("Stereo")
+#define TEXT_MONO_IT _("Mono")
+#define TEXT_HEADSET_IT _("Cuffie")
+
+#define TEXT_STEREO_ES _("Stereo")
+#define TEXT_MONO_ES _("Mono")
+#define TEXT_HEADSET_ES _("Audifonos")
+
+#define TEXT_ENGLISH _("English")
+#define TEXT_FRENCH _("Français")
+#define TEXT_GERMAN _("Deutsch")
+#define TEXT_ITALIAN _("Italiano")
+#define TEXT_ESPANOL _("Español")
+
+#define TEXT_HI_SCORE_FR _("MEILLEUR SCORE")
+#define TEXT_HI_SCORE_DE _("BESTLEISTUNG")
+#define TEXT_HI_SCORE_IT _("MIGLIORE PUNTI")
+#define TEXT_HI_SCORE_ES _("RECORD")
+
+#define TEXT_MY_SCORE_FR _("MON SCORE")
+#define TEXT_MY_SCORE_DE _("LEISTUNG")
+#define TEXT_MY_SCORE_IT _("MIO PUNTI")
+#define TEXT_MY_SCORE_ES _("MI PUNTAJE")
+
+#define TEXT_NEW_FR _("VIDE")
+#define TEXT_NEW_DE _("FREI")
+#define TEXT_NEW_IT _("NUOVO")
+#define TEXT_NEW_ES _("NUEVO")
+
+/**
+ * Menus Text (Pause, Course Completed)
+ */
+// Main Courses
+// English, "R" text is different
+#define TEXT_CAMERA_ANGLE_R             _("SET CAMERA ANGLE WITH [R]")
+// French
+#define TEXT_COURSE_FR                  _("NIVEAU")
+#define TEXT_MY_SCORE_FR                _("MON SCORE")
+#define TEXT_CONTINUE_FR                _("CONTINUER")
+#define TEXT_EXIT_COURSE_FR             _("QUITTER NIVEAU")
+#define TEXT_CAMERA_ANGLE_R_FR          _("RÉGLAGE CAMÉRA AVEC [R]")
+// German
+#define TEXT_COURSE_DE                  _("KURS")
+#define TEXT_MY_SCORE_DE                _("LEISTUNG")
+#define TEXT_CONTINUE_DE                _("WEITER")
+#define TEXT_EXIT_COURSE_DE             _("KURS VERLASSEN")
+#define TEXT_CAMERA_ANGLE_R_DE          _("KAMERA MIT [R] VERSTELLEN")
+// Italian
+#define TEXT_COURSE_IT                  _("AREA")
+#define TEXT_MY_SCORE_IT                _("MIO PUNTI")
+#define TEXT_CONTINUE_IT                _("CONTINUA")
+#define TEXT_EXIT_COURSE_IT             _("ABBANDONA")
+#define TEXT_CAMERA_ANGLE_R_IT          _("ANGOLO DI RIPRESA CON [R]")
+// Spanish
+#define TEXT_COURSE_ES                  _("NIVEL")
+#define TEXT_MY_SCORE_ES                _("MI PUNTAJE")
+#define TEXT_CONTINUE_ES                _("CONTINUAR")
+#define TEXT_EXIT_COURSE_ES             _("SALIR DEL NIVEL")
+#define TEXT_CAMERA_ANGLE_R_ES          _("AJUSTA LA CÁMARA CON [R]")
+
+
+// Camera Options
+// French
+#define TEXT_NORMAL_UPCLOSE_FR          __("(NORMAL)(GROS-PLAN)")
+#define TEXT_NORMAL_FIXED_FR            __("(NORMAL)(FIXE)")
+// German
+#define TEXT_NORMAL_UPCLOSE_DE          __("(NORMAL)(WEIT-ZOOM)")
+#define TEXT_NORMAL_FIXED_DE            __("(NORMAL)(STATIV)")
+// Italian
+#define TEXT_NORMAL_UPCLOSE_IT          __("(NORMALE)(SPALLE)")
+#define TEXT_NORMAL_FIXED_IT            __("(NORMALE)(FERMA)")
+// Spanish
+#define TEXT_NORMAL_UPCLOSE_ES          __("(NORMAL)(PRIMER-PLANO)")
+#define TEXT_NORMAL_FIXED_ES            __("(NORMAL)(FIJA)")
+
+// Course Completed Misc Text
+// French
+#define TEXT_HUD_HI_SCORE_FR            _("MEILLEUR SCORE")
+#define TEXT_HUD_CONGRATULATIONS_FR     _("FELICITATIONS")
+// German
+#define TEXT_HUD_HI_SCORE_DE            _("BESTLEISTUNG")
+#define TEXT_HUD_CONGRATULATIONS_DE     _("GRATULATION")
+// Italian
+#define TEXT_HUD_HI_SCORE_IT            _("MIGLIORE PUNTI")
+#define TEXT_HUD_CONGRATULATIONS_IT     _("CONGRATULAZIONI")
+// Spanish
+#define TEXT_HUD_HI_SCORE_ES            _("RECORD")
+#define TEXT_HUD_CONGRATULATIONS_ES     _("FELICIDADES")
+
+// Save Options
+// French
+#define TEXT_SAVE_AND_CONTINUE_FR       _("SAUVEGARDER & CONTINUER")
+#define TEXT_SAVE_AND_QUIT_FR           _("SAUVEGARDER & QUITTER")
+#define TEXT_CONTINUE_WITHOUT_SAVING_FR _("CONTINUER SANS SAUVEGARDER")
+// German
+#define TEXT_SAVE_AND_CONTINUE_DE       _("SPEICHERN & WEITER")
+#define TEXT_SAVE_AND_QUIT_DE           _("SPEICHERN & ENDE")
+#define TEXT_CONTINUE_WITHOUT_SAVING_DE _("WEITER OHNE ZU SPEICHERN")
+// Italian
+#define TEXT_SAVE_AND_CONTINUE_IT       _("SALVA & CONTINUA")
+#define TEXT_SAVE_AND_QUIT_IT           _("SALVA & ESCI")
+#define TEXT_CONTINUE_WITHOUT_SAVING_IT _("CONTINUA NON SALVARE")
+// Spanish
+#define TEXT_SAVE_AND_CONTINUE_ES       _("GUARDAR & CONTINUAR")
+#define TEXT_SAVE_AND_QUIT_ES           _("GUARDAR & SALIR")
+#define TEXT_CONTINUE_WITHOUT_SAVING_ES _("CONTINUAR SIN GUARDAR")
+
+/**
+ * Ending Peach cutscene text.
+ */
+// French
+#define TEXT_POWER_STARS_RESTORED_FR _("Grâce aux étoiles, le château a retrouvé ses pouvoirs...")
+#define TEXT_THANKS_TO_YOU_FR        _("...et ceci grâce à toi!")
+#define TEXT_THANK_YOU_MARIO_FR      _("Merci, Mario!")
+#define TEXT_SOMETHING_SPECIAL_FR    _("Tu mérites une récompense...")
+#define TEXT_COME_ON_EVERYBODY_FR    _("Venez les amis...")
+#define TEXT_LETS_HAVE_CAKE_FR       _("Allons préparer un délicieux gâteau...")
+#define TEXT_FOR_MARIO_FR            _("...pour Mario...")
+// German
+#define TEXT_POWER_STARS_RESTORED_DE _("Die Macht der Sterne ruht wieder sicher im Schloss...")
+#define TEXT_THANKS_TO_YOU_DE        _("...und alles dank Deiner Hilfe!")
+#define TEXT_THANK_YOU_MARIO_DE      _("Vielen Dank, Mario!")
+#define TEXT_SOMETHING_SPECIAL_DE    _("Wir haben eine Überraschung für Dich...")
+#define TEXT_COME_ON_EVERYBODY_DE    _("Hört alle her...")
+#define TEXT_LETS_HAVE_CAKE_DE       _("Laßt uns einen leckeren Kuchen backen...")
+#define TEXT_FOR_MARIO_DE            _("...für Mario...")
+// Italian
+#define TEXT_POWER_STARS_RESTORED_IT _("Il castello gode nuovamente del potere delle Stelle...")
+#define TEXT_THANKS_TO_YOU_IT        _("... grazie al vostro aiuto!")
+#define TEXT_THANK_YOU_MARIO_IT      _("Grazie, Mario!")
+#define TEXT_SOMETHING_SPECIAL_IT    _("Dobbiamo farvi un regalo...")
+#define TEXT_COME_ON_EVERYBODY_IT    _("Che ne dite...")
+#define TEXT_LETS_HAVE_CAKE_IT      _("di una deliziosa torta?")
+#define TEXT_FOR_MARIO_IT           _("...Per Mario...")
+// Spanish
+#define TEXT_POWER_STARS_RESTORED_ES _("El poder de las Estrellas ha sido devuelto al castillo...")
+#define TEXT_THANKS_TO_YOU_ES        _("¡Y todo gracias a ti!")
+#define TEXT_THANK_YOU_MARIO_ES      _("¡Gracias, Mario!")
+#define TEXT_SOMETHING_SPECIAL_ES    _("Tenemos que hacer algo especial para celebrarlo...")
+#define TEXT_COME_ON_EVERYBODY_ES    _("Vengan todos...")
+#define TEXT_LETS_HAVE_CAKE_ES      _("Vamos a hacer un pastel delicioso...")
+#define TEXT_FOR_MARIO_ES           _("...para Mario...")
+
+/**
+ * Course Table names for Score Menu Save view
+ */
+#define TEXT_MENU_BOB _(" 1 BOB-OMB BATTLEFIELD")
+#define TEXT_MENU_WF _(" 2 WHOMP'S FORTRESS")
+#define TEXT_MENU_JRB _(" 3 JOLLY ROGER BAY")
+#define TEXT_MENU_CCM _(" 4 COOL, COOL MOUNTAIN")
+#define TEXT_MENU_BBH _(" 5 BIG BOO'S HAUNT")
+#define TEXT_MENU_HMC _(" 6 HAZY MAZE CAVE")
+#define TEXT_MENU_LLL _(" 7 LETHAL LAVA LAND")
+#define TEXT_MENU_SSL _(" 8 SHIFTING SAND LAND")
+#define TEXT_MENU_DDD _(" 9 DIRE, DIRE DOCKS")
+#define TEXT_MENU_SL _("10 SNOWMAN'S LAND")
+#define TEXT_MENU_WDW _("11 WET-DRY WORLD")
+#define TEXT_MENU_TTM _("12 TALL, TALL MOUNTAIN")
+#define TEXT_MENU_THI _("13 TINY-HUGE ISLAND")
+#define TEXT_MENU_TTC _("14 TICK TOCK CLOCK")
+#define TEXT_MENU_RR _("15 RAINBOW RIDE")
+#define TEXT_MENU_BITDW _("   BOWSER IN THE DARK WORLD")
+#define TEXT_MENU_BITFS _("   BOWSER IN THE FIRE SEA")
+#define TEXT_MENU_BITS _("   BOWSER IN THE SKY")
+#define TEXT_MENU_PSS _("   THE PRINCESS'S SECRET SLIDE")
+#define TEXT_MENU_COTMC _("   CAVERN OF THE METAL CAP")
+#define TEXT_MENU_TOTWC _("   TOWER OF THE WING CAP")
+#define TEXT_MENU_VCUTM _("   VANISH CAP UNDER THE MOAT")
+#define TEXT_MENU_WMOTR _("   WING MARIO OVER THE RAINBOW")
+#define TEXT_MENU_SA _("   THE SECRET AQUARIUM")
+#define TEXT_MENU_NONE _("")
+#define TEXT_MENU_STARS _("   CASTLE SECRET STARS")
+
+#define TEXT_MENU_BOB_FR _(" 1 BATAILLE DE BOB-OMB")
+#define TEXT_MENU_WF_FR _(" 2 FORTERESSE DE WHOMP")
+#define TEXT_MENU_JRB_FR _(" 3 BAIE DES PIRATES")
+#define TEXT_MENU_CCM_FR _(" 4 MONTAGNE GLA-GLA")
+#define TEXT_MENU_BBH_FR _(" 5 MANOIR DE BIG BOO")
+#define TEXT_MENU_HMC_FR _(" 6 CAVERNE BRUMEUSE")
+#define TEXT_MENU_LLL_FR _(" 7 LAVES FATALES")
+#define TEXT_MENU_SSL_FR _(" 8 SABLES TROP MOUVANTS")
+#define TEXT_MENU_DDD_FR _(" 9 AFFREUX BASSIN")
+#define TEXT_MENU_SL_FR _("10 CHEZ LE ROI DES NEIGES")
+#define TEXT_MENU_WDW_FR _("11 MONDE TREMPE-SECHE")
+#define TEXT_MENU_TTM_FR _("12 TROP HAUTE MONTAGNE")
+#define TEXT_MENU_THI_FR _("13 ILE GRANDS-PETITS")
+#define TEXT_MENU_TTC_FR _("14 HORLOGE TIC-TAC")
+#define TEXT_MENU_RR_FR _("15 COURSE ARC-EN-CIEL")
+#define TEXT_MENU_BITDW_FR _("   BOWSER DES TENEBRES")
+#define TEXT_MENU_BITFS_FR _("   BOWSER DES LAVES")
+#define TEXT_MENU_BITS_FR _("   BOWSER DES CIEUX")
+#define TEXT_MENU_PSS_FR _("   GLISSADE DE LA PRINCESSE")
+#define TEXT_MENU_COTMC_FR _("   MINE DES CASQUETTES-METAL")
+#define TEXT_MENU_TOTWC_FR _("   INTERRUPTEUR DE LA TOUR AILEE")
+#define TEXT_MENU_VCUTM_FR _("   INVISIBLE SOUS LES DOUVES")
+#define TEXT_MENU_WMOTR_FR _("   AU-DELA DE L'ARC-EN-CIEL")
+#define TEXT_MENU_SA_FR _("   AQUARIUM SECRET")
+#define TEXT_MENU_NONE_FR _("")
+#define TEXT_MENU_STARS_FR _("   ETOILES SECRETES")
+
+#define TEXT_MENU_BOB_DE _(" 1 BOB-OMBS BOMBENBERG")
+#define TEXT_MENU_WF_DE _(" 2 WUMMPS WUCHTWALL")
+#define TEXT_MENU_JRB_DE _(" 3 PIRATENBUCHT PANIK")
+#define TEXT_MENU_CCM_DE _(" 4 BIBBERBERG BOB")
+#define TEXT_MENU_BBH_DE _(" 5 BIG BOOS BURG")
+#define TEXT_MENU_HMC_DE _(" 6 GRÜNE GIFTGROTTE")
+#define TEXT_MENU_LLL_DE _(" 7 LAVA LAGUNE")
+#define TEXT_MENU_SSL_DE _(" 8 WOBIWABA WÜSTE")
+#define TEXT_MENU_DDD_DE _(" 9 WILDE WASSERWERFT")
+#define TEXT_MENU_SL_DE _("10 FROSTBEULEN FRUST")
+#define TEXT_MENU_WDW_DE _("11 ATLANTIS AQUARIA")
+#define TEXT_MENU_TTM_DE _("12 FLIEGENPILZ FIASKO")
+#define TEXT_MENU_THI_DE _("13 GULLIVER GUMBA")
+#define TEXT_MENU_TTC_DE _("14 TICK TACK TRAUMA")
+#define TEXT_MENU_RR_DE _("15 REGENBOGEN RASEREI")
+#define TEXT_MENU_BITDW_DE _("   BOWSERS SCHATTENWELT")
+#define TEXT_MENU_BITFS_DE _("   BOWSERS LAVASEE")
+#define TEXT_MENU_BITS_DE _("   BOWSERS LUFTSCHLOSS")
+#define TEXT_MENU_PSS_DE _("   TOADSTOOLS RUTSCHBAHN")
+#define TEXT_MENU_COTMC_DE _("   GRÜNER SCHALTERPALAST")
+#define TEXT_MENU_TOTWC_DE _("   ROTER SCHALTERPALAST")
+#define TEXT_MENU_VCUTM_DE _("   BLAUER SCHALTERPALAST")
+#define TEXT_MENU_WMOTR_DE _("   REGENBOGEN FEUERWERK")
+#define TEXT_MENU_SA_DE _("   VERSTECKTES AQUARIUM")
+#define TEXT_MENU_NONE_DE _("")
+#define TEXT_MENU_STARS_DE _("   GEHEIME STERNE")
+
+#define TEXT_MENU_BOB_IT _(" 1 BATTAGLIA DI BOB-OMBE")
+#define TEXT_MENU_WF_IT _(" 2 FORTEZZA DI WOMP")
+#define TEXT_MENU_JRB_IT _(" 3 BAIA PIRATA")
+#define TEXT_MENU_CCM_IT _(" 4 MONTE REFRIGERION")
+#define TEXT_MENU_BBH_IT _(" 5 RIFUGIO DI RE BOO")
+#define TEXT_MENU_HMC_IT _(" 6 GROTTA LABIRINTO")
+#define TEXT_MENU_LLL_IT _(" 7 LAGO DI LAVA")
+#define TEXT_MENU_SSL_IT _(" 8 DESERTO INGOIATUTTO")
+#define TEXT_MENU_DDD_IT _(" 9 ABISSO ACQUATICO")
+#define TEXT_MENU_SL_IT _("10 TERRA INNEVATA")
+#define TEXT_MENU_WDW_IT _("11 BAGNA ASCIUGA")
+#define TEXT_MENU_TTM_IT _("12 MONTE GIGANTE")
+#define TEXT_MENU_THI_IT _("13 ISOLA GRANPICCOLA")
+#define TEXT_MENU_TTC_IT _("14 PENDOLO TICTOCCATO")
+#define TEXT_MENU_RR_IT _("15 CAMMINO ARCOBALENO")
+#define TEXT_MENU_BITDW_IT _("   BOWSER AL BUIO")
+#define TEXT_MENU_BITFS_IT _("   BOWSER NEL LAGO DI LAVA")
+#define TEXT_MENU_BITS_IT _("   BOWSER IN CIELO")
+#define TEXT_MENU_PSS_IT _("   LO SCIVOLO DELLA PRINCIPESSA")
+#define TEXT_MENU_COTMC_IT _("   DIETRO LA CASCATA")
+#define TEXT_MENU_TOTWC_IT _("   TORRE DEI VENTI")
+#define TEXT_MENU_VCUTM_IT _("   IL SEGRETO DEL FOSSATO")
+#define TEXT_MENU_WMOTR_IT _("   OLTRE L'ARCOBALENO")
+#define TEXT_MENU_SA_IT _("   L'AQUARIO SEGRETO")
+#define TEXT_MENU_NONE_IT _("")
+#define TEXT_MENU_STARS_IT _("   STELLE NASCOSTE")
+#endif
+
+#endif
