@@ -1507,119 +1507,42 @@ const Gfx dl_alo_texrect_block_end[] = {
     gsSPEndDisplayList(),
 };
 
-/**
-ALIGNED8 static const u8 balloon_dialog_ia8_64x64_left[] = {
-#include "textures/segment2/balloon_dialog_left.ia8.inc.c"
+ALIGNED8 static const u8 balloon_dialog_ci4_pallete[] = {
+#include "textures/segment2/balloon_dialog_ci4_pallete.rgba16.inc.c"
 };
 
-ALIGNED8 static const u8 balloon_dialog_middle_half1_ia8_64x64[] = {
-#include "textures/segment2/balloon_dialog_middle_half1.ia8.inc.c"
+ALIGNED8 static const u8 balloon_dialog_left_ci4[] = {
+#include "textures/segment2/balloon_dialog_left_ci4.inc.c"
 };
 
-ALIGNED8 static const u8 balloon_dialog_middle_half2_ia8_64x64[] = {
-#include "textures/segment2/balloon_dialog_middle_half2.ia8.inc.c"
-};
-
-ALIGNED8 static const u8 balloon_dialog_right_half1_ia8_64x64[] = {
-#include "textures/segment2/balloon_dialog_middle_right_half1.ia8.inc.c"
-};
-
-ALIGNED8 static const u8 balloon_dialog_right_half2_ia8_64x64[] = {
-#include "textures/segment2/balloon_dialog_middle_right_half2.ia8.inc.c"
-};
-
-#define TEX_BUBBLE_LEFT_X 0
-#define TEX_BUBBLE_LEFT_Y 110
-#define TEX_BUBBLE_MIDDLE1_X (TEX_BUBBLE_LEFT_X + 64 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_MIDDLE1_Y TEX_BUBBLE_LEFT_Y
-#define TEX_BUBBLE_MIDDLE2_X (TEX_BUBBLE_MIDDLE1_X + 64 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_MIDDLE2_Y TEX_BUBBLE_LEFT_Y
-#define TEX_BUBBLE_RIGHT1_X (TEX_BUBBLE_MIDDLE2_X + 64 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_RIGHT1_Y TEX_BUBBLE_LEFT_Y
-#define TEX_BUBBLE_RIGHT2_X (TEX_BUBBLE_RIGHT1_X + 64 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_RIGHT2_Y TEX_BUBBLE_LEFT_Y
-#define TEXRECT_BUBBLE_SCALE 1
-
-const Gfx dl_balloon_dialog_texrect[] = {
-    // 64x64 texture left (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_ia8_64x64_left, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_LEFT_X << 2, TEX_BUBBLE_LEFT_Y << 2, (TEX_BUBBLE_LEFT_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_LEFT_Y + 128 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    // 64x64 texture middle half 1 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_middle_half1_ia8_64x64, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_MIDDLE1_X << 2, TEX_BUBBLE_MIDDLE1_Y << 2, (TEX_BUBBLE_MIDDLE1_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_MIDDLE1_Y + 128 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    // 64x64 texture middle half 2 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_middle_half2_ia8_64x64, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_MIDDLE2_X << 2, TEX_BUBBLE_MIDDLE2_Y << 2, (TEX_BUBBLE_MIDDLE2_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_MIDDLE2_Y + 128 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    // 64x64 texture right half 1 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_right_half1_ia8_64x64, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_RIGHT1_X << 2, TEX_BUBBLE_RIGHT1_Y << 2, (TEX_BUBBLE_RIGHT1_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_RIGHT1_Y + 128 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    // 64x64 texture right half 2 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_right_half2_ia8_64x64, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_RIGHT2_X << 2, TEX_BUBBLE_RIGHT2_Y << 2, (TEX_BUBBLE_RIGHT2_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_RIGHT2_Y + 128 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-
-    gsSPEndDisplayList(),
-};
-*/
-
-
-ALIGNED8 static const u8 balloon_dialog_part1_rgba16[] = {
-#include "textures/segment2/balloon_dialog_part1.rgba16.inc.c"
-};
-
-ALIGNED8 static const u8 balloon_dialog_part2_rgba16[] = {
-#include "textures/segment2/balloon_dialog_part2.rgba16.inc.c"
-};
-
-ALIGNED8 static const u8 balloon_dialog_part3_rgba16[] = {
-#include "textures/segment2/balloon_dialog_part3.rgba16.inc.c"
-};
-
-ALIGNED8 static const u8 balloon_dialog_part4_rgba16[] = {
-#include "textures/segment2/balloon_dialog_part4.rgba16.inc.c"
+ALIGNED8 static const u8 balloon_dialog_right_ci4[] = {
+#include "textures/segment2/balloon_dialog_right_ci4.inc.c"
 };
 
 #define TEX_BUBBLE_LEFT_X 32
 #define TEX_BUBBLE_LEFT_Y 105
-#define TEX_BUBBLE_MIDDLE1_X (TEX_BUBBLE_LEFT_X + 32 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_MIDDLE1_Y TEX_BUBBLE_LEFT_Y
-#define TEX_BUBBLE_MIDDLE2_X (TEX_BUBBLE_MIDDLE1_X + 32 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_MIDDLE2_Y TEX_BUBBLE_LEFT_Y
-#define TEX_BUBBLE_RIGHT1_X (TEX_BUBBLE_MIDDLE2_X + 32 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_RIGHT1_Y TEX_BUBBLE_LEFT_Y
-#define TEX_BUBBLE_RIGHT2_X (TEX_BUBBLE_RIGHT1_X + 32 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_RIGHT2_Y TEX_BUBBLE_LEFT_Y
+#define TEX_BUBBLE_RIGHT_X (TEX_BUBBLE_LEFT_X + 64 * TEXRECT_BUBBLE_SCALE)
+#define TEX_BUBBLE_RIGHT_Y TEX_BUBBLE_LEFT_Y
 #define TEXRECT_BUBBLE_SCALE 2
 
 const Gfx dl_balloon_dialog_texrect[] = {
-    // 64x64 texture left (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_part1_rgba16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    
+    gsDPSetTextureLUT(G_TT_RGBA16), // enable CI
+    
+    gsDPLoadTLUT_pal16(0, balloon_dialog_ci4_pallete),
+
+    // 64x64 texture left (CI4 64x64)
+    gsDPLoadTextureBlock_4b(balloon_dialog_left_ci4, G_IM_FMT_CI, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTextureRectangle(
-        TEX_BUBBLE_LEFT_X << 2, TEX_BUBBLE_LEFT_Y << 2, (TEX_BUBBLE_LEFT_X + 32 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_LEFT_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
+        TEX_BUBBLE_LEFT_X << 2, TEX_BUBBLE_LEFT_Y << 2, (TEX_BUBBLE_LEFT_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_LEFT_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
         
-    // 64x64 texture middle half 1 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_part2_rgba16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    // 64x64 texture right (CI4 64x64)
+    gsDPLoadTextureBlock_4b(balloon_dialog_right_ci4, G_IM_FMT_CI, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTextureRectangle(
-        TEX_BUBBLE_MIDDLE1_X << 2, TEX_BUBBLE_MIDDLE1_Y << 2, (TEX_BUBBLE_MIDDLE1_X + 32 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_MIDDLE1_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
+        TEX_BUBBLE_RIGHT_X << 2, TEX_BUBBLE_RIGHT_Y << 2, (TEX_BUBBLE_RIGHT_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_RIGHT_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
         
-    // 64x64 texture middle half 2 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_part3_rgba16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_MIDDLE2_X << 2, TEX_BUBBLE_MIDDLE2_Y << 2, (TEX_BUBBLE_MIDDLE2_X + 32 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_MIDDLE2_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    // 64x64 texture right half 1 (IA8 64x64)
-    gsDPLoadTextureBlock(balloon_dialog_part4_rgba16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_RIGHT1_X << 2, TEX_BUBBLE_RIGHT1_Y << 2, (TEX_BUBBLE_RIGHT1_X + 32 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_RIGHT1_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
+    gsDPSetTextureLUT(G_TT_NONE),
+
     gsSPEndDisplayList(),
 };
 
@@ -1638,11 +1561,12 @@ ALIGNED8 static const u8 dialogue_box_bg2_ia8[] = {
 };
 
 const Gfx dl_balloon_dialog_bg[] = {
-    // 64x64 texture left (IA8 64x64)
+    // 64x64 texture top (IA8 64x64)
     gsDPLoadTextureBlock(dialogue_box_bg1_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTextureRectangle(
         TEX_BUBBLE_BG_TOP_X << 2, TEX_BUBBLE_BG_TOP_Y << 2, (TEX_BUBBLE_BG_TOP_X + 128 * TEX_BUBBLE_BG_SCALE) << 2, (TEX_BUBBLE_BG_TOP_Y + 32 * TEX_BUBBLE_BG_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEX_BUBBLE_BG_SCALE, (1 << 10) / TEX_BUBBLE_BG_SCALE),
-        
+
+    // 64x64 texture bottom (IA8 64x64)        
     gsDPLoadTextureBlock(dialogue_box_bg2_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPTextureRectangle(
         TEX_BUBBLE_BG_BOTTOM_X << 2, TEX_BUBBLE_BG_BOTTOM_Y << 2, (TEX_BUBBLE_BG_BOTTOM_X + 128 * TEX_BUBBLE_BG_SCALE) << 2, (TEX_BUBBLE_BG_BOTTOM_Y + 32 * TEX_BUBBLE_BG_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEX_BUBBLE_BG_SCALE, (1 << 10) / TEX_BUBBLE_BG_SCALE),
