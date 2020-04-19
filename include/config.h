@@ -26,17 +26,13 @@
 // Debug things by Alo
 // Changes VCTUM warp to Bowser 3, spawns a jumbo star there and quickly fades to the credits
 // There's no way better as far as i know, any attempts crashed the game when it tried to render fonts.
-#define TEST_GAME_CREDITS TRUE
+#define TEST_GAME_CREDITS FALSE
 
 // Screen Size Defines
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
 // Border Height Define for NTSC Versions
-#ifndef VERSION_EU
 #define BORDER_HEIGHT 0
-#else
-#define BORDER_HEIGHT 0
-#endif
 
 #endif
