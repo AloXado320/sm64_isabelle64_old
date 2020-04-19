@@ -1379,7 +1379,8 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
         }
 
         strIdx++;
-
+        
+        // Typewritter code, thanks to Pidgey (MCBoy) for helping me
         if (strIdx >= gDialogCharDisplay) {
             if (gDialogBoxState == DIALOG_STATE_VERTICAL && gSkipTypewriteEffect == FALSE) {
                 if (gGlobalTimer % 1 == 0) {
@@ -2193,7 +2194,7 @@ void change_dialog_camera_angle(void) {
     }
 }
 
-// With scrolling - Background code Pyoro64 - Based
+// With scrolling - Scrolling background code used in Pyoro64 by buu342
 void background_scene(void) {
     
     static float time = 0;

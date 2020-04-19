@@ -12,7 +12,7 @@
 #include "save_file.h"
 #include "text_strings.h"
 
-// TODO: Fix JP
+// Original code by devwizard, heavily edited by AloXado320
 
 #define NUM_ALT_CUSTOMES 8
 
@@ -38,8 +38,6 @@ extern Gfx isabelle_tex_extra_colors_loadblock_dl[];
 extern Gfx isabelle_tex_tshirt_pallete_dl[];
 extern Gfx isabelle_tex_ears_loadblock_dl[];
 extern Gfx isabelle_tex_hair_tail_loadblock_dl[];
-
-//extern Gfx isabelle_image_alt_costume_dl[];
 
 // Ears
 extern u8 ears_pallete[];
@@ -92,6 +90,8 @@ struct AltCostumeEntry {
     u8 *texExtraColor;
     u8 *texTshirtColor;
 };
+
+// TODO: Fix JP (strings)
 
 const struct AltCostumeEntry sAltCostumeEntries[NUM_ALT_CUSTOMES] = {
     { ears_pallete,         hair_tail_pallete,      shz_extra_colors_green,   shz_tshirt_pal_green  },
