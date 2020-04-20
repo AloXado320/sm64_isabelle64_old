@@ -166,18 +166,14 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
 			if ((currList = node->listHeads[8]) != NULL)
 			{
 				while (currList != NULL) {
-#define SCHWA AA_EN | IM_RD | CVG_DST_WRAP | CLR_ON_CVG | FORCE_BL
-
-					gDPSetFogColor(gDisplayListHead++, 0x0, 0x0, 0x0, 0x80);
-					gSPFogPosition(gDisplayListHead++, 1, 2);
 					gSPSetGeometryMode(gDisplayListHead++, G_FOG);
-					gDPSetRenderMode(gDisplayListHead++, SCHWA | GBL_c1(G_BL_CLR_FOG, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), 
-                        SCHWA | GBL_c2(G_BL_CLR_FOG, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
-					gDPSetEnvColor(gDisplayListHead++, 0x80, 0x80, 0x80, 0xA0);
+					gDPSetFogColor(gDisplayListHead++, 0x0, 0x0, 0x0, 0xA0);
+					gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF | G_RM_FOG_PRIM_A, G_RM_AA_XLU_SURF | G_RM_FOG_PRIM_A);
+					gDPSetEnvColor(gDisplayListHead++, 0x7F, 0x7F, 0x7F, 0xA0);
 					gDPSetAlphaCompare(gDisplayListHead++, G_AC_DITHER);
 					gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
 					gSPDisplayList(gDisplayListHead++, currList->displayList);
-                    gSPSetGeometryMode(gDisplayListHead++, G_FOG);
+					gSPSetGeometryMode(gDisplayListHead++, G_FOG);
 					currList = currList->next;
 				}
 				gSPClearGeometryMode(gDisplayListHead++, G_FOG);
