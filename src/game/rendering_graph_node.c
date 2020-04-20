@@ -132,13 +132,9 @@ u16 gAreaUpdateCounter = 0;
 LookAt lookAt;
 #endif
 
-#define SILLUETE_FUNC TRUE
-
 /**
- * Process a master list node. - Mario silhouette 
- * Idea by Kaze Emanuar, coded by FramePerfection and fixed by AloXado320
+ * Process a master list node
  */
-#if SILLUETE_FUNC
 static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     struct DisplayListNode *currList;
     s32 i;
@@ -159,86 +155,52 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
         gSPSetGeometryMode(gDisplayListHead++, G_ZBUFFER);
     }
 
-	for (i = 0; i < GFX_NUM_MASTER_LISTS; i++) {
-		if (i == 5) //Render Mario silhouette
-		{
-			if ((currList = node->listHeads[8]) != NULL)
-			{
-				while (currList != NULL) {
-					gSPSetGeometryMode(gDisplayListHead++, G_FOG);
-					gDPSetFogColor(gDisplayListHead++, 0x0, 0x0, 0x0, 0xA0);
-					gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF | G_RM_FOG_PRIM_A, G_RM_AA_XLU_SURF | G_RM_FOG_PRIM_A);
-					gDPSetEnvColor(gDisplayListHead++, 0x7F, 0x7F, 0x7F, 0xA0);
-					gDPSetAlphaCompare(gDisplayListHead++, G_AC_DITHER);
-					gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-					gSPDisplayList(gDisplayListHead++, currList->displayList);
-					gSPSetGeometryMode(gDisplayListHead++, G_FOG);
-					currList = currList->next;
-				}
-				gSPClearGeometryMode(gDisplayListHead++, G_FOG);
-				gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
-				currList = node->listHeads[8]; 
-				while (currList != NULL) {
-					gDPSetRenderMode(gDisplayListHead++, modeList->modes[1], mode2List->modes[1]);
-					gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
-						G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-					gSPDisplayList(gDisplayListHead++, currList->displayList);
-					currList = currList->next;
-				}
-			}
-		}
-        if (i < 8 && (currList = node->listHeads[i]) != NULL)
-            while (currList != NULL) {
-				gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode2List->modes[i]);
-                gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
-                          G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-                gSPDisplayList(gDisplayListHead++, currList->displayList);
-                currList = currList->next;
-            }
-    }
-    if (enableZBuffer != 0) {
-        gDPPipeSync(gDisplayListHead++);
-        gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER);
-    }
-}
-#else // oops, no siluette for pc port
-static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
-    struct DisplayListNode *currList;
-    s32 i;
-    s32 enableZBuffer = (node->node.flags & GRAPH_RENDER_Z_BUFFER) != 0;
-    struct RenderModeContainer *modeList = &renderModeTable_1Cycle[enableZBuffer];
-    struct RenderModeContainer *mode2List = &renderModeTable_2Cycle[enableZBuffer];
-
-    // @bug This is where the LookAt values should be calculated but aren't.
-    // As a result, environment mapping is broken on Fast3DEX2 without the
-    // changes below.
-#ifdef F3DEX_GBI_2
-    Mtx lMtx;
-    guLookAtReflect(&lMtx, &lookAt, 0, 0, 0, /* eye */ 0, 0, 1, /* at */ 1, 0, 0 /* up */);
-#endif
-
-    if (enableZBuffer != 0) {
-        gDPPipeSync(gDisplayListHead++);
-        gSPSetGeometryMode(gDisplayListHead++, G_ZBUFFER);
-    }
-
+    // Mario silhouette 
+    // Idea by Kaze Emanuar, coded by FramePerfection and fixed by AloXado320
     for (i = 0; i < GFX_NUM_MASTER_LISTS; i++) {
-        if ((currList = node->listHeads[i]) != NULL) {
-            gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode2List->modes[i]);
-            while (currList != NULL) {
-                gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
-                          G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-                gSPDisplayList(gDisplayListHead++, currList->displayList);
-                currList = currList->next;
+        if (i == 5) //Render Mario silhouette
+        {
+            if ((currList = node->listHeads[8]) != NULL)
+            {   
+                while (currList != NULL) {
+                    gSPSetGeometryMode(gDisplayListHead++, G_FOG);
+                    gDPSetFogColor(gDisplayListHead++, 0x0, 0x0, 0x0, 0xA0);
+                    gDPSetRenderMode(gDisplayListHead++, 
+                        G_RM_AA_XLU_SURF | G_RM_FOG_PRIM_A, G_RM_AA_XLU_SURF | G_RM_FOG_PRIM_A);
+                    gDPSetEnvColor(gDisplayListHead++, 0x7F, 0x7F, 0x7F, 0xA0);
+                    gDPSetAlphaCompare(gDisplayListHead++, G_AC_DITHER);
+                    gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform), 
+                        G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+                    gSPDisplayList(gDisplayListHead++, currList->displayList);
+                    gSPSetGeometryMode(gDisplayListHead++, G_FOG);
+                    currList = currList->next;
+                }
+                gSPClearGeometryMode(gDisplayListHead++, G_FOG);
+                gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
+                currList = node->listHeads[8]; 
+                while (currList != NULL) {
+                    gDPSetRenderMode(gDisplayListHead++, modeList->modes[1], mode2List->modes[1]);
+                    gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
+                        G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+                    gSPDisplayList(gDisplayListHead++, currList->displayList);
+                    currList = currList->next;
+                }
             }
         }
+        if (i < 8 && (currList = node->listHeads[i]) != NULL)
+            while (currList != NULL) {
+                gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode2List->modes[i]);
+                gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
+                          G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+                gSPDisplayList(gDisplayListHead++, currList->displayList);
+                currList = currList->next;
+            }
     }
     if (enableZBuffer != 0) {
         gDPPipeSync(gDisplayListHead++);
         gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER);
     }
 }
-#endif
 
 /**
  * Appends the display list to one of the master lists based on the layer

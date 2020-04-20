@@ -24,7 +24,7 @@ AVOID_UB ?= 1
 # Multilanguage option
 MULTILANGUAGE ?= 1
 # Compiler to use (ido or gcc)
-COMPILER ?= gcc
+COMPILER ?= ido
 
 ifeq ($(COMPILER),gcc)
   NON_MATCHING := 1
