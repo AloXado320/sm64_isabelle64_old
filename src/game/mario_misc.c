@@ -636,7 +636,10 @@ Gfx *geo_mirror_mario_backface_culling(s32 callContext, struct GraphNode *node, 
             gSPEndDisplayList(&gfx[2]);
         } else {
             gSPClearGeometryMode(&gfx[0], G_CULL_FRONT);
-            gSPSetGeometryMode(&gfx[1], G_CULL_BACK);
+            
+            // originally SetMode but changed to ClearMode due to sillouete
+            gSPClearGeometryMode(&gfx[1], G_CULL_BACK);
+            
             gSPEndDisplayList(&gfx[2]);
         }
         asGenerated->fnNode.node.flags = (asGenerated->fnNode.node.flags & 0xFF) | (LAYER_OPAQUE << 8);
