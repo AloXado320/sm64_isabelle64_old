@@ -28,8 +28,8 @@ static Movtex hmc_movtex_toxic_maze_rot_count_clock_mist_data[] = {
     MOV_TEX_4_BOX_TRIS(6298,   819),
     MOV_TEX_4_BOX_TRIS(6298, -6348),
     MOV_TEX_ROT(     ROTATE_COUNTER_CLOCKWISE),
-    MOV_TEX_ALPHA(   0x78),
-    MOV_TEX_DEFINE(  TEXTURE_MIST),
+    MOV_TEX_ALPHA(   0xFF),
+    MOV_TEX_DEFINE(  TEXTURE_GAS),
     MOV_TEX_END(),
 };
 
@@ -43,8 +43,8 @@ static Movtex hmc_movtex_toxic_maze_rot_clock_mist_data[] = {
     MOV_TEX_4_BOX_TRIS(6298,   819),
     MOV_TEX_4_BOX_TRIS(6298, -6348),
     MOV_TEX_ROT(     ROTATE_CLOCKWISE),
-    MOV_TEX_ALPHA(   0xB4),
-    MOV_TEX_DEFINE(  TEXTURE_MIST),
+    MOV_TEX_ALPHA(   0xFF),
+    MOV_TEX_DEFINE(  TEXTURE_GAS),
     MOV_TEX_END(),
 };
 

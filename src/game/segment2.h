@@ -16,11 +16,14 @@ extern u8 texture_transition_star_half[];
 extern u8 texture_transition_circle_half[];
 extern u8 texture_transition_mario[];
 extern u8 texture_transition_bowser_half[];
+
 extern u8 texture_waterbox_water[];
-extern u8 texture_waterbox_mist[];
 extern u8 texture_waterbox_jrb_water[];
-extern u8 texture_waterbox_unknown_water[];
+extern u8 texture_waterbox_mist[];
 extern u8 texture_waterbox_lava[];
+extern u8 texture_waterbox_gas[];
+extern u8 texture_waterbox_ryusa[];
+
 extern Gfx dl_proj_mtx_fullscreen[];
 extern Gfx dl_draw_quad_verts_0123[];
 extern Gfx dl_screen_transition_end[];

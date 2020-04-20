@@ -107,13 +107,6 @@ struct MovtexObject {
 s16 gMovtexCounter = 1;
 s16 gMovtexCounterPrev = 0;
 
-// Vertex colors for rectangles. Used to give mist a tint
-#define MOVTEX_VTX_COLOR_DEFAULT 0 // no tint (white vertex colors)
-#define MOVTEX_VTX_COLOR_YELLOW 1  // used for Hazy Maze Cave toxic haze
-#define MOVTEX_VTX_COLOR_RED 2     // used for Shifting Sand Land around the Tox box maze
-
-s8 gMovtexVtxColor = MOVTEX_VTX_COLOR_DEFAULT;
-
 /// The height at which Mario entered the last painting. Used for Wet-Dry World only.
 float gPaintingMarioYEntry = 0.0f;
 
@@ -128,10 +121,17 @@ extern u8 ttc_yellow_triangle[];
  * An array for converting a movtex texture id to a pointer that can
  * be passed to gDPSetTextureImage.
  */
-u8 *gMovtexIdToTexture[] = { texture_waterbox_water,     texture_waterbox_mist,
-                             texture_waterbox_jrb_water, texture_waterbox_unknown_water,
-                             texture_waterbox_lava,      ssl_quicksand,
-                             ssl_pyramid_sand,           ttc_yellow_triangle };
+u8 *gMovtexIdToTexture[] = {
+    texture_waterbox_water,     
+    texture_waterbox_jrb_water,
+    texture_waterbox_mist,
+    texture_waterbox_lava,   
+    texture_waterbox_gas,
+    texture_waterbox_ryusa,
+    ssl_quicksand,
+    ssl_pyramid_sand,           
+    ttc_yellow_triangle 
+};
 
 extern Gfx castle_grounds_dl_waterfall[];
 extern s16 castle_grounds_movtex_tris_waterfall[];
@@ -357,13 +357,7 @@ void movtex_make_quad_vertex(Vtx *verts, s32 index, s16 x, s16 y, s16 z, s16 rot
     s16 s = 32.0 * (32.0 * scale - 1.0) * sins(rot + rotOffset);
     s16 t = 32.0 * (32.0 * scale - 1.0) * coss(rot + rotOffset);
 
-    if (gMovtexVtxColor == MOVTEX_VTX_COLOR_YELLOW) {
-        make_vertex(verts, index, x, y, z, s, t, 255, 255, 0, alpha);
-    } else if (gMovtexVtxColor == MOVTEX_VTX_COLOR_RED) {
-        make_vertex(verts, index, x, y, z, s, t, 255, 0, 0, alpha);
-    } else {
-        make_vertex(verts, index, x, y, z, s, t, 255, 255, 255, alpha);
-    }
+    make_vertex(verts, index, x, y, z, s, t, 255, 255, 255, alpha);
 }
 
 /**
@@ -420,7 +414,7 @@ Gfx *movtex_gen_from_quad(s16 y, struct MovtexQuad *quad) {
     if (textureId == gMovetexLastTextureId) {
         gfxHead = alloc_display_list(3 * sizeof(*gfxHead));
     } else {
-        gfxHead = alloc_display_list(8 * sizeof(*gfxHead));
+        gfxHead = alloc_display_list(10 * sizeof(*gfxHead)); // formerly 8
     }
 
     if (gfxHead == NULL || verts == NULL) {
@@ -445,14 +439,20 @@ Gfx *movtex_gen_from_quad(s16 y, struct MovtexQuad *quad) {
 
     // Only add commands to change the texture when necessary
     if (textureId != gMovetexLastTextureId) {
-        if (textureId == TEXTURE_MIST) { // an ia16 texture
-            if (0) {
-            }
-            gLoadBlockTexture(gfx++, 32, 32, G_IM_FMT_IA, gMovtexIdToTexture[textureId]);
-        } else { // any rgba16 texture
-            gLoadBlockTexture(gfx++, 32, 32, G_IM_FMT_RGBA, gMovtexIdToTexture[textureId]);
-            if (0) {
-            }
+        switch (textureId) {
+            case TEXTURE_MIST: // ia8
+                gDPLoadTextureBlock(gfx++, gMovtexIdToTexture[textureId], G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
+                    G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+                break;
+            case TEXTURE_GAS: // rgba32
+            case TEXTURE_RYUSA:
+                gDPLoadTextureBlock(gfx++, gMovtexIdToTexture[textureId], G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0,
+                    G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+                break;
+            default: // rgba16
+                gDPLoadTextureBlock(gfx++, gMovtexIdToTexture[textureId], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                    G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+                break;
         }
         gMovetexLastTextureId = textureId;
     }
@@ -633,7 +633,6 @@ Gfx *geo_movtex_draw_water_regions(s32 callContext, struct GraphNode *node, UNUS
     s32 i;
 
     if (callContext == GEO_CONTEXT_RENDER) {
-        gMovtexVtxColor = MOVTEX_VTX_COLOR_DEFAULT;
         if (gEnvironmentRegions == NULL) {
             return NULL;
         }
@@ -652,10 +651,6 @@ Gfx *geo_movtex_draw_water_regions(s32 callContext, struct GraphNode *node, UNUS
             if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 1) { // first level in JRB complete
                 return NULL;
             }
-        } else if (asGenerated->parameter == HMC_MOVTEX_TOXIC_MAZE_MIST) {
-            gMovtexVtxColor = MOVTEX_VTX_COLOR_YELLOW;
-        } else if (asGenerated->parameter == SSL_MOVTEX_TOXBOX_QUICKSAND_MIST) {
-            gMovtexVtxColor = MOVTEX_VTX_COLOR_RED;
         }
         quadCollection = get_quad_collection_from_id(asGenerated->parameter);
         if (quadCollection == NULL) {

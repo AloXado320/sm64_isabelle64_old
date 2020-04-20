@@ -2080,23 +2080,27 @@ ALIGNED8 const u8 texture_transition_bowser_half[] = {
 };
 
 ALIGNED8 const u8 texture_waterbox_water[] = {
-#include "textures/segment2/segment2.11C58.rgba16.inc.c"
+#include "textures/segment2/seg2_envtext_1_water.rgba16.inc.c"
 };
 
 ALIGNED8 const u8 texture_waterbox_jrb_water[] = {
-#include "textures/segment2/segment2.12458.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 texture_waterbox_unknown_water[] = {
-#include "textures/segment2/segment2.12C58.rgba16.inc.c"
+#include "textures/segment2/seg2_envtext_2_jrbwater.rgba16.inc.c"
 };
 
 ALIGNED8 const u8 texture_waterbox_mist[] = {
-#include "textures/segment2/segment2.13458.ia16.inc.c"
+#include "textures/segment2/seg2_envtext_3_mist.ia8.inc.c"
 };
 
 ALIGNED8 const u8 texture_waterbox_lava[] = {
-#include "textures/segment2/segment2.13C58.rgba16.inc.c"
+#include "textures/segment2/seg2_envtext_4_lava.rgba16.inc.c"
+};
+
+ALIGNED8 const u8 texture_waterbox_gas[] = {
+#include "textures/segment2/seg2_envtext_5_gas.rgba32.inc.c"
+};
+
+ALIGNED8 const u8 texture_waterbox_ryusa[] = {
+#include "textures/segment2/seg2_envtext_6_ryusa.rgba32.inc.c"
 };
 
 // 0x02014470 - 0x020144B0
