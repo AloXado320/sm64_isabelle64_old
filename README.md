@@ -21,7 +21,7 @@ Then after you do the step above, build the rom, running `make` and wait until i
 
 It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those or things will break.
 
-## GCC build
+## GCC Build
 
 There's also a gcc build option, first run `make clean` if you already build with IDO, then run `make COMPILER=gcc`. 
 

@@ -158,10 +158,8 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     // Mario silhouette 
     // Idea by Kaze Emanuar, coded by FramePerfection and fixed by AloXado320
     for (i = 0; i < GFX_NUM_MASTER_LISTS; i++) {
-        if (i == 5) //Render Mario silhouette
-        {
-            if ((currList = node->listHeads[8]) != NULL)
-            {   
+        if (i == 5) {  //Render Mario silhouette
+            if ((currList = node->listHeads[8]) != NULL) {   
                 while (currList != NULL) {
                     gSPSetGeometryMode(gDisplayListHead++, G_FOG);
                     gDPSetFogColor(gDisplayListHead++, 0x0, 0x0, 0x0, 0xA0);
@@ -187,7 +185,7 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 }
             }
         }
-        if (i < 8 && (currList = node->listHeads[i]) != NULL)
+        if (i < 8 && (currList = node->listHeads[i]) != NULL) {
             while (currList != NULL) {
                 gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode2List->modes[i]);
                 gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
@@ -195,7 +193,9 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 gSPDisplayList(gDisplayListHead++, currList->displayList);
                 currList = currList->next;
             }
+        }
     }
+
     if (enableZBuffer != 0) {
         gDPPipeSync(gDisplayListHead++);
         gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER);
