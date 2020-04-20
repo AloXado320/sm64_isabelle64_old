@@ -119,7 +119,7 @@ void handle_alternate_costume_menu(void) {
 
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, &sAltCustomMenuOpt, 0, NUM_ALT_CUSTOMES - 1);
     
-    render_custom_texrect(dl_balloon_arrow_side_choose_texblock, FALSE, TITLE_X - 8, (sAltCustomMenuOpt * TEXT_HEIGHT) + 64, 16, 16);
+    render_custom_texrect(dl_balloon_arrow_side_choose_texblock, FALSE, FALSE, TITLE_X - 8, (sAltCustomMenuOpt * TEXT_HEIGHT) + 64, 16, 16);
 
     if (gPlayer1Controller->buttonPressed & (A_BUTTON | B_BUTTON)) {
         play_sound(SOUND_MENU_CLICK_ACNH, gDefaultSoundArgs);

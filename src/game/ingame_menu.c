@@ -2024,22 +2024,21 @@ struct ShzTitleScreen sShzTitleScreenDefines[] = {
 };
 #endif
 void render_title_screen_textures(void) {
-
 #ifndef VERSION_JP
     struct ShzTitleScreen *titleScreen = &sShzTitleScreenDefines[gInGameLanguage];
 #endif
-
     gInGameLanguage = eu_get_language();
 
+    render_custom_texrect(dl_alo_pixel_shz_titlescreen, FALSE, TRUE, 80, 18, 32, 32);
     render_ac_base_logo_titlescreen();
-    render_custom_texrect(dl_alo_leaf64_titlescreen, FALSE, 186, 26, 32, 32);
+    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, TRUE, 186, 26, 32, 32);
 
 #ifndef VERSION_JP
-    render_custom_texrect(titleScreen->shzTexture, TRUE, 92, 59, 128, 32);
+    render_custom_texrect(titleScreen->shzTexture, TRUE, FALSE, 92, 59, 128, 32);
 #else
-    render_custom_texrect(dl_alo_shizue_logo_titlescreen, TRUE, 92, 59, 128, 32);
+    render_custom_texrect(dl_alo_shizue_logo_titlescreen, TRUE, FALSE, 92, 59, 128, 32);
 #endif
-    render_custom_texrect(dl_alo_year_name_titlescreen, FALSE, 32, 200, 256, 16);
+    render_custom_texrect(dl_alo_year_name_titlescreen, FALSE, FALSE, 32, 200, 256, 16);
 
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {

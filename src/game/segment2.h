@@ -57,16 +57,18 @@ extern Gfx dl_balloon_arrow_side_choose_texblock[];
 extern Gfx dl_hud_rgba32_isabelle[];
 extern Gfx dl_hud_rgba32_bells[];
 extern Gfx dl_alo_ac_bg_menus[];
-extern Gfx dl_alo_year_name_titlescreen[];
-extern Gfx dl_alo_leaf64_titlescreen[];
-extern Gfx dl_alo_wood_leaves_titlescreen[];
+
+extern Gfx dl_alo_ac_logo_base_titlescreen[];
 extern Gfx dl_alo_isabelle_logo_titlescreen[];
 extern Gfx dl_alo_marie_logo_titlescreen[];
 extern Gfx dl_alo_melinda_logo_titlescreen[];
 extern Gfx dl_alo_fuffi_logo_titlescreen[];
 extern Gfx dl_alo_canela_logo_titlescreen[];
 extern Gfx dl_alo_shizue_logo_titlescreen[];
-extern Gfx dl_alo_ac_logo_base_titlescreen[];
+extern Gfx dl_alo_leaf64_titlescreen[];
+extern Gfx dl_alo_pixel_shz_titlescreen[];
+extern Gfx dl_alo_year_name_titlescreen[];
+
 extern Gfx dl_hud_img_load_tex_block[];
 extern Gfx dl_hud_img_begin[];
 extern Gfx dl_hud_img_end[];
