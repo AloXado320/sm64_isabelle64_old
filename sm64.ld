@@ -674,6 +674,9 @@ SECTIONS
       BUILD_DIR/src/engine/surface_collision.o(.text);
       BUILD_DIR/src/engine/surface_load.o(.text);
       BUILD_DIR/src/engine/behavior_script.o(.text);
+#ifdef __GNUC__
+      BUILD_DIR/src/engine/libc.o(.text); // for GCC support, stubbed out in IDO
+#endif
 #ifdef VERSION_EU
       BUILD_DIR/src/game/object_collision.o(.text);
       BUILD_DIR/src/game/spawn_object.o(.text);

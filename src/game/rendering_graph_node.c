@@ -135,9 +135,8 @@ LookAt lookAt;
 #define SILLUETE_FUNC TRUE
 
 /**
- * Process a master list node. - Mario silluete by Kaze & Frame
- * NOTE: This works fine on ido compiler
- * BREAKS using gcc compiler
+ * Process a master list node. - Mario silhouette 
+ * Idea by Kaze Emanuar, coded by FramePerfection and fixed by AloXado320
  */
 #if SILLUETE_FUNC
 static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
