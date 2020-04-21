@@ -2090,25 +2090,30 @@ ALIGNED8 static const u8 texture_shadow_quarter_square[] = {
 #include "textures/segment2/shadow_quarter_square.ia8.inc.c"
 };
 
+/**************************************************
+ *              SCREEN TRANSITIONS                *
+ **************************************************/
+
 ALIGNED8 const u8 texture_transition_star_half[] = {
-#include "textures/segment2/segment2.0F458.ia8.inc.c"
+#include "textures/segment2/seg2_transition_text_star.ia8.inc.c"
 };
 
 ALIGNED8 const u8 texture_transition_circle_half[] = {
-#include "textures/segment2/segment2.0FC58.ia8.inc.c"
+#include "textures/segment2/seg2_transition_text_circle.ia8.inc.c"
 };
 
 ALIGNED8 const u8 texture_transition_mario[] = {
-#include "textures/segment2/segment2.10458.ia8.inc.c"
+#include "textures/segment2/seg2_transition_text_shz.ia8.inc.c"
 };
 
 ALIGNED8 const u8 texture_transition_bowser_half[] = {
-#include "textures/segment2/segment2.11458.ia8.inc.c"
+#include "textures/segment2/seg2_transition_text_dying.ia8.inc.c"
 };
 
-/**
- * Environmental Textures
- */
+/**************************************************
+ *              ENVIRONMENTAL TEXTURES            *
+ **************************************************/
+
 ALIGNED8 const u8 texture_waterbox_water[] = {
 #include "textures/segment2/seg2_envtext_1_water.rgba16.inc.c"
 };
