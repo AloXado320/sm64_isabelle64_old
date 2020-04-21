@@ -54,8 +54,10 @@ extern Gfx dl_balloon_dialog_bg[];
 extern Gfx dl_balloon_dialog_top_name_texblock[];
 extern Gfx dl_balloon_dialog_arrow_down_texblock[];
 extern Gfx dl_balloon_arrow_side_choose_texblock[];
-extern Gfx dl_hud_rgba32_isabelle[];
-extern Gfx dl_hud_rgba32_bells[];
+
+extern Gfx dl_texhud_isabelle[];
+extern Gfx dl_texhud_bells[];
+
 extern Gfx dl_alo_ac_bg_menus[];
 
 extern Gfx dl_alo_ac_logo_base_titlescreen[];

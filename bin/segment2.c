@@ -183,19 +183,19 @@ ALIGNED8 static const u8 texture_hud_char_percent[] = {
 };
 
 ALIGNED8 static const u8 texture_hud_char_multiply[] = {
-#include "textures/segment2/segment2.05600.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_multiply.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_coin[] = {
-#include "textures/segment2/segment2.05800.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_coin.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_mario_head[] = {
-#include "textures/segment2/segment2.05A00.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_head.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_star[] = {
-#include "textures/segment2/segment2.05C00.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_star.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_decimal_point[] = {
@@ -1295,15 +1295,15 @@ ALIGNED8 static const u8 tex_font_char_button_C_right[] = {
 #endif
 
 ALIGNED8 static const u8 texture_hud_char_camera[] = {
-#include "textures/segment2/segment2.07B50.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_camera.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_lakitu[] = {
-#include "textures/segment2/segment2.07D50.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_lakitu.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_no_camera[] = {
-#include "textures/segment2/segment2.07F50.rgba16.inc.c"
+#include "textures/segment2/seg2_hudicon_denied.rgba16.inc.c"
 };
 
 ALIGNED8 static const u8 texture_hud_char_arrow_up[] = {
@@ -1604,23 +1604,22 @@ const Gfx dl_balloon_arrow_side_choose_texblock[] = {
     gsSPEndDisplayList(),
 };
 
-ALIGNED8 static const u8 texture_hud_rgba32_isabelle[] = {
-#include "textures/segment2/alo_isabelle_face.rgba32.inc.c"
+ALIGNED8 static const u8 texture_hud_rgba16_isabelle[] = {
+#include "textures/segment2/alo_texhud_32x32_shz.rgba16.inc.c"
 };
 
-ALIGNED8 static const u8 texture_hud_rgba32_bells[] = {
-#include "textures/segment2/alo_belle_bag.rgba32.inc.c"
-};
-
-const Gfx dl_hud_rgba32_isabelle[] = {
-    // 16x16 IA16 texture
-    gsDPLoadTextureBlock(texture_hud_rgba32_isabelle, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+const Gfx dl_texhud_isabelle[] = {
+    gsDPLoadTextureBlock(texture_hud_rgba16_isabelle, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-const Gfx dl_hud_rgba32_bells[] = {
-    // 16x16 IA16 texture
-    gsDPLoadTextureBlock(texture_hud_rgba32_bells, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+
+ALIGNED8 static const u8 texture_hud_rgba16_bells[] = {
+#include "textures/segment2/alo_texhud_32x32_bells.rgba16.inc.c"
+};
+
+const Gfx dl_texhud_bells[] = {
+    gsDPLoadTextureBlock(texture_hud_rgba16_bells, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 

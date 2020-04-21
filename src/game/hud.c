@@ -19,11 +19,11 @@
  * cannon reticle, and the unused keys.
  **/
 
-s8 HUD_MOVE_Y;
-s8 HUD_MOVE_TIME;
-s8 RED_COIN_Y;
-u8 RED_COIN_COUNT;
-s8 HUD_MOVE;
+s8 sHudMoveY;
+s8 sHudMoveTime;
+s8 sRedCoinY;
+u8 sRedCoinCount;
+s8 sHudMove;
 
 struct PowerMeterHUD {
     s8 animation;
@@ -254,65 +254,62 @@ void render_hud_power_meter(void) {
 }
 
 void FigureSpeed(s8 val, s8 cap) {
-    if (val < cap*0.5 && val >= 0)
-    {HUD_MOVE = 4;}
+    if (val < cap*0.5 && val >= 0) sHudMove = 4;
     else
-    if (val < cap*0.75 && val >= cap*0.5)
-    {HUD_MOVE = 2;}
+    if (val < cap*0.75 && val >= cap*0.5) sHudMove = 2;
     else
-    if (val < cap && val >= cap*0.75)
-    {HUD_MOVE = 1;}
+    if (val < cap && val >= cap*0.75) sHudMove = 1;
 }
 
 void render_hud_red_coins(void) {
-    RED_COIN_COUNT = gRedCoinsCollected;
+    sRedCoinCount = gRedCoinsCollected;
     
-    FigureSpeed(RED_COIN_Y,32);
+    FigureSpeed(sRedCoinY,32);
     
-    if (RED_COIN_COUNT > 0) {
-        if (RED_COIN_Y < 32) {
-            RED_COIN_Y += HUD_MOVE;
+    if (sRedCoinCount > 0) {
+        if (sRedCoinY < 32) {
+            sRedCoinY += sHudMove;
         }
 
-        render_rotating_model(sm64ds_red_coin_dl, 16, RED_COIN_Y - 8, 0.3f, 7.0f);
+        render_rotating_model(sm64ds_red_coin_dl, 16, sRedCoinY - 8, 0.3f, 7.0f);
         
-        //print_text(16,RED_COIN_Y, "?"); - Icon
-        print_text(32,RED_COIN_Y, "*");
-        print_text_fmt_int(48, RED_COIN_Y, "%d", RED_COIN_COUNT);
-        print_text(60,RED_COIN_Y, "&");
-        print_text(73,RED_COIN_Y, "8");
+        //print_text(16,sRedCoinY, "?"); - Icon
+        print_text(32,sRedCoinY, "*");
+        print_text_fmt_int(48, sRedCoinY, "%d", sRedCoinCount);
+        print_text(60,sRedCoinY, "&");
+        print_text(73,sRedCoinY, "8");
         
-        if (RED_COIN_COUNT == 8) {
-            print_text(89,RED_COIN_Y, "-");
+        if (sRedCoinCount == 8) {
+            print_text(89,sRedCoinY, "-");
         }
         
     } else {
-        RED_COIN_Y = 0;
+        sRedCoinY = 0;
     }
 }
 
 void handle_hud_move(void) {
  
-    if (gPlayer1Controller->buttonDown & (A_BUTTON | B_BUTTON | Z_TRIG) || gPlayer1Controller->stickX != 0 || gPlayer1Controller->stickY != 0) {
-        HUD_MOVE_TIME = 0;
+    if (gMarioState->forwardVel != 0) { // If Character is moving, move HUD out
+        sHudMoveTime = 0;
     } else {
-        if (HUD_MOVE_TIME < 99) {
-            HUD_MOVE_TIME += 1;
+        if (sHudMoveTime < 99) {
+            sHudMoveTime += 1;
         }
     }
     
     if (sCurrPlayMode == 2) { //Checks if the game is currently paused. The 2 is the actual bit itself. 1 being the game is unpaused.
-        HUD_MOVE_TIME = 45;
+        sHudMoveTime = 45;
     }
     
-    FigureSpeed(HUD_MOVE_Y,40);
+    FigureSpeed(sHudMoveY,40);
     
-    if (HUD_MOVE_TIME >= 45 && HUD_MOVE_Y < 40) {
-        HUD_MOVE_Y += HUD_MOVE;
+    if (sHudMoveTime >= 45 && sHudMoveY < 40) {
+        sHudMoveY += sHudMove;
     }
     
-    if (HUD_MOVE_TIME < 45 && HUD_MOVE_Y > 0) {
-        HUD_MOVE_Y -= HUD_MOVE;
+    if (sHudMoveTime < 45 && sHudMoveY > 0) {
+        sHudMoveY -= sHudMove;
     }
  
     render_hud_red_coins();
@@ -322,56 +319,39 @@ void handle_hud_move(void) {
 
 void render_hud_mario_lives(void) {
         
-    render_custom_texrect(dl_hud_rgba32_isabelle, FALSE, FALSE, 16, (224 - (64+HUD_TOP_Y-(HUD_MOVE_Y*1.6))), 32, 32);
+    render_custom_texrect(dl_texhud_isabelle, FALSE, FALSE, 16, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
     
-    //print_text(16, 64+HUD_TOP_Y-(HUD_MOVE_Y*1.6), ",");   // 'Mario Head' glyph
-    print_text(36, 48+HUD_TOP_Y-(HUD_MOVE_Y*1.6), "*");   // 'X' glyph
+    //print_text(16, 64+HUD_TOP_Y-(sHudMoveY*1.6), ",");   // 'Mario Head' glyph
+    print_text(36, 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");   // 'X' glyph
     
-    print_text_fmt_int(52, 48+HUD_TOP_Y-(HUD_MOVE_Y*1.6), "%d", gHudDisplay.lives);
+    print_text_fmt_int(52, 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.lives);
     
 }
 
 void render_hud_coins(void) {
     
-    render_custom_texrect(dl_hud_rgba32_bells, FALSE, FALSE, 16, (224 - (HUD_TOP_Y-HUD_MOVE_Y)), 32, 32);
-    // print_text(16, HUD_TOP_Y-HUD_MOVE_Y, "+");  // 'Coin' glyph
-    print_text(36, (HUD_TOP_Y-12)-HUD_MOVE_Y, "*");  // 'X' glyph
-    print_text_fmt_int(52, (HUD_TOP_Y-12)-HUD_MOVE_Y, "%d", gHudDisplay.coins);
+    render_custom_texrect(dl_texhud_bells, FALSE, FALSE, 16, (224 - (HUD_TOP_Y-sHudMoveY)), 32, 32);
+    // print_text(16, HUD_TOP_Y-sHudMoveY, "+");  // 'Coin' glyph
+    print_text(36, (HUD_TOP_Y-16)-sHudMoveY, "*");  // 'X' glyph
+    print_text_fmt_int(52, (HUD_TOP_Y-16)-sHudMoveY, "%d", gHudDisplay.coins);
 }
 
 #define HUD_STARS_X 96
-/**
-void render_hud_stars(void)
-{
+
+void render_hud_stars(void) {
 
     if (gHudFlash == 1 && gGlobalTimer & 0x08)
         return;
 
-    //print_text(HUD_STARS_X, 36+HUD_TOP_Y-(HUD_MOVE_Y*1.4), "-"); // 'Star' glyph
+    //print_text(HUD_STARS_X, 36+HUD_TOP_Y-(sHudMoveY*1.4), "-"); // 'Star' glyph
     
-    render_custom_texrect(dl_hud_rgba32_goldleaf, FALSE, FALSE, HUD_STARS_X, (46+HUD_TOP_Y-(HUD_MOVE_Y*1.6)), 32, 32);
+    //render_custom_texrect(dl_hud_rgba32_goldleaf, FALSE, FALSE, HUD_STARS_X, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
     
-    print_text(HUD_STARS_X + 24, -48+(HUD_MOVE_Y*1.6), "*");  // 'X' glyph
+    render_rotating_model(gold_leaf_dl, (HUD_STARS_X + 4), 48+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
     
-    print_text_fmt_int((HUD_STARS_X + 38), -48+(HUD_MOVE_Y*1.6), "%d", gHudDisplay.stars);
-}
-*/
-
-void render_hud_stars(void)
-{
-
-    if (gHudFlash == 1 && gGlobalTimer & 0x08)
-        return;
-
-    //print_text(HUD_STARS_X, 36+HUD_TOP_Y-(HUD_MOVE_Y*1.4), "-"); // 'Star' glyph
+    print_text((HUD_STARS_X + 24), 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");  // 'X' glyph
     
-    //render_custom_texrect(dl_hud_rgba32_goldleaf, FALSE, FALSE, HUD_STARS_X, (224 - (64+HUD_TOP_Y-(HUD_MOVE_Y*1.6))), 32, 32);
-    
-    render_rotating_model(gold_leaf_dl, (HUD_STARS_X + 4), 48+HUD_TOP_Y-(HUD_MOVE_Y*1.6), 0.07f, 7.0f);
-    
-    print_text((HUD_STARS_X + 24), 48+HUD_TOP_Y-(HUD_MOVE_Y*1.6), "*");  // 'X' glyph
-    
-    print_text_fmt_int((HUD_STARS_X + 38), 48+HUD_TOP_Y-(HUD_MOVE_Y*1.6), "%d", gHudDisplay.stars);
+    print_text_fmt_int((HUD_STARS_X + 38), 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.stars);
 }
 
 /**
@@ -386,8 +366,7 @@ void render_hud_keys(void) {
     }
 }
 
-void render_hud_timer(void)
-{
+void render_hud_timer(void) {
     u8* (*hudPrintLUT)[58];
     u16 timerValFrames;
     u16 timerMins;
@@ -429,15 +408,17 @@ void render_hud_camera_status(void) {
     s32 y;
 
     cameraLUT = segmented_to_virtual(&main_hud_camera_lut);
-    x = 270;
-    y = 120;
+    x = 266;
+    y = 205;
 
     if (sCameraHUD.status == CAM_STATUS_NONE) {
         return;
     }
 
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    
+
+    render_hud_tex_lut(x, y, (*cameraLUT)[GLYPH_CAM_CAMERA]);
+
     switch (sCameraHUD.status & CAM_STATUS_MODE_GROUP) {
         case CAM_STATUS_MARIO:
             render_hud_tex_lut(x + 16, y, (*cameraLUT)[GLYPH_CAM_MARIO_HEAD]);
@@ -452,14 +433,12 @@ void render_hud_camera_status(void) {
 
     switch (sCameraHUD.status & CAM_STATUS_C_MODE_GROUP) {
         case CAM_STATUS_C_DOWN:
-            render_hud_small_tex_lut(x + 24, y + 16, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
+            render_hud_small_tex_lut(x + 4, y + 16, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             break;
         case CAM_STATUS_C_UP:
-            render_hud_small_tex_lut(x + 24, y - 8, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
+            render_hud_small_tex_lut(x + 4, y - 8, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
             break;
     }
-
-    render_hud_tex_lut(x + 24, y + 2, (*cameraLUT)[GLYPH_CAM_CAMERA]);
     
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
