@@ -72,29 +72,40 @@ build/*
 
 # Include assets edited (Isabelle 64)
 
+# actors folder
+
 # SM64DS Bowser Key
 !/actors/bowser_key/*
 # SM64DS Coins
 !/actors/coin/*
 # Exclamation Box Outline (from RGBA16 to IA4)
 !/actors/exclamation_box_outline/*
+# Isabelle model
+!/actors/isabelle/*
 # Mushroom 1-up and Chocolate
 !/actors/mushroom_1up/*
 # Power Meter
 !/actors/power_meter/*
-# Isabelle model
-!/actors/isabelle/*
+# Sparkle (from RGBA16 to CI4)
+!/actors/sparkle/*
 # Gold Leaf
 !/actors/star/*
 # Transparent Gold Leaf
 !/actors/transparent_star/*
-# Menu Textures
-!/levels/menu/*
+# Water Splash (from RGBA16 to CI4)
+!/actors/water_splash/*
+
+# levels folder
+
 # AloXado Intro
 !/levels/intro/*
+# Menu Textures
+!/levels/menu/*
+
 # Isabelle Voice and some custom sounds
 !/sound/samples/sfx_9/*
 !/sound/samples/sfx_mario/*
 !/sound/samples/sfx_mario_peach/*
+
 # General Textures
 !/textures/segment2/*

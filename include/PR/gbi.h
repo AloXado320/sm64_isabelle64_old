@@ -3491,7 +3491,7 @@ typedef union {
 		((height)-1) << G_TEXTURE_IMAGE_FRAC)			\
 }
 
-// Alo's non-text block
+// without gDPSetTextureImage
 #define	gDPLoadNonTextureBlock(pkt, fmt, siz, width, height,		\
 		pal, cms, cmt, masks, maskt, shifts, shiftt)		\
 {									\
