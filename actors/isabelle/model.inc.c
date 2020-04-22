@@ -306,47 +306,20 @@ ALIGNED8 const u8 isabelle_texture_metal_wings_half_2[] = {
 #include "actors/isabelle/11.rgba16.inc.c"
 };
 
-ALIGNED8 const u8 shz_outfit_icon_1[] = {
-#include "actors/isabelle/shz_head_1.rgba16.inc.c"
+ALIGNED8 const u8 shz_outfit_icon_texture_lut[] = {
+#include "actors/isabelle/shz_head_texture_lut.rgba16.inc.c"
 };
 
-ALIGNED8 const u8 shz_outfit_icon_2[] = {
-#include "actors/isabelle/shz_head_2.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 shz_outfit_icon_3[] = {
-#include "actors/isabelle/shz_head_3.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 shz_outfit_icon_4[] = {
-#include "actors/isabelle/shz_head_4.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 shz_outfit_icon_5[] = {
-#include "actors/isabelle/shz_head_5.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 shz_outfit_icon_6[] = {
-#include "actors/isabelle/shz_head_6.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 shz_outfit_icon_7[] = {
-#include "actors/isabelle/shz_head_7.rgba16.inc.c"
-};
-
-ALIGNED8 const u8 shz_outfit_icon_8[] = {
-#include "actors/isabelle/shz_head_8.rgba16.inc.c"
-};
-
-const u8 *const shz_outfit_icon_lut[] = {
-    shz_outfit_icon_1,
-    shz_outfit_icon_2,
-    shz_outfit_icon_3,
-    shz_outfit_icon_4,
-    shz_outfit_icon_5,
-    shz_outfit_icon_6,
-    shz_outfit_icon_7,
-    shz_outfit_icon_8,
+// 0x200 is how long is a rgba16 16x16 texture
+u8 *shz_outfit_icon_lut[] = {
+    &shz_outfit_icon_texture_lut[0x200 * 0],
+    &shz_outfit_icon_texture_lut[0x200 * 1],
+    &shz_outfit_icon_texture_lut[0x200 * 2],
+    &shz_outfit_icon_texture_lut[0x200 * 3],
+    &shz_outfit_icon_texture_lut[0x200 * 4],
+    &shz_outfit_icon_texture_lut[0x200 * 5],
+    &shz_outfit_icon_texture_lut[0x200 * 6],
+    &shz_outfit_icon_texture_lut[0x200 * 7],
 };
 
 Gfx isabelle_metal_pallete_block_dl[] = {
