@@ -1,19 +1,16 @@
-// Mushroom 1-Up
+// Mushroom 1-Up & Chocolate
 
-// 0x030295E8
 static const Vtx mushroom_1up_seg3_vertex_030295E8[] = {
-    {{{    31,     31,      0}, 0, {   990,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   -30,     31,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{    31,     31,      0}, 0, {   990,     0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   -30,     31,      0}, 0, {     0,     0}, {0xff, 0xff, 0xff, 0xff}}},
     {{{   -30,    -30,      0}, 0, {     0,   990}, {0xff, 0xff, 0xff, 0xff}}},
     {{{    31,    -30,      0}, 0, {   990,   990}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
-// 0x03029628
 ALIGNED8 static const u8 mushroom_1up_seg3_texture_03029628[] = {
 #include "actors/mushroom_1up/1-up_mushroom.rgba16.inc.c"
 };
 
-// 0x0302A628 - 0x0302A660
 const Gfx mushroom_1up_texture_load[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mushroom_1up_seg3_texture_03029628),
     gsDPLoadSync(),
@@ -23,12 +20,10 @@ const Gfx mushroom_1up_texture_load[] = {
     gsSPEndDisplayList(),
 };
 
-// 0x03029628
 ALIGNED8 static const u8 mushroom_1up_seg3_texture_chocolate[] = {
 #include "actors/mushroom_1up/chocolate.rgba16.inc.c"
 };
 
-// 0x0302A628 - 0x0302A660
 const Gfx mushroom_1up_tex_chocolate_load[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mushroom_1up_seg3_texture_chocolate),
     gsDPLoadSync(),

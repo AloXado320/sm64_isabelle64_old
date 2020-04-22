@@ -78,6 +78,8 @@ build/*
 !/actors/coin/*
 # Exclamation Box Outline (from RGBA16 to IA4)
 !/actors/exclamation_box_outline/*
+# Mushroom 1-up and Chocolate
+!/actors/mushroom_1up/*
 # Power Meter
 !/actors/power_meter/*
 # Isabelle model
