@@ -401,27 +401,32 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 }
 
 
-void render_custom_texrect(Gfx *dltexture, s16 filtering, s16 usesCI, s16 x, s16 y, s16 width, s16 height) {
+void render_custom_texrect(Gfx *dltexture, s16 filtering, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height) {
    
-   gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
    
-   if (filtering == TRUE) {
-        gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
-   }
+    if (filtering != FALSE) gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
    
-   if (usesCI == TRUE) {
-        gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
-   }
+    if (usesCi != FALSE) {
+        switch (ttCiType) {
+            case G_TT_RGBA16:
+                gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
+                break;
+            case G_TT_IA16:
+                gDPSetTextureLUT(gDisplayListHead++, G_TT_IA16);
+                break;
+            default:
+                break;
+        }
+    }
+
+    gSPDisplayList(gDisplayListHead++, dltexture);
    
-   gSPDisplayList(gDisplayListHead++, dltexture);
-   
-   gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + width) << 2, (y + height) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
+    gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + width) << 2, (y + height) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
   
-   if (usesCI == TRUE) {
-        gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-   }
+    if (usesCi != FALSE) gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
    
-   gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }   
 
 /**

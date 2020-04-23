@@ -319,7 +319,7 @@ void handle_hud_move(void) {
 
 void render_hud_mario_lives(void) {
         
-    render_custom_texrect(dl_texhud_isabelle, FALSE, FALSE, 16, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
+    render_custom_texrect(dl_texhud_isabelle, FALSE, FALSE, G_TT_NONE, 16, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
     
     //print_text(16, 64+HUD_TOP_Y-(sHudMoveY*1.6), ",");   // 'Mario Head' glyph
     print_text(36, 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");   // 'X' glyph
@@ -330,7 +330,7 @@ void render_hud_mario_lives(void) {
 
 void render_hud_coins(void) {
     
-    render_custom_texrect(dl_texhud_bells, FALSE, FALSE, 16, (224 - (HUD_TOP_Y-sHudMoveY)), 32, 32);
+    render_custom_texrect(dl_texhud_bells, FALSE, FALSE, G_TT_NONE, 16, (224 - (HUD_TOP_Y-sHudMoveY)), 32, 32);
     // print_text(16, HUD_TOP_Y-sHudMoveY, "+");  // 'Coin' glyph
     print_text(36, (HUD_TOP_Y-16)-sHudMoveY, "*");  // 'X' glyph
     print_text_fmt_int(52, (HUD_TOP_Y-16)-sHudMoveY, "%d", gHudDisplay.coins);
@@ -345,7 +345,7 @@ void render_hud_stars(void) {
 
     //print_text(HUD_STARS_X, 36+HUD_TOP_Y-(sHudMoveY*1.4), "-"); // 'Star' glyph
     
-    //render_custom_texrect(dl_hud_rgba32_goldleaf, FALSE, FALSE, HUD_STARS_X, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
+    //render_custom_texrect(dl_hud_rgba32_goldleaf, FALSE, FALSE, G_TT_NONE, HUD_STARS_X, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
     
     render_rotating_model(gold_leaf_dl, (HUD_STARS_X + 4), 48+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
     
