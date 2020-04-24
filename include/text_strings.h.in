@@ -140,6 +140,7 @@
 
 // #define TEXT_MI_NINA_BONITA _("Mi niña bonita UwU")
 
+// alternate costume
 #define TEXT_ALT_COSTUME_TITLE _("Select a costume")
 #define TEXT_ALT_COSTUME_TITLE_FR _("Choisir un costume")
 #define TEXT_ALT_COSTUME_TITLE_DE _("Wähle ein Kostüm")
@@ -191,7 +192,23 @@
 #define TEXT_ALT_COSTUME_GRAY_ES _("Gris")
 #define TEXT_ALT_COSTUME_BLUE_ES _("Azul")
 
+// title screen strings
+#define TEXT_TITLE_PRESS_START _("Press Start Button")
+#define TEXT_TITLE_NO_CONTROLLER _("No Controller")
 
+#define TEXT_TITLE_PRESS_START_FR _("Appuyez sur Start")
+#define TEXT_TITLE_NO_CONTROLLER_FR _("Manette debranchee")
+
+#define TEXT_TITLE_PRESS_START_DE _("Drücke den Startknopf")
+#define TEXT_TITLE_NO_CONTROLLER_DE _("Controller fehlt")
+
+#define TEXT_TITLE_PRESS_START_IT _("Premi il pulsante Start")
+#define TEXT_TITLE_NO_CONTROLLER_IT _("Nessun controller")
+
+#define TEXT_TITLE_PRESS_START_ES _("Pulsa el boton Start")
+#define TEXT_TITLE_NO_CONTROLLER_ES _("No hay controlador")
+
+// npc names
 #define NO_NPCTEXT _("")
 #define NPCTEXT_BUDDY _("Bob-omb Buddy")
 #define NPCTEXT_KTQ _("Koopa the Quick")

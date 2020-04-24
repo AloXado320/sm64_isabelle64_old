@@ -77,9 +77,9 @@ u8 gDialogCharWidths[256] = {
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     16,  16,  16,  16,  16,  16,  16,  16,  16,  0,  0,  0,  0,  0,  0,  0, // 0x50 - 0x5F - buttons
 #ifdef MULTILANGUAGE // multilanguage chars
-    8,  8,  8,  8,  10,  10,  10,  10,  0,  0,  0,  0,  0,  0,  0,  5, // A group (3 minus & 3 mayus) - comma
+    8,  8,  8,  8,  10,  10,  10,  10,  0,  0,  0,  0,  0,  0,  0,  5, // A group (4 minus & 4 mayus) - comma
     8,  8,  8,  8,  9,  9,  9,  9,  0,  0,  0,  0,  0,  0,  0,  0, // E group (4 minus & 4 mayus)
-    8,  8,  8,  8,  10,  10,  10,  10,  0,  0,  0,  0,  0,  0,  0,  0, // U group (3 minus & 3 mayus)
+    8,  8,  8,  8,  10,  10,  10,  10,  0,  0,  0,  0,  0,  0,  0,  0, // U group (4 minus & 4 mayus)
     9,  9,  9,  9,  11,  11,  11,  11,  0,  0,  0,  0,  0,  0,  5,  5, // O group (2 minus & 2 mayus) - 0x9E, 0x9F space and hyphen
     0,  4,  4,  4,  0,  0,  0,  4,  0,  0,  0,  0,  0,  0,  0,  0, // I group (2 minus & 2 mayus)
 #else
@@ -457,11 +457,13 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
             case DIALOG_CHAR_LOWER_U_GRAVE:
             case DIALOG_CHAR_LOWER_U_CIRCUMFLEX:
             case DIALOG_CHAR_LOWER_U_UMLAUT:
+            case DIALOG_CHAR_LOWER_U_ACUTE:
                 render_lowercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('u'), str[strPos] & 0xF);
                 break;
             case DIALOG_CHAR_UPPER_U_GRAVE:
             case DIALOG_CHAR_UPPER_U_CIRCUMFLEX:
             case DIALOG_CHAR_UPPER_U_UMLAUT:
+            case DIALOG_CHAR_UPPER_U_ACUTE:
                 render_uppercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('U'), str[strPos] & 0xF);
                 break;
             case DIALOG_CHAR_LOWER_O_GRAVE:
@@ -711,15 +713,12 @@ void print_credits_string(s16 x, s16 y, const u8 *str) {
 static u8 ascii_to_font_char(u8 c) {
     if (c >= '0' && c <= '9')
         return (c - '0' + 0x00);
+
     if (c >= 'A' && c <= 'Z')
         return (c - 'A' + 0x0A);
 
     if (c >= 'a' && c <= 'z')
-#if defined(VERSION_JP) || defined(VERSION_SH)
-        return (c - 'A' + 0x0A);
-#else
         return (c - 'a' + 0x24);
-#endif
 
     if (c == '\'') return 0x3E;
     if (c == '.')  return 0x3F;
@@ -748,12 +747,12 @@ void print_generic_str_ascii(s16 x, s16 y, const char *str) {
     u8  buf[32];
     for (i = 0; str[i] != 0; i++)
         buf[i] = ascii_to_font_char(str[i]);
-    buf[i] = 0xFF;
+    buf[i] = DIALOG_CHAR_TERMINATOR;
 
     print_generic_string(x, y, buf);
 }
 
-void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, u8 spacing, const char *strAscii, const u8 *strDefault) {
+void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, const char *strAscii, const u8 *strDefault) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
@@ -764,7 +763,7 @@ void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 
     // Front Part
     gDPSetEnvColor(gDisplayListHead++, r, g, b, alpha);
 
-    isAscii ? print_generic_str_ascii(x - spacing, y + spacing, strAscii) : print_generic_string(x - spacing, y + spacing, strDefault);
+    isAscii ? print_generic_str_ascii(x - 1, y + 1, strAscii) : print_generic_string(x - 1, y + 1, strDefault);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 
@@ -857,6 +856,30 @@ s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale) {
     // return the x position of where the string starts as half the string's
     // length from the position of the provided center.
     return (f32) centerPos - (scale * (charsWidth / 2.0)) - ((scale / 2.0) * (spacesWidth / 2.0));
+}
+
+s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str) {
+    s16 strPos = 0;
+    f32 spacesWidth = 0.0f;
+    
+    switch (lutType) {
+        case LUT_TYPE_HUD:
+            while ((strPos = *str++) != 0) {
+                spacesWidth += (strPos == GLOBAL_CHAR_SPACE ? 6 : 12);
+            }
+            break;
+         case LUT_TYPE_STR:
+            while (str[strPos] != DIALOG_CHAR_TERMINATOR) {
+                spacesWidth += gDialogCharWidths[str[strPos]];
+                strPos++;
+            }
+            break;   
+        default:
+            break;
+    }
+    // return the x position of where the string starts as half the string's
+    // length from the position of the provided center.
+     return (s16)(centerPos - (s16)(spacesWidth / 4.5));
 }
 
 s16 get_string_width(u8 *str) {
@@ -2023,21 +2046,24 @@ void render_shz_names_titlescreen(s16 x, s16 y, s16 lang) {
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
-struct ShzTitleScreenStr {
-    char *pressStart;
-    char *noController;
-};
-
-struct ShzTitleScreenStr sShzTitleScreenDefinesStr[] = {
-    { "Press Start Button", "No Controller" },
-    { "Appuyez sur Start", "Manette debranchee" },
-    { "Drücke den Startknopf", "Controller fehlt" },
-    { "Premi il pulsante Start", "Nessun controller" },
-    { "Pulsa el boton Start", "No hay controlador" },
+u8 sShzTitleScreenStrings[][24] = {
+    // English Group
+    {TEXT_TITLE_PRESS_START}, {TEXT_TITLE_NO_CONTROLLER},
+    // French Group
+    {TEXT_TITLE_PRESS_START_FR}, {TEXT_TITLE_NO_CONTROLLER_FR},
+    // German Group
+    {TEXT_TITLE_PRESS_START_DE}, {TEXT_TITLE_NO_CONTROLLER_DE},
+    // Italian Group
+    {TEXT_TITLE_PRESS_START_IT}, {TEXT_TITLE_NO_CONTROLLER_IT},
+    // Spanish Group
+    {TEXT_TITLE_PRESS_START_ES}, {TEXT_TITLE_NO_CONTROLLER_ES},
 };
 
 void render_title_screen_textures(void) {
-    struct ShzTitleScreenStr *titleScreenStr = &sShzTitleScreenDefinesStr[gInGameLanguage];
+    s16 xPosStr1;
+    s16 xPosStr2;
+
+    gInGameLanguage = eu_get_language();
 
     render_custom_texrect(dl_alo_pixel_shz_titlescreen, TRUE, G_TT_RGBA16, 80, 18, 32, 32);
     render_ac_base_logo_titlescreen();
@@ -2045,16 +2071,19 @@ void render_title_screen_textures(void) {
     render_shz_names_titlescreen(92, 58, gInGameLanguage);
     render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16);
 
+    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0]);
+    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1]);
+    
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {
-            print_generic_string_shadow(ASCII_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, titleScreenStr->noController, NULL);
+            print_generic_string_shadow(HEX_PRINT_CHR, xPosStr2, 52, 230, 230, 230, 255, NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 1]);
         } else {
-            print_generic_string_shadow(ASCII_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, titleScreenStr->pressStart, NULL);
+            print_generic_string_shadow(HEX_PRINT_CHR, xPosStr1, 52, 230, 230, 230, 255, NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 0]);
         }
     }
-
-    print_generic_string_shadow(ASCII_PRINT_CHR, 256, 4, 230, 230, 230, 255, 1, "Ver. 1.3", NULL);
-    //print_generic_string_shadow(DEF_PRINT_CHR, 80, 120, 230, 230, 230, 255, 1, NULL, textShizue64);
+    
+    print_generic_string_shadow(ASCII_PRINT_CHR, 256, 4, 230, 230, 230, 255, "Ver. 1.3", NULL);
+    //print_generic_string_shadow(HEX_PRINT_CHR, 80, 120, 230, 230, 230, 255, NULL, textShizue64);
 
 }
 

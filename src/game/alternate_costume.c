@@ -163,7 +163,7 @@ void print_alternate_costume_strings(void) {
     
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     
-    print_generic_string_shadow(DEF_PRINT_CHR, TITLE_X, TITLE_Y, 230, 230, 230, 255, 1, NULL, sAltCostumeTitleText[lang]);
+    print_generic_string_shadow(HEX_PRINT_CHR, TITLE_X, TITLE_Y, 230, 230, 230, 255, NULL, sAltCostumeTitleText[lang]);
     
     for (i = 0; i < NUM_ALT_CUSTOMES; i++) {
         
@@ -173,7 +173,7 @@ void print_alternate_costume_strings(void) {
             r = 230; g = 230; b = 230;  
         }
         
-        print_generic_string_shadow(DEF_PRINT_CHR, OPTIONS_X, y, r, g, b, 255, 1, NULL, sAltCostumeColorListText[lang * 8 + i]);
+        print_generic_string_shadow(HEX_PRINT_CHR, OPTIONS_X, y, r, g, b, 255, NULL, sAltCostumeColorListText[lang * 8 + i]);
         y -= TEXT_HEIGHT;
     }
     

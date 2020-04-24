@@ -148,8 +148,11 @@ enum DialogSpecialChars {
     DIALOG_CHAR_TERMINATOR = 0xFF
 };
 
-#define DEF_PRINT_CHR 0x00
+#define HEX_PRINT_CHR 0x00
 #define ASCII_PRINT_CHR 0x01
+
+#define LUT_TYPE_HUD 0x00
+#define LUT_TYPE_STR 0x01
 
 extern s32 gDialogResponse;
 extern u16 gDialogColorFadeTimer;
@@ -170,7 +173,7 @@ extern void render_rotating_model(Gfx *displaylist, f32 xPos, f32 yPos, f32 scal
 extern void print_generic_string(s16 x, s16 y, const u8 *str);
 extern void print_hud_lut_string(s8 fontLut, s16 x, s16 y, const u8 *str);
 extern void print_menu_generic_string(s16 x, s16 y, const u8 *str);
-extern void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, u8 spacing, const char *strAscii, const u8 *strDefault);
+extern void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alph, const char *strAscii, const u8 *strDefault);
 extern void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8 maxIndex);
 #if defined(VERSION_US) || defined(VERSION_EU)
 extern s16 get_str_x_pos_from_center(s16 centerPos, u8 *str, f32 scale);
