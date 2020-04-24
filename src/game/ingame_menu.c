@@ -2001,58 +2001,61 @@ void render_ac_base_logo_titlescreen(void) {
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
-u8 textShizue64[] = { JP_SHIZUE64_TXT };
-u8 textPressStartJP[] = { JP_PRESS_START_TXT };
-u8 textNoControllerJP[] = { JP_NO_CONTROLLER_TEXT };
-#else
+extern u8 *alo_shz_title_screens_lut[];
+extern u8 alo_shz_title_screens_pallete[];
 
-//u8 textMiNinaBonita[] = { TEXT_MI_NINA_BONITA };
+void render_shz_names_titlescreen(s16 x, s16 y, s16 lang) {
+    u8* (*shzTitleLut)[];
+    
+    shzTitleLut = segmented_to_virtual(&alo_shz_title_screens_lut);
 
-struct ShzTitleScreen {
-    Gfx *shzTexture;
-    char *pressStartStr;
-    char *noControllerStr;
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+    gDPSetTextureLUT(gDisplayListHead++, G_TT_IA16);
+    
+    gDPSetEnvColor(gDisplayListHead++, 230, 200, 70, 255);
+    
+    gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_shz_title_screens_pallete);
+    gDPLoadTextureBlock_4b(gDisplayListHead++, (*shzTitleLut)[lang], G_IM_FMT_CI, 128, 32, 0, 
+        G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 128) << 2, (y + 32) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
+
+    gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+}
+
+struct ShzTitleScreenStr {
+    char *pressStart;
+    char *noController;
 };
 
-struct ShzTitleScreen sShzTitleScreenDefines[] = {
-    { dl_alo_isabelle_logo_titlescreen, "Press Start Button", "No Controller" },
-    { dl_alo_marie_logo_titlescreen, "Appuyez sur Start", "Manette debranchee" },
-    { dl_alo_melinda_logo_titlescreen, "Drücke den Startknopf", "Controller fehlt" },
-    { dl_alo_fuffi_logo_titlescreen, "Premi il pulsante Start", "Nessun controller" },
-    { dl_alo_canela_logo_titlescreen, "Pulsa el boton Start", "No hay controlador" },
+struct ShzTitleScreenStr sShzTitleScreenDefinesStr[] = {
+    { "Press Start Button", "No Controller" },
+    { "Appuyez sur Start", "Manette debranchee" },
+    { "Drücke den Startknopf", "Controller fehlt" },
+    { "Premi il pulsante Start", "Nessun controller" },
+    { "Pulsa el boton Start", "No hay controlador" },
 };
-#endif
+
 void render_title_screen_textures(void) {
-#ifndef VERSION_JP
-    struct ShzTitleScreen *titleScreen = &sShzTitleScreenDefines[gInGameLanguage];
-#endif
-    gInGameLanguage = eu_get_language();
+    struct ShzTitleScreenStr *titleScreenStr = &sShzTitleScreenDefinesStr[gInGameLanguage];
 
-    render_custom_texrect(dl_alo_pixel_shz_titlescreen, FALSE, TRUE, G_TT_RGBA16, 80, 18, 32, 32);
+    render_custom_texrect(dl_alo_pixel_shz_titlescreen, TRUE, G_TT_RGBA16, 80, 18, 32, 32);
     render_ac_base_logo_titlescreen();
-    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, TRUE, G_TT_RGBA16, 186, 26, 32, 32);
-
-#ifndef VERSION_JP
-    render_custom_texrect(titleScreen->shzTexture, TRUE, FALSE, G_TT_NONE, 92, 59, 128, 32);
-#else
-    render_custom_texrect(dl_alo_shizue_logo_titlescreen, TRUE, FALSE, G_TT_NONE, 92, 59, 128, 32);
-#endif
-    render_custom_texrect(dl_alo_year_name_titlescreen, FALSE, FALSE, G_TT_NONE, 32, 200, 256, 16);
+    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, G_TT_RGBA16, 184, 28, 32, 32);
+    render_shz_names_titlescreen(92, 58, gInGameLanguage);
+    render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16);
 
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {
-            print_generic_string_shadow(ASCII_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, titleScreen->noControllerStr, NULL);
+            print_generic_string_shadow(ASCII_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, titleScreenStr->noController, NULL);
         } else {
-            //print_generic_string_shadow(DEF_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, NULL, textMiNinaBonita);
-            print_generic_string_shadow(ASCII_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, titleScreen->pressStartStr, NULL);
+            print_generic_string_shadow(ASCII_PRINT_CHR, 90, 52, 230, 230, 230, 255, 1, titleScreenStr->pressStart, NULL);
         }
     }
 
     print_generic_string_shadow(ASCII_PRINT_CHR, 256, 4, 230, 230, 230, 255, 1, "Ver. 1.3", NULL);
-#if defined(VERSION_JP) || defined(VERSION_SH)
-    print_generic_string_shadow(DEF_PRINT_CHR, 80, 120, 230, 230, 230, 255, 1, NULL, textShizue64);
-#endif
+    //print_generic_string_shadow(DEF_PRINT_CHR, 80, 120, 230, 230, 230, 255, 1, NULL, textShizue64);
+
 }
 
 #ifndef VERSION_JP

@@ -1638,8 +1638,13 @@ const Gfx dl_alo_ac_bg_menus[] = {
     gsSPEndDisplayList(),
 };
 
-// CI4 64x64 Texrect
-
+/**************************************************
+ *                  TITLE SCREEN                  *
+ **************************************************/
+ 
+/**
+ * Animal Crossing Title Screen wood base (half image)
+ */
 ALIGNED8 static const u8 alo_aclogo_pallete_rgba16[] = {
 #include "textures/segment2/alo_title_aclogo_pallete.rgba16.inc.c"
 };
@@ -1656,13 +1661,6 @@ ALIGNED8 static const u8 alo_aclogo_right_ci4_64x64[] = {
 #include "textures/segment2/alo_title_aclogo_top_right_ci4.inc.c"
 };
 
-/**************************************************
- *                  TITLE SCREEN                  *
- **************************************************/
-
-/**
- * Animal Crossing Title Screen wood base (half image)
- */
 #define TEX_ACLOGO_BASE_LEFT_X 76
 #define TEX_ACLOGO_BASE_LEFT_Y 28
 #define TEX_ACLOGO_BASE_MIDDLE_X (TEX_ACLOGO_BASE_LEFT_X + 64 * TEXRECT_ACLOGO_BASE_SCALE)
@@ -1700,74 +1698,25 @@ const Gfx dl_alo_ac_logo_base_titlescreen[] = {
 /**
  * Isabelle's name in different languages
  */
-#ifndef VERSION_JP
-ALIGNED8 static const u8 alo_isabelle_logo_texture[] = {
-#include "textures/segment2/alo_title_1_isabelle_logo.ia4.inc.c"
+ALIGNED8 const u8 alo_shz_title_screens_pallete[] = {
+#include "textures/segment2/alo_shz_title_screens_pallete.ia16.inc.c"
 };
 
-const Gfx dl_alo_isabelle_logo_titlescreen[] = {
-    // 128x32 IA8 texture
-    gsDPSetEnvColor(231, 198, 74, 255),
-    gsDPLoadTextureBlock_4b(alo_isabelle_logo_texture, G_IM_FMT_IA, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
+
+ALIGNED8 static const u8 alo_shz_title_screens_ci4[] = {
+#include "textures/segment2/alo_shz_title_screens_ci4.inc.c"
 };
 
-ALIGNED8 static const u8 alo_marie_logo_texture[] = {
-#include "textures/segment2/alo_title_2_marie_logo.ia4.inc.c"
+// Size of CI4 128x32 texture is 0x800 long
+u8 *alo_shz_title_screens_lut[] = {
+    &alo_shz_title_screens_ci4[0x800 * 0], // Isabelle
+    &alo_shz_title_screens_ci4[0x800 * 1], // Marie
+    &alo_shz_title_screens_ci4[0x800 * 2], // Melinda
+    &alo_shz_title_screens_ci4[0x800 * 3], // Fuffi
+    &alo_shz_title_screens_ci4[0x800 * 4], // Canela
+    &alo_shz_title_screens_ci4[0x800 * 5], // Shizue
+    &alo_shz_title_screens_ci4[0x800 * 6], // Mi Ni?a (Spanish Easter egg)
 };
-
-const Gfx dl_alo_marie_logo_titlescreen[] = {
-    // 128x32 IA8 texture
-    gsDPSetEnvColor(231, 198, 74, 255),
-    gsDPLoadTextureBlock_4b(alo_marie_logo_texture, G_IM_FMT_IA, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-ALIGNED8 static const u8 alo_melinda_logo_texture[] = {
-#include "textures/segment2/alo_title_3_melinda_logo.ia4.inc.c"
-};
-
-const Gfx dl_alo_melinda_logo_titlescreen[] = {
-    // 128x32 IA8 texture
-    gsDPSetEnvColor(231, 198, 74, 255),
-    gsDPLoadTextureBlock_4b(alo_melinda_logo_texture, G_IM_FMT_IA, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-ALIGNED8 static const u8 alo_fuffi_logo_texture[] = {
-#include "textures/segment2/alo_title_4_fuffi_logo.ia4.inc.c"
-};
-
-const Gfx dl_alo_fuffi_logo_titlescreen[] = {
-    // 128x32 IA8 texture
-    gsDPSetEnvColor(231, 198, 74, 255),
-    gsDPLoadTextureBlock_4b(alo_fuffi_logo_texture, G_IM_FMT_IA, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-ALIGNED8 static const u8 alo_canela_logo_texture[] = {
-#include "textures/segment2/alo_title_5_canela_logo.ia4.inc.c"
-};
-
-const Gfx dl_alo_canela_logo_titlescreen[] = {
-    // 128x32 IA8 texture
-    gsDPSetEnvColor(231, 198, 74, 255),
-    gsDPLoadTextureBlock_4b(alo_canela_logo_texture, G_IM_FMT_IA, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-#else
-    
-ALIGNED8 static const u8 alo_shizue_logo_texture[] = {
-#include "textures/segment2/alo_shizue_logo.ia8.inc.c"
-};
-
-const Gfx dl_alo_shizue_logo_titlescreen[] = {
-    // 128x32 IA8 texture
-    gsDPSetEnvColor(231, 198, 74, 255),
-    gsDPLoadTextureBlock_4b(alo_shizue_logo_texture, G_IM_FMT_IA, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-#endif
 
 /**
  * Leaf 64 texture (New Leaf style)
@@ -1804,15 +1753,18 @@ const Gfx dl_alo_pixel_shz_titlescreen[] = {
 };
 
 /**
- * Copyright Text
+ * Year and Name (Alo) Text
  */
-ALIGNED8 static const u8 alo_copyright_texture[] = {
-#include "textures/segment2/alo_copyright_texture.ia8.inc.c"
+ALIGNED8 static const u8 alo_title_year_name_pallete[] = {
+#include "textures/segment2/alo_title_year_name_ci4_pallete.ia16.inc.c"
+};
+ALIGNED8 static const u8 alo_title_year_name_texture[] = {
+#include "textures/segment2/alo_title_year_name_ci4.inc.c"
 };
 
 const Gfx dl_alo_year_name_titlescreen[] = {
-    // 256x16 IA8 texture
-    gsDPLoadTextureBlock(alo_copyright_texture, G_IM_FMT_IA, G_IM_SIZ_8b, 256, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 8, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal16(0, alo_title_year_name_pallete),    
+    gsDPLoadTextureBlock_4b(alo_title_year_name_texture, G_IM_FMT_CI, 256, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 8, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 

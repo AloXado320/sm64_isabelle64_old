@@ -401,11 +401,9 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 }
 
 
-void render_custom_texrect(Gfx *dltexture, s16 filtering, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height) {
+void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height) {
    
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
-   
-    if (filtering != FALSE) gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
    
     if (usesCi != FALSE) {
         switch (ttCiType) {

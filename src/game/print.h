@@ -28,7 +28,7 @@
 extern void print_text_fmt_int(s32 x, s32 y, const char *str, s32 n);
 extern void print_text(s32 x, s32 y, const char *str);
 extern void print_text_centered(s32 x, s32 y, const char *str);
-extern void render_custom_texrect(Gfx *dltexture, s16 filtering, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height);
+extern void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height);
 extern void render_text_labels(void);
 
 #endif /* _PRINT_H */
