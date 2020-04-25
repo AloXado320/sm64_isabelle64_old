@@ -68,11 +68,11 @@ enum DialogMark { DIALOG_MARK_NONE = 0, DIALOG_MARK_DAKUTEN = 1, DIALOG_MARK_HAN
 #if !defined(VERSION_JP) && !defined(VERSION_SH)
 u8 gDialogCharWidths[256] = {
     9,  7,  9,  9,  9,  9,  9,  9,  9,  9, // 0 - 9
-    10,  10,  10,  11,  9,  9,  10,  10,   4,   7, // A - J
+    10,  9,  10,  11,  9,  9,  10,  10,   4,   7, // A - J
     9,  9,  12,  10,  11,  10,  11,  10,  9,  10, // K - T
-    10,  10,  13,  10,  10,  9,   8,   9,   8,   8, // U - Z / a - d
-     8,   6,   8,  8,   4,   4,   8,   4,  12,   8, // e - n
-     9,  9,   8,   6,   7,   6,   8,   8,  12,   8, // o - x
+    10,  10,  13,  10,  10,  9,   8,   8,   8,   8, // U - Z / a - d
+     8,   6,   8,  8,   3,   4,   8,   4,  12,   8, // e - n
+     8,  9,   8,   6,   7,   6,   8,   8,  12,   8, // o - x
     8,  7, /* y - z */ 4,  4, /* misc symbols */ 0,  0, /* menu mario face */  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     16,  16,  16,  16,  16,  16,  16,  16,  16,  0,  0,  0,  0,  0,  0,  0, // 0x50 - 0x5F - buttons
@@ -80,7 +80,7 @@ u8 gDialogCharWidths[256] = {
     8,  8,  8,  8,  10,  10,  10,  10,  0,  0,  0,  0,  0,  0,  0,  5, // A group (4 minus & 4 mayus) - comma
     8,  8,  8,  8,  9,  9,  9,  9,  0,  0,  0,  0,  0,  0,  0,  0, // E group (4 minus & 4 mayus)
     8,  8,  8,  8,  10,  10,  10,  10,  0,  0,  0,  0,  0,  0,  0,  0, // U group (4 minus & 4 mayus)
-    9,  9,  9,  9,  11,  11,  11,  11,  0,  0,  0,  0,  0,  0,  5,  5, // O group (2 minus & 2 mayus) - 0x9E, 0x9F space and hyphen
+    8,  8,  8,  8,  11,  11,  11,  11,  0,  0,  0,  0,  0,  0,  5,  5, // O group (2 minus & 2 mayus) - 0x9E, 0x9F space and hyphen
     0,  4,  4,  4,  0,  0,  0,  4,  0,  0,  0,  0,  0,  0,  0,  0, // I group (2 minus & 2 mayus)
 #else
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  5, // 0x6F -comma
@@ -422,7 +422,7 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
     while (str[strPos] != DIALOG_CHAR_TERMINATOR) {
         switch (str[strPos]) {
             case DIALOG_CHAR_SPACE:
-                xCoord += 5;
+                xCoord += gDialogCharWidths[DIALOG_CHAR_SPACE];
                 break;
             case DIALOG_CHAR_NEWLINE:
                 yCoord += 16;
@@ -858,10 +858,10 @@ s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale) {
     return (f32) centerPos - (scale * (charsWidth / 2.0)) - ((scale / 2.0) * (spacesWidth / 2.0));
 }
 
-s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str) {
+s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str, f32 scale) {
     s16 strPos = 0;
     f32 spacesWidth = 0.0f;
-    
+
     switch (lutType) {
         case LUT_TYPE_HUD:
             while ((strPos = *str++) != 0) {
@@ -877,9 +877,10 @@ s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str) {
         default:
             break;
     }
+
     // return the x position of where the string starts as half the string's
     // length from the position of the provided center.
-     return (s16)(centerPos - (s16)(spacesWidth / 4.5));
+     return (f32)(centerPos - (spacesWidth / scale));
 }
 
 s16 get_string_width(u8 *str) {
@@ -1075,8 +1076,9 @@ struct ACTopBalloonRender sACTopBalloonDefines[] = {
 };
 
 void render_balloon_dialog_top_name(struct DialogEntry *dialog, s16 x, s16 y) {
-
+    s16 xText;
     struct ACTopBalloonRender *topBalloon = &sACTopBalloonDefines[dialog->npcNameID];
+
     gInGameLanguage = eu_get_language();
     
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
@@ -1090,9 +1092,9 @@ void render_balloon_dialog_top_name(struct DialogEntry *dialog, s16 x, s16 y) {
     } else {
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, AC_DIALOG_ALPHA);
     }
-
-    print_generic_string(get_str_x_pos_from_center_scale(98, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 10.0f), y + 36, 
-        sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID]);
+    
+    xText = get_str_x_pos_from_center_custom(LUT_TYPE_STR, (x + 64), sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2.0f);
+    print_generic_string(xText, y + 36, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID]);
     
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
@@ -2071,8 +2073,8 @@ void render_title_screen_textures(void) {
     render_shz_names_titlescreen(92, 58, gInGameLanguage);
     render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16);
 
-    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0]);
-    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1]);
+    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4.5f);
+    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4.5f);
     
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {

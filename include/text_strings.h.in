@@ -211,7 +211,7 @@
 // npc names
 #define NO_NPCTEXT _("")
 #define NPCTEXT_BUDDY _("Bob-omb Buddy")
-#define NPCTEXT_KTQ _("Koopa the Quick")
+#define NPCTEXT_KTQ __("Koopa the Quick")
 #define NPCTEXT_KBB _("King Bob-omb")
 #define NPCTEXT_BOWSER _("Bowser")
 #define NPCTEXT_LAKITU _("Lakitu")
