@@ -752,18 +752,18 @@ void print_generic_str_ascii(s16 x, s16 y, const char *str) {
     print_generic_string(x, y, buf);
 }
 
-void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, const char *strAscii, const u8 *strDefault) {
+void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, const char *strAscii, const u8 *strHex) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     // Shadow Part
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
-    isAscii ? print_generic_str_ascii(x, y, strAscii) : print_generic_string(x, y, strDefault);
+    isAscii ? print_generic_str_ascii(x, y, strAscii) : print_generic_string(x, y, strHex);
 
     // Front Part
     gDPSetEnvColor(gDisplayListHead++, r, g, b, alpha);
 
-    isAscii ? print_generic_str_ascii(x - 1, y + 1, strAscii) : print_generic_string(x - 1, y + 1, strDefault);
+    isAscii ? print_generic_str_ascii(x - 1, y + 1, strAscii) : print_generic_string(x - 1, y + 1, strHex);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 
@@ -1443,81 +1443,56 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
     gLastDialogLineNum = lineNum;
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
-#define X_VAL1 -5.0f
-#define Y_VAL1 2.0
-#define Y_VAL2 4.0f
-#define X_VAL4_1 50
-#define X_VAL4_2 25
-#define Y_VAL4_1 1
-#define Y_VAL4_2 20
-#else
-#define X_VAL1 -7.0f
-#define Y_VAL1 5.0
-#define Y_VAL2 5.0f
-#define X_VAL4_1 74
-#define X_VAL4_2 60
-#define Y_VAL4_1 2
-#define Y_VAL4_2 16
-#endif
+void render_dialog_arrow_next_page(s16 x, s16 y) {
+    s32 timer = gGlobalTimer;
+
+    switch (timer & 8) {
+        case 0:
+        case 2:
+            y++;
+            break;
+        case 6:
+        case 8:
+            y--;
+            break;
+    }
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+
+    gDPSetEnvColor(gDisplayListHead++, 247, 166, 62, 255);
+    gSPDisplayList(gDisplayListHead++, dl_balloon_dialog_arrow_down_texblock);
+    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+}
+
+void render_select_option_arrow(s16 x, s16 y) {
+    s32 timer = gGlobalTimer;
+
+    switch (timer & 8) {
+        case 0:
+        case 2:
+            x++;
+            break;
+        case 6:
+        case 8:
+            x--;
+            break;
+    }
+
+    render_custom_texrect(dl_balloon_arrow_side_choose_texblock, FALSE, G_TT_NONE, x, y, 16, 16);
+}
 
 void render_dialog_triangle_choice(struct DialogEntry *dialog, s8 linesPerBox) {
 
-    create_dl_translation_matrix(MENU_MTX_NOPUSH, dialog->leftOffset, dialog->width, 0);
-    create_dl_translation_matrix(MENU_MTX_PUSH, X_VAL1, Y_VAL1, 0);
-    create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.1f, ((f32) linesPerBox / Y_VAL2) + 0.1, 1.0f);
-
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    s16 x = (dialog->leftOffset + (gDialogLineNum * 64)) - 60;
+    s16 y = (dialog->width + (linesPerBox * 16)) - 8;
 
     if (gDialogBoxState == DIALOG_STATE_VERTICAL) {
         handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &gDialogLineNum, 1, 2);
     }
 
-    create_dl_translation_matrix(MENU_MTX_NOPUSH, (gDialogLineNum * X_VAL4_1) - X_VAL4_2, Y_VAL4_1 - (gLastDialogLineNum * Y_VAL4_2), 0);
-
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, AC_DIALOG_ALPHA);
-
-    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
-}
-
-#ifdef VERSION_EU
-#define X_VAL5 122.0f
-#define Y_VAL5_1 -16
-#define Y_VAL5_2 3
-#define X_Y_VAL6 0.5f
-#elif defined(VERSION_US)
-#define X_VAL5 118.0f
-#define Y_VAL5_1 -16
-#define Y_VAL5_2 5
-#define X_Y_VAL6 0.8f
-#elif defined(VERSION_JP) || defined(VERSION_SH)
-#define X_VAL5 123.0f
-#define Y_VAL5_1 -20
-#define Y_VAL5_2 2
-#define X_Y_VAL6 0.8f
-#endif
-
-// Renders the blue arrow for the next dialog page, texture from Animal Forest
-void render_dialog_arrow_next_page(void) {
-    
-    s16 x = 250;
-    s16 y = 196;
-    
-    s32 timer = gGlobalTimer;
-
-    if (timer & 0x08) {
-        y++;
-    } else {
-        y--;
-    }
-
-    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
-
-    gDPSetEnvColor(gDisplayListHead++, 193, 125, 32, 255);
-    gSPDisplayList(gDisplayListHead++, dl_balloon_dialog_arrow_down_texblock);
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
-
-    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+    render_select_option_arrow(x, y);
 }
 
 void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
@@ -1857,7 +1832,7 @@ void render_dialog_entries(void) {
     #endif
     
     if (gLastDialogPageStrPos != -1 && gDialogBoxState == DIALOG_STATE_VERTICAL && gSkipTypewriteEffect == TRUE && gAllTextinPageRendered == TRUE) {
-        render_dialog_arrow_next_page();
+        render_dialog_arrow_next_page(250, 196);
     }
 }
 
