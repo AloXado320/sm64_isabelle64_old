@@ -12,6 +12,8 @@
 #include "save_file.h"
 #include "print.h"
 #include "actors/common1.h"
+#include "object_helpers.h"
+#include "behavior_data.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -22,7 +24,6 @@
 s8 sHudMoveY;
 s8 sHudMoveTime;
 s8 sRedCoinY;
-u8 sRedCoinCount;
 s8 sHudMove;
 
 struct PowerMeterHUD {
@@ -262,25 +263,26 @@ void FigureSpeed(s8 val, s8 cap) {
 }
 
 void render_hud_red_coins(void) {
-    sRedCoinCount = gRedCoinsCollected;
+    s16 redCountLvl;
+    s16 redCollected = gRedCoinsCollected;
     
     FigureSpeed(sRedCoinY,32);
     
-    if (sRedCoinCount > 0) {
+    if (redCollected > 0) {
         if (sRedCoinY < 32) {
             sRedCoinY += sHudMove;
         }
+        
+        redCountLvl = count_objects_with_behavior(bhvRedCoin);
 
         render_rotating_model(sm64ds_red_coin_dl, 16, sRedCoinY - 8, 0.3f, 7.0f);
+        print_text(32, sRedCoinY, "*");
+        print_text_fmt_int(48, sRedCoinY, "%d", redCollected);
+        print_text(60, sRedCoinY, "&");
+        print_text_fmt_int(73, sRedCoinY, "%d", redCountLvl + redCollected);
         
-        //print_text(16,sRedCoinY, "?"); - Icon
-        print_text(32,sRedCoinY, "*");
-        print_text_fmt_int(48, sRedCoinY, "%d", sRedCoinCount);
-        print_text(60,sRedCoinY, "&");
-        print_text(73,sRedCoinY, "8");
-        
-        if (sRedCoinCount == 8) {
-            print_text(89,sRedCoinY, "-");
+        if (redCollected == redCountLvl + redCollected) {
+            print_text(89, sRedCoinY, "-");
         }
         
     } else {
