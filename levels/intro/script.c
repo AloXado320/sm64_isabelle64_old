@@ -77,7 +77,8 @@ const LevelScript level_intro_entry_4[] = {
 
     AREA(/*index*/ 1, intro_geo_000414),
     END_AREA(),
-
+    CLEAR_DEMO_PTR(),
+    
     FREE_LEVEL_POOL(),
     LOAD_AREA(/*area*/ 1),
     SET_MENU_MUSIC(/*seq*/ 0x0002),

@@ -208,6 +208,22 @@
 #define TEXT_TITLE_PRESS_START_ES _("Pulsa el boton Start")
 #define TEXT_TITLE_NO_CONTROLLER_ES _("No hay controlador")
 
+// cale strings
+#define TEXT_CAKE_THANKS_FOR_PLAYING _("Thanks for playing!")
+#define TEXT_CAKE_CHARACTER_MOD_BY_ALO _("Mod by AloXado320")
+
+#define TEXT_CAKE_THANKS_FOR_PLAYING_FR _("Merci d'avoir joué!")
+#define TEXT_CAKE_CHARACTER_MOD_BY_ALO_FR _("Mod par AloXado320")
+
+#define TEXT_CAKE_THANKS_FOR_PLAYING_DE _("Danke fürs Spielen!")
+#define TEXT_CAKE_CHARACTER_MOD_BY_ALO_DE _("Mod von AloXado320")
+
+#define TEXT_CAKE_THANKS_FOR_PLAYING_IT _("Grazie per aver giocato!")
+#define TEXT_CAKE_CHARACTER_MOD_BY_ALO_IT _("Mod di AloXado320")
+
+#define TEXT_CAKE_THANKS_FOR_PLAYING_ES _("¡Gracias por jugar!")
+#define TEXT_CAKE_CHARACTER_MOD_BY_ALO_ES _("Mod por AloXado320")
+
 // npc names
 #define NO_NPCTEXT _("")
 #define NPCTEXT_BUDDY _("Bob-omb Buddy")

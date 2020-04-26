@@ -180,6 +180,7 @@ extern void print_hud_lut_string(s8 fontLut, s16 x, s16 y, const u8 *str);
 extern void print_menu_generic_string(s16 x, s16 y, const u8 *str);
 extern void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, const char *strAscii, const u8 *strHex);
 extern void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8 maxIndex);
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 extern s16 get_str_x_pos_from_center(s16 centerPos, u8 *str, f32 scale);
 #endif
@@ -190,6 +191,8 @@ extern s16 get_str_x_pos_from_center(s16 centerPos, u8 *str, f32 scale);
 #endif
 extern s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale);
 #endif
+extern s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str, f32 scale);
+
 extern s16 get_string_width_ascii(const char *str);
 extern void print_hud_my_score_coins(s32 useCourseCoinScore, s8 fileNum, s8 courseNum, s16 x, s16 y);
 extern void int_to_str(s32 num, u8 *dst);
@@ -209,6 +212,7 @@ extern void print_generic_str_ascii(s16 x, s16 y, const char *str);
 extern void set_cutscene_message(s16 xOffset, s16 yOffset, s16 msgIndex, s16 msgDuration);
 extern void do_cutscene_handler(void);
 extern void render_title_screen_textures(void);
+extern s32 lvl_render_cake_screen_strings(s16, s32);
 extern void render_hud_cannon_reticle(void);
 extern void reset_red_coins_collected(void);
 extern s16 render_menus_and_dialogs(void);

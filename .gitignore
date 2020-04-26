@@ -98,6 +98,8 @@ texconvert/*
 
 # levels folder
 
+# Cake Textures
+!/levels/ending/*
 # AloXado Intro
 !/levels/intro/*
 # Menu Textures

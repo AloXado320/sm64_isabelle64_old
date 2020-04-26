@@ -880,7 +880,7 @@ s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str, f32 sc
 
     // return the x position of where the string starts as half the string's
     // length from the position of the provided center.
-     return (f32)(centerPos - (spacesWidth / scale));
+    return (f32)(centerPos - (spacesWidth / scale));
 }
 
 s16 get_string_width(u8 *str) {
@@ -2058,6 +2058,48 @@ void render_title_screen_textures(void) {
     print_generic_string_shadow(ASCII_PRINT_CHR, 256, 4, 230, 230, 230, 255, "Ver. 1.3", NULL);
     //print_generic_string_shadow(HEX_PRINT_CHR, 80, 120, 230, 230, 230, 255, NULL, textShizue64);
 
+}
+
+u8 sShzCakeStrings[][25] = {
+    // English Group
+    {TEXT_CAKE_THANKS_FOR_PLAYING}, {TEXT_CAKE_CHARACTER_MOD_BY_ALO},
+    // French Group
+    {TEXT_CAKE_THANKS_FOR_PLAYING_FR}, {TEXT_CAKE_CHARACTER_MOD_BY_ALO_FR},
+    // German Group
+    {TEXT_CAKE_THANKS_FOR_PLAYING_DE}, {TEXT_CAKE_CHARACTER_MOD_BY_ALO_DE},
+    // Italian Group
+    {TEXT_CAKE_THANKS_FOR_PLAYING_IT}, {TEXT_CAKE_CHARACTER_MOD_BY_ALO_IT},
+    // Spanish Group
+    {TEXT_CAKE_THANKS_FOR_PLAYING_ES}, {TEXT_CAKE_CHARACTER_MOD_BY_ALO_ES},
+};
+
+s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
+    static float alpha = 0;
+    
+    s16 xPosStr1;
+    s16 xPosStr2;   
+    
+    gInGameLanguage = eu_get_language();
+
+    if (alpha < 250) {
+        alpha += 5;
+    } else {
+        alpha = 255;
+    }
+
+    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 0], 3.0f);
+    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 1], 3.0f);
+    
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
+
+    print_generic_string(xPosStr1, 48, sShzCakeStrings[gInGameLanguage * 2 + 0]);
+    print_generic_string(xPosStr2, 32, sShzCakeStrings[gInGameLanguage * 2 + 1]);
+    
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    return 1;
 }
 
 #ifndef VERSION_JP

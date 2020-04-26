@@ -7,6 +7,7 @@
 #include "level_commands.h"
 
 #include "game/area.h"
+#include "game/ingame_menu.h"
 #include "game/level_update.h"
 
 #include "levels/scripts.h"
@@ -29,9 +30,7 @@ const LevelScript level_ending_entry[] = {
     /*10*/ BLACKOUT(/*active*/ FALSE),
     /*11*/ LOAD_AREA(/*area*/ 1),
     /*12*/ TRANSITION(/*transType*/ WARP_TRANSITION_FADE_FROM_COLOR, /*time*/ 75, /*color*/ 0x00, 0x00, 0x00),
-    /*14*/ SLEEP(/*frames*/ 120),
-    /*15*/ CALL(/*arg*/ 0, /*func*/ lvl_play_the_end_screen_sound),
-    // L1:
-    /*17*/ SLEEP(/*frames*/ 1),
-    /*18*/ JUMP(level_ending_entry + 17),
+    /*13*/ CALL(/*arg*/ 0, /*func*/ lvl_render_cake_screen_strings),
+    /*14*/ SLEEP(/*frames*/ 1),
+    /*15*/ JUMP(level_ending_entry + 14),
 };
