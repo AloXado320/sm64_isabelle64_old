@@ -208,7 +208,7 @@
 #define TEXT_TITLE_PRESS_START_ES _("Pulsa el boton Start")
 #define TEXT_TITLE_NO_CONTROLLER_ES _("No hay controlador")
 
-// cale strings
+// cake strings
 #define TEXT_CAKE_THANKS_FOR_PLAYING _("Thanks for playing!")
 #define TEXT_CAKE_CHARACTER_MOD_BY_ALO _("Mod by AloXado320")
 
