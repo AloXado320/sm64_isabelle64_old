@@ -4,7 +4,9 @@ A SM64 Decomp Mod that let's you play as the yellow dog from Animal Crossing, Is
 
 Source code contains progress of the next release (Isabelle 64 version 1.3)
 
-<img src="https://i.imgur.com/s8VB6vq.png"/></a>
+<img src="https://i.imgur.com/9S7fnCr.png"/></a>
+
+<img src="https://i.imgur.com/PGH0Sq6.png"/></a>
 
 ## Info
 * Initially made as a tribute for her reveal in Smash Ultimate (September 2018).
@@ -23,7 +25,7 @@ It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those
 
 ## GCC Build
 
-There's also a gcc build option, first run `make clean` if you already build with IDO, then run `make COMPILER=gcc`. 
+There's also a gcc build option, first run `make clean` if you already build using IDO, then run `make COMPILER=gcc`. 
 
 Beware that gcc rom won't work on PJ64 1.6, but it will work on PJ64 2.x and Mupen64.
 
