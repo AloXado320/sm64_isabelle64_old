@@ -40,7 +40,7 @@ const Gfx water_splash_seg4_dl_040325C8[] = {
 const Gfx water_splash_seg4_dl_04032640[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 0]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 0]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -48,7 +48,7 @@ const Gfx water_splash_seg4_dl_04032640[] = {
 const Gfx water_splash_seg4_dl_04032658[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 1]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 1]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -56,7 +56,7 @@ const Gfx water_splash_seg4_dl_04032658[] = {
 const Gfx water_splash_seg4_dl_04032670[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 2]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 2]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -64,7 +64,7 @@ const Gfx water_splash_seg4_dl_04032670[] = {
 const Gfx water_splash_seg4_dl_04032688[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 3]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 3]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -72,7 +72,7 @@ const Gfx water_splash_seg4_dl_04032688[] = {
 const Gfx water_splash_seg4_dl_040326A0[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 4]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 4]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -80,7 +80,7 @@ const Gfx water_splash_seg4_dl_040326A0[] = {
 const Gfx water_splash_seg4_dl_040326B8[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 5]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 5]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -88,7 +88,7 @@ const Gfx water_splash_seg4_dl_040326B8[] = {
 const Gfx water_splash_seg4_dl_040326D0[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 6]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 6]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };
 
@@ -96,6 +96,6 @@ const Gfx water_splash_seg4_dl_040326D0[] = {
 const Gfx water_splash_seg4_dl_040326E8[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[0x400 * 7]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &water_splash_textures_ci4[CI4_TEXTURE_SIZE(32, 64) * 7]),
     gsSPBranchList(water_splash_seg4_dl_040325C8),
 };

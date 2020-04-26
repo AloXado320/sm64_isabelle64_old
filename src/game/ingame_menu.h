@@ -148,11 +148,17 @@ enum DialogSpecialChars {
     DIALOG_CHAR_TERMINATOR = 0xFF
 };
 
-#define HEX_PRINT_CHR 0x00
+// print_generic_string_shadow
+#define HEX_PRINT_CHR   0x00
 #define ASCII_PRINT_CHR 0x01
 
+// get_str_x_pos_from_center_custom
 #define LUT_TYPE_HUD 0x00
 #define LUT_TYPE_STR 0x01
+
+// render_arrow_texture_menu
+#define ARROW_TEXTURE_SELECT    0x00
+#define ARROW_TEXTURE_NEXT_PAGE 0x01
 
 extern s32 gDialogResponse;
 extern u16 gDialogColorFadeTimer;
@@ -193,7 +199,7 @@ extern void create_dialog_box_with_var(s16 dialog, s32 dialogVar);
 extern void create_dialog_inverted_box(s16 dialog);
 extern void create_dialog_box_with_response(s16 dialog);
 extern void reset_dialog_render_state(void);
-extern void render_select_option_arrow(s16 x, s16 y);
+extern void render_arrow_texture_menu(s16 move, s16 arrowType, s16 x, s16 y);
 extern void set_menu_mode(s16 mode);
 extern void reset_cutscene_msg_fade(void);
 extern void dl_rgba16_begin_cutscene_msg_fade(void);

@@ -358,8 +358,8 @@ void add_glyph_texture(s8 glyphIndex) {
     const u8 *const *glyphs = segmented_to_virtual(main_hud_lut);
 
     gDPPipeSync(gDisplayListHead++);
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, glyphs[glyphIndex]);
-    gSPDisplayList(gDisplayListHead++, dl_hud_img_load_tex_block);
+    gDPLoadTextureBlock(gDisplayListHead++, glyphs[glyphIndex], G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, 
+        G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD); 
 }
 
 /**
@@ -401,7 +401,7 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 }
 
 
-void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height) {
+void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 a) {
    
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
    
@@ -417,6 +417,8 @@ void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 
                 break;
         }
     }
+
+    gDPSetEnvColor(gDisplayListHead++, r, g, b, a);
 
     gSPDisplayList(gDisplayListHead++, dltexture);
    

@@ -32,13 +32,11 @@ const Gfx sparkles_seg4_dl_0402A490[] = {
     gsSPEndDisplayList(),
 };
 
-// 0x200 is how long is a ci4 32x32 texture
-
 // 0x0402A4F8 - 0x0402A510
 const Gfx sparkles_seg4_dl_0402A4F8[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[0x200 * 0]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[CI4_TEXTURE_SIZE(32, 32) * 0]),
     gsSPBranchList(sparkles_seg4_dl_0402A490),
 };
 
@@ -46,7 +44,7 @@ const Gfx sparkles_seg4_dl_0402A4F8[] = {
 const Gfx sparkles_seg4_dl_0402A510[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[0x200 * 1]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[CI4_TEXTURE_SIZE(32, 32) * 1]),
     gsSPBranchList(sparkles_seg4_dl_0402A490),
 };
 
@@ -54,7 +52,7 @@ const Gfx sparkles_seg4_dl_0402A510[] = {
 const Gfx sparkles_seg4_dl_0402A528[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[0x200 * 2]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[CI4_TEXTURE_SIZE(32, 32) * 2]),
     gsSPBranchList(sparkles_seg4_dl_0402A490),
 };
 
@@ -62,7 +60,7 @@ const Gfx sparkles_seg4_dl_0402A528[] = {
 const Gfx sparkles_seg4_dl_0402A540[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[0x200 * 3]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[CI4_TEXTURE_SIZE(32, 32) * 3]),
     gsSPBranchList(sparkles_seg4_dl_0402A490),
 };
 
@@ -70,7 +68,7 @@ const Gfx sparkles_seg4_dl_0402A540[] = {
 const Gfx sparkles_seg4_dl_0402A558[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[0x200 * 4]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[CI4_TEXTURE_SIZE(32, 32) * 4]),
     gsSPBranchList(sparkles_seg4_dl_0402A490),
 };
 
@@ -78,6 +76,6 @@ const Gfx sparkles_seg4_dl_0402A558[] = {
 const Gfx sparkles_seg4_dl_0402A570[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[0x200 * 5]),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, &sparkles_textures_ci4[CI4_TEXTURE_SIZE(32, 32) * 5]),
     gsSPBranchList(sparkles_seg4_dl_0402A490),
 };

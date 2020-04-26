@@ -47,18 +47,16 @@ extern Gfx dl_paintings_env_mapped_end[];
 extern u8 seg2_painting_triangle_mesh[];
 extern u8 seg2_painting_mesh_neighbor_tris[];
 extern u8* main_hud_lut[58];
+
 extern Gfx dl_alo_texrect_block_start[];
 extern Gfx dl_alo_texrect_block_end[];
+
 extern Gfx dl_balloon_dialog_texrect[];
 extern Gfx dl_balloon_dialog_bg[];
-extern Gfx dl_balloon_dialog_top_name_texblock[];
-extern Gfx dl_balloon_dialog_arrow_down_texblock[];
-extern Gfx dl_balloon_arrow_side_choose_texblock[];
+extern Gfx dl_balloon_dialog_top_name[];
 
-extern Gfx dl_texhud_isabelle[];
-extern Gfx dl_texhud_bells[];
-
-extern Gfx dl_alo_ac_bg_menus[];
+extern u8 texture_hud_rgba16_isabelle[];
+extern u8 texture_hud_rgba16_bells[];
 
 extern Gfx dl_alo_ac_logo_base_titlescreen[];
 extern Gfx dl_alo_isabelle_logo_titlescreen[];
@@ -71,7 +69,6 @@ extern Gfx dl_alo_leaf64_titlescreen[];
 extern Gfx dl_alo_pixel_shz_titlescreen[];
 extern Gfx dl_alo_year_name_titlescreen[];
 
-extern Gfx dl_hud_img_load_tex_block[];
 extern Gfx dl_hud_img_begin[];
 extern Gfx dl_hud_img_end[];
 extern void *main_font_lut[];

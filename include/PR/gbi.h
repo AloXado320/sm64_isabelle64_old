@@ -4771,6 +4771,11 @@ typedef union {
 #define	gDPNoOpTag(pkt, tag)	gDPParam(pkt, G_NOOP, tag)
 #define	gsDPNoOpTag(tag)	gsDPParam(G_NOOP, tag)
 
+// Texture Sizes (Custom)
+
+#define CI4_TEXTURE_SIZE(width, height)  ((((width)*(height)+2)>>1)-1)
+#define RGBA16_TEXTURE_SIZE(width, height)  (((width)*(height))<<1)
+
 #endif /* _LANGUAGE_C */
 
 

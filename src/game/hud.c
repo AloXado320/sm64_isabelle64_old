@@ -56,32 +56,48 @@ s32 sPowerMeterVisibleTimer = 0;
 static struct CameraHUD sCameraHUD = { CAM_STATUS_NONE };
 
 /**
+ * Renders a rgba16 32x32 glyph texture from a table list.
+ */
+void render_hud_big_tex_lut(s32 x, s32 y, u8 *texture) {
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+
+    gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+        G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 32) << 2, (y + 32) << 2,
+                        G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+}
+
+/**
  * Renders a rgba16 16x16 glyph texture from a table list.
  */
 void render_hud_tex_lut(s32 x, s32 y, u8 *texture) {
-    gDPPipeSync(gDisplayListHead++);
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture);
-    gSPDisplayList(gDisplayListHead++, &dl_hud_img_load_tex_block);
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2,
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+
+    gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+        G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2,
                         G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
 /**
  * Renders a rgba16 8x8 glyph texture from a table list.
  */
 void render_hud_small_tex_lut(s32 x, s32 y, u8 *texture) {
-    gDPSetTile(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0,
-                G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD);
-    gDPTileSync(gDisplayListHead++);
-    gDPSetTile(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 2, 0, G_TX_RENDERTILE, 0,
-                G_TX_CLAMP, 3, G_TX_NOLOD, G_TX_CLAMP, 3, G_TX_NOLOD);
-    gDPSetTileSize(gDisplayListHead++, G_TX_RENDERTILE, 0, 0, (8 - 1) << G_TEXTURE_IMAGE_FRAC, (8 - 1) << G_TEXTURE_IMAGE_FRAC);
-    gDPPipeSync(gDisplayListHead++);
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture);
-    gDPLoadSync(gDisplayListHead++);
-    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, 8 * 8 - 1, CALC_DXT(8, G_IM_SIZ_16b_BYTES));
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 8) << 2, (y + 8) << 2, G_TX_RENDERTILE,
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+
+    gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
+        G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 3, 3, G_TX_NOLOD, G_TX_NOLOD);
+    gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 8) << 2, (y + 8) << 2, G_TX_RENDERTILE,
                         0, 0, 1 << 10, 1 << 10);
+
+    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
 /**
@@ -265,14 +281,14 @@ void FigureSpeed(s8 val, s8 cap) {
 void render_hud_red_coins(void) {
     s16 redCountLvl;
     s16 redCollected = gRedCoinsCollected;
-    
+
     FigureSpeed(sRedCoinY,32);
-    
+
     if (redCollected > 0) {
         if (sRedCoinY < 32) {
             sRedCoinY += sHudMove;
         }
-        
+
         redCountLvl = count_objects_with_behavior(bhvRedCoin);
 
         render_rotating_model(sm64ds_red_coin_dl, 16, sRedCoinY - 8, 0.3f, 7.0f);
@@ -280,18 +296,18 @@ void render_hud_red_coins(void) {
         print_text_fmt_int(48, sRedCoinY, "%d", redCollected);
         print_text(60, sRedCoinY, "&");
         print_text_fmt_int(73, sRedCoinY, "%d", redCountLvl + redCollected);
-        
+
         if (redCollected == redCountLvl + redCollected) {
             print_text(89, sRedCoinY, "-");
         }
-        
+
     } else {
         sRedCoinY = 0;
     }
 }
 
 void handle_hud_move(void) {
- 
+
     if (gMarioState->forwardVel != 0) { // If Character is moving, move HUD out
         sHudMoveTime = 0;
     } else {
@@ -299,40 +315,39 @@ void handle_hud_move(void) {
             sHudMoveTime += 1;
         }
     }
-    
+
     if (sCurrPlayMode == 2) { //Checks if the game is currently paused. The 2 is the actual bit itself. 1 being the game is unpaused.
         sHudMoveTime = 45;
     }
-    
+
     FigureSpeed(sHudMoveY,40);
-    
+
     if (sHudMoveTime >= 45 && sHudMoveY < 40) {
         sHudMoveY += sHudMove;
     }
-    
+
     if (sHudMoveTime < 45 && sHudMoveY > 0) {
         sHudMoveY -= sHudMove;
     }
- 
+
     render_hud_red_coins();
 }
 
 #define HUD_TOP_Y 210
 
 void render_hud_mario_lives(void) {
-        
-    render_custom_texrect(dl_texhud_isabelle, FALSE, G_TT_NONE, 16, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
-    
-    //print_text(16, 64+HUD_TOP_Y-(sHudMoveY*1.6), ",");   // 'Mario Head' glyph
+
+    render_hud_big_tex_lut(16, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), texture_hud_rgba16_isabelle);
+
     print_text(36, 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");   // 'X' glyph
-    
+
     print_text_fmt_int(52, 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.lives);
-    
+
 }
 
 void render_hud_coins(void) {
-    
-    render_custom_texrect(dl_texhud_bells, FALSE, G_TT_NONE, 16, (224 - (HUD_TOP_Y-sHudMoveY)), 32, 32);
+
+    render_hud_big_tex_lut(16, (224 - (HUD_TOP_Y-sHudMoveY)), texture_hud_rgba16_bells);
     // print_text(16, HUD_TOP_Y-sHudMoveY, "+");  // 'Coin' glyph
     print_text(36, (HUD_TOP_Y-16)-sHudMoveY, "*");  // 'X' glyph
     print_text_fmt_int(52, (HUD_TOP_Y-16)-sHudMoveY, "%d", gHudDisplay.coins);
@@ -345,14 +360,10 @@ void render_hud_stars(void) {
     if (gHudFlash == 1 && gGlobalTimer & 0x08)
         return;
 
-    //print_text(HUD_STARS_X, 36+HUD_TOP_Y-(sHudMoveY*1.4), "-"); // 'Star' glyph
-    
-    //render_custom_texrect(dl_hud_rgba32_goldleaf, FALSE, G_TT_NONE, HUD_STARS_X, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), 32, 32);
-    
     render_rotating_model(gold_leaf_dl, (HUD_STARS_X + 4), 48+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
-    
+
     print_text((HUD_STARS_X + 24), 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");  // 'X' glyph
-    
+
     print_text_fmt_int((HUD_STARS_X + 38), 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.stars);
 }
 
@@ -441,7 +452,7 @@ void render_hud_camera_status(void) {
             render_hud_small_tex_lut(x + 4, y - 8, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
             break;
     }
-    
+
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 

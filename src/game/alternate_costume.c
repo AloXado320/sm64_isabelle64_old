@@ -86,7 +86,7 @@ s16 sAltCostumeSelectedID = 0;
 // These new changes are applied since Isabelle 64 1.3
 struct AltCostumeEntry {
     u8 *texEarColor;
-    u8 *texHairTailColor; 
+    u8 *texHairTailColor;
     u8 *texExtraColor;
     u8 *texTshirtColor;
 };
@@ -118,14 +118,14 @@ void set_alternate_costume(const struct AltCostumeEntry *entry) {
 void handle_alternate_costume_menu(void) {
 
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, &sAltCustomMenuOpt, 0, NUM_ALT_CUSTOMES - 1);
-    
-    render_select_option_arrow(TITLE_X - 10, (sAltCustomMenuOpt * TEXT_HEIGHT) + 64);
+
+    render_arrow_texture_menu(TRUE, ARROW_TEXTURE_SELECT, TITLE_X - 12, (sAltCustomMenuOpt * TEXT_HEIGHT) + 64);
 
     if (gPlayer1Controller->buttonPressed & (A_BUTTON | B_BUTTON)) {
         play_sound(SOUND_MENU_CLICK_ACNH, gDefaultSoundArgs);
         set_alternate_costume(&sAltCostumeEntries[sAltCustomMenuOpt]);
         sAltCostumeSelectedID = sAltCustomMenuOpt;
-        save_file_set_alt_costume(sAltCostumeSelectedID);      
+        save_file_set_alt_costume(sAltCostumeSelectedID);
     }
 }
 
@@ -139,19 +139,19 @@ u8 sAltCostumeTitleText[][21] = {
 
 u8 sAltCostumeColorListText[][10] = {
     // English Group
-    {TEXT_ALT_COSTUME_GREEN}, {TEXT_ALT_COSTUME_YELLOW}, {TEXT_ALT_COSTUME_PINK}, {TEXT_ALT_COSTUME_RED}, 
+    {TEXT_ALT_COSTUME_GREEN}, {TEXT_ALT_COSTUME_YELLOW}, {TEXT_ALT_COSTUME_PINK}, {TEXT_ALT_COSTUME_RED},
     {TEXT_ALT_COSTUME_PURPLE}, {TEXT_ALT_COSTUME_TEAL}, {TEXT_ALT_COSTUME_GRAY}, {TEXT_ALT_COSTUME_BLUE},
     // French Group
-    {TEXT_ALT_COSTUME_GREEN_FR}, {TEXT_ALT_COSTUME_YELLOW_FR}, {TEXT_ALT_COSTUME_PINK_FR}, {TEXT_ALT_COSTUME_RED_FR}, 
+    {TEXT_ALT_COSTUME_GREEN_FR}, {TEXT_ALT_COSTUME_YELLOW_FR}, {TEXT_ALT_COSTUME_PINK_FR}, {TEXT_ALT_COSTUME_RED_FR},
     {TEXT_ALT_COSTUME_PURPLE_FR}, {TEXT_ALT_COSTUME_TEAL_FR}, {TEXT_ALT_COSTUME_GRAY_FR}, {TEXT_ALT_COSTUME_BLUE_FR},
     // German Group
-    {TEXT_ALT_COSTUME_GREEN_DE}, {TEXT_ALT_COSTUME_YELLOW_DE}, {TEXT_ALT_COSTUME_PINK_DE}, {TEXT_ALT_COSTUME_RED_DE}, 
+    {TEXT_ALT_COSTUME_GREEN_DE}, {TEXT_ALT_COSTUME_YELLOW_DE}, {TEXT_ALT_COSTUME_PINK_DE}, {TEXT_ALT_COSTUME_RED_DE},
     {TEXT_ALT_COSTUME_PURPLE_DE}, {TEXT_ALT_COSTUME_TEAL_DE}, {TEXT_ALT_COSTUME_GRAY_DE}, {TEXT_ALT_COSTUME_BLUE_DE},
     // Italian Group
-    {TEXT_ALT_COSTUME_GREEN_IT}, {TEXT_ALT_COSTUME_YELLOW_IT}, {TEXT_ALT_COSTUME_PINK_IT}, {TEXT_ALT_COSTUME_RED_IT}, 
+    {TEXT_ALT_COSTUME_GREEN_IT}, {TEXT_ALT_COSTUME_YELLOW_IT}, {TEXT_ALT_COSTUME_PINK_IT}, {TEXT_ALT_COSTUME_RED_IT},
     {TEXT_ALT_COSTUME_PURPLE_IT}, {TEXT_ALT_COSTUME_TEAL_IT}, {TEXT_ALT_COSTUME_GRAY_IT}, {TEXT_ALT_COSTUME_BLUE_IT},
     // Spanish Group
-    {TEXT_ALT_COSTUME_GREEN_ES}, {TEXT_ALT_COSTUME_YELLOW_ES}, {TEXT_ALT_COSTUME_PINK_ES}, {TEXT_ALT_COSTUME_RED_ES}, 
+    {TEXT_ALT_COSTUME_GREEN_ES}, {TEXT_ALT_COSTUME_YELLOW_ES}, {TEXT_ALT_COSTUME_PINK_ES}, {TEXT_ALT_COSTUME_RED_ES},
     {TEXT_ALT_COSTUME_PURPLE_ES}, {TEXT_ALT_COSTUME_TEAL_ES}, {TEXT_ALT_COSTUME_GRAY_ES}, {TEXT_ALT_COSTUME_BLUE_ES},
 };
 
@@ -160,45 +160,43 @@ void print_alternate_costume_strings(void) {
     u8 r, g, b;
     s16 y = OPTIONS_Y;
     s16 lang = eu_get_language();
-    
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    
+
     print_generic_string_shadow(HEX_PRINT_CHR, TITLE_X, TITLE_Y, 230, 230, 230, 255, NULL, sAltCostumeTitleText[lang]);
-    
+
     for (i = 0; i < NUM_ALT_CUSTOMES; i++) {
-        
+
         if (i == sAltCostumeSelectedID) {
             r = 52; g = 166; b = 52;
         } else {
-            r = 230; g = 230; b = 230;  
+            r = 230; g = 230; b = 230;
         }
-        
+
         print_generic_string_shadow(HEX_PRINT_CHR, OPTIONS_X, y, r, g, b, 255, NULL, sAltCostumeColorListText[lang * 8 + i]);
         y -= TEXT_HEIGHT;
     }
-    
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
-extern u8 *shz_outfit_icon_lut[];
+extern u8 shz_outfit_icon_texture_lut[];
 
 void print_alternate_costume_icons(void) {
-    u8* (*shzIconLut)[];
     s16 i;
-    
-    shzIconLut = segmented_to_virtual(&shz_outfit_icon_lut);
-    
+
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    
+
     for (i = 0; i < NUM_ALT_CUSTOMES; i++) {
-        render_hud_tex_lut(MENU_X + TEXT_HEIGHT - 6, (i * TEXT_HEIGHT) + 64, (*shzIconLut)[i]);
+        render_hud_tex_lut(MENU_X + TEXT_HEIGHT - 6, (i * TEXT_HEIGHT) + 64,
+            &shz_outfit_icon_texture_lut[RGBA16_TEXTURE_SIZE(16, 16) * i]);
     }
-    
+
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
 void init_saved_alternate_costume(u16 costume) {
-   
+
     sAltCostumeSelectedID = costume;
 
     set_alternate_costume(&sAltCostumeEntries[costume]);

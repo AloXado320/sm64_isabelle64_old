@@ -1077,26 +1077,24 @@ struct ACTopBalloonRender sACTopBalloonDefines[] = {
 
 void render_balloon_dialog_top_name(struct DialogEntry *dialog, s16 x, s16 y) {
     s16 xText;
+    u8 monoColor;
     struct ACTopBalloonRender *topBalloon = &sACTopBalloonDefines[dialog->npcNameID];
 
     gInGameLanguage = eu_get_language();
-    
-    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
 
     gDPSetEnvColor(gDisplayListHead++, topBalloon->r, topBalloon->g, topBalloon->b, 20 + AC_DIALOG_ALPHA);
-    gSPDisplayList(gDisplayListHead++, dl_balloon_dialog_top_name_texblock);
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 128) << 2, (y + 32) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
+    render_custom_texrect(dl_balloon_dialog_top_name, TRUE, G_TT_IA16, x, y, 
+        128, 32, topBalloon->r, topBalloon->g, topBalloon->b, (AC_DIALOG_ALPHA) + 20); // double size due to mirror
 
-    if (topBalloon->isTextBlack == TRUE) {
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, AC_DIALOG_ALPHA);
-    } else {
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, AC_DIALOG_ALPHA);
-    }
+    topBalloon->isTextBlack ? (monoColor = 0) : (monoColor = 255);
+    xText = get_str_x_pos_from_center_custom(LUT_TYPE_STR, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2.0f);
     
-    xText = get_str_x_pos_from_center_custom(LUT_TYPE_STR, (x + 64), sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, monoColor, monoColor, monoColor, AC_DIALOG_ALPHA);
     print_generic_string(xText, y + 36, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID]);
     
-    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
 void render_balloon_dialog_texture(struct DialogEntry *dialog) {
@@ -1443,44 +1441,45 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
     gLastDialogLineNum = lineNum;
 }
 
-void render_dialog_arrow_next_page(s16 x, s16 y) {
-    s32 timer = gGlobalTimer;
+extern u8 alo_menu_arrows_ci4_pallete[];
+extern u8 alo_menu_arrows_ci4[];
 
-    switch (timer & 8) {
-        case 0:
-        case 2:
-            y++;
+void render_arrow_texture_menu(s16 move, s16 arrowTexture, s16 x, s16 y) {
+    static s16 movePos = 0;
+    s32 timer = gGlobalTimer;
+    u8 textureIndex;
+    u8 r, g, b;
+    s16 xPos, yPos;
+    
+    if (move == TRUE) timer & 4 ? movePos++: movePos--;
+    
+    switch (arrowTexture) {
+        case ARROW_TEXTURE_SELECT:
+            r = 255; g = 255; b = 255;
+            textureIndex = 0;
+            xPos = x + movePos;
+            yPos = y;
             break;
-        case 6:
-        case 8:
-            y--;
+        case ARROW_TEXTURE_NEXT_PAGE:
+            r = 247; g = 166; b = 62;
+            textureIndex = 1;
+            xPos = x;
+            yPos = y + movePos;
             break;
     }
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+    gDPSetTextureLUT(gDisplayListHead++, G_TT_IA16);
+    
+    gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
 
-    gDPSetEnvColor(gDisplayListHead++, 247, 166, 62, 255);
-    gSPDisplayList(gDisplayListHead++, dl_balloon_dialog_arrow_down_texblock);
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
+    gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_menu_arrows_ci4_pallete);
+    gDPLoadTextureBlock_4b(gDisplayListHead++, &alo_menu_arrows_ci4[CI4_TEXTURE_SIZE(16, 16) * textureIndex], G_IM_FMT_CI, 
+        16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD); 
+    gSPScisTextureRectangle(gDisplayListHead++, xPos << 2, yPos << 2, (xPos + 16) << 2, (yPos + 16) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
 
+    gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
-}
-
-void render_select_option_arrow(s16 x, s16 y) {
-    s32 timer = gGlobalTimer;
-
-    switch (timer & 8) {
-        case 0:
-        case 2:
-            x++;
-            break;
-        case 6:
-        case 8:
-            x--;
-            break;
-    }
-
-    render_custom_texrect(dl_balloon_arrow_side_choose_texblock, FALSE, G_TT_NONE, x, y, 16, 16);
 }
 
 void render_dialog_triangle_choice(struct DialogEntry *dialog, s8 linesPerBox) {
@@ -1492,7 +1491,7 @@ void render_dialog_triangle_choice(struct DialogEntry *dialog, s8 linesPerBox) {
         handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &gDialogLineNum, 1, 2);
     }
 
-    render_select_option_arrow(x, y);
+    render_arrow_texture_menu(FALSE, ARROW_TEXTURE_SELECT, x, y);
 }
 
 void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
@@ -1832,7 +1831,7 @@ void render_dialog_entries(void) {
     #endif
     
     if (gLastDialogPageStrPos != -1 && gDialogBoxState == DIALOG_STATE_VERTICAL && gSkipTypewriteEffect == TRUE && gAllTextinPageRendered == TRUE) {
-        render_dialog_arrow_next_page(250, 196);
+        render_arrow_texture_menu(TRUE, ARROW_TEXTURE_NEXT_PAGE, 250, 196);
     }
 }
 
@@ -2001,13 +2000,10 @@ void render_ac_base_logo_titlescreen(void) {
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
-extern u8 *alo_shz_title_screens_lut[];
 extern u8 alo_shz_title_screens_pallete[];
+extern u8 alo_shz_title_screens_ci4[];
 
 void render_shz_names_titlescreen(s16 x, s16 y, s16 lang) {
-    u8* (*shzTitleLut)[];
-    
-    shzTitleLut = segmented_to_virtual(&alo_shz_title_screens_lut);
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
     gDPSetTextureLUT(gDisplayListHead++, G_TT_IA16);
@@ -2015,8 +2011,8 @@ void render_shz_names_titlescreen(s16 x, s16 y, s16 lang) {
     gDPSetEnvColor(gDisplayListHead++, 230, 200, 70, 255);
     
     gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_shz_title_screens_pallete);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, (*shzTitleLut)[lang], G_IM_FMT_CI, 128, 32, 0, 
-        G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock_4b(gDisplayListHead++, &alo_shz_title_screens_ci4[CI4_TEXTURE_SIZE(128, 32) * lang], G_IM_FMT_CI, 
+        128, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD); 
     gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 128) << 2, (y + 32) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -2042,11 +2038,11 @@ void render_title_screen_textures(void) {
 
     gInGameLanguage = eu_get_language();
 
-    render_custom_texrect(dl_alo_pixel_shz_titlescreen, TRUE, G_TT_RGBA16, 80, 18, 32, 32);
+    render_custom_texrect(dl_alo_pixel_shz_titlescreen, TRUE, G_TT_RGBA16, 80, 18, 32, 32, 255, 255, 255, 255);
     render_ac_base_logo_titlescreen();
-    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, G_TT_RGBA16, 184, 28, 32, 32);
+    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, G_TT_RGBA16, 184, 28, 32, 32, 255, 255, 255, 255);
     render_shz_names_titlescreen(92, 58, gInGameLanguage);
-    render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16);
+    render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16, 255, 255, 255, 255);
 
     xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4.5f);
     xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4.5f);
@@ -2202,26 +2198,27 @@ void change_dialog_camera_angle(void) {
     }
 }
 
+extern u8 alo_ac_bg_menus_pal[];
+extern u8 alo_ac_bg_menus_ci4[];
+
 // With scrolling - Scrolling background code used in Pyoro64 by buu342
 void background_scene(void) {
-    
     static float time = 0;
-    
     time += 0.5;
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
-    
     gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
-    
-    gSPDisplayList(gDisplayListHead++, dl_alo_ac_bg_menus);
-    
+
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+    gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_ac_bg_menus_pal);
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_bg_menus_ci4, G_IM_FMT_CI, 64, 64, 0, 
+        G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD); 
 
     gSPScisTextureRectangle(gDisplayListHead++, 0 << 2, 0 << 2, (0 + SCREEN_WIDTH) << 2, (0 + SCREEN_HEIGHT) << 2, G_TX_RENDERTILE, 
             ((int)(64-time))%64 << 5, ((int)(64-time))%64 << 5, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 

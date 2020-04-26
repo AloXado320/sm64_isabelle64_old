@@ -310,18 +310,6 @@ ALIGNED8 const u8 shz_outfit_icon_texture_lut[] = {
 #include "actors/isabelle/shz_head_texture_lut.rgba16.inc.c"
 };
 
-// 0x200 is how long is a rgba16 16x16 texture
-u8 *shz_outfit_icon_lut[] = {
-    &shz_outfit_icon_texture_lut[0x200 * 0],
-    &shz_outfit_icon_texture_lut[0x200 * 1],
-    &shz_outfit_icon_texture_lut[0x200 * 2],
-    &shz_outfit_icon_texture_lut[0x200 * 3],
-    &shz_outfit_icon_texture_lut[0x200 * 4],
-    &shz_outfit_icon_texture_lut[0x200 * 5],
-    &shz_outfit_icon_texture_lut[0x200 * 6],
-    &shz_outfit_icon_texture_lut[0x200 * 7],
-};
-
 Gfx isabelle_metal_pallete_block_dl[] = {
     gsDPLoadTLUT_pal16(0, isabelle_texture_metal_pal),
     gsSPEndDisplayList(),

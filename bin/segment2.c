@@ -1507,6 +1507,10 @@ const Gfx dl_alo_texrect_block_end[] = {
     gsSPEndDisplayList(),
 };
 
+/**************************************************
+ *                DIALOG BALLOON                  *
+ **************************************************/
+
 ALIGNED8 static const u8 balloon_dialog_ci4_pallete[] = {
 #include "textures/segment2/balloon_dialog_ci4_pallete.rgba16.inc.c"
 };
@@ -1574,68 +1578,59 @@ const Gfx dl_balloon_dialog_bg[] = {
     gsSPEndDisplayList(),
 };
 
-ALIGNED8 static const u8 balloon_dialog_top_name_ia8[] = {
-#include "textures/segment2/balloon_top_name.ia8.inc.c"
+/**
+ * Dialog top name Balloon
+ */
+ALIGNED8 static const u8 balloon_dialog_top_name_pallete[] = {
+#include "textures/segment2/alo_menu_balloon_top_name_ci4_pallete.ia16.inc.c"
 };
 
-const Gfx dl_balloon_dialog_top_name_texblock[] = {
-    // 64x32 IA8 texture
-    gsDPLoadTextureBlock(balloon_dialog_top_name_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 5, G_TX_NOLOD, G_TX_NOLOD),
+ALIGNED8 static const u8 balloon_dialog_top_name_ci4[] = {
+#include "textures/segment2/alo_menu_balloon_top_name_ci4.inc.c"
+};
+
+const Gfx dl_balloon_dialog_top_name[] = {
+    gsDPLoadTLUT_pal16(0, balloon_dialog_top_name_pallete),
+    gsDPLoadTextureBlock_4b(balloon_dialog_top_name_ci4, G_IM_FMT_CI, 64, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-ALIGNED8 static const u8 balloon_dialog_arrow_down_ia8[] = {
-#include "textures/segment2/balloon_arrow_down.ia8.inc.c"
+/**************************************************
+ *                  MENU TEXTURES                 *
+ **************************************************/
+
+/**
+ * Menu Arrows
+ */
+ALIGNED8 const u8 alo_menu_arrows_ci4_pallete[] = {
+#include "textures/segment2/alo_menu_arrows_ci4_pallete.ia16.inc.c"
+};
+ 
+ALIGNED8 const u8 alo_menu_arrows_ci4[] = {
+#include "textures/segment2/alo_menu_arrows_ci4.inc.c"
 };
 
-const Gfx dl_balloon_dialog_arrow_down_texblock[] = {
-    // 16x16 IA8 texture
-    gsDPLoadTextureBlock(balloon_dialog_arrow_down_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-ALIGNED8 static const u8 balloon_arrow_side_choose_ia8[] = {
-#include "textures/segment2/balloon_arrow_side_choose.ia8.inc.c"
-};
-
-const Gfx dl_balloon_arrow_side_choose_texblock[] = {
-    // 16x16 IA8 texture
-    gsDPLoadTextureBlock(balloon_arrow_side_choose_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-ALIGNED8 static const u8 texture_hud_rgba16_isabelle[] = {
-#include "textures/segment2/alo_texhud_32x32_shz.rgba16.inc.c"
-};
-
-const Gfx dl_texhud_isabelle[] = {
-    gsDPLoadTextureBlock(texture_hud_rgba16_isabelle, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-
-ALIGNED8 static const u8 texture_hud_rgba16_bells[] = {
-#include "textures/segment2/alo_texhud_32x32_bells.rgba16.inc.c"
-};
-
-const Gfx dl_texhud_bells[] = {
-    gsDPLoadTextureBlock(texture_hud_rgba16_bells, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPEndDisplayList(),
-};
-
-ALIGNED8 static const u8 alo_ac_bg_menus_pal[] = {
+/**
+ * Background Menu
+ */
+ALIGNED8 const u8 alo_ac_bg_menus_pal[] = {
 #include "textures/segment2/alo_ac_bg_menus_pal.rgba16.inc.c"
 };
 
-ALIGNED8 static const u8 alo_ac_bg_menus_ci4[] = {
+ALIGNED8 const u8 alo_ac_bg_menus_ci4[] = {
 #include "textures/segment2/alo_ac_bg_menus_ci4.inc.c"
 };
 
-const Gfx dl_alo_ac_bg_menus[] = {    
-    gsDPLoadTLUT_pal16(0, alo_ac_bg_menus_pal),
-    gsDPLoadTextureBlock_4b(alo_ac_bg_menus_ci4, G_IM_FMT_CI, 64, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    
-    gsSPEndDisplayList(),
+/**************************************************
+ *                    HUD CUSTOM                  *
+ **************************************************/
+
+ALIGNED8 const u8 texture_hud_rgba16_isabelle[] = {
+#include "textures/segment2/alo_texhud_32x32_shz.rgba16.inc.c"
+};
+
+ALIGNED8 const u8 texture_hud_rgba16_bells[] = {
+#include "textures/segment2/alo_texhud_32x32_bells.rgba16.inc.c"
 };
 
 /**************************************************
@@ -1703,19 +1698,8 @@ ALIGNED8 const u8 alo_shz_title_screens_pallete[] = {
 };
 
 
-ALIGNED8 static const u8 alo_shz_title_screens_ci4[] = {
+ALIGNED8 const u8 alo_shz_title_screens_ci4[] = {
 #include "textures/segment2/alo_shz_title_screens_ci4.inc.c"
-};
-
-// Size of CI4 128x32 texture is 0x800 long
-u8 *alo_shz_title_screens_lut[] = {
-    &alo_shz_title_screens_ci4[0x800 * 0], // Isabelle
-    &alo_shz_title_screens_ci4[0x800 * 1], // Marie
-    &alo_shz_title_screens_ci4[0x800 * 2], // Melinda
-    &alo_shz_title_screens_ci4[0x800 * 3], // Fuffi
-    &alo_shz_title_screens_ci4[0x800 * 4], // Canela
-    &alo_shz_title_screens_ci4[0x800 * 5], // Shizue
-    &alo_shz_title_screens_ci4[0x800 * 6], // Mi Ni?a (Spanish Easter egg)
 };
 
 /**
@@ -1777,16 +1761,6 @@ const Gfx dl_hud_img_begin[] = {
     gsDPSetEnvColor(255, 255, 255, 255),
     gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
     gsDPSetTextureFilter(G_TF_POINT),
-    gsSPEndDisplayList(),
-};
-
-// 0x0200EC98 - 0x0200ECC8
-const Gfx dl_hud_img_load_tex_block[] = {
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 16 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (16 - 1) << G_TEXTURE_IMAGE_FRAC),
     gsSPEndDisplayList(),
 };
 
