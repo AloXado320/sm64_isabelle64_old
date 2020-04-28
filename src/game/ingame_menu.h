@@ -153,8 +153,9 @@ enum DialogSpecialChars {
 #define ASCII_PRINT_CHR 0x01
 
 // get_str_x_pos_from_center_custom
-#define LUT_TYPE_HUD 0x00
-#define LUT_TYPE_STR 0x01
+#define LUT_TYPE_HUD    0x00
+#define LUT_TYPE_STR    0x01
+#define LUT_TYPE_ASCII  0x02
 
 // render_arrow_texture_menu
 #define ARROW_TEXTURE_SELECT    0x00
@@ -191,7 +192,7 @@ extern s16 get_str_x_pos_from_center(s16 centerPos, u8 *str, f32 scale);
 #endif
 extern s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale);
 #endif
-extern s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str, f32 scale);
+extern s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *strHex, char *strAscii, f32 scale);
 
 extern s16 get_string_width_ascii(const char *str);
 extern void print_hud_my_score_coins(s32 useCourseCoinScore, s8 fileNum, s8 courseNum, s16 x, s16 y);

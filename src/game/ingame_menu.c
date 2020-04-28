@@ -858,20 +858,34 @@ s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale) {
     return (f32) centerPos - (scale * (charsWidth / 2.0)) - ((scale / 2.0) * (spacesWidth / 2.0));
 }
 
-s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *str, f32 scale) {
-    s16 strPos = 0;
+s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *strHex, char *strAscii, f32 scale) {
+    s16 i;    
+    s16 strHexPos = 0;
     f32 spacesWidth = 0.0f;
+
+    u8  buf[32];
+    s16 bufPos = 0;
 
     switch (lutType) {
         case LUT_TYPE_HUD:
-            while ((strPos = *str++) != 0) {
-                spacesWidth += (strPos == GLOBAL_CHAR_SPACE ? 6 : 12);
+            while ((strHexPos = *strHex++) != 0) {
+                spacesWidth += (strHexPos == GLOBAL_CHAR_SPACE ? 6 : 12);
             }
             break;
          case LUT_TYPE_STR:
-            while (str[strPos] != DIALOG_CHAR_TERMINATOR) {
-                spacesWidth += gDialogCharWidths[str[strPos]];
-                strPos++;
+            while (strHex[strHexPos] != DIALOG_CHAR_TERMINATOR) {
+                spacesWidth += gDialogCharWidths[strHex[strHexPos]];
+                strHexPos++;
+            }
+            break;
+         case LUT_TYPE_ASCII:
+            for (i = 0; strAscii[i] != 0; i++)
+                buf[i] = ascii_to_font_char(strAscii[i]);
+            buf[i] = DIALOG_CHAR_TERMINATOR;
+
+            while (buf[bufPos] != DIALOG_CHAR_TERMINATOR) {
+                spacesWidth += gDialogCharWidths[buf[bufPos]];
+            bufPos++;
             }
             break;   
         default:
@@ -1087,7 +1101,7 @@ void render_balloon_dialog_top_name(struct DialogEntry *dialog, s16 x, s16 y) {
         128, 32, topBalloon->r, topBalloon->g, topBalloon->b, (AC_DIALOG_ALPHA) + 20); // double size due to mirror
 
     topBalloon->isTextBlack ? (monoColor = 0) : (monoColor = 255);
-    xText = get_str_x_pos_from_center_custom(LUT_TYPE_STR, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2.0f);
+    xText = get_str_x_pos_from_center_custom(LUT_TYPE_STR, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], NULL, 2.0f);
     
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
@@ -2044,8 +2058,8 @@ void render_title_screen_textures(void) {
     render_shz_names_titlescreen(92, 58, gInGameLanguage);
     render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16, 255, 255, 255, 255);
 
-    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4.5f);
-    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4.5f);
+    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], NULL, 4.5f);
+    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], NULL, 4.5f);
     
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {
@@ -2087,8 +2101,8 @@ s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
         alpha = 255;
     }
 
-    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 0], 3.0f);
-    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 1], 3.0f);
+    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 0], NULL, 3.0f);
+    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 1], NULL, 3.0f);
     
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     

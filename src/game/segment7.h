@@ -27,6 +27,11 @@ extern const u8 eu_course_strings_es_table[];
 #endif
 
 // from intro_segment7
+extern Gfx *dl_intro_n64_logo;
+extern u8 texture_nintendo_words_pallete[];
+extern u8 texture_nintendo_words_ci4[];
+extern u8 texture_64_words_pallete[];
+extern u8 texture_64_words_ci4[];
 extern Gfx *dl_main_aloxado_intro;
 
 #endif /* SEGMENT_7_H */

@@ -20,6 +20,7 @@
 #include "save_file.h"
 #include "segment2.h"
 #include "level_table.h"
+#include "menu/intro_geo.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -49,6 +50,8 @@ u8 gWarpTransGreen = 0;
 u8 gWarpTransBlue = 0;
 s16 gCurrSaveFileNum = 1;
 s16 gCurrLevelNum = LEVEL_MIN;
+s16 gTitleInitMessage = FALSE;
+s16 gRenderN64Text = FALSE;
 
 /* 
  * The following two tables are used in get_mario_spawn_type() to determine spawn type
@@ -376,7 +379,15 @@ void render_game(void) {
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
         do_cutscene_handler();
+
+        if (gTitleInitMessage != FALSE) {
+            render_initial_intro_message();
+        }
         
+        if (gRenderN64Text != FALSE) {
+            render_nintendo_64_textures();
+        }
+
         if (gCurrDemoInput != NULL) {
             render_title_screen_textures();
         }

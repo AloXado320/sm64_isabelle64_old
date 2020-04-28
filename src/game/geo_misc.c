@@ -190,13 +190,6 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
     return displayList;
 }
 
-#ifdef VERSION_EU
-// TODO: Symbolize these
-extern Gfx dl_cake_end_screen_eu_070296F8[];
-extern Gfx dl_cake_end_screen_eu_07029768[];
-extern Gfx dl_cake_end_screen_eu_070297D8[];
-#endif
-
 /**
  * Create a display list for the end screen with Peach's delicious cake.
  */

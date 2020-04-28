@@ -6964,7 +6964,7 @@ sound_ref .sound_menu_exit_pipe
 sound_ref .sound_menu_bowser_laugh
 sound_ref .sound_menu_enter_hole
 sound_ref .sound_menu_click_change_view
-sound_ref .sound_menu_camera_unused1
+sound_ref .sound_menu_n64_intro_screen
 sound_ref .sound_menu_camera_unused2
 sound_ref .sound_menu_mario_castle_warp
 sound_ref .sound_menu_star_sound
@@ -6981,7 +6981,7 @@ sound_ref .sound_menu_mario_castle_warp2
   sound_ref .sound_menu_bowser_laugh
   sound_ref .sound_menu_enter_hole
   sound_ref .sound_menu_click_change_view
-  sound_ref .sound_menu_camera_unused1
+  sound_ref .sound_menu_n64_intro_screen
   sound_ref .sound_menu_camera_unused2
   sound_ref .sound_menu_mario_castle_warp
   sound_ref .sound_menu_star_sound
@@ -7524,20 +7524,16 @@ chan_end
 layer_note1 39, 0x30, 127
 layer_end
 
-.sound_menu_camera_unused1:
+.sound_menu_n64_intro_screen:
+chan_setmutebhv 0x0
+chan_setnotepriority 14
 chan_setbank 9
-chan_setinstr 3
-chan_setenvelope .envelope_32D4
-chan_setlayer 0, .layer_2F7C
+chan_setinstr 0xD
+chan_setlayer 0, .layer_n64introscreen
 chan_end
 
-.layer_2F7C:
-layer_transpose 244
-layer_portamento 0x83, 3, 255
-layer_note1 15, 0xa, 127
-layer_somethingon
-layer_transpose 0
-layer_note1 46, 0x64, 127
+.layer_n64introscreen:
+layer_note1 39, 400, 150
 layer_end
 
 .sound_menu_camera_unused2:

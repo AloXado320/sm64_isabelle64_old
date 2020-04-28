@@ -18,26 +18,82 @@
 #include "make_const_nonconst.h"
 #include "levels/intro/header.h"
 
-const LevelScript level_intro_entry_1[] = {
+// AloXado Logo
+const LevelScript level_intro_entry_1_p3[] = {
     INIT_LEVEL(),
     FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
     LOAD_RAW(/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
     LOAD_MIO0(/*seg*/ 0x07, _intro_segment_7SegmentRomStart, _intro_segment_7SegmentRomEnd),
+    CALL(/*arg*/ 2, /*func*/ lvl_intro_update),
+
     ALLOC_LEVEL_POOL(),
-
-    AREA(/*index*/ 1, intro_geo_0002D0),
+    AREA(/*index*/ 1, intro_geo_aloxado_logo),
     END_AREA(),
-
     FREE_LEVEL_POOL(),
     LOAD_AREA(/*area*/ 1),
-    CALL(/*arg*/ 0, /*func*/ lvl_intro_update),
-    SLEEP(/*frames*/ 75),
-    TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 16, /*color*/ 0x00, 0x00, 0x00),
-    SLEEP(/*frames*/ 16),
+
+    SLEEP(/*frames*/ 65),
+    TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 12, /*color*/ 0x00, 0x00, 0x00),
+    SLEEP(/*frames*/ 12),
     CMD2A(/*unk2*/ 1),
     CLEAR_LEVEL(),
-    SLEEP(/*frames*/ 2),
+    SLEEP(/*frames*/ 4),
     EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_entry_2),
+};
+
+// N64 Logo
+const LevelScript level_intro_entry_1_p2[] = {
+    INIT_LEVEL(),
+    FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
+    LOAD_RAW(/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
+    LOAD_MIO0(/*seg*/ 0x07, _intro_segment_7SegmentRomStart, _intro_segment_7SegmentRomEnd),
+    CALL(/*arg*/ 1, /*func*/ lvl_intro_update),
+
+    ALLOC_LEVEL_POOL(),
+    AREA(/*index*/ 1, intro_geo_n64_logo),
+    END_AREA(),
+    FREE_LEVEL_POOL(),
+    LOAD_AREA(/*area*/ 1),
+
+    SLEEP(/*frames*/ 105),
+    TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 12, /*color*/ 0x00, 0x00, 0x00),
+    SLEEP(/*frames*/ 12),
+    CALL(/*arg*/ 3, /*func*/ lvl_intro_update),
+    CMD2A(/*unk2*/ 1),
+    CLEAR_LEVEL(),
+    SLEEP(/*frames*/ 4),
+    EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_entry_1_p3),
+};
+
+// Text Intro
+const LevelScript level_intro_entry_1_p1[] = {
+    INIT_LEVEL(),
+    FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
+    LOAD_RAW(/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
+    LOAD_MIO0(/*seg*/ 0x07, _intro_segment_7SegmentRomStart, _intro_segment_7SegmentRomEnd),
+    CALL(/*arg*/ 0, /*func*/ lvl_intro_update),
+
+    ALLOC_LEVEL_POOL(),
+    AREA(/*index*/ 1, intro_geo_text_intro),
+    END_AREA(),
+    FREE_LEVEL_POOL(),
+    LOAD_AREA(/*area*/ 1),
+
+    SLEEP(/*frames*/ 70),
+    TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 12, /*color*/ 0x00, 0x00, 0x00),
+    SLEEP(/*frames*/ 12),
+    CALL(/*arg*/ 3, /*func*/ lvl_intro_update),
+    CMD2A(/*unk2*/ 1),
+    CLEAR_LEVEL(),
+    SLEEP(/*frames*/ 4),
+
+    EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_entry_1_p2),
+
+
+};
+
+const LevelScript level_intro_entry_1[] = {
+    JUMP_LINK(level_intro_entry_1_p1),
 };
 
 const LevelScript level_intro_entry_2[] = {
@@ -46,19 +102,19 @@ const LevelScript level_intro_entry_2[] = {
     FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd), // this needs to stay or else game crashes loading next demo
     LOAD_RAW(/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    
+
     FREE_LEVEL_POOL(),
     SLEEP(/*frames*/ 2),
     BLACKOUT(/*active*/ FALSE),
-    
+
     CLEAR_DEMO_PTR(), // we need to do this or else file select will be tainted with inputs
     GET_OR_SET(/*op*/ OP_GET, /*var*/ 5),
     JUMP_IF(/*op*/ OP_EQ, /*arg*/ 1, script_intro_L1), // was start pressed when demo ended last time?
-       
+
     TRANSITION(/*transType*/ WARP_TRANSITION_FADE_FROM_STAR, /*time*/ 20, /*color*/ 0x00, 0x00, 0x00),
     SLEEP(/*frames*/ 10),
     SET_MENU_MUSIC(/*seq*/ 0x0002),
-    
+
     ADV_DEMO(), // # advance the demo ID manually with a new command which sets the level as script register
     JUMP(script_intro_L4), // go to ingame
 };
@@ -78,13 +134,13 @@ const LevelScript level_intro_entry_4[] = {
     AREA(/*index*/ 1, intro_geo_000414),
     END_AREA(),
     CLEAR_DEMO_PTR(),
-    
+
     FREE_LEVEL_POOL(),
     LOAD_AREA(/*area*/ 1),
     SET_MENU_MUSIC(/*seq*/ 0x0002),
     TRANSITION(/*transType*/ WARP_TRANSITION_FADE_FROM_COLOR, /*time*/ 16, /*color*/ 0xFF, 0xFF, 0xFF),
     SLEEP(/*frames*/ 16),
-    CALL_LOOP(/*arg*/ 3, /*func*/ lvl_intro_update),
+    CALL_LOOP(/*arg*/ 4, /*func*/ lvl_intro_update),
     JUMP_IF(/*op*/ OP_EQ, /*arg*/ -1, script_intro_L5),
     JUMP(script_intro_L3),
 };

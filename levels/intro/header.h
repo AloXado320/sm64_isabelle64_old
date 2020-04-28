@@ -4,7 +4,9 @@
 #include "types.h"
 
 // geo
-extern const GeoLayout intro_geo_0002D0[];
+extern const GeoLayout intro_geo_text_intro[];
+extern const GeoLayout intro_geo_n64_logo[];
+extern const GeoLayout intro_geo_aloxado_logo[];
 extern const GeoLayout intro_geo_00035C[];
 extern const GeoLayout intro_geo_0003B8[];
 extern const GeoLayout intro_geo_000414[];

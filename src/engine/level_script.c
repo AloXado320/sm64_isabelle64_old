@@ -746,7 +746,7 @@ int gDemoLevels[6] = {
 };
 
 int gDemoLevelID = 0;
-int gDemoInputListID_2 = 0;
+u16 gDemoInputListIDForIntro = 0;
 
 extern void start_demo(int);
 

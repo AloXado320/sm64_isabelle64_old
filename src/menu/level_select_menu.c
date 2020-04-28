@@ -13,6 +13,10 @@
 #include "seq_ids.h"
 #include "engine/math_util.h"
 #include "level_table.h"
+#include "game/ingame_menu.h"
+#include "game/segment2.h"
+#include "game/segment7.h"
+#include "game/area.h"
 
 #define PRESS_START_DEMO_TIMER 800
 
@@ -68,7 +72,7 @@ int run_press_start_demo_timer(s32 timer) {
     return timer;
 }
 
-extern int gDemoInputListID_2;
+extern u16 gDemoInputListIDForIntro;
 extern int gPressedStart;
 
 int start_demo(int timer)
@@ -76,13 +80,13 @@ int start_demo(int timer)
 	gCurrDemoInput = NULL;
 	gPressedStart = 0;
     // start the mario demo animation for the demo list.
-    load_patchable_table(&gDemo, gDemoInputListID_2);
+    load_patchable_table(&gDemo, gDemoInputListIDForIntro);
 
     // if the next demo sequence ID is the count limit, reset it back to
     // the first sequence.
 
-    if((++gDemoInputListID_2) == gDemo.animDmaTable->count)
-        gDemoInputListID_2 = 0;
+    if((++gDemoInputListIDForIntro) == gDemo.animDmaTable->count)
+        gDemoInputListIDForIntro = 0;
 
     gCurrDemoInput = ((struct DemoInput *) gDemo.targetAnim) + 1; // add 1 (+4) to the pointer to skip the demoID.
     timer = (s8)((struct DemoInput *) gDemo.targetAnim)->timer; // TODO: see if making timer s8 matches
@@ -202,8 +206,31 @@ int intro_game_over(void) {
     return run_press_start_demo_timer(sp1C);
 }
 
-int intro_play_its_a_me_mario(void) {
-    set_background_music(0, SEQ_EVENT_GUNBOUNT_UNKTITLE, 0);
+int intro_screen_message_init(void) {
+    gTitleInitMessage = TRUE;
+    return 1;
+}
+
+
+int intro_screen_n64_logo_init(void) {
+    gRenderN64Text = TRUE;
+    play_sound(SOUND_MENU_N64_INTRO_SCREEN, gDefaultSoundArgs);
+    return 1;
+}
+
+int intro_screen_aloxado_logo_init(void) {
+    set_background_music(0, SEQ_EVENT_GUNBOUND_FANFARE, 0);
+    return 1;
+}
+
+
+int disable_texrect_rendering_intros(void) {
+    if (gTitleInitMessage == TRUE)
+        gTitleInitMessage = FALSE;
+
+    if (gRenderN64Text == TRUE)
+        gRenderN64Text = FALSE;
+
     return 1;
 }
 
@@ -212,17 +239,20 @@ s32 lvl_intro_update(s16 arg1, UNUSED s32 arg2) {
 
     switch (arg1) {
         case 0:
-            retVar = intro_play_its_a_me_mario();
+            retVar = intro_screen_message_init();
             break;
         case 1:
-            retVar = intro_default();
+            retVar = intro_screen_n64_logo_init();
             break;
         case 2:
-            retVar = intro_game_over();
+            retVar = intro_screen_aloxado_logo_init();
             break;
         case 3:
+            retVar = disable_texrect_rendering_intros();
+            break;
+        case 4:
             retVar = level_select_input_loop();
-            break; // useless break needed to match
+            break;
     }
     return retVar;
 }
