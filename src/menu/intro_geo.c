@@ -11,11 +11,6 @@
 #include "game/print.h"
 #include "game/ingame_menu.h"
 
-// frame counts for the zoom in, hold, and zoom out of title model
-#define INTRO_STEPS_ZOOM_IN 20
-#define INTRO_STEPS_HOLD_1 75
-#define INTRO_STEPS_ZOOM_OUT 91
-
 // background types
 #define INTRO_BACKGROUND_SUPER_MARIO 0
 #define INTRO_BACKGROUND_GAME_OVER 1
@@ -81,6 +76,7 @@ s8 gameOverBackgroundTable[] = {
 // order of tiles that are flipped from "Game Over" to "Super Mario 64"
 s8 gameOverBackgroundFlipOrder[] = { 0x00, 0x01, 0x02, 0x03, 0x07, 0x0B,
                                      0x0a, 0x09, 0x08, 0x04, 0x05, 0x06 };
+
 char *sShzIntroScreenText[] = {
     "Isabelle 64 version 1.3",
     "SM64 Character Mod by AloXado",
@@ -102,7 +98,7 @@ void render_initial_intro_message(void) {
     s16 i;
     s16 y;
     s16 xPos;
-    
+
     if (alpha < 250) {
         alpha += 15;
     } else {
@@ -112,12 +108,11 @@ void render_initial_intro_message(void) {
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
-
     for (i = 0, y = 208; i < 13; y -= 16, i++) {
         xPos = get_str_x_pos_from_center_custom(LUT_TYPE_ASCII, 160, NULL, sShzIntroScreenText[i], 2.0f);
         print_generic_str_ascii(xPos, y, sShzIntroScreenText[i]);
     }
-    
+
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
@@ -135,7 +130,7 @@ void render_nintendo_64_textures(void) {
     for (i = 0, x = 16; i < 8; x += 32, i++) {
         gDPLoadTextureBlock_4b(gDisplayListHead++, &texture_nintendo_words_ci4[CI4_TEXTURE_SIZE(32, 32) * i], G_IM_FMT_CI,
             32, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 32) << 2, (y + 32) << 2, 
+        gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 32) << 2, (y + 32) << 2,
             G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
     }
 
@@ -143,7 +138,7 @@ void render_nintendo_64_textures(void) {
     gDPLoadTLUT_pal16(gDisplayListHead++, 0, texture_64_words_pallete);
     gDPLoadTextureBlock_4b(gDisplayListHead++, texture_64_words_ci4, G_IM_FMT_CI,
         64, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gSPScisTextureRectangle(gDisplayListHead++, (32 * 8) << 2, (y - 8) << 2, ((32 * 8) + 64) << 2, ((y - 8) + 32) << 2, 
+    gSPScisTextureRectangle(gDisplayListHead++, (32 * 8) << 2, (y - 8) << 2, ((32 * 8) + 64) << 2, ((y - 8) + 32) << 2,
         G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -212,15 +207,13 @@ Gfx *geo_intro_n64_logo(s32 callContext, struct GraphNode *node, UNUSED f32 mtx[
 Gfx *geo_aloxado_logo_screen(s32 callContext, struct GraphNode *node, UNUSED f32 mtx[4][4]) {
     struct GraphNode *graphNode = node;
     static float alpha = 0;
-    Gfx *displayList = NULL;            
-    Gfx *displayListIter = NULL;        
+    Gfx *displayList = NULL;
+    Gfx *displayListIter = NULL;
     if (callContext == GEO_CONTEXT_RENDER) {
-
+        graphNode->flags = (graphNode->flags & 0xFF) | (LAYER_TRANSPARENT << 8);
         displayList = alloc_display_list(5 * sizeof(*displayList));
         displayListIter = displayList;
 
-        graphNode->flags = (graphNode->flags & 0xFF) | (LAYER_TRANSPARENT << 8);
-        
         if (alpha < 250) {
             alpha += 15;
         } else {
@@ -230,7 +223,6 @@ Gfx *geo_aloxado_logo_screen(s32 callContext, struct GraphNode *node, UNUSED f32
         gSPDisplayList(displayListIter++, &dl_alo_texrect_block_start);
 
         gDPSetEnvColor(displayListIter++, 255, 255, 255, alpha);
-
         gSPDisplayList(displayListIter++, &dl_main_aloxado_intro);
 
         gSPDisplayList(displayListIter++, &dl_alo_texrect_block_end);

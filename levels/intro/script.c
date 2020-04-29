@@ -88,8 +88,6 @@ const LevelScript level_intro_entry_1_p1[] = {
     SLEEP(/*frames*/ 4),
 
     EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_entry_1_p2),
-
-
 };
 
 const LevelScript level_intro_entry_1[] = {

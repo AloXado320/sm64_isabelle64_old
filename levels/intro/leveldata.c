@@ -541,4 +541,3 @@ const Gfx dl_main_aloxado_intro[] = {
     gsSPDisplayList(dl_logo_aloxado_intro),
     gsSPEndDisplayList(),
 };  
-

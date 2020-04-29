@@ -41,6 +41,7 @@ static s16 gameOverNotPlayed = 1;
 
 // don't shift this function from being the first function in the segment.
 // the level scripts assume this function is the first, so it cant be moved.
+/**
 int run_press_start_demo_timer(s32 timer) {
     gCurrDemoInput = NULL;
 
@@ -71,7 +72,7 @@ int run_press_start_demo_timer(s32 timer) {
     }
     return timer;
 }
-
+ */
 extern u16 gDemoInputListIDForIntro;
 extern int gPressedStart;
 
@@ -160,7 +161,7 @@ s16 level_select_input_loop(void) {
     return 0;
 }
 
-
+/**
 int intro_default(void) {
     s32 sp1C = 0;
 
@@ -205,6 +206,7 @@ int intro_game_over(void) {
     }
     return run_press_start_demo_timer(sp1C);
 }
+ */
 
 int intro_screen_message_init(void) {
     gTitleInitMessage = TRUE;

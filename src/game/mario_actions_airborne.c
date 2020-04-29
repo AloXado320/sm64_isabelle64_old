@@ -385,16 +385,16 @@ u32 common_air_action_step(
 
     case AIR_STEP_HIT_WALL:
         set_mario_animation(m, animation);
-        m->wallKickTimer+=1;
+        m->wallKickTimer+= 1;
         if (m->forwardVel > 16.0f)
         {
             if (m->wall != NULL) //Checks if the wall exists
             {
                 if ((m->action == ACT_LONG_JUMP)) //Now we check if Mario is currently long jumping
                 {
-                    if (++(m->wallKickTimer) <= 3) //If the wallkick timer is below 3 frames, then execute below
+                    if ((++(m->wallKickTimer) <= 3)) //If the wallkick timer is below 3 frames, then execute below
                     {
-                        if ((m->input & INPUT_A_PRESSED) || (m->framesSinceA = 1)) //If A is pressed, or A has been pressed in the last frame, then wall kick
+                        if (m->input & INPUT_A_PRESSED || (m->framesSinceA = 1)) //If A is pressed, or A has been pressed in the last frame, then wall kick
                         {
                             m->vel[1] = 52.0f;
                             set_mario_action(m, ACT_WALL_KICK_AIR, 0);
@@ -409,7 +409,7 @@ u32 common_air_action_step(
                         set_mario_action(m,ACT_BACKWARD_AIR_KB,0);
                     }
                 }
-            else //If Mario is not long jumping, then check if he's wall sliding. If he isn't, then execute the wall colission, otherwise, continue wall sliding.
+            else //If Mario is not long jumping, then check if he's wall sliding. If he isn't, then execute the wall collision, otherwise, continue wall sliding.
                 if (!(m->flags & ACT_WALL_SLIDE))
                 set_mario_action(m, ACT_AIR_HIT_WALL, 0);
                 else
@@ -1304,6 +1304,8 @@ s32 act_getting_blown(struct MarioState *m) {
 
 s32 act_air_hit_wall(struct MarioState *m)
 {
+
+    s16 wallAngle;
     if (!(m->flags & ACT_WALL_SLIDE))
     {
     if (m->heldObj != NULL)
@@ -1332,27 +1334,18 @@ s32 act_air_hit_wall(struct MarioState *m)
     }
     else
     {
-//        s16 wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
+        wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
         m->wallKickTimer = 5;
+        m->faceAngle[1] += wallAngle;
         return set_mario_action(m, ACT_WALL_SLIDE, 0);
     }
     set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
 }
 else
-    return FALSE;
-    //! Missing return statement. The returned value is the result of the call
-    // to set_mario_animation. In practice, this value is nonzero.
-    // This results in this action "cancelling" into itself. It is supposed to
-    // execute three times, each on a separate frame, but instead it executes
-    // three times on the same frame.
-    // This results in firsties only being possible for a single frame, instead
-    // of three.
+    return set_mario_animation(m, MARIO_ANIM_START_WALLKICK);;
 }
 
-s32 act_wall_slide(struct MarioState *m)
-{
-//    s16 wallAngle;
-    s16 yawVelTarget;
+s32 act_wall_slide(struct MarioState *m) {
 
     if (m->wall == NULL)
         return set_mario_action(m, ACT_FREEFALL, 0);
@@ -1360,27 +1353,24 @@ s32 act_wall_slide(struct MarioState *m)
     m->particleFlags |= PARTICLE_DUST;
     play_sound(SOUND_MOVING_TERRAIN_SLIDE + m->terrainSoundAddend, m->marioObj->header.gfx.cameraToObject);
 
-    m->vel[1] = -(gMarioState->fallacc/2);
+    m->vel[1] = -(gMarioState->fallacc / 2);
     mario_set_forward_vel(m, 0.0);
     set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
     play_sound(SOUND_MOVING_TERRAIN_SLIDE, m->marioObj->header.gfx.cameraToObject);
-        if (m->input & INPUT_A_PRESSED)
-        {
+        if (m->input & INPUT_A_PRESSED) {
             play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,m->marioObj->header.gfx.cameraToObject);
             gMarioState->fallacc = 0;
-            m->vel[1] = 52.0;
+            m->vel[1] = 52.0f;
             return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
         }
 
-        if (m->input & INPUT_Z_PRESSED)
-        {
+        if (m->input & INPUT_Z_PRESSED) {
             gMarioState->fallacc = 0;
             m->vel[1] = -4.0;
             return set_mario_action(m, ACT_SOFT_BONK, 0);
         }
 
-    switch (perform_air_step(m, 0))
-    {
+    switch (perform_air_step(m, 0)) {
     case AIR_STEP_LANDED:
         gMarioState->fallacc = 0;
         set_mario_action(m, ACT_FREEFALL_LAND_STOP, 0);
