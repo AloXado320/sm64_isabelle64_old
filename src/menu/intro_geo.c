@@ -109,7 +109,7 @@ void render_initial_intro_message(void) {
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
     for (i = 0, y = 208; i < 13; y -= 16, i++) {
-        xPos = get_str_x_pos_from_center_custom(LUT_TYPE_ASCII, 160, NULL, sShzIntroScreenText[i], 2.0f);
+        xPos = get_str_x_pos_from_center_custom(LUT_TYPE_ASCII, SCREEN_WIDTH / 2, NULL, sShzIntroScreenText[i], 2.0f);
         print_generic_str_ascii(xPos, y, sShzIntroScreenText[i]);
     }
 

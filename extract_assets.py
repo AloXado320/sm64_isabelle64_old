@@ -215,7 +215,8 @@ def main():
             input = image[pos : pos + size]
             os.makedirs(os.path.dirname(asset), exist_ok=True)
             if asset.endswith(".png"):
-                with tempfile.NamedTemporaryFile(prefix="asset", delete=False) as png_file:
+                png_file = tempfile.NamedTemporaryFile(prefix="asset", delete=False)
+                try:
                     png_file.write(input)
                     png_file.flush()
                     png_file.close()
@@ -235,6 +236,9 @@ def main():
                             ],
                             check=True,
                         )
+                    finally:
+                        png_file.close()
+                        remove_file(png_file.name)
                     else:
                         w, h = meta
                         fmt = asset.split(".")[-2]

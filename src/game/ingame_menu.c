@@ -1,6 +1,7 @@
 #include <ultra64.h>
 
 #include "sm64.h"
+#include "gfx_dimensions.h"
 #include "memory.h"
 #include "types.h"
 #include "audio/external.h"
@@ -2271,7 +2272,7 @@ void background_scene(void) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_bg_menus_ci4, G_IM_FMT_CI, 64, 64, 0, 
         G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD); 
 
-    gSPScisTextureRectangle(gDisplayListHead++, 0 << 2, 0 << 2, (0 + SCREEN_WIDTH) << 2, (0 + SCREEN_HEIGHT) << 2, G_TX_RENDERTILE, 
+    gSPScisTextureRectangle(gDisplayListHead++, GFX_DIMENSIONS_FROM_LEFT_EDGE(0) / 4, 0 << 2, GFX_DIMENSIONS_FROM_RIGHT_EDGE(0) / 4, SCREEN_HEIGHT << 2, G_TX_RENDERTILE, 
             ((int)(64-time))%64 << 5, ((int)(64-time))%64 << 5, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);

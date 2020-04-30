@@ -2,6 +2,7 @@
 
 #include "area.h"
 #include "sm64.h"
+#include "gfx_dimensions.h"
 #include "behavior_data.h"
 #include "game_init.h"
 #include "object_list_processor.h"
@@ -335,7 +336,7 @@ void play_transition(s16 transType, s16 time, u8 red, u8 green, u8 blue) {
 
         if (transType & 1) // Is the image fading in?
         {
-            gWarpTransition.data.startTexRadius = SCREEN_WIDTH;
+            gWarpTransition.data.startTexRadius = GFX_DIMENSIONS_FULL_RADIUS;
             if (transType >= 0x0F) {
                 gWarpTransition.data.endTexRadius = 16;
             } else {
@@ -348,7 +349,7 @@ void play_transition(s16 transType, s16 time, u8 red, u8 green, u8 blue) {
             } else {
                 gWarpTransition.data.startTexRadius = 0;
             }
-            gWarpTransition.data.endTexRadius = SCREEN_WIDTH;
+            gWarpTransition.data.endTexRadius = GFX_DIMENSIONS_FULL_RADIUS;
         }
     }
 }

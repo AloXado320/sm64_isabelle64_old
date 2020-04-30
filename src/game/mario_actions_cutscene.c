@@ -2,6 +2,7 @@
 
 #include "prevent_bss_reordering.h"
 #include "sm64.h"
+#include "gfx_dimensions.h"
 #include "game_init.h"
 #include "sound_init.h"
 #include "level_update.h"
@@ -90,8 +91,10 @@ s32 get_credits_str_width(char *str) {
     return length;
 }
  */
-#define CREDIT_TEXT_X_LEFT 12 
-#define CREDIT_TEXT_X_RIGHT 308
+
+#define CREDIT_TEXT_MARGIN_X ((s32)(GFX_DIMENSIONS_ASPECT_RATIO * 12))
+#define CREDIT_TEXT_X_LEFT GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(CREDIT_TEXT_MARGIN_X)
+#define CREDIT_TEXT_X_RIGHT GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(CREDIT_TEXT_MARGIN_X)
 
 /**
  * print_displaying_credits_entry: Print the current displaying Credits Entry

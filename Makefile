@@ -215,10 +215,7 @@ SOUND_SAMPLE_DIRS := $(wildcard sound/samples/*)
 SOUND_SAMPLE_AIFFS := $(foreach dir,$(SOUND_SAMPLE_DIRS),$(wildcard $(dir)/*.aiff))
 SOUND_SAMPLE_TABLES := $(foreach file,$(SOUND_SAMPLE_AIFFS),$(BUILD_DIR)/$(file:.aiff=.table))
 SOUND_SAMPLE_AIFCS := $(foreach file,$(SOUND_SAMPLE_AIFFS),$(BUILD_DIR)/$(file:.aiff=.aifc))
-SOUND_OBJ_FILES := $(SOUND_BIN_DIR)/sound_data.ctl.o \
-                   $(SOUND_BIN_DIR)/sound_data.tbl.o \
-                   $(SOUND_BIN_DIR)/sequences.bin.o \
-                   $(SOUND_BIN_DIR)/bank_sets.o
+SOUND_OBJ_FILES := $(SOUND_BIN_DIR)/sound_data.o
 
 
 # Object files
@@ -233,7 +230,7 @@ ULTRA_O_FILES := $(foreach file,$(ULTRA_S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
 DEP_FILES := $(O_FILES:.o=.d) $(ULTRA_O_FILES:.o=.d) $(BUILD_DIR)/$(LD_SCRIPT).d
 
 # Files with GLOBAL_ASM blocks
-ifneq ($(NON_MATCHING),1)
+ifeq ($(NON_MATCHING),0)
 GLOBAL_ASM_C_FILES != grep -rl 'GLOBAL_ASM(' $(wildcard src/**/*.c)
 GLOBAL_ASM_O_FILES = $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 GLOBAL_ASM_DEP = $(BUILD_DIR)/src/audio/non_matching_dep
@@ -529,8 +526,11 @@ $(SOUND_BIN_DIR)/%.m64: $(SOUND_BIN_DIR)/%.o
 $(SOUND_BIN_DIR)/%.o: $(SOUND_BIN_DIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(SOUND_BIN_DIR)/%.s: $(SOUND_BIN_DIR)/%
-	printf ".section .data\n\n.incbin \"$<\"\n" > $@
+$(SOUND_BIN_DIR)/%.inc.c: $(SOUND_BIN_DIR)/%
+	hexdump -v -e '1/1 "0x%X,"' $< > $@
+	echo >> $@
+
+$(SOUND_BIN_DIR)/sound_data.o: $(SOUND_BIN_DIR)/sound_data.ctl.inc.c $(SOUND_BIN_DIR)/sound_data.tbl.inc.c $(SOUND_BIN_DIR)/sequences.bin.inc.c $(SOUND_BIN_DIR)/bank_sets.inc.c
 
 $(BUILD_DIR)/levels/scripts.o: $(BUILD_DIR)/include/level_headers.h
 

@@ -902,7 +902,8 @@ void audio_init() {
         ((u64 *) gAudioHeap)[i] = 0;
     }
 
-#ifndef AVOID_UB
+#ifdef TARGET_N64
+    // It seems boot.s doesn't clear the .bss area for audio, so do it here.
     i = 0;
     lim3 = ((uintptr_t) &gAudioGlobalsEndMarker - (uintptr_t) &gAudioGlobalsStartMarker) / 8;
     ptr64 = &gAudioGlobalsStartMarker - 1;
@@ -917,7 +918,8 @@ void audio_init() {
         ((u64 *) gAudioHeap)[i] = 0;
     }
 
-#ifndef AVOID_UB
+#ifdef TARGET_N64
+    // It seems boot.s doesn't clear the .bss area for audio, so do it here.
     lim3 = ((uintptr_t) &gAudioGlobalsEndMarker - (uintptr_t) &gAudioGlobalsStartMarker) / 8;
     ptr64 = &gAudioGlobalsStartMarker;
     for (k = lim3; k >= 0; k--) {

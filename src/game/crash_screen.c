@@ -4,6 +4,7 @@
 
 #include "sm64.h"
 
+#ifdef TARGET_N64
 s32 _Printf(char *(*prout)(char *, const char *, size_t), char *dst, const char *fmt, va_list args);
 
 u8 gCrashScreenCharToGlyph[128] = {
@@ -348,3 +349,4 @@ void crash_screen_init(void) {
                   );
     osStartThread(&gCrashScreen.thread);
 }
+#endif

@@ -1,6 +1,7 @@
 #include <ultra64.h>
 
 #include "sm64.h"
+#include "gfx_dimensions.h"
 #include "game_init.h"
 #include "level_update.h"
 #include "camera.h"
@@ -337,20 +338,20 @@ void handle_hud_move(void) {
 
 void render_hud_mario_lives(void) {
 
-    render_hud_big_tex_lut(16, (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), texture_hud_rgba16_isabelle);
+    render_hud_big_tex_lut(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(16), (224 - (64+HUD_TOP_Y-(sHudMoveY*1.6))), texture_hud_rgba16_isabelle);
 
-    print_text(36, 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");   // 'X' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(36), 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");   // 'X' glyph
 
-    print_text_fmt_int(52, 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.lives);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(52), 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.lives);
 
 }
 
 void render_hud_coins(void) {
 
-    render_hud_big_tex_lut(16, (224 - (HUD_TOP_Y-sHudMoveY)), texture_hud_rgba16_bells);
+    render_hud_big_tex_lut(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(16), (224 - (HUD_TOP_Y-sHudMoveY)), texture_hud_rgba16_bells);
     // print_text(16, HUD_TOP_Y-sHudMoveY, "+");  // 'Coin' glyph
-    print_text(36, (HUD_TOP_Y-16)-sHudMoveY, "*");  // 'X' glyph
-    print_text_fmt_int(52, (HUD_TOP_Y-16)-sHudMoveY, "%d", gHudDisplay.coins);
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(36), (HUD_TOP_Y-16)-sHudMoveY, "*");  // 'X' glyph
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(52), (HUD_TOP_Y-16)-sHudMoveY, "%d", gHudDisplay.coins);
 }
 
 #define HUD_STARS_X 96
@@ -360,11 +361,11 @@ void render_hud_stars(void) {
     if (gHudFlash == 1 && gGlobalTimer & 0x08)
         return;
 
-    render_rotating_model(gold_leaf_dl, (HUD_STARS_X + 4), 48+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
+    render_rotating_model(gold_leaf_dl, GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(HUD_STARS_X + 4), 48+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
 
-    print_text((HUD_STARS_X + 24), 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");  // 'X' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(HUD_STARS_X + 24), 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");  // 'X' glyph
 
-    print_text_fmt_int((HUD_STARS_X + 38), 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.stars);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(HUD_STARS_X + 38), 48+HUD_TOP_Y-(sHudMoveY*1.6), "%d", gHudDisplay.stars);
 }
 
 /**
@@ -393,13 +394,13 @@ void render_hud_timer(void) {
 
     timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) / 3;
 
-    print_text(15, 52, "%");
-    print_text_fmt_int(32, 52,  "%0d", timerMins);
-    print_text_fmt_int(53, 52, "%02d", timerSecs);
-    print_text_fmt_int(87, 52,   "%d", timerFracSecs);
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(15), 52, "%");
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(32), 52,  "%0d", timerMins);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(53), 52, "%02d", timerSecs);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(87), 52,   "%d", timerFracSecs);
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    render_hud_tex_lut(43, 168, (*hudPrintLUT)[GLYPH_COLON]);
-    render_hud_tex_lut(78, 168, (*hudPrintLUT)[GLYPH_COLON]);
+    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(43), 168, (*hudPrintLUT)[GLYPH_COLON]);
+    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(78), 168, (*hudPrintLUT)[GLYPH_COLON]);
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
@@ -421,7 +422,7 @@ void render_hud_camera_status(void) {
     s32 y;
 
     cameraLUT = segmented_to_virtual(&main_hud_camera_lut);
-    x = 266;
+    x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(54);
     y = 205;
 
     if (sCameraHUD.status == CAM_STATUS_NONE) {
