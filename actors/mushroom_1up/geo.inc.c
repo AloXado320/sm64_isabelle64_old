@@ -1,4 +1,3 @@
-// 0x16000E84
 const GeoLayout mushroom_1up_geo[] = {
       GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0xB4, 80),
       GEO_OPEN_NODE(),

@@ -1803,15 +1803,6 @@ s32 execute_mario_action(UNUSED struct Object *o) {
             play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
 #endif
         }
-        if (gMarioState->action & ACT_WALL_SLIDE)
-        {
-            if (gMarioState->fallacc < 150)
-                gMarioState->fallacc += 1;
-        }
-        else
-        {
-            gMarioState->fallacc = 0;
-        }
 
         play_infinite_stairs_music();
         gMarioState->marioObj->oInteractStatus = 0;

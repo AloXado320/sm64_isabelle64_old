@@ -551,17 +551,16 @@ s32 act_ledge_grab(struct MarioState *m) {
         m->actionTimer++;
     }
 
+    if (m->floor->normal.y < 0.9f) {
+        return let_go_of_ledge(m);
+    }
+
     if (m->input & (INPUT_Z_PRESSED | INPUT_OFF_FLOOR)) {
         return let_go_of_ledge(m);
     }
 
-    if ((m->input & INPUT_A_PRESSED) && hasSpaceForMario) { // to compensate wall kicks
-    
-        if (m->floor->normal.y < 0.9f) {
-            return set_mario_action(m, ACT_LEDGE_CLIMB_SLOW_1, 0);
-        } else {
-            return set_mario_action(m, ACT_LEDGE_CLIMB_FAST, 0);
-        }
+    if ((m->input & INPUT_A_PRESSED) && hasSpaceForMario) {
+        return set_mario_action(m, ACT_LEDGE_CLIMB_FAST, 0);
     }
 
     if (m->input & INPUT_UNKNOWN_10) {

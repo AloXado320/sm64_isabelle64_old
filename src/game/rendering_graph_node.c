@@ -170,7 +170,6 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform), 
                         G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
                     gSPDisplayList(gDisplayListHead++, currList->displayList);
-                    gSPSetGeometryMode(gDisplayListHead++, G_FOG);
                     currList = currList->next;
                 }
                 gSPClearGeometryMode(gDisplayListHead++, G_FOG);

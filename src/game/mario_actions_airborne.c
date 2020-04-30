@@ -364,79 +364,76 @@ void update_flying(struct MarioState *m) {
     m->slideVelZ = m->vel[2];
 }
 
-u32 common_air_action_step(
-    struct MarioState *m, u32 landAction, s32 animation, u32 stepArg)
-{
+u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, u32 stepArg) {
     u32 stepResult;
 
     update_air_without_turn(m);
 
     stepResult = perform_air_step(m, stepArg);
-    switch (stepResult)
-    {
-    case AIR_STEP_NONE:
-        set_mario_animation(m, animation);
-        break;
+    switch (stepResult) {
+        case AIR_STEP_NONE:
+            set_mario_animation(m, animation);
+            break;
 
-    case AIR_STEP_LANDED:
-        if (!check_fall_damage_or_get_stuck(m, ACT_HARD_BACKWARD_GROUND_KB))
-            set_mario_action(m, landAction, 0);
-        break;
-
-    case AIR_STEP_HIT_WALL:
-        set_mario_animation(m, animation);
-        m->wallKickTimer+= 1;
-        if (m->forwardVel > 16.0f)
-        {
-            if (m->wall != NULL) //Checks if the wall exists
-            {
-                if ((m->action == ACT_LONG_JUMP)) //Now we check if Mario is currently long jumping
-                {
-                    if ((++(m->wallKickTimer) <= 3)) //If the wallkick timer is below 3 frames, then execute below
-                    {
-                        if (m->input & INPUT_A_PRESSED || (m->framesSinceA = 1)) //If A is pressed, or A has been pressed in the last frame, then wall kick
-                        {
-                            m->vel[1] = 52.0f;
-                            set_mario_action(m, ACT_WALL_KICK_AIR, 0);
-                            play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,m->marioObj->header.gfx.cameraToObject);
-                            m->faceAngle[1] += 0x8000;
-                        }
-                    }
-                    else //otherwise, bonk.
-                    {
-                        play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,m->marioObj->header.gfx.cameraToObject);
-                        m->particleFlags |= PARTICLE_VERTICAL_STAR;
-                        set_mario_action(m,ACT_BACKWARD_AIR_KB,0);
-                    }
-                }
-            else //If Mario is not long jumping, then check if he's wall sliding. If he isn't, then execute the wall collision, otherwise, continue wall sliding.
-                if (!(m->flags & ACT_WALL_SLIDE))
-                set_mario_action(m, ACT_AIR_HIT_WALL, 0);
-                else
-                {
-                m->faceAngle[1] += 0x8000;
-                set_mario_action(m,ACT_WALL_SLIDE,0);
-                }
+        case AIR_STEP_LANDED:
+            if (!check_fall_damage_or_get_stuck(m, ACT_HARD_BACKWARD_GROUND_KB)) {
+                set_mario_action(m, landAction, 0);
             }
-        }
-        else
-        {
-            mario_set_forward_vel(m, 0.0f);
-        }
-        break;
+            break;
 
-    case AIR_STEP_GRABBED_LEDGE:
-        set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);
-        drop_and_set_mario_action(m, ACT_LEDGE_GRAB, 0);
-        break;
+        case AIR_STEP_HIT_WALL:
+            set_mario_animation(m, animation);
 
-    case AIR_STEP_GRABBED_CEILING:
-        set_mario_action(m, ACT_START_HANGING, 0);
-        break;
+            if (m->forwardVel > 16.0f) {
+#ifdef VERSION_SH
+                queue_rumble_data(5, 40);
+#endif
+                mario_bonk_reflection(m, FALSE);
+                m->faceAngle[1] += 0x8000;
 
-    case AIR_STEP_HIT_LAVA_WALL:
-        lava_boost_on_wall(m);
-        break;
+                if (m->wall != NULL) {
+                    set_mario_action(m, ACT_AIR_HIT_WALL, 0);
+                } else {
+                    if (m->vel[1] > 0.0f) {
+                        m->vel[1] = 0.0f;
+                    }
+
+                    //! Hands-free holding. Bonking while no wall is referenced
+                    // sets Mario's action to a non-holding action without
+                    // dropping the object, causing the hands-free holding
+                    // glitch. This can be achieved using an exposed ceiling,
+                    // out of bounds, grazing the bottom of a wall while
+                    // falling such that the final quarter step does not find a
+                    // wall collision, or by rising into the top of a wall such
+                    // that the final quarter step detects a ledge, but you are
+                    // not able to ledge grab it.
+                    if (m->forwardVel >= 38.0f) {
+                        m->particleFlags |= PARTICLE_VERTICAL_STAR;
+                        set_mario_action(m, ACT_BACKWARD_AIR_KB, 0);
+                    } else {
+                        if (m->forwardVel > 8.0f) {
+                            mario_set_forward_vel(m, -8.0f);
+                        }
+                        return set_mario_action(m, ACT_SOFT_BONK, 0);
+                    }
+                }
+            } else {
+                mario_set_forward_vel(m, 0.0f);
+            }
+            break;
+
+        case AIR_STEP_GRABBED_LEDGE:
+            set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);
+            drop_and_set_mario_action(m, ACT_LEDGE_GRAB, 0);
+            break;
+
+        case AIR_STEP_GRABBED_CEILING:
+            set_mario_action(m, ACT_START_HANGING, 0);
+            break;
+
+        case AIR_STEP_HIT_LAVA_WALL:
+            lava_boost_on_wall(m);
+            break;
     }
 
     return stepResult;
@@ -1302,88 +1299,38 @@ s32 act_getting_blown(struct MarioState *m) {
     return FALSE;
 }
 
-s32 act_air_hit_wall(struct MarioState *m)
-{
-
-    s16 wallAngle;
-    if (!(m->flags & ACT_WALL_SLIDE))
-    {
-    if (m->heldObj != NULL)
+s32 act_air_hit_wall(struct MarioState *m) {
+    if (m->heldObj != NULL) {
         mario_drop_held_object(m);
+    }
 
-    play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,m->marioObj->header.gfx.cameraToObject);
-
-
-    if (++(m->actionTimer) <= 2) //Pretty sure this is redundant.
-    {
-        if (m->input & INPUT_A_PRESSED)
-        {
+    if (++(m->actionTimer) <= 2) {
+        if (m->input & INPUT_A_PRESSED) {
             m->vel[1] = 52.0f;
-            play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,m->marioObj->header.gfx.cameraToObject);
+            m->faceAngle[1] += 0x8000;
             return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
         }
-    }
-    else if (m->forwardVel >= 38.0f)
-    {
+    } else if (m->forwardVel >= 38.0f) {
         m->wallKickTimer = 5;
-        if (m->vel[1] > 0.0f)
+        if (m->vel[1] > 0.0f) {
             m->vel[1] = 0.0f;
+        }
 
         m->particleFlags |= PARTICLE_VERTICAL_STAR;
         return set_mario_action(m, ACT_BACKWARD_AIR_KB, 0);
-    }
-    else
-    {
-        wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
+    } else {
         m->wallKickTimer = 5;
-        m->faceAngle[1] += wallAngle;
-        return set_mario_action(m, ACT_WALL_SLIDE, 0);
-    }
-    set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
-}
-else
-    return set_mario_animation(m, MARIO_ANIM_START_WALLKICK);;
-}
-
-s32 act_wall_slide(struct MarioState *m) {
-
-    if (m->wall == NULL)
-        return set_mario_action(m, ACT_FREEFALL, 0);
-
-    m->particleFlags |= PARTICLE_DUST;
-    play_sound(SOUND_MOVING_TERRAIN_SLIDE + m->terrainSoundAddend, m->marioObj->header.gfx.cameraToObject);
-
-    m->vel[1] = -(gMarioState->fallacc / 2);
-    mario_set_forward_vel(m, 0.0);
-    set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
-    play_sound(SOUND_MOVING_TERRAIN_SLIDE, m->marioObj->header.gfx.cameraToObject);
-        if (m->input & INPUT_A_PRESSED) {
-            play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,m->marioObj->header.gfx.cameraToObject);
-            gMarioState->fallacc = 0;
-            m->vel[1] = 52.0f;
-            return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
+        if (m->vel[1] > 0.0f) {
+            m->vel[1] = 0.0f;
         }
 
-        if (m->input & INPUT_Z_PRESSED) {
-            gMarioState->fallacc = 0;
-            m->vel[1] = -4.0;
-            return set_mario_action(m, ACT_SOFT_BONK, 0);
+        if (m->forwardVel > 8.0f) {
+            mario_set_forward_vel(m, -8.0f);
         }
-
-    switch (perform_air_step(m, 0)) {
-    case AIR_STEP_LANDED:
-        gMarioState->fallacc = 0;
-        set_mario_action(m, ACT_FREEFALL_LAND_STOP, 0);
-        play_mario_landing_sound_once(m, SOUND_ACTION_TERRAIN_LANDING);
-        break;
-
-    case AIR_STEP_HIT_LAVA_WALL:
-        gMarioState->fallacc = 0;
-        lava_boost_on_wall(m);
-        break;
+        return set_mario_action(m, ACT_SOFT_BONK, 0);
     }
 
-    return FALSE;
+    return set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
 }
 
 s32 act_forward_rollout(struct MarioState *m) {
@@ -2152,7 +2099,6 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         case ACT_RIDING_HOOT:          cancel = act_riding_hoot(m);          break;
         case ACT_TOP_OF_POLE_JUMP:     cancel = act_top_of_pole_jump(m);     break;
         case ACT_VERTICAL_WIND:        cancel = act_vertical_wind(m);        break;
-        case ACT_WALL_SLIDE:           cancel = act_wall_slide(m);           break;
     }
     /* clang-format on */
 
