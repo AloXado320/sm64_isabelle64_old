@@ -44,7 +44,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    280,
+    40,
     166,
     1.0,
 };
@@ -131,7 +131,7 @@ void render_dl_power_meter(s16 numHealthWedges) {
         return;
     }
 
-    guTranslate(mtx, (f32) sPowerMeterHUD.x, (f32) sPowerMeterHUD.y, 0);
+    guTranslate(mtx, (f32) GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(sPowerMeterHUD.x), (f32) sPowerMeterHUD.y, 0);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
               G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
@@ -292,14 +292,14 @@ void render_hud_red_coins(void) {
 
         redCountLvl = count_objects_with_behavior(bhvRedCoin);
 
-        render_rotating_model(sm64ds_red_coin_dl, 16, sRedCoinY - 8, 0.3f, 7.0f);
-        print_text(32, sRedCoinY, "*");
-        print_text_fmt_int(48, sRedCoinY, "%d", redCollected);
-        print_text(60, sRedCoinY, "&");
-        print_text_fmt_int(73, sRedCoinY, "%d", redCountLvl + redCollected);
+        render_rotating_model(sm64ds_red_coin_dl, GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(16), sRedCoinY - 8, 0.3f, 7.0f);
+        print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(32), sRedCoinY, "*");
+        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(48), sRedCoinY, "%d", redCollected);
+        print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(60), sRedCoinY, "&");
+        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(73), sRedCoinY, "%d", redCountLvl + redCollected);
 
         if (redCollected == redCountLvl + redCollected) {
-            print_text(89, sRedCoinY, "-");
+            print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(89), sRedCoinY, "-");
         }
 
     } else {
