@@ -4,15 +4,11 @@
 
 .include "macros.inc"
 
-.ifdef VERSION_SH
-.set VERSION_EU, 1 # HACK, someone fix this file, its poorly diff'd!
-.endif
+#.ifdef VERSION_SH
+#.set VERSION_EU, 1 # HACK, someone fix this file, its poorly diff'd!
+#.endif
 
 .section .text, "ax"
-
-.ifdef AVOID_UB
-.set D_80334890_fix, D_80334890_fix_fix
-.endif
 
 glabel __osExceptionPreamble
     lui   $k0, %hi(__osException)
