@@ -651,12 +651,6 @@ s32 audio_shut_down_and_reset_step(void) {
  */
 void wait_for_audio_frames(s32 frames) {
     gAudioFrameCount = 0;
-#ifndef AVOID_UB
-    // Sound thread will update gAudioFrameCount
-    while (gAudioFrameCount < frames) {
-        // spin
-    }
-#endif
 }
 #endif
 

@@ -2066,6 +2066,7 @@ ALIGNED8 const u8 texture_waterbox_ryusa[] = {
 
 // 0x02014470 - 0x020144B0
 static const Mtx matrix_identity = {
+#ifdef TARGET_N64
     {{0x00010000, 0x00000000,
       0x00000001, 0x00000000},
      {0x00000000, 0x00010000,
@@ -2074,11 +2075,18 @@ static const Mtx matrix_identity = {
       0x00000000, 0x00000000},
      {0x00000000, 0x00000000,
       0x00000000, 0x00000000}}
+#else
+    {{1.0f, 0.0f, 0.0f, 0.0f},
+    {0.0f, 1.0f, 0.0f, 0.0f},
+    {0.0f, 0.0f, 1.0f, 0.0f},
+    {0.0f, 0.0f, 0.0f, 1.0f}}
+#endif
 };
 
 
 // 0x020144B0 - 0x020144F0
 static const Mtx matrix_fullscreen = {
+#if TARGET_N64
     {{0x00000000, 0x00000000,
       0x00000000, 0x00000000},
      {0x00000000, 0xffff0000,
@@ -2087,6 +2095,12 @@ static const Mtx matrix_fullscreen = {
       (0 << 16) | (65536 * 2 / SCREEN_HEIGHT), 0x00000000},
      {0x00000000, 0x00000000,
       0x00000000, 0x00000000}}
+#else
+    {{2.0f / SCREEN_WIDTH, 0.0f, 0.0f, 0.0f},
+    {0.0f, 2.0f / SCREEN_HEIGHT, 0.0f, 0.0f},
+    {0.0f, 0.0f, -1.0f, 0.0f},
+    {-1.0f, -1.0f, -1.0f, 1.0f}}
+#endif
 };
 
 
