@@ -55,6 +55,7 @@ texconvert/*
 sm64_save_file.bin
 sm64config.txt
 /src/pc/*
+Makefile_pc
 
 # Assets. Generally ignored, but ones with "custom" in the name are fine.
 /levels/**/*.png
