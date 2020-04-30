@@ -2,6 +2,7 @@
 
 #include "sm64.h"
 
+#if defined(TARGET_N64) && defined(__GNUC__)
 extern void bcopy(const void *, void *, size_t);
 
 /*
@@ -10,7 +11,6 @@ extern void bcopy(const void *, void *, size_t);
  * in libultra.)
  */
 
-#ifdef __GNUC__
 void *memset(void *dest, int c, size_t n) {
     u8 *local_dest = dest;
     int i;
