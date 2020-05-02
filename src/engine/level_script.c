@@ -19,6 +19,7 @@
 #include "geo_layout.h"
 #include "graph_node.h"
 #include "level_script.h"
+#include "level_misc_macros.h"
 #include "math_util.h"
 #include "surface_collision.h"
 #include "surface_load.h"
@@ -599,6 +600,7 @@ static void level_cmd_set_terrain_data(void) {
         Collision *data;
         u32 size;
 
+        // The game modifies the terrain data and must be reset upon level reload.
         data = segmented_to_virtual(CMD_GET(void *, 4));
         size = get_area_terrain_size(data) * sizeof(Collision);
         gAreas[sCurrAreaIndex].terrainData = alloc_only_pool_alloc(sLevelPool, size);
@@ -620,9 +622,11 @@ static void level_cmd_set_macro_objects(void) {
 #ifndef NO_SEGMENTED_MEMORY
         gAreas[sCurrAreaIndex].macroObjects = segmented_to_virtual(CMD_GET(void *, 4));
 #else
+        // The game modifies the macro object data (for example marking coins as taken),
+        // so it must be reset when the level reloads.
         MacroObject *data = segmented_to_virtual(CMD_GET(void *, 4));
         s32 len = 0;
-        while (data[len++] != 0x001E) {
+        while (data[len++] != MACRO_OBJECT_END()) {
             len += 4;
         }
         gAreas[sCurrAreaIndex].macroObjects = alloc_only_pool_alloc(sLevelPool, len * sizeof(MacroObject));

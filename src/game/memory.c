@@ -1,4 +1,7 @@
 #include <ultra64.h>
+#ifndef TARGET_N64
+#include <string.h>
+#endif
 
 #include "sm64.h"
 
