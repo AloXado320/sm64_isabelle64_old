@@ -1511,87 +1511,38 @@ const Gfx dl_alo_texrect_block_end[] = {
  *                DIALOG BALLOON                  *
  **************************************************/
 
-ALIGNED8 static const u8 balloon_dialog_ci4_pallete[] = {
-#include "textures/segment2/balloon_dialog_ci4_pallete.rgba16.inc.c"
+/**
+ * Dialog balloon border
+ */
+ALIGNED8 const u8 alo_ac_dialog_border_ci4_pal[] = {
+#include "textures/segment2/alo_ac_dialog_border_ci4_pal.rgba16.inc.c"
 };
 
-ALIGNED8 static const u8 balloon_dialog_left_ci4[] = {
-#include "textures/segment2/balloon_dialog_left_ci4.inc.c"
-};
-
-ALIGNED8 static const u8 balloon_dialog_right_ci4[] = {
-#include "textures/segment2/balloon_dialog_right_ci4.inc.c"
-};
-
-#define TEX_BUBBLE_LEFT_X 32
-#define TEX_BUBBLE_LEFT_Y 105
-#define TEX_BUBBLE_RIGHT_X (TEX_BUBBLE_LEFT_X + 64 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_RIGHT_Y TEX_BUBBLE_LEFT_Y
-#define TEXRECT_BUBBLE_SCALE 2
-
-const Gfx dl_balloon_dialog_texrect[] = {
-    
-    gsDPSetTextureLUT(G_TT_RGBA16), // enable CI
-    
-    gsDPLoadTLUT_pal16(0, balloon_dialog_ci4_pallete),
-
-    // 64x64 texture left (CI4 64x64)
-    gsDPLoadTextureBlock_4b(balloon_dialog_left_ci4, G_IM_FMT_CI, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_LEFT_X << 2, TEX_BUBBLE_LEFT_Y << 2, (TEX_BUBBLE_LEFT_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_LEFT_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    // 64x64 texture right (CI4 64x64)
-    gsDPLoadTextureBlock_4b(balloon_dialog_right_ci4, G_IM_FMT_CI, 64, 64, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_RIGHT_X << 2, TEX_BUBBLE_RIGHT_Y << 2, (TEX_BUBBLE_RIGHT_X + 64 * TEXRECT_BUBBLE_SCALE) << 2, (TEX_BUBBLE_RIGHT_Y + 64 * TEXRECT_BUBBLE_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEXRECT_BUBBLE_SCALE, (1 << 10) / TEXRECT_BUBBLE_SCALE),
-        
-    gsDPSetTextureLUT(G_TT_NONE),
-
-    gsSPEndDisplayList(),
-};
-
-#define TEX_BUBBLE_BG_TOP_X 32
-#define TEX_BUBBLE_BG_TOP_Y 105
-#define TEX_BUBBLE_BG_BOTTOM_X TEX_BUBBLE_BG_TOP_X
-#define TEX_BUBBLE_BG_BOTTOM_Y (TEX_BUBBLE_BG_TOP_Y + 32 * TEXRECT_BUBBLE_SCALE)
-#define TEX_BUBBLE_BG_SCALE 2
-
-ALIGNED8 static const u8 dialogue_box_bg1_ia8[] = {
-#include "textures/segment2/dialogue_box_bg1.ia8.inc.c"
-};
-
-ALIGNED8 static const u8 dialogue_box_bg2_ia8[] = {
-#include "textures/segment2/dialogue_box_bg2.ia8.inc.c"
-};
-
-const Gfx dl_balloon_dialog_bg[] = {
-    // 64x64 texture top (IA8 64x64)
-    gsDPLoadTextureBlock(dialogue_box_bg1_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_BG_TOP_X << 2, TEX_BUBBLE_BG_TOP_Y << 2, (TEX_BUBBLE_BG_TOP_X + 128 * TEX_BUBBLE_BG_SCALE) << 2, (TEX_BUBBLE_BG_TOP_Y + 32 * TEX_BUBBLE_BG_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEX_BUBBLE_BG_SCALE, (1 << 10) / TEX_BUBBLE_BG_SCALE),
-
-    // 64x64 texture bottom (IA8 64x64)        
-    gsDPLoadTextureBlock(dialogue_box_bg2_ia8, G_IM_FMT_IA, G_IM_SIZ_8b, 128, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPTextureRectangle(
-        TEX_BUBBLE_BG_BOTTOM_X << 2, TEX_BUBBLE_BG_BOTTOM_Y << 2, (TEX_BUBBLE_BG_BOTTOM_X + 128 * TEX_BUBBLE_BG_SCALE) << 2, (TEX_BUBBLE_BG_BOTTOM_Y + 32 * TEX_BUBBLE_BG_SCALE) << 2,       G_TX_RENDERTILE, 0, 0, (1 << 10) / TEX_BUBBLE_BG_SCALE, (1 << 10) / TEX_BUBBLE_BG_SCALE),
-        
-    gsSPEndDisplayList(),
+ALIGNED8 const u8 alo_ac_dialog_border_ci4[] = { // texture called twice with rotation
+#include "textures/segment2/alo_ac_dialog_border_ci4.inc.c"
 };
 
 /**
- * Dialog top name Balloon
+ * Dialog balloon background
  */
-ALIGNED8 static const u8 balloon_dialog_top_name_pallete[] = {
-#include "textures/segment2/alo_menu_balloon_top_name_ci4_pallete.ia16.inc.c"
+ALIGNED8 const u8 alo_ac_dialog_bg_ia4[] = { // texture called twice with rotation
+#include "textures/segment2/alo_ac_dialog_bg.ia4.inc.c"
 };
 
-ALIGNED8 static const u8 balloon_dialog_top_name_ci4[] = {
-#include "textures/segment2/alo_menu_balloon_top_name_ci4.inc.c"
+/**
+ * Dialog balloon top name
+ */
+ALIGNED8 static const u8 alo_ac_dialog_top_npc_name_ci4_pal[] = {
+#include "textures/segment2/alo_ac_dialog_top_npc_name_ci4_pal.ia16.inc.c"
 };
 
-const Gfx dl_balloon_dialog_top_name[] = {
-    gsDPLoadTLUT_pal16(0, balloon_dialog_top_name_pallete),
-    gsDPLoadTextureBlock_4b(balloon_dialog_top_name_ci4, G_IM_FMT_CI, 64, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 4, G_TX_NOLOD, G_TX_NOLOD),
+ALIGNED8 static const u8 alo_ac_dialog_top_npc_name_ci4[] = {
+#include "textures/segment2/alo_ac_dialog_top_npc_name_ci4.inc.c"
+};
+
+const Gfx dl_balloon_dialog_top_npc_name[] = {
+    gsDPLoadTLUT_pal16(0, alo_ac_dialog_top_npc_name_ci4_pal),
+    gsDPLoadTextureBlock_4b(alo_ac_dialog_top_npc_name_ci4, G_IM_FMT_CI, 64, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 

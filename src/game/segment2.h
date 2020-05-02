@@ -51,9 +51,7 @@ extern u8* main_hud_lut[58];
 extern Gfx dl_alo_texrect_block_start[];
 extern Gfx dl_alo_texrect_block_end[];
 
-extern Gfx dl_balloon_dialog_texrect[];
-extern Gfx dl_balloon_dialog_bg[];
-extern Gfx dl_balloon_dialog_top_name[];
+extern Gfx dl_balloon_dialog_top_npc_name[];
 
 extern u8 texture_hud_rgba16_isabelle[];
 extern u8 texture_hud_rgba16_bells[];

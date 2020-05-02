@@ -232,28 +232,28 @@ void create_dl_ortho_matrix(void) {
 }
 
 void create_aio_matrix(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 aRot, f32 xRot, f32 yRot, f32 zPosRot) {
-       
+
     create_dl_translation_matrix(MENU_MTX_PUSH, xPos, yPos, 0);
     create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 1.0f);
-    
+
     create_dl_translation_matrix(MENU_MTX_PUSH, xPos, yPos, zPosRot);
     create_dl_rotation_matrix(MENU_MTX_NOPUSH, aRot, xRot, yRot, 1.0f);
-    
+
     gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
-    
+
     gSPDisplayList(gDisplayListHead++, displaylist);
 
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-    
+
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
 void render_rotating_model(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 rotSpeed) {
     f32 rotation;
-            
+
     rotation = gGlobalTimer * rotSpeed;
-        
+
     // 200.0f extends the z range in n64 so the model doesn't get cutoff while rotating
     create_aio_matrix(displaylist, xPos, yPos, scale, rotation, 0, rotation, 200.0f);
 }
@@ -898,7 +898,7 @@ s16 get_string_width_ascii(char *str) {
     u8  buf[36];
     s16 bufPos = 0;
     s16 width = 0;
-    
+
     for (i = 0; str[i] != 0; i++)
         buf[i] = ascii_to_font_char(str[i]);
     buf[i] = DIALOG_CHAR_TERMINATOR;
@@ -907,7 +907,7 @@ s16 get_string_width_ascii(char *str) {
         width += gDialogCharWidths[buf[bufPos]];
         bufPos++;
     }
-    
+
     return width;
 }
 
@@ -937,7 +937,7 @@ s16 get_str_x_pos_from_center_custom_ascii(s16 lutType, s16 centerPos, char *str
             break;
          case LUT_TYPE_STR_ASCII:
             spacesWidth = get_string_width_ascii(strAscii);
-            break;   
+            break;
         default:
             break;
     }
@@ -1066,31 +1066,31 @@ void reset_dialog_render_state(void) {
 
 #define AC_DIALOG_ALPHA (220 - gDialogBoxOpenTimer * 2)
 
-struct ACTopBalloonRender {
+struct ACTopNameStrColors {
     u8 r, g, b;
     u8 isTextBlack;
 };
 
 static unsigned char sACTopBalloonText[][16] = {
     // English Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY}, {NPCTEXT_KTQ}, {NPCTEXT_KBB}, {NPCTEXT_BOWSER}, {NPCTEXT_LAKITU}, {NPCTEXT_HOOT}, {NPCTEXT_PENGUIN}, 
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY}, {NPCTEXT_KTQ}, {NPCTEXT_KBB}, {NPCTEXT_BOWSER}, {NPCTEXT_LAKITU}, {NPCTEXT_HOOT}, {NPCTEXT_PENGUIN},
     {NPCTEXT_TOAD}, {NPCTEXT_UKIKI}, {NPCTEXT_MIPS}, {NPCTEXT_SNOWMAN}, {NPCTEXT_WHOMP}, {NPCTEXT_EYEROK}, {NPCTEXT_WIGGLER}, {NPCTEXT_YOSHI},
     // French Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_FR}, {NPCTEXT_KTQ_FR}, {NPCTEXT_KBB_FR}, {NPCTEXT_BOWSER_FR}, {NPCTEXT_LAKITU_FR}, {NPCTEXT_HOOT_FR}, {NPCTEXT_PENGUIN_FR}, 
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_FR}, {NPCTEXT_KTQ_FR}, {NPCTEXT_KBB_FR}, {NPCTEXT_BOWSER_FR}, {NPCTEXT_LAKITU_FR}, {NPCTEXT_HOOT_FR}, {NPCTEXT_PENGUIN_FR},
     {NPCTEXT_TOAD_FR}, {NPCTEXT_UKIKI_FR}, {NPCTEXT_MIPS_FR}, {NPCTEXT_SNOWMAN_FR}, {NPCTEXT_WHOMP_FR}, {NPCTEXT_EYEROK_FR}, {NPCTEXT_WIGGLER_FR}, {NPCTEXT_YOSHI_FR},
     // German Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_DE}, {NPCTEXT_KTQ_DE}, {NPCTEXT_KBB_DE}, {NPCTEXT_BOWSER_DE}, {NPCTEXT_LAKITU_DE}, {NPCTEXT_HOOT_DE}, {NPCTEXT_PENGUIN_DE}, 
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_DE}, {NPCTEXT_KTQ_DE}, {NPCTEXT_KBB_DE}, {NPCTEXT_BOWSER_DE}, {NPCTEXT_LAKITU_DE}, {NPCTEXT_HOOT_DE}, {NPCTEXT_PENGUIN_DE},
     {NPCTEXT_TOAD_DE}, {NPCTEXT_UKIKI_DE}, {NPCTEXT_MIPS_DE}, {NPCTEXT_SNOWMAN_DE}, {NPCTEXT_WHOMP_DE}, {NPCTEXT_EYEROK_DE}, {NPCTEXT_WIGGLER_DE}, {NPCTEXT_YOSHI_DE},
     // Italian Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_IT}, {NPCTEXT_KTQ_IT}, {NPCTEXT_KBB_IT}, {NPCTEXT_BOWSER_IT}, {NPCTEXT_LAKITU_IT}, {NPCTEXT_HOOT_IT}, {NPCTEXT_PENGUIN_IT}, 
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_IT}, {NPCTEXT_KTQ_IT}, {NPCTEXT_KBB_IT}, {NPCTEXT_BOWSER_IT}, {NPCTEXT_LAKITU_IT}, {NPCTEXT_HOOT_IT}, {NPCTEXT_PENGUIN_IT},
     {NPCTEXT_TOAD_IT}, {NPCTEXT_UKIKI_IT}, {NPCTEXT_MIPS_IT}, {NPCTEXT_SNOWMAN_IT}, {NPCTEXT_WHOMP_IT}, {NPCTEXT_EYEROK_IT}, {NPCTEXT_WIGGLER_IT}, {NPCTEXT_YOSHI_IT},
     // Spanish Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_ES}, {NPCTEXT_KTQ_ES}, {NPCTEXT_KBB_ES}, {NPCTEXT_BOWSER_ES}, {NPCTEXT_LAKITU_ES}, {NPCTEXT_HOOT_ES}, {NPCTEXT_PENGUIN_ES}, 
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_ES}, {NPCTEXT_KTQ_ES}, {NPCTEXT_KBB_ES}, {NPCTEXT_BOWSER_ES}, {NPCTEXT_LAKITU_ES}, {NPCTEXT_HOOT_ES}, {NPCTEXT_PENGUIN_ES},
     {NPCTEXT_TOAD_ES}, {NPCTEXT_UKIKI_ES}, {NPCTEXT_MIPS_ES}, {NPCTEXT_SNOWMAN_ES}, {NPCTEXT_WHOMP_ES}, {NPCTEXT_EYEROK_ES}, {NPCTEXT_WIGGLER_ES}, {NPCTEXT_YOSHI_ES},
 };
 
 // First 2 are generic dialog and signpost, they aren't defined because top balloon doesn't render with their npcNameID
-struct ACTopBalloonRender sACTopBalloonDefines[] = {
+struct ACTopNameStrColors sACTopNameColorDefines[] = {
     {   0,   0,   0, FALSE},
     {   0,   0,   0, FALSE},
     { 240,   0,  80, FALSE},
@@ -1110,40 +1110,81 @@ struct ACTopBalloonRender sACTopBalloonDefines[] = {
     {   0, 246,   0,  TRUE},
 };
 
-void render_balloon_dialog_top_name(struct DialogEntry *dialog, s16 x, s16 y) {
+void render_acnl_dialog_top_npc_name(struct DialogEntry *dialog, s16 x, s16 y) {
     s16 xText;
     u8 monoColor;
-    struct ACTopBalloonRender *topBalloon = &sACTopBalloonDefines[dialog->npcNameID];
+    struct ACTopNameStrColors *topName = &sACTopNameColorDefines[dialog->npcNameID];
 
     gInGameLanguage = eu_get_language();
 
-    gDPSetEnvColor(gDisplayListHead++, topBalloon->r, topBalloon->g, topBalloon->b, 20 + AC_DIALOG_ALPHA);
-    render_custom_texrect(dl_balloon_dialog_top_name, TRUE, G_TT_IA16, x, y, 
-        128, 32, topBalloon->r, topBalloon->g, topBalloon->b, (AC_DIALOG_ALPHA) + 20); // double size due to mirror
+    gDPSetEnvColor(gDisplayListHead++, topName->r, topName->g, topName->b, 20 + AC_DIALOG_ALPHA);
+    render_custom_texrect(dl_balloon_dialog_top_npc_name, TRUE, G_TT_IA16, x, y,
+        128, 32, topName->r, topName->g, topName->b, (AC_DIALOG_ALPHA) + 20); // double size due to mirror
 
-    topBalloon->isTextBlack ? (monoColor = 0) : (monoColor = 255);
+    topName->isTextBlack ? (monoColor = 0) : (monoColor = 255);
     xText = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2);
-    
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     gDPSetEnvColor(gDisplayListHead++, monoColor, monoColor, monoColor, AC_DIALOG_ALPHA);
     print_generic_string(xText, y + 36, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID]);
-    
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
-void render_balloon_dialog_texture(struct DialogEntry *dialog) {
+extern u8 alo_ac_dialog_bg_ia4[];
+
+void render_acnl_dialog_background(s16 x, s16 y, s16 scale) {
+    s16 yPos;
+
+    // top part
+    yPos = y;
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_bg_ia4, G_IM_FMT_IA, 128, 32, 0,
+            G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gSPTextureRectangle(gDisplayListHead++, x << 2, yPos << 2, (x + 128 * scale) << 2, (yPos + 32 * scale) << 2,
+            G_TX_RENDERTILE, 0 << 6, 0 << 6, (1 << 10) / scale, (1 << 10) / scale);
+    // bottom part - rotated with mirror
+    yPos = (y + 32 * scale);
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_bg_ia4, G_IM_FMT_IA, 128, 32, 0,
+            G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gSPTextureRectangle(gDisplayListHead++, x << 2, yPos << 2, (x + 128 * scale) << 2, (yPos + 32 * scale) << 2,
+            G_TX_RENDERTILE, (128 / scale) << 6, (32 / scale) << 6, (1 << 10) / scale, (1 << 10) / scale);
+}
+
+extern u8 alo_ac_dialog_border_ci4_pal[];
+extern u8 alo_ac_dialog_border_ci4[];
+
+void render_acnl_dialog_border(s16 x, s16 y, s16 scale) {
+    s16 xPos;
+
+    gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
+    gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_ac_dialog_border_ci4_pal);
+
+    // left part
+    xPos = x;
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_IA, 64, 64, 0,
+            G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gSPTextureRectangle(gDisplayListHead++, xPos << 2, y << 2, (xPos + 64 * scale) << 2, (y + 64 * scale) << 2,
+            G_TX_RENDERTILE, 0 << 6, 0 << 6, (1 << 10) / scale, (1 << 10) / scale);
+    // right part - rotated with mirror
+    xPos = (x + 64 * scale);
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_IA, 64, 64, 0,
+            G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gSPTextureRectangle(gDisplayListHead++, xPos << 2, y << 2, (xPos + 64 * scale) << 2, (y + 64 * scale) << 2,
+            G_TX_RENDERTILE, (64 / scale) << 6, (64 / scale) << 6, (1 << 10) / scale, (1 << 10) / scale);
+
+    gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
+}
+
+void render_acnl_dialog_style(struct DialogEntry *dialog, s16 x, s16 y, s16 scale) {
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, AC_DIALOG_ALPHA);
-    gSPDisplayList(gDisplayListHead++, dl_balloon_dialog_bg);
+    render_acnl_dialog_background(x, y, scale);
 
-    if (dialog->npcNameID == NPCNAME_SIGN) {
-        gDPSetEnvColor(gDisplayListHead++, 181, 107, 41, AC_DIALOG_ALPHA);
-    }
-    
-    gSPDisplayList(gDisplayListHead++, dl_balloon_dialog_texrect);
+    if (dialog->npcNameID == NPCNAME_SIGN) gDPSetEnvColor(gDisplayListHead++, 181, 107, 41, AC_DIALOG_ALPHA);
+    render_acnl_dialog_border(x, y, scale);
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
@@ -1437,7 +1478,7 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
         }
 
         strIdx++;
-        
+
         // Typewritter code, thanks to Pidgey (MCBoy) for helping me
         if (strIdx >= gDialogCharDisplay) {
             if (gDialogBoxState == DIALOG_STATE_VERTICAL && gSkipTypewriteEffect == FALSE) {
@@ -1480,14 +1521,14 @@ extern u8 alo_menu_arrows_ci4_pallete[];
 extern u8 alo_menu_arrows_ci4[];
 
 void render_arrow_texture_menu(s16 move, s16 arrowTexture, s16 x, s16 y) {
-    static s16 movePos = 0;
+    s16 movePos = 0;
     s32 timer = gGlobalTimer;
     u8 textureIndex;
     u8 r, g, b;
     s16 xPos, yPos;
-    
+
     if (move == TRUE) timer & 4 ? movePos++: movePos--;
-    
+
     switch (arrowTexture) {
         case ARROW_TEXTURE_SELECT:
             r = 255; g = 255; b = 255;
@@ -1505,12 +1546,12 @@ void render_arrow_texture_menu(s16 move, s16 arrowTexture, s16 x, s16 y) {
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
     gDPSetTextureLUT(gDisplayListHead++, G_TT_IA16);
-    
+
     gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
 
     gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_menu_arrows_ci4_pallete);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, &alo_menu_arrows_ci4[CI4_TEXTURE_SIZE(16, 16) * textureIndex], G_IM_FMT_CI, 
-        16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD); 
+    gDPLoadTextureBlock_4b(gDisplayListHead++, &alo_menu_arrows_ci4[CI4_TEXTURE_SIZE(16, 16) * textureIndex], G_IM_FMT_CI,
+        16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gSPScisTextureRectangle(gDisplayListHead++, xPos << 2, yPos << 2, (xPos + 16) << 2, (yPos + 16) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -1835,12 +1876,16 @@ void render_dialog_entries(void) {
             break;
     }
 
+#define ACNL_DIALOG_X 32
+#define ACNL_DIALOG_Y 90
 
-    render_balloon_dialog_texture(dialog);
+#define ACNL_DIALOG_STYLE_Y ACNL_DIALOG_Y + 15
+
+    render_acnl_dialog_style(dialog, ACNL_DIALOG_X, ACNL_DIALOG_STYLE_Y, 2);
 
     // don't print top name if is a generic dialog or a sign
     if (dialog->npcNameID != NPCNAME_NONE && dialog->npcNameID != NPCNAME_SIGN) {
-        render_balloon_dialog_top_name(dialog, 30, 90);
+        render_acnl_dialog_top_npc_name(dialog, ACNL_DIALOG_X, ACNL_DIALOG_Y);
     }
 
     gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE,
@@ -1854,17 +1899,9 @@ void render_dialog_entries(void) {
     if (gLastDialogPageStrPos == -1 && gLastDialogResponse == 1) {
         render_dialog_triangle_choice(dialog, dialog->linesPerBox);
     }
-    
-    #ifdef VERSION_EU
-    #undef BORDER_HEIGHT
-    #define BORDER_HEIGHT 8
-    #endif
+
     gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 2, 2, SCREEN_WIDTH - BORDER_HEIGHT/2, SCREEN_HEIGHT - BORDER_HEIGHT/2);
-    #ifdef VERSION_EU
-    #undef BORDER_HEIGHT
-    #define BORDER_HEIGHT 1
-    #endif
-    
+
     if (gLastDialogPageStrPos != -1 && gDialogBoxState == DIALOG_STATE_VERTICAL && gSkipTypewriteEffect == TRUE && gAllTextinPageRendered == TRUE) {
         render_arrow_texture_menu(TRUE, ARROW_TEXTURE_NEXT_PAGE, 250, 196);
     }
@@ -2042,12 +2079,12 @@ void render_shz_names_titlescreen(s16 x, s16 y, s16 lang) {
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
     gDPSetTextureLUT(gDisplayListHead++, G_TT_IA16);
-    
+
     gDPSetEnvColor(gDisplayListHead++, 230, 200, 70, 255);
-    
+
     gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_shz_title_screens_pallete);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, &alo_shz_title_screens_ci4[CI4_TEXTURE_SIZE(128, 32) * lang], G_IM_FMT_CI, 
-        128, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD); 
+    gDPLoadTextureBlock_4b(gDisplayListHead++, &alo_shz_title_screens_ci4[CI4_TEXTURE_SIZE(128, 32) * lang], G_IM_FMT_CI,
+        128, 32, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 128) << 2, (y + 32) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -2081,7 +2118,7 @@ void render_title_screen_textures(void) {
 
     xPosStr1 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4);
     xPosStr2 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4);
-    
+
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {
             print_generic_string_shadow(HEX_PRINT_CHR, xPosStr2, 52, 230, 230, 230, 255, NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 1]);
@@ -2089,7 +2126,7 @@ void render_title_screen_textures(void) {
             print_generic_string_shadow(HEX_PRINT_CHR, xPosStr1, 52, 230, 230, 230, 255, NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 0]);
         }
     }
-    
+
     print_generic_string_shadow(ASCII_PRINT_CHR, 256, 4, 230, 230, 230, 255, "Ver. 1.3", NULL);
     //print_generic_string_shadow(HEX_PRINT_CHR, 80, 120, 230, 230, 230, 255, NULL, textShizue64);
 
@@ -2110,10 +2147,10 @@ u8 sShzCakeStrings[][25] = {
 
 s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
     static float alpha = 0;
-    
+
     s16 xPosStr1;
-    s16 xPosStr2;   
-    
+    s16 xPosStr2;
+
     gInGameLanguage = eu_get_language();
 
     if (alpha < 250) {
@@ -2124,14 +2161,14 @@ s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
 
     xPosStr1 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, 180, sShzCakeStrings[gInGameLanguage * 2 + 0], 3);
     xPosStr2 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, 180, sShzCakeStrings[gInGameLanguage * 2 + 1], 3);
-    
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    
+
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
 
     print_generic_string(xPosStr1, 48, sShzCakeStrings[gInGameLanguage * 2 + 0]);
     print_generic_string(xPosStr2, 32, sShzCakeStrings[gInGameLanguage * 2 + 1]);
-    
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
     return 1;
@@ -2289,10 +2326,10 @@ void background_scene(void) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_ac_bg_menus_pal);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_bg_menus_ci4, G_IM_FMT_CI, 64, 64, 0, 
-        G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD); 
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_bg_menus_ci4, G_IM_FMT_CI, 64, 64, 0,
+        G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPScisTextureRectangle(gDisplayListHead++, GFX_DIMENSIONS_FROM_LEFT_EDGE(0) * 4, 0 << 2, GFX_DIMENSIONS_FROM_RIGHT_EDGE(0) * 4, SCREEN_HEIGHT << 2, G_TX_RENDERTILE, 
+    gSPScisTextureRectangle(gDisplayListHead++, GFX_DIMENSIONS_FROM_LEFT_EDGE(0) * 4, 0 << 2, GFX_DIMENSIONS_FROM_RIGHT_EDGE(0) * 4, SCREEN_HEIGHT << 2, G_TX_RENDERTILE,
             ((int)(64-time))%64 << 5, ((int)(64-time))%64 << 5, (1 << 10), (1 << 10));
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -2334,7 +2371,7 @@ void render_pause_red_coins(void) {
     }
 }
  */
- 
+
 #ifdef MULTILANGUAGE
 u8 gTextCourseArr[][7] = { // D_802FDA10
     { TEXT_COURSE },
@@ -2646,8 +2683,8 @@ void print_hud_pause_colorful_str(void) {
         { TEXT_PAUSE },
         { TEXT_PAUSA },
         { TEXT_PAUSA }
-    }; 
-    
+    };
+
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
