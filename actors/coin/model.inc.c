@@ -56,7 +56,6 @@ const Gfx sm64ds_coin_dl_init[] = {
 };
 
 const Gfx sm64ds_coin_dl_model[] = {
-    gsDPSetTileSize(0, 0, 0, 60, 252),
     gsSPVertex(sm64ds_coin_vertex, 18, 0),
     gsSP2Triangles (0,  3,  1, 0x0,  0,  6,  5, 0x0),
     gsSP2Triangles (1,  2,  0, 0x0,  3,  0,  4, 0x0),

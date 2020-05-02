@@ -119,7 +119,7 @@ void handle_alternate_costume_menu(void) {
 
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, &sAltCustomMenuOpt, 0, NUM_ALT_CUSTOMES - 1);
 
-    render_arrow_texture_menu(TRUE, ARROW_TEXTURE_SELECT, TITLE_X - 12, (sAltCustomMenuOpt * TEXT_HEIGHT) + 64);
+    render_arrow_texture_menu(FALSE, ARROW_TEXTURE_SELECT, TITLE_X - 10, (sAltCustomMenuOpt * TEXT_HEIGHT) + 64);
 
     if (gPlayer1Controller->buttonPressed & (A_BUTTON | B_BUTTON)) {
         play_sound(SOUND_MENU_CLICK_ACNH, gDefaultSoundArgs);

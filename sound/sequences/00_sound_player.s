@@ -7051,7 +7051,7 @@ chan_setlayer 0, .layer_acnh_appopen
 chan_end
 
 .layer_acnh_appopen:
-layer_note1 39, 0x7f, 115
+layer_note1 39, 0x2A, 115
 layer_end
 
 .sound_menu_hover_acnh:
@@ -7063,7 +7063,7 @@ chan_setlayer 0, .layer_acnh_hover
 chan_end
 
 .layer_acnh_hover:
-layer_note1 39, 0x7f, 115
+layer_note1 39, 0x20, 115
 layer_end
 
 .sound_menu_click_acnh:
@@ -7075,7 +7075,7 @@ chan_setlayer 0, .layer_acnh_click
 chan_end
 
 .layer_acnh_click:
-layer_note1 39, 0x7f, 115
+layer_note1 39, 0x20, 115
 layer_end
 
 .sound_menu_message_appear:
@@ -7085,7 +7085,7 @@ chan_setlayer 0, .layer_acballoonopen
 chan_end
 
 .layer_acballoonopen:
-layer_note1 39, 0x7f, 115
+layer_note1 39, 0x20, 115
 layer_end
 
 .sound_menu_message_disappear:
@@ -7097,7 +7097,7 @@ chan_setlayer 0, .layer_acballoonclose
 chan_end
 
 .layer_acballoonclose:
-layer_note1 39, 0x7f, 115
+layer_note1 39, 0x20, 115
 layer_end
 
 .sound_menu_camera_zoom_out:
@@ -7139,7 +7139,7 @@ chan_setlayer 0, .layer_acballoonblob
 chan_end
 
 .layer_acballoonblob:
-layer_note1 39, 0x7f, 115
+layer_note1 39, 0x20, 115
 layer_end
 
 .sound_menu_let_go_mario_face:

@@ -1135,7 +1135,7 @@ s32 update_level(void) {
 }
 
 
-#define SKIP_CUTSCENE TRUE
+#define SKIP_CUTSCENE FALSE
 
 s32 init_level(void) {
     s32 val4 = 0;
