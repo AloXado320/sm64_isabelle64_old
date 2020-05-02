@@ -745,7 +745,7 @@ static u8 ascii_to_font_char(u8 c) {
 
 void print_generic_str_ascii(s16 x, s16 y, const char *str) {
     s16 i;
-    u8  buf[32];
+    u8  buf[36];
     for (i = 0; str[i] != 0; i++)
         buf[i] = ascii_to_font_char(str[i]);
     buf[i] = DIALOG_CHAR_TERMINATOR;
@@ -859,43 +859,15 @@ s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale) {
     return (f32) centerPos - (scale * (charsWidth / 2.0)) - ((scale / 2.0) * (spacesWidth / 2.0));
 }
 
-s16 get_str_x_pos_from_center_custom(s16 lutType, s16 centerPos, u8 *strHex, char *strAscii, f32 scale) {
-    s16 i;    
-    s16 strHexPos = 0;
-    f32 spacesWidth = 0.0f;
+s32 get_hud_str_width(u8 *str) {
+    u32 c;
+    s32 length = 0;
 
-    u8  buf[32];
-    s16 bufPos = 0;
-
-    switch (lutType) {
-        case LUT_TYPE_HUD:
-            while ((strHexPos = *strHex++) != 0) {
-                spacesWidth += (strHexPos == GLOBAL_CHAR_SPACE ? 6 : 12);
-            }
-            break;
-         case LUT_TYPE_STR:
-            while (strHex[strHexPos] != DIALOG_CHAR_TERMINATOR) {
-                spacesWidth += gDialogCharWidths[strHex[strHexPos]];
-                strHexPos++;
-            }
-            break;
-         case LUT_TYPE_ASCII:
-            for (i = 0; strAscii[i] != 0; i++)
-                buf[i] = ascii_to_font_char(strAscii[i]);
-            buf[i] = DIALOG_CHAR_TERMINATOR;
-
-            while (buf[bufPos] != DIALOG_CHAR_TERMINATOR) {
-                spacesWidth += gDialogCharWidths[buf[bufPos]];
-            bufPos++;
-            }
-            break;   
-        default:
-            break;
+    while ((c = *str++) != 0) {
+        length += (c == GLOBAL_CHAR_SPACE ? 6 : 12);
     }
 
-    // return the x position of where the string starts as half the string's
-    // length from the position of the provided center.
-    return (f32)(centerPos - (spacesWidth / scale));
+    return length;
 }
 
 s16 get_string_width(u8 *str) {
@@ -909,9 +881,21 @@ s16 get_string_width(u8 *str) {
     return width;
 }
 
-s16 get_string_width_ascii(const char *str) {
+
+s32 get_hud_str_width_ascii(char *str) {
+    u32 c;
+    s32 length = 0;
+
+    while ((c = *str++) != 0) {
+        length += (c == ' ' ? 6 : 12);
+    }
+
+    return length;
+}
+
+s16 get_string_width_ascii(char *str) {
     s16 i;
-    u8  buf[32];
+    u8  buf[36];
     s16 bufPos = 0;
     s16 width = 0;
     
@@ -925,6 +909,42 @@ s16 get_string_width_ascii(const char *str) {
     }
     
     return width;
+}
+
+s16 get_str_x_pos_from_center_custom_hex(s16 lutType, s16 centerPos, u8 *strHex, u8 scale) {
+    s16 spacesWidth;
+
+    switch (lutType) {
+        case LUT_TYPE_HUD_HEX:
+            spacesWidth = get_hud_str_width(strHex);
+            break;
+         case LUT_TYPE_STR_HEX:
+            spacesWidth = get_string_width(strHex);
+            break;
+    }
+
+    // return the x position of where the string starts as half the string's
+    // length from the position of the provided center.
+    return (centerPos - (spacesWidth / scale));
+}
+
+s16 get_str_x_pos_from_center_custom_ascii(s16 lutType, s16 centerPos, char *strAscii, u8 scale) {
+    s16 spacesWidth;
+
+    switch (lutType) {
+        case LUT_TYPE_HUD_ASCII:
+            spacesWidth = get_hud_str_width_ascii(strAscii);
+            break;
+         case LUT_TYPE_STR_ASCII:
+            spacesWidth = get_string_width_ascii(strAscii);
+            break;   
+        default:
+            break;
+    }
+
+    // return the x position of where the string starts as half the string's
+    // length from the position of the provided center.
+    return (centerPos - (spacesWidth / scale));
 }
 
 u8 gHudSymCoin[] = { GLYPH_COIN, GLYPH_SPACE };
@@ -1102,7 +1122,7 @@ void render_balloon_dialog_top_name(struct DialogEntry *dialog, s16 x, s16 y) {
         128, 32, topBalloon->r, topBalloon->g, topBalloon->b, (AC_DIALOG_ALPHA) + 20); // double size due to mirror
 
     topBalloon->isTextBlack ? (monoColor = 0) : (monoColor = 255);
-    xText = get_str_x_pos_from_center_custom(LUT_TYPE_STR, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], NULL, 2.0f);
+    xText = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2);
     
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
@@ -2059,8 +2079,8 @@ void render_title_screen_textures(void) {
     render_shz_names_titlescreen(92, 58, gInGameLanguage);
     render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16, 255, 255, 255, 255);
 
-    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], NULL, 4.5f);
-    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], NULL, 4.5f);
+    xPosStr1 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4);
+    xPosStr2 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4);
     
     if ((gGlobalTimer & 0x1F) < 20) {
         if (gControllerBits == 0) {
@@ -2102,8 +2122,8 @@ s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
         alpha = 255;
     }
 
-    xPosStr1 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 0], NULL, 3.0f);
-    xPosStr2 = get_str_x_pos_from_center_custom(LUT_TYPE_STR, 180, sShzCakeStrings[gInGameLanguage * 2 + 1], NULL, 3.0f);
+    xPosStr1 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, 180, sShzCakeStrings[gInGameLanguage * 2 + 0], 3);
+    xPosStr2 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, 180, sShzCakeStrings[gInGameLanguage * 2 + 1], 3);
     
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     

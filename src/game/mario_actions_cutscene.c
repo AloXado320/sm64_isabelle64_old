@@ -72,26 +72,6 @@ static Vec4s sJumboStarKeyframes[27] = {
     { 0, -3500, 2100, -2000 },  { 0, -2000, 2200, -3500 },  { 0, 0, 2300, -4000 },
 };
 
-/**
- * get_credits_str_width: Calculate width of a Credits String
- * Loop over each character in a credits string and increment the length. If the
- * character is a space, increment by 4; otherwise increment by 7. Once the next
- * character is a null character (equal to 0), stop counting the length since
- * that's the end of the string.
- */
-/**
-s32 get_credits_str_width(char *str) {
-    u32 c;
-    s32 length = 0;
-
-    while ((c = *str++) != 0) {
-        length += (c == ' ' ? 4 : 6);
-    }
-
-    return length;
-}
- */
-
 #define CREDIT_TEXT_MARGIN_X ((s32)(GFX_DIMENSIONS_ASPECT_RATIO * 12))
 #define CREDIT_TEXT_X_LEFT GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(CREDIT_TEXT_MARGIN_X)
 #define CREDIT_TEXT_X_RIGHT GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(CREDIT_TEXT_MARGIN_X)
