@@ -39,6 +39,8 @@ s16 gCutsceneMsgXOffset;
 s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
 u16 gDialogCharDisplay;
+u8 gAcnlDialogAlpha;
+u8 gAcnlDialogTextAlpha;
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -63,8 +65,7 @@ enum DialogBoxType {
 
 enum DialogMark { DIALOG_MARK_NONE = 0, DIALOG_MARK_DAKUTEN = 1, DIALOG_MARK_HANDAKUTEN = 2 };
 
-#define DEFAULT_DIALOG_BOX_ANGLE 90.0f
-#define DEFAULT_DIALOG_BOX_SCALE 19.0f
+#define AC_DIALOG_DELAY 45.0f
 
 #if !defined(VERSION_JP) && !defined(VERSION_SH)
 u8 gDialogCharWidths[256] = {
@@ -133,9 +134,6 @@ u8 gDialogMenuCharWidths[256] = { // TODO: Is there a way to auto generate this?
 #endif
 
 s8 gDialogBoxState = DIALOG_STATE_OPENING;
-f32 gDialogBoxOpenTimer = DEFAULT_DIALOG_BOX_ANGLE;
-f32 gDialogBoxScale = DEFAULT_DIALOG_BOX_SCALE;
-s16 gDialogScrollOffsetY = 0;
 s8 gDialogBoxType = DIALOG_TYPE_ROTATE;
 s16 gDialogID = -1;
 s16 gLastDialogPageStrPos = 0;
@@ -150,6 +148,9 @@ u8 gMenuHoldKeyTimer = 0;
 s32 gDialogResponse = 0;
 s8 gSkipTypewriteEffect = FALSE;
 s8 gAllTextinPageRendered = FALSE;
+
+s16 gDialogTextXPosition = 62;
+s16 gDialogTextYPosition = 102;
 
 #define JP_X_SPACING 12
 
@@ -1054,8 +1055,6 @@ void reset_dialog_render_state(void) {
         trigger_cutscene_dialog(2);
     }
 
-    gDialogBoxScale = 19.0f;
-    gDialogBoxOpenTimer = 90.0f;
     gDialogBoxState = DIALOG_STATE_OPENING;
     gDialogID = -1;
     gDialogTextPos = 0;
@@ -1064,29 +1063,9 @@ void reset_dialog_render_state(void) {
     gDialogResponse = 0;
 }
 
-#define AC_DIALOG_ALPHA (220 - gDialogBoxOpenTimer * 2)
-
 struct ACTopNameStrColors {
     u8 r, g, b;
     u8 isTextBlack;
-};
-
-static unsigned char sACTopBalloonText[][16] = {
-    // English Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY}, {NPCTEXT_KTQ}, {NPCTEXT_KBB}, {NPCTEXT_BOWSER}, {NPCTEXT_LAKITU}, {NPCTEXT_HOOT}, {NPCTEXT_PENGUIN},
-    {NPCTEXT_TOAD}, {NPCTEXT_UKIKI}, {NPCTEXT_MIPS}, {NPCTEXT_SNOWMAN}, {NPCTEXT_WHOMP}, {NPCTEXT_EYEROK}, {NPCTEXT_WIGGLER}, {NPCTEXT_YOSHI},
-    // French Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_FR}, {NPCTEXT_KTQ_FR}, {NPCTEXT_KBB_FR}, {NPCTEXT_BOWSER_FR}, {NPCTEXT_LAKITU_FR}, {NPCTEXT_HOOT_FR}, {NPCTEXT_PENGUIN_FR},
-    {NPCTEXT_TOAD_FR}, {NPCTEXT_UKIKI_FR}, {NPCTEXT_MIPS_FR}, {NPCTEXT_SNOWMAN_FR}, {NPCTEXT_WHOMP_FR}, {NPCTEXT_EYEROK_FR}, {NPCTEXT_WIGGLER_FR}, {NPCTEXT_YOSHI_FR},
-    // German Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_DE}, {NPCTEXT_KTQ_DE}, {NPCTEXT_KBB_DE}, {NPCTEXT_BOWSER_DE}, {NPCTEXT_LAKITU_DE}, {NPCTEXT_HOOT_DE}, {NPCTEXT_PENGUIN_DE},
-    {NPCTEXT_TOAD_DE}, {NPCTEXT_UKIKI_DE}, {NPCTEXT_MIPS_DE}, {NPCTEXT_SNOWMAN_DE}, {NPCTEXT_WHOMP_DE}, {NPCTEXT_EYEROK_DE}, {NPCTEXT_WIGGLER_DE}, {NPCTEXT_YOSHI_DE},
-    // Italian Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_IT}, {NPCTEXT_KTQ_IT}, {NPCTEXT_KBB_IT}, {NPCTEXT_BOWSER_IT}, {NPCTEXT_LAKITU_IT}, {NPCTEXT_HOOT_IT}, {NPCTEXT_PENGUIN_IT},
-    {NPCTEXT_TOAD_IT}, {NPCTEXT_UKIKI_IT}, {NPCTEXT_MIPS_IT}, {NPCTEXT_SNOWMAN_IT}, {NPCTEXT_WHOMP_IT}, {NPCTEXT_EYEROK_IT}, {NPCTEXT_WIGGLER_IT}, {NPCTEXT_YOSHI_IT},
-    // Spanish Group
-    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_ES}, {NPCTEXT_KTQ_ES}, {NPCTEXT_KBB_ES}, {NPCTEXT_BOWSER_ES}, {NPCTEXT_LAKITU_ES}, {NPCTEXT_HOOT_ES}, {NPCTEXT_PENGUIN_ES},
-    {NPCTEXT_TOAD_ES}, {NPCTEXT_UKIKI_ES}, {NPCTEXT_MIPS_ES}, {NPCTEXT_SNOWMAN_ES}, {NPCTEXT_WHOMP_ES}, {NPCTEXT_EYEROK_ES}, {NPCTEXT_WIGGLER_ES}, {NPCTEXT_YOSHI_ES},
 };
 
 // First 2 are generic dialog and signpost, they aren't defined because top balloon doesn't render with their npcNameID
@@ -1110,6 +1089,24 @@ struct ACTopNameStrColors sACTopNameColorDefines[] = {
     {   0, 246,   0,  TRUE},
 };
 
+static unsigned char sACTopBalloonText[][16] = {
+    // English Group
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY}, {NPCTEXT_KTQ}, {NPCTEXT_KBB}, {NPCTEXT_BOWSER}, {NPCTEXT_LAKITU}, {NPCTEXT_HOOT}, {NPCTEXT_PENGUIN},
+    {NPCTEXT_TOAD}, {NPCTEXT_UKIKI}, {NPCTEXT_MIPS}, {NPCTEXT_SNOWMAN}, {NPCTEXT_WHOMP}, {NPCTEXT_EYEROK}, {NPCTEXT_WIGGLER}, {NPCTEXT_YOSHI},
+    // French Group
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_FR}, {NPCTEXT_KTQ_FR}, {NPCTEXT_KBB_FR}, {NPCTEXT_BOWSER_FR}, {NPCTEXT_LAKITU_FR}, {NPCTEXT_HOOT_FR}, {NPCTEXT_PENGUIN_FR},
+    {NPCTEXT_TOAD_FR}, {NPCTEXT_UKIKI_FR}, {NPCTEXT_MIPS_FR}, {NPCTEXT_SNOWMAN_FR}, {NPCTEXT_WHOMP_FR}, {NPCTEXT_EYEROK_FR}, {NPCTEXT_WIGGLER_FR}, {NPCTEXT_YOSHI_FR},
+    // German Group
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_DE}, {NPCTEXT_KTQ_DE}, {NPCTEXT_KBB_DE}, {NPCTEXT_BOWSER_DE}, {NPCTEXT_LAKITU_DE}, {NPCTEXT_HOOT_DE}, {NPCTEXT_PENGUIN_DE},
+    {NPCTEXT_TOAD_DE}, {NPCTEXT_UKIKI_DE}, {NPCTEXT_MIPS_DE}, {NPCTEXT_SNOWMAN_DE}, {NPCTEXT_WHOMP_DE}, {NPCTEXT_EYEROK_DE}, {NPCTEXT_WIGGLER_DE}, {NPCTEXT_YOSHI_DE},
+    // Italian Group
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_IT}, {NPCTEXT_KTQ_IT}, {NPCTEXT_KBB_IT}, {NPCTEXT_BOWSER_IT}, {NPCTEXT_LAKITU_IT}, {NPCTEXT_HOOT_IT}, {NPCTEXT_PENGUIN_IT},
+    {NPCTEXT_TOAD_IT}, {NPCTEXT_UKIKI_IT}, {NPCTEXT_MIPS_IT}, {NPCTEXT_SNOWMAN_IT}, {NPCTEXT_WHOMP_IT}, {NPCTEXT_EYEROK_IT}, {NPCTEXT_WIGGLER_IT}, {NPCTEXT_YOSHI_IT},
+    // Spanish Group
+    {NO_NPCTEXT}, {NO_NPCTEXT}, {NPCTEXT_BUDDY_ES}, {NPCTEXT_KTQ_ES}, {NPCTEXT_KBB_ES}, {NPCTEXT_BOWSER_ES}, {NPCTEXT_LAKITU_ES}, {NPCTEXT_HOOT_ES}, {NPCTEXT_PENGUIN_ES},
+    {NPCTEXT_TOAD_ES}, {NPCTEXT_UKIKI_ES}, {NPCTEXT_MIPS_ES}, {NPCTEXT_SNOWMAN_ES}, {NPCTEXT_WHOMP_ES}, {NPCTEXT_EYEROK_ES}, {NPCTEXT_WIGGLER_ES}, {NPCTEXT_YOSHI_ES},
+};
+
 void render_acnl_dialog_top_npc_name(struct DialogEntry *dialog, s16 x, s16 y) {
     s16 xText;
     u8 monoColor;
@@ -1117,16 +1114,15 @@ void render_acnl_dialog_top_npc_name(struct DialogEntry *dialog, s16 x, s16 y) {
 
     gInGameLanguage = eu_get_language();
 
-    gDPSetEnvColor(gDisplayListHead++, topName->r, topName->g, topName->b, 20 + AC_DIALOG_ALPHA);
     render_custom_texrect(dl_balloon_dialog_top_npc_name, TRUE, G_TT_IA16, x, y,
-        128, 32, topName->r, topName->g, topName->b, (AC_DIALOG_ALPHA) + 20); // double size due to mirror
+        128, 32, topName->r, topName->g, topName->b, gAcnlDialogAlpha * 1.2); // double size due to mirror
 
     topName->isTextBlack ? (monoColor = 0) : (monoColor = 255);
     xText = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, x + 64, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID], 2);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
-    gDPSetEnvColor(gDisplayListHead++, monoColor, monoColor, monoColor, AC_DIALOG_ALPHA);
+    gDPSetEnvColor(gDisplayListHead++, monoColor, monoColor, monoColor, gAcnlDialogAlpha * 1.2);
     print_generic_string(xText, y + 36, sACTopBalloonText[gInGameLanguage * 17 + dialog->npcNameID]);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
@@ -1148,7 +1144,7 @@ void render_acnl_dialog_background(s16 x, s16 y, s16 scale) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_bg_ia4, G_IM_FMT_IA, 128, 32, 0,
             G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, x << 2, yPos << 2, (x + 128 * scale) << 2, (yPos + 32 * scale) << 2,
-            G_TX_RENDERTILE, (128 / scale) << 6, (32 / scale) << 6, (1 << 10) / scale, (1 << 10) / scale);
+            G_TX_RENDERTILE, (128 << 6) / scale, (32 << 6) / scale, (1 << 10) / scale, (1 << 10) / scale);
 }
 
 extern u8 alo_ac_dialog_border_ci4_pal[];
@@ -1171,40 +1167,38 @@ void render_acnl_dialog_border(s16 x, s16 y, s16 scale) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_IA, 64, 64, 0,
             G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, xPos << 2, y << 2, (xPos + 64 * scale) << 2, (y + 64 * scale) << 2,
-            G_TX_RENDERTILE, (64 / scale) << 6, (64 / scale) << 6, (1 << 10) / scale, (1 << 10) / scale);
+            G_TX_RENDERTILE, (64 << 6) / scale, (64 << 6) / scale, (1 << 10) / scale, (1 << 10) / scale);
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
 }
 
 void render_acnl_dialog_style(struct DialogEntry *dialog, s16 x, s16 y, s16 scale) {
-
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
 
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, AC_DIALOG_ALPHA);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gAcnlDialogAlpha);
+
     render_acnl_dialog_background(x, y, scale);
 
-    if (dialog->npcNameID == NPCNAME_SIGN) gDPSetEnvColor(gDisplayListHead++, 181, 107, 41, AC_DIALOG_ALPHA);
+    if (dialog->npcNameID == NPCNAME_SIGN)
+        gDPSetEnvColor(gDisplayListHead++, 230, 116, 0, gAcnlDialogAlpha);
+
     render_acnl_dialog_border(x, y, scale);
 
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
-void render_generic_dialog_char_at_pos(struct DialogEntry *dialog, s16 x, s16 y, u8 c) {
-    s16 width;  // sp26
-    s16 height; // sp24
-    s16 tmpX;
-    s16 tmpY;
-    s16 xCoord; // sp1E
-    s16 yCoord; // sp1C
+void render_generic_dialog_char_at_pos(UNUSED struct DialogEntry *dialog, s16 x, s16 y, u8 c) {
+    s16 width;
+    s16 height;
+    s16 xCoord;
+    s16 yCoord;
     void **fontLUT;
     void *packedTexture;
 
-    width = (16.0 - (gDialogBoxScale * 0.8));
-    height = (17.0 - (gDialogBoxScale * 0.8)); // 16 + 1
-    tmpX = (dialog->leftOffset + (65.0 - (65.0 / gDialogBoxScale)));
-    tmpY = ((240 - dialog->width) - ((40.0 / gDialogBoxScale) - 40));
-    xCoord = (tmpX + (x / gDialogBoxScale));
-    yCoord = (tmpY + (y / gDialogBoxScale));
+    width = 16.0;
+    height = 16.0;
+    xCoord = gDialogTextXPosition + x;
+    yCoord = (SCREEN_HEIGHT - gDialogTextYPosition) + y;
 
     fontLUT = segmented_to_virtual(main_font_lut);
     packedTexture = segmented_to_virtual(fontLUT[c]);
@@ -1219,30 +1213,30 @@ void render_generic_dialog_char_at_pos(struct DialogEntry *dialog, s16 x, s16 y,
         case DIALOG_C_DOWN_BUTTON:
         case DIALOG_C_LEFT_BUTTON:
         case DIALOG_C_RIGHT_BUTTON:
-            gDPSetEnvColor(gDisplayListHead++, 255, 194, 14, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 255, 194, 14, gAcnlDialogTextAlpha);
             break;
         case DIALOG_A_BUTTON:
-            gDPSetEnvColor(gDisplayListHead++, 77, 109, 243, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 77, 109, 243, gAcnlDialogTextAlpha);
             break;
         case DIALOG_B_BUTTON:
-            gDPSetEnvColor(gDisplayListHead++, 34, 177, 76, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 34, 177, 76, gAcnlDialogTextAlpha);
             break;
         case DIALOG_Z_BUTTON:
         case DIALOG_R_BUTTON:
-            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gAcnlDialogTextAlpha);
             break;
 #endif
         case DIALOG_CHAR_COIN:
-            gDPSetEnvColor(gDisplayListHead++, 253, 221, 96, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 253, 221, 96, gAcnlDialogTextAlpha);
             break;
         case DIALOG_CHAR_STAR_FILLED:
-            gDPSetEnvColor(gDisplayListHead++, 232, 209, 22, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 232, 209, 22, gAcnlDialogTextAlpha);
             break;
         case DIALOG_CHAR_STAR_OPEN:
-            gDPSetEnvColor(gDisplayListHead++, 97, 186, 70, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 97, 186, 70, gAcnlDialogTextAlpha);
             break;
         default:
-            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, AC_DIALOG_ALPHA);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gAcnlDialogTextAlpha);
             break;
     }
 
@@ -1264,8 +1258,6 @@ void handle_dialog_scroll_page_state(s8 lineNum, s8 totalLines, s8 *pageState) {
         pageState[0] = DIALOG_PAGE_STATE_SCROLL;
         return;
     }
-
-    gDialogY += 15;
 }
 
 void render_star_count_dialog_text(struct DialogEntry *dialog)
@@ -1346,19 +1338,11 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
 
     strIdx = gDialogTextPos;
 
-    gDialogX = 0;
-    gDialogY = 14;
-
-
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
 
-    if (gDialogBoxState == DIALOG_STATE_HORIZONTAL) {
-        totalLines = linesPerBox * 2 + 1;
-        //gDialogY -= gDialogScrollOffsetY;
-    } else {
-        totalLines = linesPerBox + 1;
-    }
+    totalLines = linesPerBox + 1;
+
 
     while (pageState == DIALOG_PAGE_STATE_NONE) {
 
@@ -1372,6 +1356,7 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
                 lineNum++;
                 handle_dialog_scroll_page_state(lineNum, totalLines, &pageState);
                 gDialogX = 0;
+                gDialogY += 15;
                 break;
 #ifdef MULTILANGUAGE
             case DIALOG_CHAR_LOWER_A_GRAVE:
@@ -1558,10 +1543,10 @@ void render_arrow_texture_menu(s16 move, s16 arrowTexture, s16 x, s16 y) {
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }
 
-void render_dialog_triangle_choice(struct DialogEntry *dialog, s8 linesPerBox) {
+void render_dialog_triangle_choice(struct DialogEntry *dialog) {
 
-    s16 x = (dialog->leftOffset + (gDialogLineNum * 64)) - 60;
-    s16 y = (dialog->width + (linesPerBox * 16)) - 8;
+    s16 x = (gDialogTextXPosition + (gDialogLineNum * 64)) - 60;
+    s16 y = (gDialogTextYPosition + (dialog->linesPerBox * 16)) - 8;
 
     if (gDialogBoxState == DIALOG_STATE_VERTICAL) {
         handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &gDialogLineNum, 1, 2);
@@ -1748,21 +1733,9 @@ s16 gCutsceneMsgTimer = 0;
 s8 gDialogCameraAngleIndex = CAM_SELECTION_MARIO;
 s8 gDialogCourseActNum = 1;
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
-#define DIAG_VAL1 1
-#define DIAG_VAL3 320
-#define DIAG_VAL4 5
-#else
-#define DIAG_VAL1 1
-#define DIAG_VAL3 320 // US & EU - expand text rendering
-#define DIAG_VAL4 5
-#endif
-#ifdef VERSION_EU
-#define DIAG_VAL2 238
-#else
-#define DIAG_VAL2 238 // JP & US
-#endif
-
+// TODO: this is really messy, dialog states need to change a lot because of new rendering
+// something like "open, scrolling, idle, close"
+// but other functions also rely on dialog state so i might as well rewrite it
 void render_dialog_entries(void) {
     void **dialogTable;
     struct DialogEntry *dialog;
@@ -1801,26 +1774,20 @@ void render_dialog_entries(void) {
 
     switch (gDialogBoxState) {
         case DIALOG_STATE_OPENING:
-            if (gDialogBoxOpenTimer == DEFAULT_DIALOG_BOX_ANGLE) {
-                play_dialog_sound(gDialogID);
+            gAcnlDialogAlpha += 20;
+            play_dialog_sound(gDialogID);
+
+            if (gAcnlDialogAlpha == 100) {
                 play_sound(SOUND_MENU_MESSAGE_APPEAR, gDefaultSoundArgs);
             }
 
-            if (gDialogBoxType == DIALOG_TYPE_ROTATE) {
-                gDialogBoxOpenTimer -= 7.5;
-                gDialogBoxScale -= 1.5;
-            } else {
-                gDialogBoxOpenTimer -= 10.0;
-                gDialogBoxScale -= 2.0;
-            }
-
-            if (gDialogBoxOpenTimer == 0.0f) {
+            if (gAcnlDialogAlpha == 200) {
                 gDialogBoxState = DIALOG_STATE_VERTICAL;
                 gDialogLineNum = 1;
             }
             break;
         case DIALOG_STATE_VERTICAL:
-            gDialogBoxOpenTimer = 0.0f;
+            gAcnlDialogTextAlpha = gAcnlDialogAlpha * 1.2;
 
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | B_BUTTON)) {
                 if (gSkipTypewriteEffect == TRUE && gAllTextinPageRendered == TRUE) {
@@ -1828,8 +1795,8 @@ void render_dialog_entries(void) {
                         handle_special_dialog_text(gDialogID);
                         gDialogBoxState = DIALOG_STATE_CLOSING;
                     } else {
-                        gDialogBoxState = DIALOG_STATE_HORIZONTAL;
-//                        play_sound(SOUND_MENU_MESSAGE_NEXT_PAGE, gDefaultSoundArgs);
+                        gDialogTextPos = gLastDialogPageStrPos;
+                        play_sound(SOUND_MENU_MESSAGE_NEXT_PAGE, gDefaultSoundArgs);
                     }
                     gSkipTypewriteEffect = FALSE;
                 } else {
@@ -1838,31 +1805,21 @@ void render_dialog_entries(void) {
                 }
             }
             break;
-        case DIALOG_STATE_HORIZONTAL:
-            gDialogScrollOffsetY += dialog->linesPerBox * 2;
-
-            if (gDialogScrollOffsetY >= dialog->linesPerBox * DIAG_VAL1) {
-                gDialogTextPos = gLastDialogPageStrPos;
-                gDialogBoxState = DIALOG_STATE_VERTICAL;
-                gDialogScrollOffsetY = 0;
-            }
-            break;
         case DIALOG_STATE_CLOSING:
-            if (gDialogBoxOpenTimer == 20.0f) {
+            gAcnlDialogAlpha -= 20;
+            gAcnlDialogTextAlpha -= 20;
+
+            if (gAcnlDialogAlpha == 160) {
                 level_set_transition(0, 0);
                 play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
 
                 if (gDialogBoxType == DIALOG_TYPE_ZOOM) {
                     trigger_cutscene_dialog(2);
                 }
-
-                gDialogResponse = gDialogLineNum;
             }
 
-            gDialogBoxOpenTimer = gDialogBoxOpenTimer + 10.0f;
-            gDialogBoxScale = gDialogBoxScale + 2.0f;
-
-            if (gDialogBoxOpenTimer == DEFAULT_DIALOG_BOX_ANGLE) {
+            if (gAcnlDialogAlpha == 60) {
+                gDialogResponse = gDialogLineNum;
                 gDialogBoxState = DIALOG_STATE_OPENING;
                 gDialogID = -1;
                 gDialogTextPos = 0;
@@ -1872,6 +1829,8 @@ void render_dialog_entries(void) {
                 gDialogCharDisplay = 0;
                 gSkipTypewriteEffect = FALSE;
                 gAllTextinPageRendered = FALSE;
+                gAcnlDialogAlpha = 0;
+                gAcnlDialogTextAlpha = 0;
             }
             break;
     }
@@ -1888,19 +1847,18 @@ void render_dialog_entries(void) {
         render_acnl_dialog_top_npc_name(dialog, ACNL_DIALOG_X, ACNL_DIALOG_Y);
     }
 
-    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE,
-                ensure_nonnegative(dialog->leftOffset),
-                ensure_nonnegative(DIAG_VAL2 - dialog->width),
-                ensure_nonnegative(dialog->leftOffset + DIAG_VAL3 / gDialogBoxScale),
-                ensure_nonnegative((236 - dialog->width) + ((dialog->linesPerBox * 80) / DIAG_VAL4) / gDialogBoxScale));
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0,
+        SCREEN_WIDTH, ensure_nonnegative(SCREEN_HEIGHT + (dialog->linesPerBox * 16)));
 
-    handle_dialog_text_and_pages(dialog);
-
-    if (gLastDialogPageStrPos == -1 && gLastDialogResponse == 1) {
-        render_dialog_triangle_choice(dialog, dialog->linesPerBox);
+    if (gAcnlDialogAlpha >= 20) {
+        handle_dialog_text_and_pages(dialog);
     }
 
-    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 2, 2, SCREEN_WIDTH - BORDER_HEIGHT/2, SCREEN_HEIGHT - BORDER_HEIGHT/2);
+    if (gLastDialogPageStrPos == -1 && gLastDialogResponse == 1) {
+        render_dialog_triangle_choice(dialog);
+    }
+
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH - BORDER_HEIGHT/2, SCREEN_HEIGHT - BORDER_HEIGHT/2);
 
     if (gLastDialogPageStrPos != -1 && gDialogBoxState == DIALOG_STATE_VERTICAL && gSkipTypewriteEffect == TRUE && gAllTextinPageRendered == TRUE) {
         render_arrow_texture_menu(TRUE, ARROW_TEXTURE_NEXT_PAGE, 250, 196);
@@ -2178,20 +2136,7 @@ s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
 extern Gfx castle_grounds_seg7_us_dl_0700F2E8[];
 #endif
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
 #define PEACH_MESSAGE_TIMER 170
-#else
-#define PEACH_MESSAGE_TIMER 250
-#endif
-
-#if defined(VERSION_JP) || defined(VERSION_SH)
-#define STR_X 53
-#define STR_Y 136
-#else
-#define STR_X 38
-#define STR_Y 142
-#endif
-
 // "Dear Mario" message handler
 void print_peach_letter_message(void) {
     void **dialogTable;
@@ -2231,7 +2176,7 @@ void print_peach_letter_message(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, gCutsceneMsgFade);
 
-    print_generic_string(STR_X, STR_Y, str);
+    print_generic_string(32, 144, str);
 #if defined(VERSION_JP) || defined(VERSION_SH)
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 #endif
@@ -2288,12 +2233,12 @@ void render_hud_cannon_reticle(void) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
     create_dl_translation_matrix(MENU_MTX_PUSH, 8.0f, -20.0f, 0);
-    create_dl_rotation_matrix(MENU_MTX_NOPUSH, DEFAULT_DIALOG_BOX_ANGLE, 0, 0, 1.0f);
+    create_dl_rotation_matrix(MENU_MTX_NOPUSH, 90.0f, 0, 0, 1.0f);
     gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
     create_dl_translation_matrix(MENU_MTX_PUSH, -8.0f, 20.0f, 0);
-    create_dl_rotation_matrix(MENU_MTX_NOPUSH, -DEFAULT_DIALOG_BOX_ANGLE, 0, 0, 1.0f);
+    create_dl_rotation_matrix(MENU_MTX_NOPUSH, -90.0f, 0, 0, 1.0f);
     gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
@@ -2638,25 +2583,6 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     if (index[0] == 3) {
         render_pause_camera_options(x - 42, y - 42, &gDialogCameraAngleIndex, 110);
     }
-}
-
-void render_pause_castle_menu_box(s16 x, s16 y) {
-    create_dl_translation_matrix(MENU_MTX_PUSH, x - 78, y - 32, 0);
-    create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.2f, 0.8f, 1.0f);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 105);
-    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-
-    create_dl_translation_matrix(MENU_MTX_PUSH, x + 6, y - 28, 0);
-    create_dl_rotation_matrix(MENU_MTX_NOPUSH, DEFAULT_DIALOG_BOX_ANGLE, 0, 0, 1.0f);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-
-    create_dl_translation_matrix(MENU_MTX_PUSH, x - 9, y - 101, 0);
-    create_dl_rotation_matrix(MENU_MTX_NOPUSH, 270.0f, 0, 0, 1.0f);
-    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
 void highlight_last_course_complete_stars(void) {

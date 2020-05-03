@@ -1,6 +1,6 @@
-// Parameters: dialog enum ID, (unused), lines per box, left offset, width
+// Parameters: dialog enum ID, npc name, lines per box
 
-DEFINE_DIALOG(DIALOG_000, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_000, 1, 5, _("\
 おおっと、ここはキケンな\n\
 せんじょうの　どまんなか。\n\
 『え』のなかのせかいには\n\
@@ -17,7 +17,7 @@ DEFINE_DIALOG(DIALOG_000, 1, 5, 38, 105, _("\
 まえにたつだけで　はなし\n\
 かける、どうぶつもいます。"))
 
-DEFINE_DIALOG(DIALOG_001, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_001, 1, 4, _("\
 あぶない　あぶない！！\n\
 こんなところを　うろうろ\n\
 してると、みずばくだんが\n\
@@ -39,7 +39,7 @@ DEFINE_DIALOG(DIALOG_001, 1, 4, 38, 105, _("\
 を　とりもどしたら　また\n\
 あいに　きてください。"))
 
-DEFINE_DIALOG(DIALOG_002, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_002, 1, 4, _("\
 ちょっと　あなた！\n\
 このさきはキケンですよ！\n\
 \n\
@@ -57,7 +57,7 @@ DEFINE_DIALOG(DIALOG_002, 1, 4, 38, 105, _("\
 いつでも　はなしかけて\n\
 きてくださいね！"))
 
-DEFINE_DIALOG(DIALOG_003, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_003, 1, 5, _("\
 おかげで　ボムキングは\n\
 おとなしくなりました！\n\
 でも、たたかいは　おわり\n\
@@ -74,7 +74,7 @@ DEFINE_DIALOG(DIALOG_003, 1, 5, 38, 105, _("\
 いつでも　たいほうを\n\
 じゅんびしますよ。"))
 
-DEFINE_DIALOG(DIALOG_004, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_004, 1, 3, _("\
 ぼくたちは　へいわを\n\
 ねがっています。　だから\n\
 たいほうは　つかいません。\n\
@@ -85,7 +85,7 @@ DEFINE_DIALOG(DIALOG_004, 1, 3, 38, 105, _("\
 あかボムぐん　たいほうを\n\
 つかえるように　します。"))
 
-DEFINE_DIALOG(DIALOG_005, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_005, 1, 4, _("\
 なーんだ、しずえさんじゃ\n\
 ないッスか！\n\
 ボムキングやっつけたって\n\
@@ -106,13 +106,13 @@ DEFINE_DIALOG(DIALOG_005, 1, 4, 38, 105, _("\
 \n\
 　　　ドン！　　やめる"))
 
-DEFINE_DIALOG(DIALOG_006, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_006, 1, 4, _("\
 ははっ　ズルッコは\n\
 なしッス！　しずえさん。\n\
 またこんど\n\
 あそびましょうね。"))
 
-DEFINE_DIALOG(DIALOG_007, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_007, 1, 6, _("\
 ハア　ハア　ハア\n\
 いやーまいったッス！\n\
 ほんと　はえーッスね！\n\
@@ -120,7 +120,7 @@ DEFINE_DIALOG(DIALOG_007, 1, 6, 38, 105, _("\
 これ、あげるッス。\n\
 ホイ！"))
 
-DEFINE_DIALOG(DIALOG_008, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_008, 1, 5, _("\
 もうけんワンワン　キケン\n\
 Ｃボタンの　うえをおして\n\
 『しずえのちかく』から\n\
@@ -132,7 +132,7 @@ DEFINE_DIALOG(DIALOG_008, 1, 5, 38, 105, _("\
 わたったひだりのはやしに\n\
 スターがでます。"))
 
-DEFINE_DIALOG(DIALOG_009, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_009, 1, 5, _("\
 ひっさしぶりッス！　いま\n\
 ちょーどかえったとこッス。\n\
 パワースターのせいか\n\
@@ -149,7 +149,7 @@ DEFINE_DIALOG(DIALOG_009, 1, 5, 38, 105, _("\
 　ヨーーーイ！\n\
 　　　ドン！　　やめる"))
 
-DEFINE_DIALOG(DIALOG_010, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_010, 1, 3, _("\
 そらを　じゆうにとべる\n\
 『はねのぼうし』の\n\
 スイッチを　ふみました。\n\
@@ -160,7 +160,7 @@ DEFINE_DIALOG(DIALOG_010, 1, 3, 38, 105, _("\
 \n\
 　　　はい　　　いいえ"))
 
-DEFINE_DIALOG(DIALOG_011, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_011, 1, 3, _("\
 むてきの　からだになれる\n\
 『メタルのぼうし』の\n\
 スイッチを　ふみました。\n\
@@ -171,7 +171,7 @@ DEFINE_DIALOG(DIALOG_011, 1, 3, 38, 105, _("\
 \n\
 　　　はい　　　いいえ"))
 
-DEFINE_DIALOG(DIALOG_012, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_012, 1, 3, _("\
 すがたをけせる　まほうの\n\
 『とうめいのぼうし』の\n\
 スイッチを　ふみました。\n\
@@ -182,7 +182,7 @@ DEFINE_DIALOG(DIALOG_012, 1, 3, 38, 105, _("\
 \n\
 　　　はい　　　いいえ"))
 
-DEFINE_DIALOG(DIALOG_013, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_013, 1, 5, _("\
 １００まいコインの\n\
 スターを　てにいれた！\n\
 おしろのパワーが\n\
@@ -193,7 +193,7 @@ DEFINE_DIALOG(DIALOG_013, 1, 5, 38, 105, _("\
 \n\
 　　　はい　　　いいえ"))
 
-DEFINE_DIALOG(DIALOG_014, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_014, 1, 5, _("\
 おもわぬところで\n\
 スターをてにいれた。\n\
 そして　おしろのパワーが\n\
@@ -204,7 +204,7 @@ DEFINE_DIALOG(DIALOG_014, 1, 5, 38, 105, _("\
 \n\
 　　　はい　　　いいえ"))
 
-DEFINE_DIALOG(DIALOG_015, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_015, 1, 4, _("\
 てきはパンチでたおせるよ。\n\
 Ａボタンは『ジャンプ』\n\
 Ｂボタンは『パンチ』です。\n\
@@ -214,13 +214,13 @@ DEFINE_DIALOG(DIALOG_015, 1, 4, 38, 105, _("\
 『なげる』は　もういちど\n\
 Ｂボタンをおしてください。"))
 
-DEFINE_DIALOG(DIALOG_016, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_016, 1, 4, _("\
 キラキラひかったコウラに\n\
 のると、どんなところも\n\
 スイスイすすめる！\n\
 てきをけちらし　すすめ！"))
 
-DEFINE_DIALOG(DIALOG_017, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_017, 1, 4, _("\
 ワシがボムキング、つまり\n\
 ばくだんの　おうさまだ。\n\
 よくここまできた。その\n\
@@ -234,39 +234,39 @@ DEFINE_DIALOG(DIALOG_017, 1, 4, 38, 105, _("\
 うしろから　かつげるか？\n\
 さあ、かかってこい！"))
 
-DEFINE_DIALOG(DIALOG_018, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_018, 1, 4, _("\
 ねむいので、ねています。\n\
 おこすと　おこります。\n\
 \n\
 しずかに　あるきましょう。"))
 
-DEFINE_DIALOG(DIALOG_019, 1, 2, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_019, 1, 2, _("\
 ろうかは　しずかに\n\
 あるきましょう。"))
 
-DEFINE_DIALOG(DIALOG_020, 1, 5, 95, 150, _("\
+DEFINE_DIALOG(DIALOG_020, 1, 5, _("\
 おしろへ　あそびに\n\
 きてください。\n\
 ケーキを　つくって\n\
 まってます。\n\
 　　　　　-ピーチより-"))
 
-DEFINE_DIALOG(DIALOG_021, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_021, 1, 5, _("\
 ようこそいらっしゃいませ\n\
 ・・だれも　いませんので\n\
 とっとと\n\
 　　おかえりください。\n\
 ガハハハッ！"))
 
-DEFINE_DIALOG(DIALOG_022, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_022, 1, 3, _("\
 カギが　かかっている・・"))
 
-DEFINE_DIALOG(DIALOG_023, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_023, 1, 3, _("\
 ・・・カギがあわない！\n\
 このカギは『ちか』への\n\
 カギのようだ。"))
 
-DEFINE_DIALOG(DIALOG_024, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_024, 1, 3, _("\
 クッパがとじたこのドアを\n\
 ひらくには、スターの\n\
 パワーが　ひつようです。\n\
@@ -274,35 +274,35 @@ DEFINE_DIALOG(DIALOG_024, 1, 3, 38, 105, _("\
 なかの　モンスターから\n\
 とりもどしてきてください"))
 
-DEFINE_DIALOG(DIALOG_025, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_025, 1, 3, _("\
 このドアを　ひらくには\n\
 スター３まいの　パワーが\n\
 ひつようです。\n\
 あと[%]まいの　スターが\n\
 ひつようです。"))
 
-DEFINE_DIALOG(DIALOG_026, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_026, 1, 3, _("\
 このドアを　ひらくには\n\
 スター８まいの　パワーが\n\
 ひつようです。\n\
 あと[%]まいの　スターが\n\
 ひつようです。"))
 
-DEFINE_DIALOG(DIALOG_027, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_027, 1, 3, _("\
 このドアを　ひらくには\n\
 スター３０まいのパワーが\n\
 ひつようです。\n\
 スターがあと\n\
 [%]まいひつようです。"))
 
-DEFINE_DIALOG(DIALOG_028, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_028, 1, 3, _("\
 このドアを　ひらくには\n\
 スター５０まいのパワーが\n\
 ひつようです。\n\
 あと[%]まいの　スターが\n\
 ひつようです。"))
 
-DEFINE_DIALOG(DIALOG_029, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_029, 1, 4, _("\
 はてしない　かいだんの\n\
 ドアを　ひらくには\n\
 スター７０まいのパワーが\n\
@@ -311,7 +311,7 @@ DEFINE_DIALOG(DIALOG_029, 1, 4, 38, 105, _("\
 たりません・・・\n\
 ガハハッ！"))
 
-DEFINE_DIALOG(DIALOG_030, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_030, 1, 4, _("\
 カメラマンのジュゲムです。\n\
 ちょっと　アドバイス！\n\
 しずかにあるきたいときは\n\
@@ -325,7 +325,7 @@ DEFINE_DIALOG(DIALOG_030, 1, 4, 38, 105, _("\
 よろしく！！　\n\
 　　　　　　-ジュゲム"))
 
-DEFINE_DIALOG(DIALOG_031, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_031, 1, 3, _("\
 またまた　まけちゃったよ。\n\
 こんどはスッゴい　じしん\n\
 あったんッスけどね・・・\n\
@@ -333,7 +333,7 @@ DEFINE_DIALOG(DIALOG_031, 1, 3, 38, 105, _("\
 このスターも\n\
 あげちゃいます！"))
 
-DEFINE_DIALOG(DIALOG_032, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_032, 1, 4, _("\
 はねぼうしの　あるひとは\n\
 ３かいれんぞくでジャンプ\n\
 しよう。　おおぞらたかく\n\
@@ -343,7 +343,7 @@ DEFINE_DIALOG(DIALOG_032, 1, 4, 38, 105, _("\
 まわりをみるのはＣボタン。\n\
 おりたいときはＺボタン。"))
 
-DEFINE_DIALOG(DIALOG_033, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_033, 1, 4, _("\
 ワープどかんを\n\
 くぐりぬけ、\n\
 ピーチの　おしろに\n\
@@ -357,7 +357,7 @@ DEFINE_DIALOG(DIALOG_033, 1, 4, 38, 105, _("\
 『３Ｄスティック』。\n\
 まずはおしろへ　すすめ！"))
 
-DEFINE_DIALOG(DIALOG_034, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_034, 1, 5, _("\
 こんにちは！　\n\
 ぼくたちカメラマンの\n\
 ジュゲムブラザーズです。\n\
@@ -383,7 +383,7 @@ DEFINE_DIALOG(DIALOG_034, 1, 5, 38, 105, _("\
 おしらせでした。\n\
 それじゃ、きをつけて！"))
 
-DEFINE_DIALOG(DIALOG_035, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_035, 1, 4, _("\
 きいろい４つの　Ｃボタン。\n\
 『うえ』をおすと\n\
 ３Ｄスティックで\n\
@@ -405,7 +405,7 @@ DEFINE_DIALOG(DIALOG_035, 1, 4, 38, 105, _("\
 がめん　みぎしたの\n\
 アイコンを　みてください。"))
 
-DEFINE_DIALOG(DIALOG_036, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_036, 1, 5, _("\
 　『てんぼうだい』\n\
 Ｃボタンの　うえをおすと、\n\
 まわりを　みわたせます。\n\
@@ -427,7 +427,7 @@ DEFINE_DIALOG(DIALOG_036, 1, 5, 38, 105, _("\
 しずえとの　きょりは\n\
 きいろやじるしを　みよう。"))
 
-DEFINE_DIALOG(DIALOG_037, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_037, 1, 3, _("\
 あたしの『かち』です。\n\
 あなたの『まけ』です。\n\
 ははははは！！！\n\
@@ -435,12 +435,12 @@ DEFINE_DIALOG(DIALOG_037, 1, 3, 38, 105, _("\
 おしかったですね。\n\
 また　あそびましょう！"))
 
-DEFINE_DIALOG(DIALOG_038, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_038, 1, 3, _("\
 パワースターの　ちからで\n\
 つぎの　せかいへのドアは\n\
 しずかにひらいた。"))
 
-DEFINE_DIALOG(DIALOG_039, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_039, 1, 5, _("\
 -ボムとりで　いりぐち-\n\
 　　だれも　はいるな！\n\
 \n\
@@ -457,17 +457,17 @@ DEFINE_DIALOG(DIALOG_039, 1, 5, 38, 105, _("\
 \n\
 おやまのうえのボムキング"))
 
-DEFINE_DIALOG(DIALOG_040, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_040, 1, 3, _("\
 このさき　キケン！\n\
 リフトのたにぞこ　です。"))
 
-DEFINE_DIALOG(DIALOG_041, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_041, 1, 4, _("\
 オイラがかっちゃいました。\n\
 ハッハッハッ\n\
 たいしたことないッスね！\n\
 じゃ、またこんどね！"))
 
-DEFINE_DIALOG(DIALOG_042, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_042, 1, 5, _("\
 この『はし』せまい。\n\
 ゆっくりわたろう！\n\
 ガケのカドにとびついたり\n\
@@ -482,7 +482,7 @@ DEFINE_DIALOG(DIALOG_042, 1, 5, 38, 105, _("\
 Ａボタンをおすと\n\
 すばやく　あがれます。"))
 
-DEFINE_DIALOG(DIALOG_043, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_043, 1, 4, _("\
 ジャンプしてＡボタンを\n\
 おしっぱなしに　すると\n\
 ぶらさがれる　ところが\n\
@@ -490,7 +490,7 @@ DEFINE_DIALOG(DIALOG_043, 1, 4, 38, 105, _("\
 『とり』につかまるとき\n\
 と　おなじです。"))
 
-DEFINE_DIALOG(DIALOG_044, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_044, 1, 5, _("\
 だれだい！　　せっかく\n\
 いいきもちで　ねてたのに。\n\
 あー　カラダがおもいなー\n\
@@ -507,7 +507,7 @@ DEFINE_DIALOG(DIALOG_044, 1, 5, 38, 105, _("\
 Ａボタンで　つかまって\n\
 くださいねー！"))
 
-DEFINE_DIALOG(DIALOG_045, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_045, 1, 5, _("\
 あーあ、つかれたー・・\n\
 やーっぱり　おもいなー。\n\
 きょうは　このあたりで！\n\
@@ -518,7 +518,7 @@ DEFINE_DIALOG(DIALOG_045, 1, 5, 38, 105, _("\
 \n\
 じゃあ、さよならー！"))
 
-DEFINE_DIALOG(DIALOG_046, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_046, 1, 5, _("\
 ジャンプのワザ　まとめて\n\
 せいりしておきます。\n\
 とてもだいじな３つのワザ。\n\
@@ -545,18 +545,18 @@ DEFINE_DIALOG(DIALOG_046, 1, 5, 38, 105, _("\
 『カベキック』\n\
 　　　　　わかった？"))
 
-DEFINE_DIALOG(DIALOG_047, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_047, 1, 3, _("\
 こんにちは！\n\
 たいほうの　じゅんびに\n\
 かかります！・・・・・"))
 
-DEFINE_DIALOG(DIALOG_048, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_048, 1, 4, _("\
 ここは　ツルツルすべる\n\
 ゆきやまの　ちょうじょう。\n\
 まずはそこの\n\
 やまごやへ　どうぞ。"))
 
-DEFINE_DIALOG(DIALOG_049, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_049, 1, 5, _("\
 ジャンプわざカベキックを\n\
 おぼえていますか？\n\
 たかいところへ　あがる\n\
@@ -568,7 +568,7 @@ DEFINE_DIALOG(DIALOG_049, 1, 5, 38, 105, _("\
 よーく\n\
 れんしゅう　しておこう！"))
 
-DEFINE_DIALOG(DIALOG_050, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_050, 1, 4, _("\
 Ｚボタンで　しゃがめます。\n\
 『さか』では　すべれます。\n\
 ジャンプの　とちゅうなら\n\
@@ -582,7 +582,7 @@ DEFINE_DIALOG(DIALOG_050, 1, 4, 38, 105, _("\
 しゃがんでから　あるくと\n\
 ・・・ひみつです。"))
 
-DEFINE_DIALOG(DIALOG_051, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_051, 1, 5, _("\
 『き』や『ぼう』には\n\
 ジャンプで　つかまれます。\n\
 『のぼる』『おりる』は\n\
@@ -599,7 +599,7 @@ DEFINE_DIALOG(DIALOG_051, 1, 5, 38, 105, _("\
 むきをきめて　せなかの\n\
 ほうこうに　ジャンプだ！"))
 
-DEFINE_DIALOG(DIALOG_052, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_052, 1, 4, _("\
 Ｚボタンで　しゃがめます。\n\
 とまって　しゃがんでから\n\
 ジャンプすると、\n\
@@ -609,7 +609,7 @@ DEFINE_DIALOG(DIALOG_052, 1, 4, 38, 105, _("\
 『ちゅうがえり』！\n\
 どちらも　たかくとべます。"))
 
-DEFINE_DIALOG(DIALOG_053, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_053, 1, 6, _("\
 コインリングや　かくれた\n\
 シークレットポイントを\n\
 とおると　あかいすうじが\n\
@@ -617,13 +617,13 @@ DEFINE_DIALOG(DIALOG_053, 1, 6, 38, 105, _("\
 とおると　ひみつのスター\n\
 が　あらわれます。"))
 
-DEFINE_DIALOG(DIALOG_054, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_054, 1, 4, _("\
 スライダーへようこそ！！\n\
 さかを　すべりはじめたら\n\
 スティックまえで　かそく、\n\
 うしろで　げんそくできる。"))
 
-DEFINE_DIALOG(DIALOG_055, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_055, 1, 5, _("\
 あたし、このスライダーの\n\
 せかいチャンピオン！！！\n\
 からだ、デカイけど\n\
@@ -635,7 +635,7 @@ DEFINE_DIALOG(DIALOG_055, 1, 5, 38, 105, _("\
 　　・・・　\n\
 　　　ゴー！！　やめとく"))
 
-DEFINE_DIALOG(DIALOG_056, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_056, 1, 3, _("\
 ヒエーーーッ！！！\n\
 セカイきろくだよ！\n\
 スゴイよ！あなた！！\n\
@@ -643,7 +643,7 @@ DEFINE_DIALOG(DIALOG_056, 1, 3, 38, 105, _("\
 コレ　あげます！\n\
 いやーースゴイスゴイ！！"))
 
-DEFINE_DIALOG(DIALOG_057, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_057, 1, 4, _("\
 どこかで　うちのこどもを\n\
 みかけません　でしたか？\n\
 ・・・わたしんち　こども\n\
@@ -657,7 +657,7 @@ DEFINE_DIALOG(DIALOG_057, 1, 4, 38, 105, _("\
 なくんですけどね・・・\n\
 ヤレヤレ・・・・・"))
 
-DEFINE_DIALOG(DIALOG_058, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_058, 1, 5, _("\
 ああーーっ！！たしかに\n\
 うちの　こどもです・・・\n\
 『こらっ！　いつも\n\
@@ -669,14 +669,14 @@ DEFINE_DIALOG(DIALOG_058, 1, 5, 38, 105, _("\
 あったかくって　とても\n\
 げんきに　なりますよ。"))
 
-DEFINE_DIALOG(DIALOG_059, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_059, 1, 5, _("\
 このこは　うちのこじゃー\n\
 ないようだなあ・・・\n\
 かわいそうに・・・\n\
 おやはいったい\n\
 なにをしてるんだろう・・"))
 
-DEFINE_DIALOG(DIALOG_060, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_060, 1, 4, _("\
 -みずにはいるちゅうい-\n\
 \n\
 もぐっていると　しぬほど\n\
@@ -698,7 +698,7 @@ DEFINE_DIALOG(DIALOG_060, 1, 4, 38, 105, _("\
 　『じゅんびたいそう\n\
 　　　　わすれずに！！』"))
 
-DEFINE_DIALOG(DIALOG_061, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_061, 1, 6, _("\
 つめたいみず　キケン！！\n\
 およいでは　いけません！\n\
 この　こおりのいけは\n\
@@ -706,7 +706,7 @@ DEFINE_DIALOG(DIALOG_061, 1, 6, 38, 105, _("\
 つめたいです！\n\
 　　　　　　　　ペンギン"))
 
-DEFINE_DIALOG(DIALOG_062, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_062, 1, 5, _("\
 みどりの　ブロックに\n\
 かくされている\n\
 ふしぎな　ふしぎな\n\
@@ -718,7 +718,7 @@ DEFINE_DIALOG(DIALOG_062, 1, 5, 38, 105, _("\
 へいきです。\n\
 こまったことにおよげない。"))
 
-DEFINE_DIALOG(DIALOG_063, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_063, 1, 4, _("\
 あおいブロックには\n\
 『とうめいぼうし』。\n\
 メダマも　ビックリ\n\
@@ -727,7 +727,7 @@ DEFINE_DIALOG(DIALOG_063, 1, 4, 38, 105, _("\
 『ひみつのカベ』を\n\
 とおりぬけるぞ。"))
 
-DEFINE_DIALOG(DIALOG_064, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_064, 1, 4, _("\
 あかいブロックのなかの\n\
 はねのぼうしを　かぶると、\n\
 ３かいジャンプで\n\
@@ -737,7 +737,7 @@ DEFINE_DIALOG(DIALOG_064, 1, 4, 38, 105, _("\
 まえにたおすと　さがる。\n\
 やめるときはＺボタンで！"))
 
-DEFINE_DIALOG(DIALOG_065, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_065, 1, 5, _("\
 およぎかた　おしえます。\n\
 \n\
 みずにはいるとおよげます。\n\
@@ -759,7 +759,7 @@ DEFINE_DIALOG(DIALOG_065, 1, 5, 38, 105, _("\
 およいでいるあいだは\n\
 ドアを　あけられません。"))
 
-DEFINE_DIALOG(DIALOG_066, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_066, 1, 5, _("\
 しずえ！　　クッパのはく\n\
 ほのおに　きをつけて！\n\
 クッパを　こらしめるには\n\
@@ -780,7 +780,7 @@ DEFINE_DIALOG(DIALOG_066, 1, 5, 38, 105, _("\
 \n\
 もういちどＢボタンよ！"))
 
-DEFINE_DIALOG(DIALOG_067, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_067, 1, 4, _("\
 ざんねんだったなしずえ！\n\
 ここには　ピーチちゃんは\n\
 いませんでした。\n\
@@ -794,7 +794,7 @@ DEFINE_DIALOG(DIALOG_067, 1, 4, 38, 105, _("\
 できるわけが　ない！！\n\
 　　ガハハッ！！"))
 
-DEFINE_DIALOG(DIALOG_068, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_068, 1, 5, _("\
 ここは　しゃくねつの\n\
 ファイアバブル　ランド！\n\
 からだに　ひがついても\n\
@@ -806,7 +806,7 @@ DEFINE_DIALOG(DIALOG_068, 1, 5, 38, 105, _("\
 あまりうごきまわらないで\n\
 ガンバレ！"))
 
-DEFINE_DIALOG(DIALOG_069, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_069, 1, 3, _("\
 『え』のなかのカイブツの\n\
 せかいには、せかいの\n\
 はてがあります。\n\
@@ -817,7 +817,7 @@ DEFINE_DIALOG(DIALOG_069, 1, 3, 38, 105, _("\
 そこから　さきには\n\
 すすめません。"))
 
-DEFINE_DIALOG(DIALOG_070, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_070, 1, 5, _("\
 かいぶつたちの　すんでる\n\
 『え』のなかのせかいから、\n\
 おしろの　いりぐちの\n\
@@ -839,7 +839,7 @@ DEFINE_DIALOG(DIALOG_070, 1, 5, 38, 105, _("\
 えらんだヒントいがいの\n\
 スターをとってもＯＫです。"))
 
-DEFINE_DIALOG(DIALOG_071, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_071, 1, 4, _("\
 　-このさきキケン-\n\
 　　あやしいケムリに\n\
 　　ちゅうい！\n\
@@ -849,21 +849,21 @@ DEFINE_DIALOG(DIALOG_071, 1, 4, 38, 105, _("\
 まる・・・・・ひなんじょ\n\
 やじるし・・・でいりぐち"))
 
-DEFINE_DIALOG(DIALOG_072, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_072, 1, 5, _("\
 カゼつよし！　　ぼうしは\n\
 しっかり　かぶりましょう。\n\
 もし　ぼうしをなくしても\n\
 ここでなくした　ぼうしは\n\
 このやまで　みつかります。"))
 
-DEFINE_DIALOG(DIALOG_073, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_073, 1, 5, _("\
 ただしい　じゅんばんで\n\
 はこを　ひらくこと。\n\
 こたえは　だれにも\n\
 おしえてやらない。\n\
 　　　--せんちょう--"))
 
-DEFINE_DIALOG(DIALOG_074, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_074, 1, 5, _("\
 ガケのカドに　とびつくと\n\
 ぶらさがれます。\n\
 おりるときはスティックを\n\
@@ -875,7 +875,7 @@ DEFINE_DIALOG(DIALOG_074, 1, 5, 38, 105, _("\
 すぐに　Ａボタンをおすと\n\
 すばやく　のぼれます！"))
 
-DEFINE_DIALOG(DIALOG_075, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_075, 1, 5, _("\
 しずえ！！たいへんです。\n\
 クッパがまた・・・・\n\
 おしろの　パワースターを\n\
@@ -897,7 +897,7 @@ DEFINE_DIALOG(DIALOG_075, 1, 5, 38, 105, _("\
 かくれスターが　あるわ！\n\
 きっと　やくにたつはずよ。"))
 
-DEFINE_DIALOG(DIALOG_076, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_076, 1, 5, _("\
 パワースターのおかげで\n\
 おしろに、げんきが\n\
 もどってきました。\n\
@@ -914,12 +914,12 @@ DEFINE_DIALOG(DIALOG_076, 1, 5, 38, 105, _("\
 みずびたしに　できます。\n\
 アッ、これ　みつけました。"))
 
-DEFINE_DIALOG(DIALOG_077, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_077, 1, 3, _("\
 とびらを　ひらくまえに\n\
 ２つの　はしらを\n\
 おしさげて　おくこと。"))
 
-DEFINE_DIALOG(DIALOG_078, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_078, 1, 5, _("\
 あおコインのブロックを\n\
 ジャンプちゅうにＺボタン\n\
 『ヒップドロップ』で\n\
@@ -931,7 +931,7 @@ DEFINE_DIALOG(DIALOG_078, 1, 5, 38, 105, _("\
 でも　じかんがたつと\n\
 きえてしまう・・ザンネン"))
 
-DEFINE_DIALOG(DIALOG_079, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_079, 1, 5, _("\
 いててて！\n\
 はなしてくれよ。\n\
 ウッキッキー！\n\
@@ -943,10 +943,10 @@ DEFINE_DIALOG(DIALOG_079, 1, 5, 38, 105, _("\
 \n\
 　　　はなす　　いやだ"))
 
-DEFINE_DIALOG(DIALOG_080, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_080, 1, 3, _("\
 ヘッヘッヘッ！"))
 
-DEFINE_DIALOG(DIALOG_081, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_081, 1, 6, _("\
 ここは　みずにみちたまち。\n\
 このまちは、あなたが\n\
 ここを　おとずれるときの\n\
@@ -954,7 +954,7 @@ DEFINE_DIALOG(DIALOG_081, 1, 6, 38, 105, _("\
 みずをもって\n\
 あなたをむかえる。"))
 
-DEFINE_DIALOG(DIALOG_082, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_082, 1, 5, _("\
 ぼうしを　なくすと\n\
 ダメージがおおくなるので\n\
 だいじに　してください。\n\
@@ -971,7 +971,7 @@ DEFINE_DIALOG(DIALOG_082, 1, 5, 38, 105, _("\
 もっていって　ください。\n\
 かくして　もってました。"))
 
-DEFINE_DIALOG(DIALOG_083, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_083, 1, 4, _("\
 とけいがとても　へんです。\n\
 とけいに　はいるとき、\n\
 ながいはりの　ばしょに\n\
@@ -981,7 +981,7 @@ DEFINE_DIALOG(DIALOG_083, 1, 4, 38, 105, _("\
 かっこよく\n\
 うけとってくださいね！"))
 
-DEFINE_DIALOG(DIALOG_084, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_084, 1, 5, _("\
 イテテ　らんぼうなひとだ。\n\
 このスターは　クッパって\n\
 ヤツが　くれたんだよ。\n\
@@ -993,31 +993,31 @@ DEFINE_DIALOG(DIALOG_084, 1, 5, 38, 105, _("\
 スターぐらい　かえすから。\n\
 ホイ！！"))
 
-DEFINE_DIALOG(DIALOG_085, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_085, 1, 4, _("\
 この　やかたから\n\
 　　ぶじにでられたら\n\
 \n\
 ・・・エライ。・・"))
 
-DEFINE_DIALOG(DIALOG_086, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_086, 1, 3, _("\
 まわりをクルクルまわると\n\
 めをまわす　ヤツがいます。"))
 
-DEFINE_DIALOG(DIALOG_087, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_087, 1, 5, _("\
 えんとつから　はいるのは\n\
 サンタだけではありません。\n\
 　　ごえんりょなく\n\
 　　おはいりください。\n\
 スノーマンハウスおーなー"))
 
-DEFINE_DIALOG(DIALOG_088, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_088, 1, 5, _("\
 -さぎょうリフトじょう-\n\
 \n\
 ここから　おりるひとは\n\
 ひだりのぼうにつかまって、\n\
 きをつけて　おりること。"))
 
-DEFINE_DIALOG(DIALOG_089, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_089, 1, 4, _("\
 どちらのみちも　キケン！\n\
 くらいあしもとにチュウイ。\n\
 はばとび　できないひとは\n\
@@ -1031,7 +1031,7 @@ DEFINE_DIALOG(DIALOG_089, 1, 4, 38, 105, _("\
 　　　　　　ちていこ　へ\n\
 やじるし・・げんざいち"))
 
-DEFINE_DIALOG(DIALOG_090, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_090, 1, 6, _("\
 ガハハッ！\n\
 ワナにはまったなしずえ！\n\
 また　ジャマをしにきた\n\
@@ -1039,12 +1039,12 @@ DEFINE_DIALOG(DIALOG_090, 1, 6, 38, 105, _("\
 ちゅうこくだ。\n\
 あしもとには　きをつけな。"))
 
-DEFINE_DIALOG(DIALOG_091, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_091, 1, 3, _("\
 つよいカゼに　チュウイ！\n\
 でも、カゼにのると\n\
 フワフワきもちいいです。"))
 
-DEFINE_DIALOG(DIALOG_092, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_092, 1, 3, _("\
 いいかげんにしろしずえ！\n\
 いつもいつも、わがはいの\n\
 ジャマをしおって！\n\
@@ -1055,7 +1055,7 @@ DEFINE_DIALOG(DIALOG_092, 1, 3, 38, 105, _("\
 そいつが　いるんだよ！！\n\
 ガハハッ！！"))
 
-DEFINE_DIALOG(DIALOG_093, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_093, 1, 4, _("\
 アララ！いつのまにきた？\n\
 ・・・・・・ムム\n\
 どちらにしろ　わがはいの\n\
@@ -1069,7 +1069,7 @@ DEFINE_DIALOG(DIALOG_093, 1, 4, 38, 105, _("\
 ピーチちゃんも　わたさん\n\
 もんね！　　いくぞ！！"))
 
-DEFINE_DIALOG(DIALOG_094, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_094, 1, 3, _("\
 のぼりにくい　さかみちは\n\
 じょそうをつけて\n\
 げんきよく　のぼる！\n\
@@ -1077,7 +1077,7 @@ DEFINE_DIALOG(DIALOG_094, 1, 3, 38, 105, _("\
 はしりながら　Ｚボタンで\n\
 しゃがんで　ジャンプだ！"))
 
-DEFINE_DIALOG(DIALOG_095, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_095, 1, 3, _("\
 このように　カンバンの\n\
 まえで　Ｂボタンをおすと\n\
 よむことができます。\n\
@@ -1088,7 +1088,7 @@ DEFINE_DIALOG(DIALOG_095, 1, 3, 38, 105, _("\
 ぬすまれたパワースターを\n\
 とりかえしてください。"))
 
-DEFINE_DIALOG(DIALOG_096, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_096, 1, 5, _("\
 このあたり　みちせまし。\n\
 ゆっくり　あるこう！\n\
 だれも　ちょうじょうまで\n\
@@ -1100,17 +1100,17 @@ DEFINE_DIALOG(DIALOG_096, 1, 5, 38, 105, _("\
 ゆっくりと　しずかに\n\
 あるきましょう。フフフ。"))
 
-DEFINE_DIALOG(DIALOG_097, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_097, 1, 4, _("\
 たいあたり　されたら\n\
 たいあたりで　かえせ！\n\
 ほのおのうみにつきおとす\n\
 １たい１のデスマッチだ！"))
 
-DEFINE_DIALOG(DIALOG_098, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_098, 1, 3, _("\
 ここまでおいで・・・・\n\
 ケッケッケ・・"))
 
-DEFINE_DIALOG(DIALOG_099, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_099, 1, 3, _("\
 クックック・・\n\
 　とりついてやる。\n\
 　　　　ヒッヒッヒ！\n\
@@ -1118,20 +1118,20 @@ DEFINE_DIALOG(DIALOG_099, 1, 3, 38, 105, _("\
 こんなこと　できるか？\n\
 　　　　　ケッケッケ！"))
 
-DEFINE_DIALOG(DIALOG_100, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_100, 1, 4, _("\
 ウッキッキー\n\
 　ワッキッキー！\n\
 　　　ホヨホヨ。\n\
 いっただきー。"))
 
-DEFINE_DIALOG(DIALOG_101, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_101, 1, 5, _("\
 ヘッヘッヘッ！\n\
 つかまっちゃいました。\n\
 きにいってたのになあ・・\n\
 かえしますよ。\n\
 　ウッキッキー！！"))
 
-DEFINE_DIALOG(DIALOG_102, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_102, 1, 4, _("\
 テレサの　たおしかた\n\
 おしえます。\n\
 はずかしがりやの\n\
@@ -1145,13 +1145,13 @@ DEFINE_DIALOG(DIALOG_102, 1, 4, 38, 105, _("\
 うしろにまわって\n\
 なぐると　よわい。"))
 
-DEFINE_DIALOG(DIALOG_103, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_103, 1, 4, _("\
 ４ほんの　はしらのうえに\n\
 たつものに、わたしは、\n\
 このやかたを　おとずれる\n\
 しかくを　あたえよう。"))
 
-DEFINE_DIALOG(DIALOG_104, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_104, 1, 6, _("\
 めのまえのブルーグレーの\n\
 はんとうめいの　ほしは\n\
 『パワースターのだい』だ。\n\
@@ -1159,7 +1159,7 @@ DEFINE_DIALOG(DIALOG_104, 1, 6, 38, 105, _("\
 ８まいぜんぶ　あつめると、\n\
 スターが　あらわれる。"))
 
-DEFINE_DIALOG(DIALOG_105, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_105, 1, 3, _("\
 じゅんび　かんりょう！\n\
 そこの　あなに\n\
 はいってみてください。\n\
@@ -1170,28 +1170,28 @@ DEFINE_DIALOG(DIALOG_105, 1, 3, 38, 105, _("\
 Ａではっしゃ！とびながら\n\
 『き』にも　つかまれます。"))
 
-DEFINE_DIALOG(DIALOG_106, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_106, 1, 3, _("\
 じゅんびが\n\
 かんりょう　しました！\n\
 それでは、おきをつけて！"))
 
-DEFINE_DIALOG(DIALOG_107, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_107, 1, 3, _("\
 おばけは　し　な　な　い\n\
 ケッケッケ・・\n\
 ぶじに　でられるかな？"))
 
-DEFINE_DIALOG(DIALOG_108, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_108, 1, 3, _("\
 ぼよよーん\n\
 おやかたの　おでましだ。\n\
 カッカッカ・・"))
 
-DEFINE_DIALOG(DIALOG_109, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_109, 1, 4, _("\
 カラダが　とけちゃったヨ。\n\
 いいカラダ　いないかなー\n\
 なにか　おちつかなくてネ。\n\
 アー　かおがつめたいなー"))
 
-DEFINE_DIALOG(DIALOG_110, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_110, 1, 3, _("\
 しょうらい　きっと\n\
 りっぱなカラダになろうと\n\
 おもってまーす！\n\
@@ -1202,7 +1202,7 @@ DEFINE_DIALOG(DIALOG_110, 1, 3, 38, 105, _("\
 うしろをついていきまーす。\n\
 　ヨロシクー！"))
 
-DEFINE_DIALOG(DIALOG_111, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_111, 1, 3, _("\
 ヤッリー！\n\
 きぶんスッキリ！りっぱな\n\
 カラダが　みつかった！\n\
@@ -1210,7 +1210,7 @@ DEFINE_DIALOG(DIALOG_111, 1, 3, 38, 105, _("\
 もっていって　ください。\n\
 とってもアッタカイですよ。"))
 
-DEFINE_DIALOG(DIALOG_112, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_112, 1, 4, _("\
 コインいっぱいあつめよう。\n\
 ちからが　かいふくする。\n\
 えのなかの１５コースでは\n\
@@ -1220,7 +1220,7 @@ DEFINE_DIALOG(DIALOG_112, 1, 4, 38, 105, _("\
 はやく　かけぬけるほど\n\
 たくさん　かいふくする！"))
 
-DEFINE_DIALOG(DIALOG_113, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_113, 1, 6, _("\
 あか・あお・みどりの\n\
 ブロックには　アイテムの\n\
 『ぼうし』が　はいってる。\n\
@@ -1228,7 +1228,7 @@ DEFINE_DIALOG(DIALOG_113, 1, 6, 38, 105, _("\
 スイッチを　ふんでくると\n\
 つかえるように　なります。"))
 
-DEFINE_DIALOG(DIALOG_114, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_114, 1, 4, _("\
 ああ～　きにいらねえ！\n\
 おれたち、いしのおかげで\n\
 『いえ』も『しろ』も\n\
@@ -1246,7 +1246,7 @@ DEFINE_DIALOG(DIALOG_114, 1, 4, 38, 105, _("\
 バッタンキングさまを\n\
 ふみつけて　みやがれっ！"))
 
-DEFINE_DIALOG(DIALOG_115, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_115, 1, 5, _("\
 ああ　くやしいぞ！\n\
 またまた\n\
 ふみつけられちまった！\n\
@@ -1256,7 +1256,7 @@ DEFINE_DIALOG(DIALOG_115, 1, 5, 38, 105, _("\
 これ　もっていきやがれ！\n\
 ガクッ！"))
 
-DEFINE_DIALOG(DIALOG_116, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_116, 1, 5, _("\
 おおっ！いてて！　まわり\n\
 こみのはやさは　まだまだ\n\
 だが、なかなか　つよいな。\n\
@@ -1268,7 +1268,7 @@ DEFINE_DIALOG(DIALOG_116, 1, 5, 38, 105, _("\
 このスターをメニューから\n\
 えらぶがよい。さらばじゃ"))
 
-DEFINE_DIALOG(DIALOG_117, 1, 3, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_117, 1, 3, _("\
 ジャジャジャーン！\n\
 どうだ！\n\
 おどろいたか？？・・・\n\
@@ -1276,14 +1276,14 @@ DEFINE_DIALOG(DIALOG_117, 1, 3, 38, 105, _("\
 もっとオドロカセテやる！\n\
 イクゾ！　カカッテコイ！"))
 
-DEFINE_DIALOG(DIALOG_118, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_118, 1, 5, _("\
 オオオッ・・・\n\
 オマエ、いがいとツヨイ！\n\
 このヤカタは、きょうから\n\
 オマエのものダッ・・\n\
 ジユウニつかエ。ガクッ！"))
 
-DEFINE_DIALOG(DIALOG_119, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_119, 1, 4, _("\
 グウウッ！　　ちょっと\n\
 ゆだん　しておったわ！\n\
 せっかくのケイカクが\n\
@@ -1297,7 +1297,7 @@ DEFINE_DIALOG(DIALOG_119, 1, 4, 38, 105, _("\
 らで　かんべんしてやる！\n\
 おおぉ、おぼえてろよ！！"))
 
-DEFINE_DIALOG(DIALOG_120, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_120, 1, 4, _("\
 グググッワッ！\n\
 こうも　かんたんに\n\
 やられるとは、スターの\n\
@@ -1311,7 +1311,7 @@ DEFINE_DIALOG(DIALOG_120, 1, 4, 38, 105, _("\
 のぼってきてみろ。\n\
 まってるぞ！ガハハッ！！"))
 
-DEFINE_DIALOG(DIALOG_121, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_121, 1, 5, _("\
 あああっ・・またこんども\n\
 キサマのかちか　しずえ！\n\
 キサマはな、わがはいが\n\
@@ -1333,20 +1333,20 @@ DEFINE_DIALOG(DIALOG_121, 1, 5, 38, 105, _("\
 \n\
 ガハハハッ！"))
 
-DEFINE_DIALOG(DIALOG_122, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_122, 1, 6, _("\
 -やみにとけるおおあな-\n\
 \n\
 みぎ・・・さぎょうリフト\n\
 　　　　　ケムリめいろ\n\
 ひだり・・ちていこ"))
 
-DEFINE_DIALOG(DIALOG_123, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_123, 1, 5, _("\
 　-メタルのどうくつ-\n\
 \n\
 みぎ・・・ちじょうへ\n\
 ひだり・・メタルスイッチ"))
 
-DEFINE_DIALOG(DIALOG_124, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_124, 1, 5, _("\
 -さぎょうようリフト-\n\
 \n\
 　　　キケン！！\n\
@@ -1358,20 +1358,20 @@ DEFINE_DIALOG(DIALOG_124, 1, 5, 38, 105, _("\
 おりると　もとのばしょに\n\
 もどります。"))
 
-DEFINE_DIALOG(DIALOG_125, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_125, 1, 5, _("\
 -ケムリめいろ・でぐち-\n\
 \n\
 キケン！　ヘイサちゅう。\n\
 ここからは　はいれません。"))
 
-DEFINE_DIALOG(DIALOG_126, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_126, 1, 6, _("\
 ・１ごうエレベーター・\n\
 \n\
 うえ・・やみのおおあな\n\
 みぎ・・さぎょうリフト\n\
 　　　　ケムリめいろ"))
 
-DEFINE_DIALOG(DIALOG_127, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_127, 1, 5, _("\
 　　-ちていこ-\n\
 \n\
 みぎ・・メタルのどうくつ\n\
@@ -1383,13 +1383,13 @@ DEFINE_DIALOG(DIALOG_127, 1, 5, 38, 105, _("\
 すると、あたまをさげます。\n\
 エサにならないでください。"))
 
-DEFINE_DIALOG(DIALOG_128, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_128, 1, 4, _("\
 おっとっと！じょうがいに\n\
 なげるのは　はんそくだ！\n\
 リングのうえでフェアーに\n\
 たたかおうでは　ないか！"))
 
-DEFINE_DIALOG(DIALOG_129, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_129, 1, 5, _("\
 とうめいスイッチの\n\
 　　コースへ　ようこそ！\n\
 あおいスイッチを　ふむと\n\
@@ -1401,7 +1401,7 @@ DEFINE_DIALOG(DIALOG_129, 1, 5, 38, 105, _("\
 とおりぬけられます。\n\
 まずは　おためしください。"))
 
-DEFINE_DIALOG(DIALOG_130, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_130, 1, 5, _("\
 メタルのスイッチの\n\
 　　コースヘ　ようこそ！\n\
 みどりのスイッチを\n\
@@ -1413,7 +1413,7 @@ DEFINE_DIALOG(DIALOG_130, 1, 5, 38, 105, _("\
 あるけてしまう。\n\
 まずは　おためしください。"))
 
-DEFINE_DIALOG(DIALOG_131, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_131, 1, 5, _("\
 はねのスイッチの\n\
 　　コースヘ　ようこそ！\n\
 にじのリングのまんなかの\n\
@@ -1430,14 +1430,14 @@ DEFINE_DIALOG(DIALOG_131, 1, 5, 38, 105, _("\
 てまえにひくと『あがる』\n\
 まずは　おためしを！"))
 
-DEFINE_DIALOG(DIALOG_132, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_132, 1, 5, _("\
 ダメダメ！\n\
 それは　きていいはんです。\n\
 『しっかーく！』\n\
 こんどはフェアーに\n\
 いきましょう。"))
 
-DEFINE_DIALOG(DIALOG_133, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_133, 1, 5, _("\
 ああよかった。\n\
 きてくれたんですね！\n\
 ピーチひめも　ぼくたちも\n\
@@ -1464,7 +1464,7 @@ DEFINE_DIALOG(DIALOG_133, 1, 5, 38, 105, _("\
 きっと　ピーチひめは\n\
 そのなかです！"))
 
-DEFINE_DIALOG(DIALOG_134, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_134, 1, 4, _("\
 コースのはじめにえらべる\n\
 スターのなまえは、\n\
 つぎに　みつけられそうな\n\
@@ -1482,7 +1482,7 @@ DEFINE_DIALOG(DIALOG_134, 1, 4, 38, 105, _("\
 すすんでください。みんな\n\
 たすけを　まっています！"))
 
-DEFINE_DIALOG(DIALOG_135, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_135, 1, 5, _("\
 クッパがスターをもって\n\
 いっちゃいました。\n\
 ここにかくれてみてました。\n\
@@ -1499,7 +1499,7 @@ DEFINE_DIALOG(DIALOG_135, 1, 5, 38, 105, _("\
 とき、そのほしをえらぶと\n\
 またあえる　てきもいます。"))
 
-DEFINE_DIALOG(DIALOG_136, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_136, 1, 4, _("\
 ワァすごい！もうそんなに\n\
 スターをもってるんですね。\n\
 もうすぐ　ぼくらのことも\n\
@@ -1517,7 +1517,7 @@ DEFINE_DIALOG(DIALOG_136, 1, 4, 38, 105, _("\
 『ヒップドロップ』すると\n\
 ダメージを　ふせげます。"))
 
-DEFINE_DIALOG(DIALOG_137, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_137, 1, 5, _("\
 パワースターが　もどって、\n\
 おしろのちからが\n\
 かいふく　してきました！\n\
@@ -1529,14 +1529,14 @@ DEFINE_DIALOG(DIALOG_137, 1, 5, 38, 105, _("\
 スペシャルスターが\n\
 あらわれます。"))
 
-DEFINE_DIALOG(DIALOG_138, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_138, 1, 5, _("\
 ・２ごうエレベーター・\n\
 した・・ちていこ\n\
 ひだり・・やみのおおあな\n\
 みぎ・・・ケムリめいろ\n\
 　　　　　へいさちゅう！"))
 
-DEFINE_DIALOG(DIALOG_139, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_139, 1, 6, _("\
 このうえ・・じどうリフト\n\
 じどうリフトは　のると\n\
 じどうてきに　うごきだし、\n\
@@ -1544,7 +1544,7 @@ DEFINE_DIALOG(DIALOG_139, 1, 6, 38, 105, _("\
 おりて　ほうっておくと\n\
 きえてしまいます。"))
 
-DEFINE_DIALOG(DIALOG_140, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_140, 1, 6, _("\
 -そうさリフトじょう-\n\
 みぎ・・・ケムリめいろ\n\
 　　　　　いりぐち\n\
@@ -1552,7 +1552,7 @@ DEFINE_DIALOG(DIALOG_140, 1, 6, 38, 105, _("\
 　　１ごうエレベーターへ\n\
 やじるし・・げんざいち"))
 
-DEFINE_DIALOG(DIALOG_141, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_141, 1, 5, _("\
 ぬすまれたパワースターを\n\
 とりかえした！\n\
 クッパが　とじてしまった\n\
@@ -1568,7 +1568,7 @@ DEFINE_DIALOG(DIALOG_141, 1, 5, 38, 105, _("\
 いそげ　しずえ！！\n\
 おしろの　いちだいじだ！"))
 
-DEFINE_DIALOG(DIALOG_142, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_142, 1, 5, _("\
 ３このスターを\n\
 とりもどしたぞ！　\n\
 そして　スターに『３』の\n\
@@ -1580,7 +1580,7 @@ DEFINE_DIALOG(DIALOG_142, 1, 5, 38, 105, _("\
 もっと　てごわいぞ。\n\
 きをつけて　すすめ！"))
 
-DEFINE_DIALOG(DIALOG_143, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_143, 1, 6, _("\
 ８このパワースターを\n\
 ぶじ　とりもどし、\n\
 おおきな　ほしのドアが\n\
@@ -1588,7 +1588,7 @@ DEFINE_DIALOG(DIALOG_143, 1, 6, 38, 105, _("\
 クッパは　すぐそこだ！\n\
 ピーチのこえがきこえる。"))
 
-DEFINE_DIALOG(DIALOG_144, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_144, 1, 5, _("\
 ３０この　パワースターを\n\
 とりもどし、\n\
 おおきなスターのドアが\n\
@@ -1605,7 +1605,7 @@ DEFINE_DIALOG(DIALOG_144, 1, 5, 38, 105, _("\
 とうとうやつを\n\
 おいつめたぞ！"))
 
-DEFINE_DIALOG(DIALOG_145, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_145, 1, 4, _("\
 ５０このパワースターを\n\
 とりもどした！\n\
 ３かいへの　ほしのドアが\n\
@@ -1619,7 +1619,7 @@ DEFINE_DIALOG(DIALOG_145, 1, 4, 38, 105, _("\
 とてもだいじな　みかただ。\n\
 さあ『３かい』へすすめ！"))
 
-DEFINE_DIALOG(DIALOG_146, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_146, 1, 6, _("\
 ７０このパワースターを\n\
 とりもどした！\n\
 はてしない　かいだんの\n\
@@ -1627,7 +1627,7 @@ DEFINE_DIALOG(DIALOG_146, 1, 6, 38, 105, _("\
 クッパはかなりあせってる。\n\
 さあ！さいごのたたかいだ。"))
 
-DEFINE_DIALOG(DIALOG_147, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_147, 1, 5, _("\
 あか・あお・みどりの\n\
 『アイテムブロック』を\n\
 つかっていますか？\n\
@@ -1644,7 +1644,7 @@ DEFINE_DIALOG(DIALOG_147, 1, 5, 38, 105, _("\
 \n\
 とてもつよい　みかたです。"))
 
-DEFINE_DIALOG(DIALOG_148, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_148, 1, 5, _("\
 このさきスノーマンのやま\n\
 だれも　はいるな！\n\
 アイスブロックシューター\n\
@@ -1656,7 +1656,7 @@ DEFINE_DIALOG(DIALOG_148, 1, 5, 38, 105, _("\
 かいふくも　しません。\n\
 　　　　　　スノーマン"))
 
-DEFINE_DIALOG(DIALOG_149, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_149, 1, 5, _("\
 ピーチのかくれスライダー\n\
 へ　ようこそ！\n\
 ここには　クッパにみつけ\n\
@@ -1668,20 +1668,20 @@ DEFINE_DIALOG(DIALOG_149, 1, 5, 38, 105, _("\
 はやくすべれば　スターが\n\
 みつかるはずだ！"))
 
-DEFINE_DIALOG(DIALOG_150, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_150, 1, 5, _("\
 あーーん、だれだい？\n\
 とつぜん　ビショぬれに\n\
 なっちゃいました！\n\
 キチンと　てんじょう\n\
 なおしてもらうです。"))
 
-DEFINE_DIALOG(DIALOG_151, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_151, 1, 4, _("\
 みずをかけられた　つぎは\n\
 ふんづけられました。\n\
 もう　ほんとーに\n\
 おこったです！"))
 
-DEFINE_DIALOG(DIALOG_152, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_152, 1, 5, _("\
 いててて！！！\n\
 らんぼうなひとだなあ。\n\
 なぜかイライラしてたけど、\n\
@@ -1693,13 +1693,13 @@ DEFINE_DIALOG(DIALOG_152, 1, 5, 38, 105, _("\
 あー、なんだか　きもちが\n\
 おちついてきたです。"))
 
-DEFINE_DIALOG(DIALOG_153, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_153, 1, 4, _("\
 わしの　カラダに\n\
 のぼっては　いかーん！\n\
 そういうヤツは　みんな\n\
 ふきっとばしちまうぞー！"))
 
-DEFINE_DIALOG(DIALOG_154, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_154, 1, 5, _("\
 ぼうしを　なくすと\n\
 ダメージがおおくなるので\n\
 だいじに　してください。\n\
@@ -1716,7 +1716,7 @@ DEFINE_DIALOG(DIALOG_154, 1, 5, 38, 105, _("\
 あります。\n\
 よーく、しらべてください。"))
 
-DEFINE_DIALOG(DIALOG_155, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_155, 1, 5, _("\
 パワースターのおかげで\n\
 おしろに、げんきが\n\
 もどってきました。\n\
@@ -1732,13 +1732,13 @@ DEFINE_DIALOG(DIALOG_155, 1, 5, 38, 105, _("\
 によって、まちをすっかり\n\
 みずびたしに　できます。"))
 
-DEFINE_DIALOG(DIALOG_156, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_156, 1, 4, _("\
 とけいがとても　へんです。\n\
 とけいに　はいるとき、\n\
 ながいはりの　ばしょに\n\
 ちゅういしてください！"))
 
-DEFINE_DIALOG(DIALOG_157, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_157, 1, 5, _("\
 ながれる『すな』に\n\
 ながされないように\n\
 きをつけて！\n\
@@ -1750,7 +1750,7 @@ DEFINE_DIALOG(DIALOG_157, 1, 5, 38, 105, _("\
 とくに　キケン！！\n\
 そこなしの　じごくです！"))
 
-DEFINE_DIALOG(DIALOG_158, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_158, 1, 5, _("\
 ジャンプのテクニック\n\
 その１\n\
 タイミングよく、\n\
@@ -1767,7 +1767,7 @@ DEFINE_DIALOG(DIALOG_158, 1, 5, 38, 105, _("\
 『カベキック』といって、\n\
 たかいところにのぼれます。"))
 
-DEFINE_DIALOG(DIALOG_159, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_159, 1, 5, _("\
 ジャンプのテクニック\n\
 その３　　Ｚボタンわざ\n\
 たちどまって　しゃがんで\n\
@@ -1778,7 +1778,7 @@ DEFINE_DIALOG(DIALOG_159, 1, 5, 38, 105, _("\
 とおくまで　とべる。\n\
 『はばとび』です。"))
 
-DEFINE_DIALOG(DIALOG_160, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_160, 1, 4, _("\
 はやく　はしりながら\n\
 Ｂボタンをおすと\n\
 『ボディアタック』が\n\
@@ -1788,7 +1788,7 @@ DEFINE_DIALOG(DIALOG_160, 1, 4, 38, 105, _("\
 Ａ・Ｂどちらのボタンでも\n\
 おきあがることができます。"))
 
-DEFINE_DIALOG(DIALOG_161, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_161, 1, 5, _("\
 いやー　すごいです！！\n\
 ここにいれば　あえると\n\
 きいてたけど、ほんとに\n\
@@ -1800,7 +1800,7 @@ DEFINE_DIALOG(DIALOG_161, 1, 5, 38, 105, _("\
 うけとって　ください。』\n\
 -しずえ・スタッフより-"))
 
-DEFINE_DIALOG(DIALOG_162, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_162, 1, 5, _("\
 イテテ　あいかわらず\n\
 らんぼうなひとだな。\n\
 このスターは　べつに\n\
@@ -1812,7 +1812,7 @@ DEFINE_DIALOG(DIALOG_162, 1, 5, 38, 105, _("\
 これで　ほんとに\n\
 さいごだよ！　　ホイ！"))
 
-DEFINE_DIALOG(DIALOG_163, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_163, 1, 5, _("\
 あああっ・・またこんども\n\
 キサマのかちか　しずえ！\n\
 キサマはな、わがはいが\n\
@@ -1839,7 +1839,7 @@ DEFINE_DIALOG(DIALOG_163, 1, 5, 38, 105, _("\
 まってろよ！\n\
 　ガハハッ！"))
 
-DEFINE_DIALOG(DIALOG_164, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_164, 1, 4, _("\
 しばらく　やすんでたので\n\
 こんなにみごとに、\n\
 ふとっちゃいました。\n\
@@ -1849,13 +1849,13 @@ DEFINE_DIALOG(DIALOG_164, 1, 4, 38, 105, _("\
 \n\
 　　　ゴー！！　やめとく"))
 
-DEFINE_DIALOG(DIALOG_165, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_165, 1, 4, _("\
 このクイの　まわりを\n\
 クルクルまわって\n\
 めをまわしても\n\
 しりません。"))
 
-DEFINE_DIALOG(DIALOG_166, 1, 6, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_166, 1, 6, _("\
 きょうは　トレーニングで\n\
 るすに　してるッス！\n\
 オイラに　ちょーせん\n\
@@ -1863,7 +1863,7 @@ DEFINE_DIALOG(DIALOG_166, 1, 6, 38, 105, _("\
 くるといいッス！\n\
 　　　　　　　ノコノコ"))
 
-DEFINE_DIALOG(DIALOG_167, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_167, 1, 4, _("\
 『ピーチの　おしろ』\n\
 　　　　　すぐそこ\n\
 Ａボタン『ジャンプ』\n\
@@ -1873,13 +1873,13 @@ DEFINE_DIALOG(DIALOG_167, 1, 4, 38, 105, _("\
 　　　　『ものをもつ』\n\
 もういちどおす『なげる』"))
 
-DEFINE_DIALOG(DIALOG_168, 1, 4, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_168, 1, 4, _("\
 アーン、またまた　\n\
 ふんづけられちゃいました。\n\
 ハナチャン　かんぜんに\n\
 おこったです！"))
 
-DEFINE_DIALOG(DIALOG_169, 1, 5, 38, 105, _("\
+DEFINE_DIALOG(DIALOG_169, 1, 5, _("\
 かってに　はいるな！\n\
 この『どうくつ』に\n\
 むだんで　はいるものには、\n\

@@ -57,9 +57,7 @@ struct DialogEntry
 {
  /*0x00*/ u8 npcNameID;
  /*0x04*/ s8 linesPerBox;
- /*0x06*/ s16 leftOffset;
- /*0x08*/ s16 width;
- /*0x0C*/ const u8 *str;
+ /*0x06*/ const u8 *str;
 };
 
 // EU only

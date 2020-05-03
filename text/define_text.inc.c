@@ -1,59 +1,23 @@
 // == debug table ==
 
-#ifndef MULTILANGUAGE
-
-// (this wasn't translated for US, and was removed in EU)
-
-static const u8 Debug0[] = {
-    _("ＳＴＡＧＥ　ＳＥＬＥＣＴ\n"
-      "　つづける？\n"
-      "　１　マウンテン\n"
-      "　２　ファイアーバブル\n"
-      "　３　スノースライダー\n"
-      "　４　ウォーターランド\n"
-      "　　　クッパ１ごう\n"
-      "　もどる")
-};
-
-static const u8 Debug1[] = {
-    _("ＰＡＵＳＥ　　　　\n"
-      "　つづける？\n"
-      "　やめる　？")
-};
-
-static const struct DialogEntry debug_text_entry_0 = {
-    1, 8, 30, 200, Debug0
-};
-
-static const struct DialogEntry debug_text_entry_1 = {
-    1, 3, 100, 150, Debug1
-};
-
-const struct DialogEntry *const seg2_debug_text_table[] = {
-    &debug_text_entry_0, &debug_text_entry_1, NULL,
-};
-
-#endif
-
-
 // == dialog ==
 // (defines en_dialog_table etc.)
 
-#define DEFINE_DIALOG(id, _1, _2, _3, _4, str) \
+#define DEFINE_DIALOG(id, _1, _2, str) \
     static const u8 dialog_text_ ## id[] = { str };
 
 #include "dialogs.h"
 
 #undef DEFINE_DIALOG
-#define DEFINE_DIALOG(id, npcNameID, linesPerBox, leftOffset, width, _) \
+#define DEFINE_DIALOG(id, npcNameID, linesPerBox, _) \
     static const struct DialogEntry dialog_entry_ ## id = { \
-        npcNameID, linesPerBox, leftOffset, width, dialog_text_ ## id \
+        npcNameID, linesPerBox, dialog_text_ ## id \
     };
 
 #include "dialogs.h"
 
 #undef DEFINE_DIALOG
-#define DEFINE_DIALOG(id, _1, _2, _3, _4, _5) &dialog_entry_ ## id,
+#define DEFINE_DIALOG(id, _1, _2, _5) &dialog_entry_ ## id,
 
 const struct DialogEntry *const seg2_dialog_table[] = {
 #include "dialogs.h"

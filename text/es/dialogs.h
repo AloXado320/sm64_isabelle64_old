@@ -1,6 +1,6 @@
-// Parameters: dialog enum ID, npc name, lines per box, left offset, width
+// Parameters: dialog enum ID, npc name, lines per box
 
-DEFINE_DIALOG(DIALOG_000, NPCNAME_NONE, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_000, NPCNAME_NONE, 6, _("\
 ¡Increíble! ¡Estás en\n\
 medio de un campo de\n\
 batalla! Encuentrás las\n\
@@ -19,7 +19,7 @@ pulsa [B]. Pulsa [A] o [B]\n\
 para leer el resto del\n\
 texto."))
 
-DEFINE_DIALOG(DIALOG_001, NPCNAME_BOMBBUDDY, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_001, NPCNAME_BOMBBUDDY, 4, _("\
 ¡Cuidado! ¡Si andas por\n\
 aquí, te vas a caer una\n\
 bomba de agua!\n\
@@ -48,7 +48,7 @@ encontrar el Rey Bob-omba.\n\
 recobrado la Estrella\n\
 de Poder!"))
 
-DEFINE_DIALOG(DIALOG_002, NPCNAME_BOMBBUDDY, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_002, NPCNAME_BOMBBUDDY, 4, _("\
 ¡Eh, tú! ¡Es peligroso\n\
 para acá, así que\n\
 escuchame! Acepta\n\
@@ -71,7 +71,7 @@ somos de tu lado.\n\
 hablarnos siempre y\n\
 cuando quieras!"))
 
-DEFINE_DIALOG(DIALOG_003, NPCNAME_BOMBBUDDY, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_003, NPCNAME_BOMBBUDDY, 5, _("\
 ¡Muchas gracias Canela!\n\
 ¡Ahora el Rey Bob-omba\n\
 ya no es más que el\n\
@@ -90,7 +90,7 @@ No te olvides de hablar\n\
 con ellos, te ayudarán\n\
 a usar los cañones."))
 
-DEFINE_DIALOG(DIALOG_004, NPCNAME_BOMBBUDDY, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_004, NPCNAME_BOMBBUDDY, 3, _("\
 Aunque no lo parezca,\n\
 los Bob-ombas somos\n\
 gente de paz, y no\n\
@@ -104,7 +104,7 @@ todos los cañones que\n\
 hay en este nivel.\n\
 ¡Buen viaje!"))
 
-DEFINE_DIALOG(DIALOG_005, NPCNAME_KTQ, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_005, NPCNAME_KTQ, 3, _("\
 ¡Eh, Canela! ¿Es verdad\n\
 que dicen? ¿Has realmente\n\
 derrotado el Rey Bob-omba?\n\
@@ -126,7 +126,7 @@ Preparados, listos...\n\
 \n\
 //¡Ya!//Ahora no"))
 
-DEFINE_DIALOG(DIALOG_006, NPCNAME_KTQ, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_006, NPCNAME_KTQ, 3, _("\
 ¡¡Eh!! ¡No valen trampas!\n\
 Hay que hacer a pata\n\
 todo el recorrido, listillo.\n\
@@ -134,7 +134,7 @@ Hasta luego. ¡Avísame\n\
 cuando quieras correr\n\
 en serio!"))
 
-DEFINE_DIALOG(DIALOG_007, NPCNAME_KTQ, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_007, NPCNAME_KTQ, 5, _("\
 Uff... uff... uff...\n\
 ¡Guau! Eres... eres...\n\
 muy... rápido.\n\
@@ -142,7 +142,7 @@ muy... rápido.\n\
 ¡Bueno, te la has\n\
 ganado limpiamente!"))
 
-DEFINE_DIALOG(DIALOG_008, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_008, NPCNAME_SIGN, 4, _("\
 CUIDADO:\n\
 CHOMP CADENAS\n\
 ¡Muy peligroso! Acercate\n\
@@ -159,7 +159,7 @@ una Estrella de Poder\n\
 en la pradera del otro\n\
 lado del puente."))
 
-DEFINE_DIALOG(DIALOG_009, NPCNAME_KTQ, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_009, NPCNAME_KTQ, 5, _("\
 ¡Cuánto tiempo! ¡Guau!\n\
 ¡Te has hecho más rápido!\n\
 ¿Has estado entrenando\n\
@@ -176,7 +176,7 @@ Viento.\n\
 \n\
 //Sí////Paso"))
 
-DEFINE_DIALOG(DIALOG_010, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_010, NPCNAME_NONE, 4, _("\
 Acabas de pisar el\n\
 Interruptor de la\n\
 Gorra Alada. Llevando\n\
@@ -191,7 +191,7 @@ rojos que golpeas.\n\
 \n\
 //Sí////No"))
 
-DEFINE_DIALOG(DIALOG_011, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_011, NPCNAME_NONE, 4, _("\
 ¡Acabas de pisar el\n\
 Interruptor de la\n\
 Gorra de Hierro! ¡Con una\n\
@@ -206,7 +206,7 @@ verdes que golpeas.\n\
 \n\
 //Sí////No"))
 
-DEFINE_DIALOG(DIALOG_012, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_012, NPCNAME_NONE, 4, _("\
 Acabas de pisar el\n\
 Interruptor de la\n\
 Gorra de Invisibilidad.\n\
@@ -223,7 +223,7 @@ que golpeas.\n\
 \n\
 //Sí////No"))
 
-DEFINE_DIALOG(DIALOG_013, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_013, NPCNAME_NONE, 5, _("\
 ¡Has conseguido 100\n\
 monedas! ¡Canela obtiene\n\
 más fuerza del castillo!\n\
@@ -231,7 +231,7 @@ más fuerza del castillo!\n\
 \n\
 //Sí////No"))
 
-DEFINE_DIALOG(DIALOG_014, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_014, NPCNAME_NONE, 4, _("\
 ¡Guau! ¡Otra Estrella\n\
 de Poder! Canela está\n\
 haciendose fuerte con\n\
@@ -240,7 +240,7 @@ la energía del castillo.\n\
 \n\
 //Sí////No"))
 
-DEFINE_DIALOG(DIALOG_015, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_015, NPCNAME_SIGN, 4, _("\
 Puedes atacar a tus\n\
 enemigos a puñetazos.\n\
 Pulsa [A] para saltar y\n\
@@ -252,14 +252,14 @@ recoger algo del suelo\n\
 y púlsalo otra vez\n\
 para tirarlo."))
 
-DEFINE_DIALOG(DIALOG_016, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_016, NPCNAME_SIGN, 3, _("\
 ¡Salta sobre los\n\
 caparazones brillantes\n\
 y date rienda suelta!\n\
 ¡Despeja el camino\n\
 de enemigos!"))
 
-DEFINE_DIALOG(DIALOG_017, NPCNAME_KINGBOMB, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_017, NPCNAME_KINGBOMB, 4, _("\
 Yo soy el Rey Bob-omba,\n\
 un gran cabezota,\n\
 dueño de lo que\n\
@@ -290,18 +290,18 @@ por mi hermoso trasero\n\
 y lanzarme lejos?\n\
 ¡Adelante, pequeñajo!"))
 
-DEFINE_DIALOG(DIALOG_018, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_018, NPCNAME_SIGN, 4, _("\
 Estoy durmiendo...\n\
 porque estoy dormida.\n\
 Que nadie me moleste.\n\
 No hagas ruido a pasar."))
 
-DEFINE_DIALOG(DIALOG_019, NPCNAME_SIGN, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_019, NPCNAME_SIGN, 2, _("\
 ¡Sssss! ¡No armes\n\
 jaleo en el pasillo,\n\
 por favor!"))
 
-DEFINE_DIALOG(DIALOG_020, NPCNAME_NONE, 6, 95, 150, _("\
+DEFINE_DIALOG(DIALOG_020, NPCNAME_NONE, 6, _("\
 Querida Canela:\n\
 Por favor, ven al\n\
 castillo. He hecho\n\
@@ -309,23 +309,23 @@ un pastel para ti.\n\
 Sinceramente tuya:\n\
 Princesa Toadstool"))
 
-DEFINE_DIALOG(DIALOG_021, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_021, NPCNAME_BOWSER, 5, _("\
 Bienvenido.\n\
 ¡No hay nadie en casa!\n\
 ¡Así que lárgate\n\
 y no vuelvas!\n\
 ¡Bwa, ja, ja, ja!"))
 
-DEFINE_DIALOG(DIALOG_022, NPCNAME_NONE, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_022, NPCNAME_NONE, 2, _("\
 Necesitas una llave\n\
 para abrir esta puerta."))
 
-DEFINE_DIALOG(DIALOG_023, NPCNAME_NONE, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_023, NPCNAME_NONE, 3, _("\
 ¡Esta llave no encaja!\n\
 Tal vez sea para el\n\
 sótano..."))
 
-DEFINE_DIALOG(DIALOG_024, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_024, NPCNAME_NONE, 5, _("\
 Necesitas el poder de\n\
 las Estrellas para\n\
 abrir esta puerta.\n\
@@ -333,31 +333,31 @@ Recupera las Estrellas\n\
 que hay dentro de los\n\
 cuadros del castillo."))
 
-DEFINE_DIALOG(DIALOG_025, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_025, NPCNAME_NONE, 4, _("\
 Se necesita el poder de\n\
 3 Estrellas para abrir\n\
 esta puerta. Te faltan\n\
 [%] Estrella(s)."))
 
-DEFINE_DIALOG(DIALOG_026, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_026, NPCNAME_NONE, 4, _("\
 Se necesita el poder de\n\
 8 Estrellas para abrir\n\
 esta puerta. Te faltan\n\
 [%] Estrella(s)."))
 
-DEFINE_DIALOG(DIALOG_027, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_027, NPCNAME_NONE, 4, _("\
 Se necesita el poder de\n\
 30 Estrellas para abrir\n\
 esta puerta. Te faltan\n\
 [%] Estrella(s)."))
 
-DEFINE_DIALOG(DIALOG_028, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_028, NPCNAME_NONE, 4, _("\
 Se necesita el poder de\n\
 50 Estrellas para abrir\n\
 esta puerta. Te faltan\n\
 [%] Estrella(s)."))
 
-DEFINE_DIALOG(DIALOG_029, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_029, NPCNAME_BOWSER, 5, _("\
 Hacen falta 70 Estrellas\n\
 para resolver el misterio\n\
 de la 『escalera sin fin』.\n\
@@ -365,7 +365,7 @@ Y aún te faltan [%]\n\
 Estrellas(s)...\n\
 ¡Bwa, ja, ja!"))
 
-DEFINE_DIALOG(DIALOG_030, NPCNAME_LAKITU, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_030, NPCNAME_LAKITU, 6, _("\
 ¡Hola! ¡Aquí un avance\n\
 de las últimas noticias!\n\
 Canela está a punto de\n\
@@ -391,7 +391,7 @@ patrocinada por el\n\
 apoyo financiero de\n\
 televidentes como Uds."))
 
-DEFINE_DIALOG(DIALOG_031, NPCNAME_KTQ, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_031, NPCNAME_KTQ, 5, _("\
 ¡No me lo puedo creer!\n\
 ¡Me has vuelto a ganar!\n\
 ¡Me ha gastado una fortuna\n\
@@ -402,7 +402,7 @@ ahora debo entregar\n\
 el trofeo al ganador.\n\
 ¡Enhorabuena, Canela!"))
 
-DEFINE_DIALOG(DIALOG_032, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_032, NPCNAME_SIGN, 5, _("\
 ¡Si llevas una Gorra\n\
 Alada, puedes volar!\n\
 Ponte la gorra y da\n\
@@ -418,7 +418,7 @@ mirar alrededor de ti\n\
 mientras volar, y pulsa\n\
 [Z] para aterrizar."))
 
-DEFINE_DIALOG(DIALOG_033, NPCNAME_NONE, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_033, NPCNAME_NONE, 6, _("\
 ¡Ciao bello!\n\
 Has arrivado al castillo\n\
 de la Princesa con una\n\
@@ -434,7 +434,7 @@ para mover Canela...\n\
 ¡Ahora, adelante al\n\
 castillo!"))
 
-DEFINE_DIALOG(DIALOG_034, NPCNAME_LAKITU, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_034, NPCNAME_LAKITU, 6, _("\
 ¡Buenos dias! Somos los\n\
 hermanos Lakitu y tenemos\n\
 el honor de filmar el\n\
@@ -460,7 +460,7 @@ el camarógrafo siempre\n\
 listo a presentar las\n\
 mejores imágenes..."))
 
-DEFINE_DIALOG(DIALOG_035, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_035, NPCNAME_SIGN, 5, _("\
 Hay cuatro botones [C].\n\
 Pulsa [C]↑ para echar un\n\
 vistazo alrededor con la\n\
@@ -479,7 +479,7 @@ Pulsa [C]↓ para ver Canela\n\
 de lejos, cualquier modo\n\
 de vista que usas."))
 
-DEFINE_DIALOG(DIALOG_036, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_036, NPCNAME_SIGN, 5, _("\
 MIRADOR\n\
 Pulsa [C]↑ para echar\n\
 un vistazo alrededor.\n\
@@ -501,7 +501,7 @@ mantén pulsado [R] para\n\
 que la cámara queda en\n\
 funcionamento."))
 
-DEFINE_DIALOG(DIALOG_037, NPCNAME_KTQ, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_037, NPCNAME_KTQ, 2, _("\
 ¡He ganado! ¡He ganado!\n\
 Espera, entonces...,\n\
 ¿quién habrá perdido?\n\
@@ -509,12 +509,12 @@ Ah, sí: ¡TÚUUUUU!\n\
 ¡Je, je, je, je!\n\
 ¡Suerte para la próxima!"))
 
-DEFINE_DIALOG(DIALOG_038, NPCNAME_NONE, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_038, NPCNAME_NONE, 3, _("\
 Reaccionando al\n\
 poder estelar,\n\
 la puerta se abre."))
 
-DEFINE_DIALOG(DIALOG_039, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_039, NPCNAME_SIGN, 4, _("\
 No se permiten visitas,\n\
 por decreto del\n\
 Rey Bob-omba.\n\
@@ -541,11 +541,11 @@ al iniciar cada nivel.\n\
 \n\
 ///El Rey Bob-omba"))
 
-DEFINE_DIALOG(DIALOG_040, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_040, NPCNAME_SIGN, 3, _("\
 ¡Peligro!\n\
 ¡Grieta ahí abajo!"))
 
-DEFINE_DIALOG(DIALOG_041, NPCNAME_KTQ, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_041, NPCNAME_KTQ, 3, _("\
 ¡He ganado!\n\
 ¡¡He ganado!!\n\
 ¡Ja, ja, ja, ja!\n\
@@ -553,7 +553,7 @@ DEFINE_DIALOG(DIALOG_041, NPCNAME_KTQ, 3, 58, 114, _("\
 a Koopa el Rápido!\n\
 ¡Quizás la próxima vez!"))
 
-DEFINE_DIALOG(DIALOG_042, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_042, NPCNAME_SIGN, 4, _("\
 ¡Atención! ¡Puente estrecho!\n\
 ¡Cruzar con cuidado!\n\
 \n\
@@ -575,7 +575,7 @@ control Arriba o pulsa\n\
 el botón [A] para ir más\n\
 deprisa."))
 
-DEFINE_DIALOG(DIALOG_043, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_043, NPCNAME_SIGN, 5, _("\
 Si saltas y mantienes\n\
 pulsado el botón [A],\n\
 puedes colgarte de\n\
@@ -584,7 +584,7 @@ sobre tu cabeza.\n\
 ¡Es igual a agarrarte a\n\
 las alas de un pájaro!"))
 
-DEFINE_DIALOG(DIALOG_044, NPCNAME_HOOT, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_044, NPCNAME_HOOT, 5, _("\
 ¡Uuuuuh! ¿Qué pasa?...\n\
 ¿Quién me ha despertado?\n\
 ¡Pero si aún es de día!\n\
@@ -604,7 +604,7 @@ las alas, claro.\n\
 ¡Atento a mi sombra y\n\
 salta cuando estés listo!"))
 
-DEFINE_DIALOG(DIALOG_045, NPCNAME_HOOT, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_045, NPCNAME_HOOT, 6, _("\
 ¡Guau! ¡Vas a tener\n\
 que aprender a volar\n\
 tú solito o dejar de\n\
@@ -613,7 +613,7 @@ Suelta [A] para\n\
 dejarme libre.\n\
 Hala, hala, ¡adiós!"))
 
-DEFINE_DIALOG(DIALOG_046, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_046, NPCNAME_SIGN, 5, _("\
 Tendrás que dominar\n\
 tres técnicas de salto.\n\
 Antes de nada, el Salto\n\
@@ -640,18 +640,18 @@ te quedes en el jardín\n\
 escuchando a los\n\
 pajaritos."))
 
-DEFINE_DIALOG(DIALOG_047, NPCNAME_BOMBBUDDY, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_047, NPCNAME_BOMBBUDDY, 2, _("\
 ¡Buenas!\n\
 ¡En un segundo tendrá\n\
 el cañón preparado!"))
 
-DEFINE_DIALOG(DIALOG_048, NPCNAME_NONE, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_048, NPCNAME_NONE, 4, _("\
 Montaña Blanca\n\
 ¡Terreno resbaladizo!\n\
 Entra en el refugio\n\
 antes de seguir."))
 
-DEFINE_DIALOG(DIALOG_049, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_049, NPCNAME_SIGN, 5, _("\
 ¿Conoces la técnica de la\n\
 Patada contra la Pared?\n\
 Usa esta técnica para\n\
@@ -663,7 +663,7 @@ dirección deseada.\n\
 ¡La práctica hace al\n\
 maestro!"))
 
-DEFINE_DIALOG(DIALOG_050, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_050, NPCNAME_SIGN, 4, _("\
 Para dejarte caer por\n\
 una pendiente, mantén\n\
 pulsado [Z] para\n\
@@ -683,7 +683,7 @@ darás un Salto Largo.\n\
 O agáchate y camin...\n\
 Bah, no importa."))
 
-DEFINE_DIALOG(DIALOG_051, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_051, NPCNAME_SIGN, 5, _("\
 ¡Escalar está chupado!\n\
 Si saltas a árboles,\n\
 postes o pilares, te\n\
@@ -702,7 +702,7 @@ hacer el pino!\n\
 ¡Salta desde esa posición\n\
 para bajarte con estilo!"))
 
-DEFINE_DIALOG(DIALOG_052, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_052, NPCNAME_SIGN, 5, _("\
 Párate y pulsa [Z] para\n\
 agacharte, pues pulsa [A]\n\
 para dar un Salto Hacia\n\
@@ -711,7 +711,7 @@ Para dar un Salto Lateral,\n\
 corre, haz un cambio\n\
 rápido de sentido y salta."))
 
-DEFINE_DIALOG(DIALOG_053, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_053, NPCNAME_SIGN, 5, _("\
 A veces, si pasas a\n\
 través de un anillo de\n\
 monedas o encuentras un\n\
@@ -723,7 +723,7 @@ números rojos,\n\
 obtendrás una\n\
 Estrella."))
 
-DEFINE_DIALOG(DIALOG_054, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_054, NPCNAME_SIGN, 5, _("\
 ¡Bienvenido al tobogán!\n\
 ¡Salta y disfruta! Pulsa\n\
 la palanca de control\n\
@@ -731,7 +731,7 @@ Arriba para acelerar y\n\
 Abajo para reducir la\n\
 velocidad."))
 
-DEFINE_DIALOG(DIALOG_055, NPCNAME_PENGUIN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_055, NPCNAME_PENGUIN, 4, _("\
 ¡Saludos amigo! ¿Qué tal,\n\
 Canela? Ven, amigo. Parece\n\
 que eres rapido.\n\
@@ -748,7 +748,7 @@ Preparados, listos...\n\
 \n\
 //¡Ya!//Ahora no"))
 
-DEFINE_DIALOG(DIALOG_056, NPCNAME_PENGUIN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_056, NPCNAME_PENGUIN, 6, _("\
 ¡Eh! ¡Has pulverizado\n\
 mi récord! ¡Increíble!\n\
 ¡Qué frialdad la tuya!\n\
@@ -760,7 +760,7 @@ llevaría un disgusto.\n\
 Anda, toma esta Estrella.\n\
 ¡Te la has ganado!"))
 
-DEFINE_DIALOG(DIALOG_057, NPCNAME_PENGUIN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_057, NPCNAME_PENGUIN, 4, _("\
 ¡Eh! ¡Mi niña! ¡¡Mi niña!!\n\
 ¡¿Has visto a mi niña?!\n\
 Es la cosa más bonita\n\
@@ -774,7 +774,7 @@ comer la sepia al\n\
 ajillo y luego... ¡Oooh!\n\
 ¡No tengo ni idea!"))
 
-DEFINE_DIALOG(DIALOG_058, NPCNAME_PENGUIN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_058, NPCNAME_PENGUIN, 4, _("\
 ¡¡Oh, mi niña!! ¡¡Has\n\
 encontrado mi niña!!\n\
 ¡¿Pero dónde estaba?!\n\
@@ -786,7 +786,7 @@ Toma, es toda tuya.\n\
 Te estaré eternamente\n\
 agradecida, joven."))
 
-DEFINE_DIALOG(DIALOG_059, NPCNAME_PENGUIN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_059, NPCNAME_PENGUIN, 4, _("\
 ¡Esa no es mi niña!\n\
 ¡¿Tú ves que se\n\
 parezca en algo a mí?!\n\
@@ -794,7 +794,7 @@ parezca en algo a mí?!\n\
 su madre, pero la\n\
 compadezco!"))
 
-DEFINE_DIALOG(DIALOG_060, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_060, NPCNAME_SIGN, 4, _("\
 ¡ATENCIÓN!\n\
 ¡Leer antes de nadar!\n\
 Si estás mucho tiempo\n\
@@ -821,13 +821,13 @@ la palanca de control\n\
 Abajo y pulsa [A] para dar\n\
 un salto fuera del agua."))
 
-DEFINE_DIALOG(DIALOG_061, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_061, NPCNAME_SIGN, 4, _("\
 ¡BRRR!\n\
 ¡Peligro de congelación!\n\
 No nades aquí, en serio.\n\
 ///El pingüino"))
 
-DEFINE_DIALOG(DIALOG_062, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_062, NPCNAME_SIGN, 3, _("\
 Escondido dentro de\n\
 cada bloque verde es\n\
 la Gorra de Hierro.\n\
@@ -840,7 +840,7 @@ respirar.\n\
 Solo hay un problema:\n\
 no puedes nadar."))
 
-DEFINE_DIALOG(DIALOG_063, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_063, NPCNAME_SIGN, 5, _("\
 La Gorra de Invisibilidad\n\
 está dentro de los\n\
 bloques azules.\n\
@@ -854,7 +854,7 @@ al mismísimo Gran Bú,\n\
 y así podrás atravesar\n\
 las paredes secretas!"))
 
-DEFINE_DIALOG(DIALOG_064, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_064, NPCNAME_SIGN, 5, _("\
 Cuando lleves la Gorra\n\
 Alada procedida de un\n\
 bloque rojo, da un Salto\n\
@@ -868,7 +868,7 @@ pulsa Arriba para descender\n\
 en picada, y pulsa [Z] para\n\
 aterrizar."))
 
-DEFINE_DIALOG(DIALOG_065, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_065, NPCNAME_SIGN, 6, _("\
 Lecciones de natación:\n\
 Pulsa [A] para nadar pecho.\n\
 Si tu sincronización es\n\
@@ -899,7 +899,7 @@ no puedes abrir las\n\
 puertas que hay debajo\n\
 del agua."))
 
-DEFINE_DIALOG(DIALOG_066, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_066, NPCNAME_SIGN, 5, _("\
 ¡Canela! Ten cuidado:\n\
 ¡Bowser es muy vicioso!\n\
 ¡Tratará de quemarte con\n\
@@ -931,7 +931,7 @@ Vas a necesitarla...\n\
 \n\
 ///Peach"))
 
-DEFINE_DIALOG(DIALOG_067, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_067, NPCNAME_BOWSER, 5, _("\
 ¡Mala suerte, Canela!\n\
 Tu Princesita Peach\n\
 no está aquí...\n\
@@ -949,7 +949,7 @@ mocoso como tú puedas\n\
 marearme así.\n\
 ¡Ni hablar! ¡Ja!"))
 
-DEFINE_DIALOG(DIALOG_068, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_068, NPCNAME_SIGN, 5, _("\
 ¡Bienvenido a la\n\
 Tierra del Fuego!\n\
 Si te quemas o te caes\n\
@@ -960,7 +960,7 @@ Canela. ¡Mantén la cabeza\n\
 fría aunque tengas el\n\
 trasero caliente!"))
 
-DEFINE_DIALOG(DIALOG_069, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_069, NPCNAME_SIGN, 6, _("\
 Los limites de los\n\
 mundos que hay tras los\n\
 cuadros están marcados\n\
@@ -970,7 +970,7 @@ de estas paredes\n\
 cuando estás volando,\n\
 saldrás rebotado."))
 
-DEFINE_DIALOG(DIALOG_070, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_070, NPCNAME_SIGN, 5, _("\
 Puedes volver cuando\n\
 quieras a la entrada\n\
 del castillo desde los\n\
@@ -1006,7 +1006,7 @@ obligado de atrapar la\n\
 Estrella descrito por\n\
 la pista."))
 
-DEFINE_DIALOG(DIALOG_071, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_071, NPCNAME_SIGN, 3, _("\
 ¡Zona de peligro!\n\
 ¡Nube tóxica!\n\
 ¡No inhalar!\n\
@@ -1020,14 +1020,14 @@ Circulo:\n\
 Flecha roja:\n\
 //Entrada-Salida"))
 
-DEFINE_DIALOG(DIALOG_072, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_072, NPCNAME_SIGN, 5, _("\
 Advertencia: ¡vendaval!\n\
 ¡Agárrate a tu gorra!\n\
 Si la pierdes aquí,\n\
 aquí debes volver a\n\
 encontrarla."))
 
-DEFINE_DIALOG(DIALOG_073, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_073, NPCNAME_SIGN, 4, _("\
 ¡Ejey! ¡Bucanero!\n\
 Un tesoro perdido\n\
 se perdió por aquí.\n\
@@ -1044,7 +1044,7 @@ orden ordenado?\n\
 \n\
 ///El Capitán"))
 
-DEFINE_DIALOG(DIALOG_074, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_074, NPCNAME_SIGN, 5, _("\
 Puedes agarrarte a los\n\
 bordes de plataformas\n\
 y salientes y quedarte\n\
@@ -1061,7 +1061,7 @@ control Arriba o pulsa\n\
 [A] para subir de un\n\
 salto."))
 
-DEFINE_DIALOG(DIALOG_075, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_075, NPCNAME_SIGN, 5, _("\
 ¡¡Canela!! Mi castillo\n\
 corre un grave peligro.\n\
 Sé que la culpa es de\n\
@@ -1098,7 +1098,7 @@ el castillo y liberanos\n\
 de esta prisión terrible!\n\
 ¡Por favor!"))
 
-DEFINE_DIALOG(DIALOG_076, NPCNAME_TOAD, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_076, NPCNAME_TOAD, 6, _("\
 Gracias al poder de las\n\
 Estrellas, la vida está\n\
 volviendo al castillo.\n\
@@ -1120,11 +1120,11 @@ un salto de altura.\n\
 De paso, ¡mira lo que\n\
 tengo por ti!"))
 
-DEFINE_DIALOG(DIALOG_077, NPCNAME_SIGN, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_077, NPCNAME_SIGN, 2, _("\
 Si ha decretado que deben\n\
 bajarse los pilares."))
 
-DEFINE_DIALOG(DIALOG_078, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_078, NPCNAME_SIGN, 5, _("\
 Hunde el Bloque de las\n\
 Monedas Azules con el\n\
 Azotón, pulsando [Z].\n\
@@ -1134,7 +1134,7 @@ monedas amarillas.\n\
 monedas desaparecen\n\
 muy pronto! Qué lástima."))
 
-DEFINE_DIALOG(DIALOG_079, NPCNAME_UKIKI, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_079, NPCNAME_UKIKI, 4, _("\
 ¡Ouuuuo! ¡Déjame!\n\
 ¡Uuki-ki! ¡Solo estaba\n\
 de broma! No aguantas\n\
@@ -1147,10 +1147,10 @@ algo bueno, ¿vale?\n\
 \n\
 //Vale//Ni hablar"))
 
-DEFINE_DIALOG(DIALOG_080, NPCNAME_UKIKI, 1, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_080, NPCNAME_UKIKI, 1, _("\
 ¡Eh, je, je, je, je!"))
 
-DEFINE_DIALOG(DIALOG_081, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_081, NPCNAME_SIGN, 4, _("\
 El misterio de agua.\n\
 ¿Sobre ella o bajo ella?\n\
 ¿Dónde estará la\n\
@@ -1160,7 +1160,7 @@ visitantes con el nivel\n\
 con el que entran.\n\
 Ni más ni menos."))
 
-DEFINE_DIALOG(DIALOG_082, NPCNAME_TOAD, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_082, NPCNAME_TOAD, 4, _("\
 ¡Agárrate a tu gorra!\n\
 Si la pierdes, serás\n\
 dañado más fácilmente.\n\
@@ -1184,7 +1184,7 @@ también.\n\
 Por cierto, tengo un\n\
 regalito para ti..."))
 
-DEFINE_DIALOG(DIALOG_083, NPCNAME_TOAD, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_083, NPCNAME_TOAD, 6, _("\
 Hay algo raro en ese\n\
 reloj de aquí. Si saltas\n\
 dentro, vigila la posición\n\
@@ -1192,7 +1192,7 @@ de la manecilla grande.\n\
 ¡Ah, y mira lo que he\n\
 encontrado! ¡Cógela, Canela!"))
 
-DEFINE_DIALOG(DIALOG_084, NPCNAME_MIPS, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_084, NPCNAME_MIPS, 3, _("\
 ¡Eeeeh! ¡Suéltame! ¡Me\n\
 voy, me voy, debo darme\n\
 prisa! ¿Eh? ¿Esta cosa\n\
@@ -1206,32 +1206,32 @@ regalo de Bowser, admito.\n\
 más de la tres! ¡Me voy\n\
 a un buen té!"))
 
-DEFINE_DIALOG(DIALOG_085, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_085, NPCNAME_SIGN, 5, _("\
 Los fantasmas como tú\n\
 no tienen sitio en esta\n\
 casa. Aunque, si logras\n\
 salir con vida, quizás...\n\
 no seas tan fantasma."))
 
-DEFINE_DIALOG(DIALOG_086, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_086, NPCNAME_SIGN, 3, _("\
 Correr dando vueltas en\n\
 círculos puede evitar el\n\
 mal de ojo."))
 
-DEFINE_DIALOG(DIALOG_087, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_087, NPCNAME_SIGN, 4, _("\
 ¡Papá Noel no es el único\n\
 que puede bajar por las\n\
 chimeneas! ¡Atrévete!\n\
 ///El dueño"))
 
-DEFINE_DIALOG(DIALOG_088, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_088, NPCNAME_SIGN, 5, _("\
 Plataforma\n\
 Para el que se baje aquí:\n\
 Agárrate al poste de la\n\
 izquierda y baja con\n\
 cuidado."))
 
-DEFINE_DIALOG(DIALOG_089, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_089, NPCNAME_SIGN, 5, _("\
 ¡Ambos caminos están\n\
 plagados de peligros!\n\
 ¡Vigila el suelo!\n\
@@ -1250,20 +1250,20 @@ Punto rojo:\n\
 Flecha roja:\n\
 //Estás aquí"))
 
-DEFINE_DIALOG(DIALOG_090, NPCNAME_BOWSER, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_090, NPCNAME_BOWSER, 6, _("\
 ¡Bwa, ja, ja, ja!\n\
 ¡Caíste en mi trampa,\n\
 justo como pensaba!\n\
 ¡Te lo advierto, 『Amiga,』\n\
 cuidado por donde pisas!"))
 
-DEFINE_DIALOG(DIALOG_091, NPCNAME_SIGN, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_091, NPCNAME_SIGN, 2, _("\
 ¡Peligro!\n\
 ¡Ventisca!\n\
 Pero a veces el viento\n\
 ayuda a andar el camino."))
 
-DEFINE_DIALOG(DIALOG_092, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_092, NPCNAME_BOWSER, 5, _("\
 Mira que molestas, ¿eh\n\
 Canela? ¿No ves que me\n\
 lo estaba pasando bien\n\
@@ -1277,7 +1277,7 @@ Estrellas de Poder!\n\
 para esos mundos de los\n\
 cuadros!"))
 
-DEFINE_DIALOG(DIALOG_093, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_093, NPCNAME_BOWSER, 5, _("\
 ¡Canela! ¡Otra vez!\n\
 ¡Qué oportuno! ¡Justo\n\
 estaba deseando echarle\n\
@@ -1290,7 +1290,7 @@ emparedados...\n\
 Princesita! ¡Qué triste!\n\
 ¡Bwa, ja, ja, ja!"))
 
-DEFINE_DIALOG(DIALOG_094, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_094, NPCNAME_SIGN, 4, _("\
 ¡Cuando te encuentres\n\
 con una pendiente difícil,\n\
 coge carrerilla!\n\
@@ -1298,7 +1298,7 @@ coge carrerilla!\n\
 ¡Coge carrerilla, pulsa [Z]\n\
 y salta!"))
 
-DEFINE_DIALOG(DIALOG_095, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_095, NPCNAME_SIGN, 4, _("\
 Para leer una pancarta,\n\
 hay que pararse frente\n\
 al letrero y pulsar [B],\n\
@@ -1312,7 +1312,7 @@ Estrellas que Bowser ha\n\
 escondido en este\n\
 nivel!"))
 
-DEFINE_DIALOG(DIALOG_096, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_096, NPCNAME_SIGN, 4, _("\
 El camino se estrecha.\n\
 Más vale paso que dure,\n\
 que no trote que canse.\n\
@@ -1324,7 +1324,7 @@ despiertes a nadie!\n\
 Muévete con cuidado,\n\
 camina con pies de plomo."))
 
-DEFINE_DIALOG(DIALOG_097, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_097, NPCNAME_NONE, 5, _("\
 ¡No te dejes arrollar!\n\
 Si alguien trata de\n\
 empujarte, empújale\n\
@@ -1334,25 +1334,25 @@ y el que pierde se\n\
 llevará la peor parte!"))
 
 
-DEFINE_DIALOG(DIALOG_098, NPCNAME_NONE, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_098, NPCNAME_NONE, 2, _("\
 Sigueme, ¡je, je, je!"))
 
 // unused
-DEFINE_DIALOG(DIALOG_099, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_099, NPCNAME_NONE, 5, _("\
 ¡Je, je, je!\n\
 ¡Voy a encantarte!\n\
 ¡Atravesaré la pared!\n\
 ¿Puedes hacerlo?\n\
 ¡Je, je, je!"))
 
-DEFINE_DIALOG(DIALOG_100, NPCNAME_UKIKI, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_100, NPCNAME_UKIKI, 3, _("\
 ¡Ukiki... wakiki!...\n\
 ¡Je, je! ¡La pillé!\n\
 ¡Es mía, mía, mía\n\
 y solo mía!\n\
 ¡Je, je, je!"))
 
-DEFINE_DIALOG(DIALOG_101, NPCNAME_UKIKI, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_101, NPCNAME_UKIKI, 3, _("\
 ¡Akk! Déjame...\n\
 ¡No... puedo... respirar!\n\
 Cough... ¡Me has pillado!\n\
@@ -1362,7 +1362,7 @@ Pero creo que me sienta\n\
 mejor a mí.\n\
 ¡Uuki-ki!"))
 
-DEFINE_DIALOG(DIALOG_102, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_102, NPCNAME_SIGN, 5, _("\
 ¡Psss! ¡Oye! Los Bús son\n\
 de los más tímido. Si les\n\
 miras cara a cara, van y\n\
@@ -1376,13 +1376,13 @@ es acarcarse por detrás y\n\
 atacarles cuando están\n\
 desprevenidos."))
 
-DEFINE_DIALOG(DIALOG_103, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_103, NPCNAME_SIGN, 4, _("\
 Aquel que suba\n\
 a las cuatro torres\n\
 hará que la luz brille\n\
 sobre la cúspide..."))
 
-DEFINE_DIALOG(DIALOG_104, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_104, NPCNAME_SIGN, 5, _("\
 Esa forma gris que tienes\n\
 delante es un 『Marcador\n\
 de Estrella』. Cuando\n\
@@ -1390,7 +1390,7 @@ consigas las 8 monedas\n\
 rojas, ahi aparecerá una\n\
 Estrella."))
 
-DEFINE_DIALOG(DIALOG_105, NPCNAME_BOMBBUDDY, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_105, NPCNAME_BOMBBUDDY, 3, _("\
 ¡Listo para un viajecito!\n\
 ¡Pues venga, métete en el\n\
 cañón!\n\
@@ -1408,19 +1408,19 @@ agarrarte a los árboles\n\
 que encuentres para\n\
 aterrizar."))
 
-DEFINE_DIALOG(DIALOG_106, NPCNAME_BOMBBUDDY, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_106, NPCNAME_BOMBBUDDY, 2, _("\
 ¡Listo para un viajecito!\n\
 ¡Pues venga, métete en el\n\
 cañón!"))
 
-DEFINE_DIALOG(DIALOG_107, NPCNAME_NONE, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_107, NPCNAME_NONE, 3, _("\
 ¡Los fantasmas...\n\
 no se MUEREN!\n\
 ¡Je, je, je!\n\
 ¡Pero tú...\n\
 ...sí puedes!"))
 
-DEFINE_DIALOG(DIALOG_108, NPCNAME_NONE, 2, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_108, NPCNAME_NONE, 2, _("\
 ¡Uuuuh! Ha llegado el\n\
 terror de los fantasmas.\n\
 El que siembra el miedo\n\
@@ -1428,7 +1428,7 @@ allá por donde flota.\n\
 ¡El Gran Bú!\n\
 Ka, ja, ja, ja..."))
 
-DEFINE_DIALOG(DIALOG_109, NPCNAME_SNOWMAN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_109, NPCNAME_SNOWMAN, 4, _("\
 ¡Ooooo, nooooo!\n\
 ¡La gente habla de perder la\n\
 cabeza, pero ni comparación\n\
@@ -1441,7 +1441,7 @@ Así todos esos pingüinos\n\
 dejarían de llamarme\n\
 cabezón..."))
 
-DEFINE_DIALOG(DIALOG_110, NPCNAME_SNOWMAN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_110, NPCNAME_SNOWMAN, 5, _("\
 Estoy harto de rodar\n\
 sin rumbo como una\n\
 bola de nieve. Necesito\n\
@@ -1451,7 +1451,7 @@ alguna que necesite\n\
 un buen cuerpo, ¿eh?\n\
 Ven, yo te sigo."))
 
-DEFINE_DIALOG(DIALOG_111, NPCNAME_SNOWMAN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_111, NPCNAME_SNOWMAN, 4, _("\
 ¡Perfecto! ¡Ahora sí\n\
 que tengo un buen\n\
 cuerpo, eh!\n\
@@ -1459,7 +1459,7 @@ Toma, un regalito para\n\
 ti. Ya verás como te\n\
 hace olvidar el frío."))
 
-DEFINE_DIALOG(DIALOG_112, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_112, NPCNAME_SIGN, 4, _("\
 ¡Consigue todas las\n\
 monedas que puedes!\n\
 Rellenarán tu indicador\n\
@@ -1476,7 +1476,7 @@ Cuanto más rápido pases\n\
 a través del Corazón,\n\
 más vida recuperarás."))
 
-DEFINE_DIALOG(DIALOG_113, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_113, NPCNAME_SIGN, 6, _("\
 Hay gorras especiales en\n\
 los bloques rojos, verdes\n\
 y azules. Ponte encima de\n\
@@ -1484,7 +1484,7 @@ los interruptores en los\n\
 niveles escondidos para\n\
 activar los bloques de color."))
 
-DEFINE_DIALOG(DIALOG_114, NPCNAME_WHOMP, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_114, NPCNAME_WHOMP, 5, _("\
 ¡Anda! ¡Fíjate! ¡Mira\n\
 quién ha llegado! ¡Y\n\
 luego dicen que tengo\n\
@@ -1507,7 +1507,7 @@ dejarme pisar por ti!\n\
 encima esta vez!\n\
 ¡Jua, jua, jua, jua!"))
 
-DEFINE_DIALOG(DIALOG_115, NPCNAME_WHOMP, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_115, NPCNAME_WHOMP, 5, _("\
 ¡Oh, no! Esta vez no\n\
 solo me has pisado.\n\
 ¡Me has pisoteado!\n\
@@ -1517,7 +1517,7 @@ triste peldaño más...\n\
 Toma, has ganado.\n\
 ¡Llévatela!"))
 
-DEFINE_DIALOG(DIALOG_116, NPCNAME_KINGBOMB, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_116, NPCNAME_KINGBOMB, 5, _("\
 ¿Cómo? ¿Cómoooo?\n\
 ¿Puede ser que un\n\
 pequeñajo como tú ha\n\
@@ -1535,7 +1535,7 @@ verme, selecciona esta\n\
 Estrella en el menú.\n\
 Hasta la vista."))
 
-DEFINE_DIALOG(DIALOG_117, NPCNAME_EYEROK, 1, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_117, NPCNAME_EYEROK, 1, _("\
 ¿Quién... ha osado...?\n\
 ¿Quién... ha roto el sello?\n\
 ¿Quién ha despertado...\n\
@@ -1548,7 +1548,7 @@ los intrusos!\n\
 ...A...\n\
 ...MANO!"))
 
-DEFINE_DIALOG(DIALOG_118, NPCNAME_EYEROK, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_118, NPCNAME_EYEROK, 6, _("\
 ¡Aaaaaaaah!\n\
 ¿Qué ha... pasado?\n\
 Aplastados... reducidos\n\
@@ -1562,7 +1562,7 @@ Poder es tuya.\n\
 Nosotros... volveremos\n\
 a las tinieblas."))
 
-DEFINE_DIALOG(DIALOG_119, NPCNAME_BOWSER, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_119, NPCNAME_BOWSER, 6, _("\
 ¡Grrr! Debí tener más\n\
 cuidado. Esto no estaba\n\
 planeado...¡pero aún tengo\n\
@@ -1576,7 +1576,7 @@ por ahora dejaré que te\n\
 marches. Pagarás por\n\
 esto...¡más tarde!"))
 
-DEFINE_DIALOG(DIALOG_120, NPCNAME_BOWSER, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_120, NPCNAME_BOWSER, 4, _("\
 ¡Oaaauuu! ¡¿Será posible\n\
 que haya vuelto a perder?\n\
 El poder de las Estrellas\n\
@@ -1592,7 +1592,7 @@ ven a la torre.\n\
 ¡Estaré esperándote!\n\
 ¡Bwa, ja, ja, ja!"))
 
-DEFINE_DIALOG(DIALOG_121, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_121, NPCNAME_BOWSER, 5, _("\
 ¡Noo! ¡No puede ser!\n\
 ¡¡Me has derrotado!!\n\
 Todo el poder que di\n\
@@ -1608,7 +1608,7 @@ esto... ¡Vamos, todos!\n\
 ¡Veamos junto el final!\n\
 ¡Bwa, ja, ja, ja!"))
 
-DEFINE_DIALOG(DIALOG_122, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_122, NPCNAME_SIGN, 4, _("\
 Abismo Negro\n\
 Derecha:\n\
 //Plataforma\n\
@@ -1616,7 +1616,7 @@ Derecha:\n\
 Izquierda:\n\
 //Lago subterráneo"))
 
-DEFINE_DIALOG(DIALOG_123, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_123, NPCNAME_SIGN, 4, _("\
 Cueva del hierro\n\
 Derecha:\n\
 //La cascada\n\
@@ -1624,7 +1624,7 @@ Izquierda:\n\
 //Interruptor de la\n\
 //Gorra de Hierro"))
 
-DEFINE_DIALOG(DIALOG_124, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_124, NPCNAME_SIGN, 4, _("\
 Plataforma:\n\
 ¡¡Peligro!!\n\
 Lee las instrucciones\n\
@@ -1637,12 +1637,12 @@ Al dejar la plataforma,\n\
 esta volverá a su punto\n\
 de origen."))
 
-DEFINE_DIALOG(DIALOG_125, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_125, NPCNAME_SIGN, 3, _("\
 Salida del laberinto\n\
 ¡Peligro! Cerrada.\n\
 ¡De la vuelta ahora!"))
 
-DEFINE_DIALOG(DIALOG_126, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_126, NPCNAME_SIGN, 3, _("\
 Ascensor 1\n\
 Arriba:\n\
 //Abismo negro\n\
@@ -1650,7 +1650,7 @@ Derecha:\n\
 //Plataforma\n\
 //Laberinto brumoso"))
 
-DEFINE_DIALOG(DIALOG_127, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_127, NPCNAME_SIGN, 4, _("\
 Lago subterráneo\n\
 Derecha:\n\
 //Cueva del hierro\n\
@@ -1664,13 +1664,13 @@ para hacerle bajar\n\
 la cabeza.\n\
 Y que no te coma."))
 
-DEFINE_DIALOG(DIALOG_128, NPCNAME_KINGBOMB, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_128, NPCNAME_KINGBOMB, 4, _("\
 ¡Debes luchar con honor!\n\
 ¡Va contra las reglas\n\
 lanzar al rey fuera\n\
 del campo de batalla!"))
 
-DEFINE_DIALOG(DIALOG_129, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_129, NPCNAME_NONE, 5, _("\
 ¡Bienvenido al nivel\n\
 de las Gorras de\n\
 Invisibilidad! Todos los\n\
@@ -1683,7 +1683,7 @@ atravesar tus enemigos\n\
 y otras muchas cosas.\n\
 ¡Pruébalo!"))
 
-DEFINE_DIALOG(DIALOG_130, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_130, NPCNAME_NONE, 5, _("\
 ¡Bienvenido al nivel\n\
 de las Gorras de Hierro!\n\
 Cuando subes al\n\
@@ -1696,7 +1696,7 @@ en Canela de Hierro!\n\
 Puedes entonces caminar\n\
 bajo el agua. ¡Pruébalo!"))
 
-DEFINE_DIALOG(DIALOG_131, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_131, NPCNAME_NONE, 5, _("\
 ¡Bienvenido al nivel\n\
 de la Gorra Alada! Súbete\n\
 al Interruptor Rojo en la\n\
@@ -1722,7 +1722,7 @@ Arriba para descender\n\
 en picada. ¡Imaginate\n\
 a bordo de un 747!"))
 
-DEFINE_DIALOG(DIALOG_132, NPCNAME_PENGUIN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_132, NPCNAME_PENGUIN, 4, _("\
 Vaya, conque tratando\n\
 de hacer trampas, ¿eh?\n\
 No se permiten atajos.\n\
@@ -1734,7 +1734,7 @@ hacerlo mejor. En fin.\n\
 ¡La próxima vez,\n\
 juega limpio!"))
 
-DEFINE_DIALOG(DIALOG_133, NPCNAME_TOAD, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_133, NPCNAME_TOAD, 6, _("\
 ¡Canela! ¡Qué alegría!\n\
 La Princesa...y yo...y\n\
 todos nosotros...estamos\n\
@@ -1765,7 +1765,7 @@ la puerta de la estrella\n\
 grande. ¡La Princesa\n\
 debe estar dentro!"))
 
-DEFINE_DIALOG(DIALOG_134, NPCNAME_TOAD, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_134, NPCNAME_TOAD, 5, _("\
 El nombre de las Estrellas\n\
 al iniciar cada nivel\n\
 suele darte una pista.\n\
@@ -1785,7 +1785,7 @@ otro nivel. ¡Todos\n\
 estamos esperando a\n\
 que nos salves!"))
 
-DEFINE_DIALOG(DIALOG_135, NPCNAME_TOAD, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_135, NPCNAME_TOAD, 5, _("\
 ¡Bowser ha robado las\n\
 Estrellas! ¡Lo he visto!\n\
 ¡Con mis propios ojos!\n\
@@ -1809,7 +1809,7 @@ enemigos que has derrotado,\n\
 elige las Estrellas que\n\
 has recobrado de ellos."))
 
-DEFINE_DIALOG(DIALOG_136, NPCNAME_TOAD, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_136, NPCNAME_TOAD, 6, _("\
 ¡Guau! ¡¿Ya tienes\n\
 todas esas Estrellas?!\n\
 ¡Increíble! ¡Creo que\n\
@@ -1840,7 +1840,7 @@ alto, te harás menos daño\n\
 si das un Azotón justo\n\
 antes llegas al suelo."))
 
-DEFINE_DIALOG(DIALOG_137, NPCNAME_TOAD, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_137, NPCNAME_TOAD, 6, _("\
 ¡Gracias, Canela!\n\
 El castillo está\n\
 recobrando la energía de\n\
@@ -1856,7 +1856,7 @@ aparecen cuando consigues\n\
 100 monedas en cada uno\n\
 de los 15 niveles!"))
 
-DEFINE_DIALOG(DIALOG_138, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_138, NPCNAME_SIGN, 3, _("\
 Ascensor 2\n\
 Abajo:\n\
 //Lago subterráneo\n\
@@ -1866,7 +1866,7 @@ Derecha:\n\
 //Laberinto brumoso\n\
 //¡Cerrado!"))
 
-DEFINE_DIALOG(DIALOG_139, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_139, NPCNAME_SIGN, 6, _("\
 Encima:\n\
 Plataforma automática.\n\
 \n\
@@ -1876,7 +1876,7 @@ un rumbo fijo.\n\
 También desaparece\n\
 automáticamente."))
 
-DEFINE_DIALOG(DIALOG_140, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_140, NPCNAME_SIGN, 6, _("\
 Área del montacargas\n\
 Derecha:\n\
 //Laberinto brumoso\n\
@@ -1888,7 +1888,7 @@ Izquierda:\n\
 Flecha roja:\n\
 //Estás aquí"))
 
-DEFINE_DIALOG(DIALOG_141, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_141, NPCNAME_NONE, 5, _("\
 ¡Has recobrado 1 de\n\
 las Estrellas de Poder!\n\
 Ahora podrás abrir algunas\n\
@@ -1905,7 +1905,7 @@ están alcanzando el poder!\n\
 Canela! ¡Ya hay más\n\
 Estrellas a recobrar!"))
 
-DEFINE_DIALOG(DIALOG_142, NPCNAME_NONE, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_142, NPCNAME_NONE, 5, _("\
 ¡Has recobrado 3\n\
 Estrellas de Poder!\n\
 Ahora podrás abrir\n\
@@ -1919,7 +1919,7 @@ mundos de la planta baja.\n\
 serán más y más recios!\n\
 ¡Ten cuidado!"))
 
-DEFINE_DIALOG(DIALOG_143, NPCNAME_NONE, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_143, NPCNAME_NONE, 6, _("\
 ¡Has recobrado 8\n\
 Estrellas de Poder!\n\
 ¡Ahora puedes abrir la\n\
@@ -1930,7 +1930,7 @@ lejos... ¿Y no esa\n\
 la voz de la Princesa\n\
 pidiendo ayuda?"))
 
-DEFINE_DIALOG(DIALOG_144, NPCNAME_NONE, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_144, NPCNAME_NONE, 6, _("\
 ¡Has recobrado 30\n\
 Estrellas de Poder!\n\
 ¡Ahora puedes abrir la\n\
@@ -1957,7 +1957,7 @@ se refugia bajo tierra.\n\
 ¿Lo tienes acorralado\n\
 por fin?"))
 
-DEFINE_DIALOG(DIALOG_145, NPCNAME_NONE, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_145, NPCNAME_NONE, 6, _("\
 ¡Has recobrado 50\n\
 Estrellas de Poder!\n\
 ¡Ahora puedes abrir la\n\
@@ -1973,7 +1973,7 @@ colorados pueden ser muy\n\
 Date prisa. El segundo\n\
 piso está ahí mismo."))
 
-DEFINE_DIALOG(DIALOG_146, NPCNAME_NONE, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_146, NPCNAME_NONE, 6, _("\
 ¡Has recobrado 70\n\
 Estrellas de Poder!\n\
 El misterio de la\n\
@@ -1983,7 +1983,7 @@ ya no es tal misterio.\n\
 enfadado Bowser!\n\
 ¡A por la batalla final!"))
 
-DEFINE_DIALOG(DIALOG_147, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_147, NPCNAME_SIGN, 5, _("\
 ¿Estás usando bien las\n\
 gorras especiales?\n\
 Pueder ser muy útiles\n\
@@ -2003,7 +2003,7 @@ Gorras de Invisibilidad,\n\
 y los verdes las Gorras\n\
 de Hierro."))
 
-DEFINE_DIALOG(DIALOG_148, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_148, NPCNAME_SIGN, 6, _("\
 Mi Montaña.\n\
 ¡No entrar!\n\
 Y no uses el Salto Triple\n\
@@ -2015,7 +2015,7 @@ rápidamente y tardarás\n\
 en recuperarte.\n\
 ///El Muñeco de Nieve"))
 
-DEFINE_DIALOG(DIALOG_149, NPCNAME_SIGN, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_149, NPCNAME_SIGN, 3, _("\
 ¡Bienvenido al tobogán\n\
 secreto de la Princesa!\n\
 Hay una Estrella escondida\n\
@@ -2027,7 +2027,7 @@ y Abajo para frenar.\n\
 ¡Si bajas rápido, te\n\
 ganarás la Estrella!"))
 
-DEFINE_DIALOG(DIALOG_150, NPCNAME_WIGGLER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_150, NPCNAME_WIGGLER, 5, _("\
 ¡Uaaa! ¡Me has inundado\n\
 la casa! ¿¿Por... qué??\n\
 ¡Mira cómo está todo!\n\
@@ -2044,7 +2044,7 @@ esta Estrella... Da gusto\n\
 verla brillar, pero me\n\
 hace sentir raro..."))
 
-DEFINE_DIALOG(DIALOG_151, NPCNAME_WIGGLER, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_151, NPCNAME_WIGGLER, 4, _("\
 ¡Pero bueno! ¡Hasta\n\
 aquí podíamos llegar!\n\
 ¡Primero me inundas\n\
@@ -2054,7 +2054,7 @@ Ya no estoy enfadado.\n\
 ¡VOY A ESTELLAR!\n\
 ¡¡UAAAAAAAA!!"))
 
-DEFINE_DIALOG(DIALOG_152, NPCNAME_WIGGLER, 3, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_152, NPCNAME_WIGGLER, 3, _("\
 ¡Auch! ¡Me rindo,\n\
 me rindo! ¡Tú ganas!\n\
 En realidad, no necesito\n\
@@ -2069,7 +2069,7 @@ sentir en paz.\n\
 Y ven a verme cuando\n\
 quieras, aquí estaré."))
 
-DEFINE_DIALOG(DIALOG_153, NPCNAME_SNOWMAN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_153, NPCNAME_SNOWMAN, 4, _("\
 ¡Eh! ¿Quién anda ahí?\n\
 ¿Qué se me está\n\
 subiendo encima?...\n\
@@ -2081,7 +2081,7 @@ sea, ¡me molesta!\n\
 Voy a quitármela de\n\
 un soplido..."))
 
-DEFINE_DIALOG(DIALOG_154, NPCNAME_TOAD, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_154, NPCNAME_TOAD, 5, _("\
 ¡Agárrate a tu gorra!\n\
 Si la pierdes, serás\n\
 dañado más fácilmente.\n\
@@ -2096,7 +2096,7 @@ Oh... ¿Tú sabes que hay\n\
 también niveles en las\n\
 paredes?"))
 
-DEFINE_DIALOG(DIALOG_155, NPCNAME_TOAD, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_155, NPCNAME_TOAD, 6, _("\
 Gracias al poder de las\n\
 Estrellas, la vida está\n\
 volviendo al castillo.\n\
@@ -2114,14 +2114,14 @@ ciudad del agua, podrás\n\
 inundarla entrando con\n\
 un salto de altura."))
 
-DEFINE_DIALOG(DIALOG_156, NPCNAME_TOAD, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_156, NPCNAME_TOAD, 5, _("\
 Dentro de ese reloj\n\
 es un mundo de lo más\n\
 rarito. ¡Atento a la\n\
 posición de la manecilla\n\
 grande antes de saltar!"))
 
-DEFINE_DIALOG(DIALOG_157, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_157, NPCNAME_SIGN, 5, _("\
 ¡Cuidado! No dejes\n\
 que te traguen las\n\
 arenas movedizas.\n\
@@ -2132,7 +2132,7 @@ Las zonas de arena\n\
 oscura son fosos\n\
 sin fondo."))
 
-DEFINE_DIALOG(DIALOG_158, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_158, NPCNAME_SIGN, 6, _("\
 1. Si saltas y saltas,\n\
 saltarás más y más alto.\n\
 Si corres y saltes tres\n\
@@ -2146,7 +2146,7 @@ la Pared. Puedes acceder\n\
 a lugares más altos con\n\
 esa técnica."))
 
-DEFINE_DIALOG(DIALOG_159, NPCNAME_SIGN, 6, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_159, NPCNAME_SIGN, 6, _("\
 3. Si te paras, pulsas [Z]\n\
 para agacharte y saltas,\n\
 darás un Salto Hacia\n\
@@ -2154,13 +2154,13 @@ Atrás. Para dar un Salto\n\
 Largo, corre, pulsa [Z]\n\
 y salta."))
 
-DEFINE_DIALOG(DIALOG_160, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_160, NPCNAME_SIGN, 4, _("\
 Pulsa [B] mientras correr\n\
 para dar un ataque\n\
 resbalando. Para reponerte\n\
 de pie, pulsa [A] o [B]."))
 
-DEFINE_DIALOG(DIALOG_161, NPCNAME_YOSHI, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_161, NPCNAME_YOSHI, 4, _("\
 ¡¡¡Canela!!!\n\
 ¿Eres tú? ¿De veras?\n\
 ¡Ha sido mucho tiempo\n\
@@ -2197,7 +2197,7 @@ municiones!\n\
 \n\
 //Equipo Canela 64"))
 
-DEFINE_DIALOG(DIALOG_162, NPCNAME_MIPS, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_162, NPCNAME_MIPS, 4, _("\
 ¡No, no, no! ¡Es la\n\
 segunda vez! Debo darme\n\
 prisa, ¿lo ves?\n\
@@ -2210,7 +2210,7 @@ Pero en serio, ¡yo ya\n\
 me voy! ¡Ahora, suéltame!\n\
 ¡Me voy, me voy, me voy!"))
 
-DEFINE_DIALOG(DIALOG_163, NPCNAME_BOWSER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_163, NPCNAME_BOWSER, 5, _("\
 ¡Noooo! ¡Esta vez sí que\n\
 me has ganado de verdad,\n\
 Canela! ¡Qué rabia perder\n\
@@ -2232,7 +2232,7 @@ ni mirar. ¡Me largo!\n\
 esa palanca de control eche\n\
 fuego! ¡Bwa, ja. ja!"))
 
-DEFINE_DIALOG(DIALOG_164, NPCNAME_PENGUIN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_164, NPCNAME_PENGUIN, 4, _("\
 ¡Canela! ¿Cómo va eso,\n\
 amigo? Hace mucho que no\n\
 practico y estoy un pelín\n\
@@ -2247,18 +2247,18 @@ Preparados, listos...\n\
 //¡Ya!//Ahora no"))
 
 
-DEFINE_DIALOG(DIALOG_165, NPCNAME_SIGN, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_165, NPCNAME_SIGN, 5, _("\
 No es problema mio si\n\
 corres alrededor de\n\
 este palo y te mareas."))
 
-DEFINE_DIALOG(DIALOG_166, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_166, NPCNAME_SIGN, 4, _("\
 Volveré pronto.\n\
 Estoy entrenando, así\n\
 que ven más tarde.\n\
 ///Koopa el Rápido"))
 
-DEFINE_DIALOG(DIALOG_167, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_167, NPCNAME_SIGN, 4, _("\
 ¡Bienvenido al castillo!\n\
 \n\
 Pulsa [A] para saltar\n\
@@ -2268,14 +2268,14 @@ atrapar algo. Pulsa [B]\n\
 otra vez para tirar lo\n\
 que llevas."))
 
-DEFINE_DIALOG(DIALOG_168, NPCNAME_WIGGLER, 5, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_168, NPCNAME_WIGGLER, 5, _("\
 ¡Eh! ¡¿Vas a parar ya?!\n\
 ¡Es la segunda vez\n\
 que me has dado!\n\
 ¡Te la has ganado,\n\
 dos pies!"))
 
-DEFINE_DIALOG(DIALOG_169, NPCNAME_SIGN, 4, 58, 114, _("\
+DEFINE_DIALOG(DIALOG_169, NPCNAME_SIGN, 4, _("\
 ¡No entrar!\n\
 ¡Y eso va por ti!\n\
 \n\
