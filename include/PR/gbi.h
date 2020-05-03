@@ -90,6 +90,7 @@
 # ifndef F3DEX_GBI_2
 #  define F3DEX_GBI_2
 # endif
+# define GBI_FLOATS
 #endif
 
 #ifdef    F3DEX_GBI_2
@@ -1108,7 +1109,7 @@
  * Vertex (set up for use with colors)
  */
 typedef struct {
-#ifdef TARGET_N64
+#ifndef GBI_FLOATS
 	short		ob[3];	/* x, y, z */
 #else
 	float		ob[3];	/* x, y, z */
@@ -1122,7 +1123,7 @@ typedef struct {
  * Vertex (set up for use with normals)
  */
 typedef struct {
-#ifdef TARGET_N64
+#ifndef GBI_FLOATS
 	short		ob[3];	/* x, y, z */
 #else
 	float		ob[3];	/* x, y, z */
@@ -1175,7 +1176,7 @@ typedef struct {
 	unsigned char	v[3];
 } Tri;
 
-#ifdef TARGET_N64
+#ifndef GBI_FLOATS
 /*
  * 4x4 matrix, fixed point s15.16 format.
  * First 8 words are integer portion of the 4x4 matrix

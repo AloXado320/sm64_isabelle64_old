@@ -1,4 +1,4 @@
-    #include <ultra64.h>
+#include <ultra64.h>
 #include "sm64.h"
 #include "heap.h"
 #include "load.h"
@@ -443,7 +443,6 @@ u8 sBackgroundMusicDefaultVolume[] = {
     70,  // SEQ_EVENT_CUTSCENE_ENDING
     65,  // SEQ_MENU_FILE_SELECT
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
-    75,  // SEQ_EVENT_GUNBOUND_FANFARE
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
@@ -491,7 +490,7 @@ u8 sUnused8033323C = 0; // never read, set to 0
 
 // bss
 #ifndef VERSION_EU
-u16 *gCurrAiBuffer;
+s16 *gCurrAiBuffer;
 #endif
 struct Sound sSoundRequests[0x100];
 // Curiously, this has size 3, despite SEQUENCE_PLAYERS == 4 on EU
@@ -1946,7 +1945,7 @@ u8 func_803200E4(u16 fadeTimer) {
 #if defined(VERSION_JP) || defined(VERSION_US)
             gSequencePlayers[SEQ_PLAYER_LEVEL].volume = sBackgroundMusicDefaultVolume[sPlayer0CurSeqId] / 127.0f;
 #endif
-            func_8031D7B0(0, fadeTimer);
+            func_8031D7B0(SEQ_PLAYER_LEVEL, fadeTimer);
         }
     }
     return vol;
@@ -2352,14 +2351,14 @@ void func_803210D4(u16 fadeOutTime) {
 #ifdef VERSION_EU
         func_802ad74c(0x83000000, fadeOutTime);
 #else
-        sequence_player_fade_out_internal(0, fadeOutTime);
+        sequence_player_fade_out_internal(SEQ_PLAYER_LEVEL, fadeOutTime);
 #endif
     }
     if (gSequencePlayers[SEQ_PLAYER_ENV].enabled == TRUE) {
 #ifdef VERSION_EU
         func_802ad74c(0x83010000, fadeOutTime);
 #else
-        sequence_player_fade_out_internal(1, fadeOutTime);
+        sequence_player_fade_out_internal(SEQ_PLAYER_ENV, fadeOutTime);
 #endif
     }
 

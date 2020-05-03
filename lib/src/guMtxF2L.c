@@ -1,9 +1,9 @@
 #include "libultra_internal.h"
-#ifndef TARGET_N64
+#ifdef GBI_FLOATS
 #include <string.h>
 #endif
 
-#ifdef TARGET_N64
+#ifndef GBI_FLOATS
 void guMtxF2L(float mf[4][4], Mtx *m) {
     int r, c;
     s32 tmp1;
@@ -58,7 +58,7 @@ void guMtxIdentF(float mf[4][4]) {
     }
 }
 void guMtxIdent(Mtx *m) {
-#ifdef TARGET_N64
+#ifndef GBI_FLOATS
     float mf[4][4];
     guMtxIdentF(mf);
     guMtxF2L(mf, m);

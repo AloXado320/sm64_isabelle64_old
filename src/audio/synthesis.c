@@ -9,7 +9,7 @@
 #include "external.h"
 
 #ifndef TARGET_N64
-#include "../pc/mixer.h" // huh
+#include "../pc/mixer.h"
 #endif
 
 #define DMEM_ADDR_TEMP 0x0
@@ -258,7 +258,7 @@ s32 get_volume_ramping(u16 sourceVol, u16 targetVol, s32 arg2) {
 
 #ifdef VERSION_EU
 //TODO: (Scrub C) pointless mask and whitespace
-u64 *synthesis_execute(u64 *cmdBuf, s32 *writtenCmds, u16 *aiBuf, s32 bufLen) {
+u64 *synthesis_execute(u64 *cmdBuf, s32 *writtenCmds, s16 *aiBuf, s32 bufLen) {
     s32 i, j;
     f32 *leftVolRamp;
     f32 *rightVolRamp;
@@ -309,7 +309,7 @@ u64 *synthesis_execute(u64 *cmdBuf, s32 *writtenCmds, u16 *aiBuf, s32 bufLen) {
 }
 #else
 // bufLen will be divisible by 16
-u64 *synthesis_execute(u64 *cmdBuf, s32 *writtenCmds, u16 *aiBuf, s32 bufLen) {
+u64 *synthesis_execute(u64 *cmdBuf, s32 *writtenCmds, s16 *aiBuf, s32 bufLen) {
     s32 chunkLen;
     s32 i;
     u32 *aiBufPtr = (u32 *) aiBuf;

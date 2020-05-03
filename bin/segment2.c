@@ -2017,7 +2017,7 @@ ALIGNED8 const u8 texture_waterbox_ryusa[] = {
 
 // 0x02014470 - 0x020144B0
 static const Mtx matrix_identity = {
-#ifdef TARGET_N64
+#ifndef GBI_FLOATS
     {{0x00010000, 0x00000000,
       0x00000001, 0x00000000},
      {0x00000000, 0x00010000,
@@ -2037,7 +2037,7 @@ static const Mtx matrix_identity = {
 
 // 0x020144B0 - 0x020144F0
 static const Mtx matrix_fullscreen = {
-#if TARGET_N64
+#ifndef GBI_FLOATS
     {{0x00000000, 0x00000000,
       0x00000000, 0x00000000},
      {0x00000000, 0xffff0000,

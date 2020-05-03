@@ -13,9 +13,9 @@
 extern struct Note *gNotes;
 
 // Music in SM64 is played using 3 players:
-// gSequencePlayers[SEQ_PLAYER_LEVEL] is level background music
-// gSequencePlayers[SEQ_PLAYER_ENV] is misc music, like the puzzle jingle
-// gSequencePlayers[SEQ_PLAYER_SFX] is sound
+// gSequencePlayers[0] is level background music
+// gSequencePlayers[1] is misc music, like the puzzle jingle
+// gSequencePlayers[2] is sound
 extern struct SequencePlayer gSequencePlayers[SEQUENCE_PLAYERS];
 
 extern struct SequenceChannel gSequenceChannels[SEQUENCE_CHANNELS];

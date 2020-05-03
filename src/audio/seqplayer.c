@@ -8,10 +8,6 @@
 #include "external.h"
 #include "effects.h"
 
-#ifndef TARGET_N64
-#include "../pc/mixer.h"
-#endif
-
 #define PORTAMENTO_IS_SPECIAL(x) ((x).mode & 0x80)
 #define PORTAMENTO_MODE(x) ((x).mode & ~0x80)
 #define PORTAMENTO_MODE_1 1

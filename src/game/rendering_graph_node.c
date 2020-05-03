@@ -539,7 +539,7 @@ static void geo_process_background(struct GraphNodeBackground *node) {
     if (list != 0) {
         geo_append_display_list((void *) VIRTUAL_TO_PHYSICAL(list), node->fnNode.node.flags >> 8);
     } else if (gCurGraphNodeMasterList != NULL) {
-#ifdef TARGET_N64
+#ifndef F3DEX_GBI_2E
         Gfx *gfxStart = alloc_display_list(sizeof(Gfx) * 7);
 #else
         Gfx *gfxStart = alloc_display_list(sizeof(Gfx) * 8);
