@@ -645,19 +645,6 @@ s32 audio_shut_down_and_reset_step(void) {
     }
     return 1;
 }
-#else
-/**
- * Waits until a specified number of audio frames have been created
- */
-void wait_for_audio_frames(UNUSED s32 frames) {
-    gAudioFrameCount = 0;
-#ifdef TARGET_N64
-    // Sound thread will update gAudioFrameCount
-    while (gAudioFrameCount < frames) {
-        // spin
-    }
-#endif
-}
 #endif
 
 #ifndef VERSION_EU
@@ -700,7 +687,6 @@ void audio_reset_session(void) {
         // Wait for all notes to stop playing
         frames = 0;
         for (;;) {
-            wait_for_audio_frames(1);
             frames++;
             if (frames > 4 * 60) {
                 // Break after 4 seconds
@@ -720,13 +706,11 @@ void audio_reset_session(void) {
 
         // Wait for the reverb to finish as well
         decrease_reverb_gain();
-        wait_for_audio_frames(3);
 
         // The audio interface is double buffered; thus, we have to take the
         // load lock for 2 frames for the buffers to free up before we can
         // repurpose memory. Make that 3 frames, just in case.
         gAudioLoadLock = AUDIO_LOCK_LOADING;
-        wait_for_audio_frames(3);
 
         remainingDmas = gCurrAudioFrameDmaCount;
         while (remainingDmas > 0) {
