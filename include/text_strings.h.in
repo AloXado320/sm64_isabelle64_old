@@ -321,7 +321,8 @@
 #define TEXT_CHECK_FILE _("CHECK FILE")
 #define TEXT_COPY_FILE _("COPY FILE")
 #define TEXT_ERASE_FILE _("ERASE FILE")
-#define TEXT_SOUND_SELECT _("SOUND SELECT")
+
+#define TEXT_SOUND_SELECT _("Sound Select")
 
 #define TEXT_FILE_MARIO_A _("ISABELLE A")
 #define TEXT_FILE_MARIO_B _("ISABELLE B")
@@ -349,9 +350,9 @@
 #define TEXT_FILE_MARIO_D_ES _("CANELA D")
 
 // Menu Options
-#define TEXT_SCORE _("Score")
-#define TEXT_COPY _("Copy")
-#define TEXT_ERASE _("Erase")
+#define TEXT_SCORE _(" Score")
+#define TEXT_COPY _(" Copy")
+#define TEXT_ERASE _(" Erase")
 
 // Sound Options
 #define TEXT_STEREO _("Stereo")
@@ -363,10 +364,10 @@
 #define TEXT_NO_SAVED_DATA_EXISTS _("No save data exists")
 
 // Inside a Menu
-#define TEXT_RETURN _("Return")
-#define TEXT_CHECK_SCORE _("Check score")
-#define TEXT_COPY_FILE_BUTTON _("Copy file")
-#define TEXT_ERASE_FILE_BUTTON _("Erase file")
+#define TEXT_RETURN _(" Return")
+#define TEXT_CHECK_SCORE _(" Check score")
+#define TEXT_COPY_FILE_BUTTON _(" Copy file")
+#define TEXT_ERASE_FILE_BUTTON _(" Erase file")
 
 // Score Menu
 #define TEXT_HI_SCORE _("HI SCORE")
@@ -430,51 +431,57 @@
 /**
  * File Select Text
  */
-#define TEXT_RETURN_FR _("Retour")
-#define TEXT_RETURN_DE _("Zurück")
-#define TEXT_RETURN_IT _("Torna")
-#define TEXT_RETURN_ES _("Regresar")
+#define TEXT_RETURN_FR _(" Retour")
+#define TEXT_RETURN_DE _(" Zurück")
+#define TEXT_RETURN_IT _(" Torna")
+#define TEXT_RETURN_ES _(" Regresar")
 
-#define TEXT_CHECK_SCORE_FR _("Score")
-#define TEXT_CHECK_SCORE_DE _("Leistung")
-#define TEXT_CHECK_SCORE_IT _("Punteggio")
-#define TEXT_CHECK_SCORE_ES _("Ver puntos")
+#define TEXT_CHECK_SCORE_FR _(" Score")
+#define TEXT_CHECK_SCORE_DE _(" Leistung")
+#define TEXT_CHECK_SCORE_IT _(" Punteggio")
+#define TEXT_CHECK_SCORE_ES _(" Ver puntos")
 
-#define TEXT_COPY_FILE_BUTTON_FR _("Copier")
-#define TEXT_COPY_FILE_BUTTON_DE _("Kopieren")
-#define TEXT_COPY_FILE_BUTTON_IT _("Copia")
-#define TEXT_COPY_FILE_BUTTON_ES _("Copiar")
+#define TEXT_COPY_FILE_BUTTON_FR _(" Copier")
+#define TEXT_COPY_FILE_BUTTON_DE _(" Kopieren")
+#define TEXT_COPY_FILE_BUTTON_IT _(" Copia")
+#define TEXT_COPY_FILE_BUTTON_ES _(" Copiar")
 
-#define TEXT_ERASE_FILE_BUTTON_FR _("Effacer")
-#define TEXT_ERASE_FILE_BUTTON_DE _("Löschen")
-#define TEXT_ERASE_FILE_BUTTON_IT _("Cancella")
-#define TEXT_ERASE_FILE_BUTTON_ES _("Borrar")
+#define TEXT_ERASE_FILE_BUTTON_FR _(" Effacer")
+#define TEXT_ERASE_FILE_BUTTON_DE _(" Löschen")
+#define TEXT_ERASE_FILE_BUTTON_IT _(" Cancella")
+#define TEXT_ERASE_FILE_BUTTON_ES _(" Borrar")
 
 #define TEXT_SELECT_FILE_FR _("CHOISIR  FICHIER")
 #define TEXT_SELECT_FILE_DE _("WwHLE SPIEL")
 #define TEXT_SELECT_FILE_IT _("SCEGLI FILE")
 #define TEXT_SELECT_FILE_ES _("ELEGIR ARCHIVO")
 
-#define TEXT_SCORE_FR _("Score")
-#define TEXT_SCORE_DE _("Leistung")
-#define TEXT_SCORE_IT _("Punteggi")
-#define TEXT_SCORE_ES _("Puntos")
+#define TEXT_SCORE_FR _(" Score")
+#define TEXT_SCORE_DE _(" Leistung")
+#define TEXT_SCORE_IT _(" Punteggi")
+#define TEXT_SCORE_ES _(" Puntos")
 
-#define TEXT_COPY_FR _("Copier")
-#define TEXT_COPY_DE _("Kopieren")
-#define TEXT_COPY_IT _("Copia")
-#define TEXT_COPY_ES _("Copiar")
+#define TEXT_COPY_FR _(" Copier")
+#define TEXT_COPY_DE _(" Kopieren")
+#define TEXT_COPY_IT _(" Copia")
+#define TEXT_COPY_ES _(" Copiar")
 
-#define TEXT_ERASE_FR _("Effacer")
-#define TEXT_ERASE_DE _("Löschen")
-#define TEXT_ERASE_IT _("Elimina")
-#define TEXT_ERASE_ES _("Borrar")
+#define TEXT_ERASE_FR _(" Effacer")
+#define TEXT_ERASE_DE _(" Löschen")
+#define TEXT_ERASE_IT _(" Elimina")
+#define TEXT_ERASE_ES _(" Borrar")
 
-#define TEXT_OPTION _("Option")  // new in EU
-#define TEXT_OPTION_FR _("Option")
-#define TEXT_OPTION_DE _("Optionen")
-#define TEXT_OPTION_IT _("Opzioni")
-#define TEXT_OPTION_ES _("Opciones")
+#define TEXT_OPTION _(" Options")  // new in EU
+#define TEXT_OPTION_FR _(" Options")
+#define TEXT_OPTION_DE _(" Optionen")
+#define TEXT_OPTION_IT _(" Opzioni")
+#define TEXT_OPTION_ES _(" Opciones")
+
+#define TEXT_OPTIONS_MENU _("OPTIONS MENU")  // new in EU
+#define TEXT_OPTIONS_MENU_FR _("MENU D OPTIONS")
+#define TEXT_OPTIONS_MENU_DE _("OPTIONS MENU")
+#define TEXT_OPTIONS_MENU_IT _("MENU DELLE OPZIONI")
+#define TEXT_OPTIONS_MENU_ES _("MENU DE OPCION")
 
 #define TEXT_CHECK_FILE_FR _("VOIR  SCORE")
 #define TEXT_CHECK_FILE_DE _("VON WELCHEM SPIEL")
@@ -521,7 +528,7 @@
 #define TEXT_NO_IT _("No")
 #define TEXT_NO_ES _("No")
 
-#define TEXT_ERASE_FILE_FR _("EFFACER  FICHIER")
+#define TEXT_ERASE_FILE_FR _("EFFACER FICHIER")
 #define TEXT_ERASE_FILE_DE _("SPIEL LxSCHEN")
 #define TEXT_ERASE_FILE_IT _("CANCELLA FILE")
 #define TEXT_ERASE_FILE_ES _("BORRAR ARCHIVO")
@@ -536,16 +543,16 @@
 #define TEXT_FILE_MARIO_A_JUST_ERASED_IT _("Fuffi A cancellati")
 #define TEXT_FILE_MARIO_A_JUST_ERASED_ES _("Canela A fue borrada")
 
-#define TEXT_SOUND_SELECT_FR _("SON")
-#define TEXT_SOUND_SELECT_DE _("SOUND")
-#define TEXT_SOUND_SELECT_IT _("SCEGLI AUDIO")
-#define TEXT_SOUND_SELECT_ES _("ELEGIR SONIDO")
+#define TEXT_SOUND_SELECT_FR _("Son")
+#define TEXT_SOUND_SELECT_DE _("Sound")
+#define TEXT_SOUND_SELECT_IT _("Scegli Audio")
+#define TEXT_SOUND_SELECT_ES _("Elegir Sonido")
 
-#define TEXT_LANGUAGE_SELECT _("LANGUAGE SELECT")  // new in EU
-#define TEXT_LANGUAGE_SELECT_FR _("SELECTION LANGUE")
-#define TEXT_LANGUAGE_SELECT_DE _("WwHLE SPRACHE")
-#define TEXT_LANGUAGE_SELECT_IT _("SELEZIONE LINGUA")
-#define TEXT_LANGUAGE_SELECT_ES _("SELECCIONA IDIOMA")
+#define TEXT_LANGUAGE_SELECT _("Language Select")  // new in EU
+#define TEXT_LANGUAGE_SELECT_FR _("Selection Langue")
+#define TEXT_LANGUAGE_SELECT_DE _("Wähle Sprache")
+#define TEXT_LANGUAGE_SELECT_IT _("Selezione Lingua")
+#define TEXT_LANGUAGE_SELECT_ES _("Selecciona Idioma")
 
 #define TEXT_STEREO_FR _("Stéréo")
 #define TEXT_MONO_FR _("Mono")

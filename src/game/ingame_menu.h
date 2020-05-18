@@ -69,7 +69,7 @@ enum HudSpecialHUDChars {
 
 enum SpecialFontChars {
     GLOBAL_CHAR_SPACE = 0x9E,
-    GLOBAR_CHAR_TERMINATOR = 0xFF
+    GLOBAL_CHAR_TERMINATOR = 0xFF
 };
 
 // definitions for some of the special characters defined in charmap.txt
@@ -198,6 +198,10 @@ extern s16 get_str_x_pos_from_center(s16 centerPos, u8 *str, f32 scale);
 extern s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale);
 #endif
 
+extern s16 get_hud_str_width(u8 *str);
+extern s16 get_string_width(u8 *str);
+
+extern s16 get_hud_str_width_ascii(char *str);
 extern s16 get_string_width_ascii(char *str);
 
 extern s16 get_str_x_pos_from_center_custom_hex(s16 lutType, s16 centerPos, u8 *strHex, u8 scale);

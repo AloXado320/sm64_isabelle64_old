@@ -1568,6 +1568,10 @@ ALIGNED8 const u8 alo_ac_bg_menus_pal[] = {
 #include "textures/segment2/alo_ac_bg_menus_pal.rgba16.inc.c"
 };
 
+ALIGNED8 const u8 alo_ac_bg_menus_gray_pal[] = {
+#include "textures/segment2/alo_ac_bg_menus_gray_pal.rgba16.inc.c"
+};
+
 ALIGNED8 const u8 alo_ac_bg_menus_ci4[] = {
 #include "textures/segment2/alo_ac_bg_menus_ci4.inc.c"
 };

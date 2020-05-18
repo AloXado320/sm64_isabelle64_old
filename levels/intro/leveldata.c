@@ -420,7 +420,7 @@ const Gfx n64logo_material_revert_render_settings[] = {
 };
 
 
-const Gfx dl_intro_n64_logo[] = {
+Gfx dl_intro_n64_logo[] = {
     gsSPDisplayList(n64logo_Ultra64_mesh),
     gsSPDisplayList(n64logo_material_revert_render_settings),
     gsSPEndDisplayList(),

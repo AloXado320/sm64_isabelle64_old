@@ -4,35 +4,10 @@
 #include "types.h"
 
 // geo
-extern const GeoLayout geo_menu_mario_save_button[];
-extern const GeoLayout geo_menu_mario_save_button_fade[];
-extern const GeoLayout geo_menu_mario_new_button[];
-extern const GeoLayout geo_menu_mario_new_button_fade[];
-extern const GeoLayout geo_menu_erase_button[];
-extern const GeoLayout geo_menu_copy_button[];
-extern const GeoLayout geo_menu_file_button[];
-extern const GeoLayout geo_menu_score_button[];
-extern const GeoLayout geo_menu_sound_button[];
-extern const GeoLayout geo_menu_generic_button[];
 extern const GeoLayout geo_menu_file_select_strings_and_menu_cursor[];
 extern const GeoLayout geo_menu_act_selector_strings[];
 
 // leveldata
-extern const Gfx dl_menu_mario_english_button_base[];
-extern const Gfx dl_menu_mario_french_button_base[];
-extern const Gfx dl_menu_mario_german_button_base[];
-extern const Gfx dl_menu_mario_italian_button_base[];
-extern const Gfx dl_menu_mario_spanish_button_base[];
-extern const Gfx dl_menu_mario_save_button_base[];
-extern const Gfx dl_menu_mario_new_button_base[];
-extern const Gfx dl_menu_save_button_back[];
-extern const Gfx dl_menu_save_button_fade_back[];
-extern const Gfx dl_menu_erase_button[];
-extern const Gfx dl_menu_copy_button[];
-extern const Gfx dl_menu_file_button[];
-extern const Gfx dl_menu_score_button[];
-extern const Gfx dl_menu_sound_button[];
-extern const Gfx dl_menu_generic_button[];
 extern const Gfx dl_menu_idle_hand[];
 extern const Gfx dl_menu_grabbing_hand[];
 extern const u8 *const menu_hud_lut[];

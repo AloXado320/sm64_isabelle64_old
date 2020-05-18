@@ -393,7 +393,6 @@ void render_textrect(s32 x, s32 y, s32 pos) {
     s32 rectX;
     s32 rectY;
 
-//    clip_to_bounds(&rectBaseX, &rectBaseY);
     rectX = rectBaseX;
     rectY = rectBaseY;
     gSPScisTextureRectangle(gDisplayListHead++, rectX << 2, rectY << 2, (rectX + 16) << 2,
@@ -401,9 +400,11 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 }
 
 
-void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 a) {
+void render_custom_texrect(Gfx *dltexture, s16 configDls, s16 usesCi, u16 ttCiType, 
+        s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 a) {
    
-    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
+    if (configDls != FALSE)
+        gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
    
     if (usesCi != FALSE) {
         switch (ttCiType) {
@@ -423,10 +424,15 @@ void render_custom_texrect(Gfx *dltexture, s16 usesCi, u16 ttCiType, s16 x, s16 
     gSPDisplayList(gDisplayListHead++, dltexture);
    
     gSPScisTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + width) << 2, (y + height) << 2, G_TX_RENDERTILE, 0, 0, (1 << 10), (1 << 10));
-  
-    if (usesCi != FALSE) gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
+    
+    if (configDls != TRUE)
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+
+    if (usesCi != FALSE)
+        gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
    
-    gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
+    if (configDls != FALSE)
+        gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_end);
 }   
 
 /**

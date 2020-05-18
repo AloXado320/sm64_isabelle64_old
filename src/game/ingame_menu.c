@@ -233,6 +233,8 @@ void create_dl_ortho_matrix(void) {
 }
 
 void create_aio_matrix(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 aRot, f32 xRot, f32 yRot, f32 zPosRot) {
+        
+    create_dl_ortho_matrix();
 
     create_dl_translation_matrix(MENU_MTX_PUSH, xPos, yPos, 0);
     create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 1.0f);
@@ -245,8 +247,7 @@ void create_aio_matrix(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 aRot
     gSPDisplayList(gDisplayListHead++, displaylist);
 
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
@@ -563,7 +564,7 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
 #endif
     }
 
-    while (str[strPos] != GLOBAR_CHAR_TERMINATOR) {
+    while (str[strPos] != GLOBAL_CHAR_TERMINATOR) {
         switch (str[strPos]) {
             case GLOBAL_CHAR_SPACE:
                 curX += xStride / 2;
@@ -692,7 +693,7 @@ void print_credits_string(s16 x, s16 y, const u8 *str) {
                 G_TX_CLAMP, 3, G_TX_NOLOD, G_TX_CLAMP, 3, G_TX_NOLOD);
     gDPSetTileSize(gDisplayListHead++, G_TX_RENDERTILE, 0, 0, (8 - 1) << G_TEXTURE_IMAGE_FRAC, (8 - 1) << G_TEXTURE_IMAGE_FRAC);
 
-    while (str[strPos] != GLOBAR_CHAR_TERMINATOR) {
+    while (str[strPos] != GLOBAL_CHAR_TERMINATOR) {
         switch (str[strPos]) {
             case GLOBAL_CHAR_SPACE:
                 curX += 4;
@@ -860,11 +861,11 @@ s16 get_str_x_pos_from_center_scale(s16 centerPos, u8 *str, f32 scale) {
     return (f32) centerPos - (scale * (charsWidth / 2.0)) - ((scale / 2.0) * (spacesWidth / 2.0));
 }
 
-s32 get_hud_str_width(u8 *str) {
+s16 get_hud_str_width(u8 *str) {
     u32 c;
-    s32 length = 0;
+    s16 length = 0;
 
-    while ((c = *str++) != 0) {
+    while ((c = *str++) != GLOBAL_CHAR_TERMINATOR) {
         length += (c == GLOBAL_CHAR_SPACE ? 6 : 12);
     }
 
@@ -883,11 +884,11 @@ s16 get_string_width(u8 *str) {
 }
 
 
-s32 get_hud_str_width_ascii(char *str) {
+s16 get_hud_str_width_ascii(char *str) {
     u32 c;
-    s32 length = 0;
+    s16 length = 0;
 
-    while ((c = *str++) != 0) {
+    while ((c = *str++) != GLOBAL_CHAR_TERMINATOR) {
         length += (c == ' ' ? 6 : 12);
     }
 
@@ -1114,7 +1115,7 @@ void render_acnl_dialog_top_npc_name(struct DialogEntry *dialog, s16 x, s16 y) {
 
     gInGameLanguage = eu_get_language();
 
-    render_custom_texrect(dl_balloon_dialog_top_npc_name, TRUE, G_TT_IA16, x, y,
+    render_custom_texrect(dl_balloon_dialog_top_npc_name, TRUE, TRUE, G_TT_IA16, x, y,
         128, 32, topName->r, topName->g, topName->b, gAcnlDialogAlpha * 1.2); // double size due to mirror
 
     topName->isTextBlack ? (monoColor = 0) : (monoColor = 255);
@@ -1144,7 +1145,7 @@ void render_acnl_dialog_background(s16 x, s16 y, s16 scale) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_bg_ia4, G_IM_FMT_IA, 128, 32, 0,
             G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 7, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, x << 2, yPos << 2, (x + 128 * scale) << 2, (yPos + 32 * scale) << 2,
-            G_TX_RENDERTILE, (128 << 6) / scale, (32 << 6) / scale, (1 << 10) / scale, (1 << 10) / scale);
+            G_TX_RENDERTILE, (64 << 6), (16 << 6), (1 << 10) / scale, (1 << 10) / scale);
 }
 
 extern u8 alo_ac_dialog_border_ci4_pal[];
@@ -1167,7 +1168,7 @@ void render_acnl_dialog_border(s16 x, s16 y, s16 scale) {
     gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_IA, 64, 64, 0,
             G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, xPos << 2, y << 2, (xPos + 64 * scale) << 2, (y + 64 * scale) << 2,
-            G_TX_RENDERTILE, (64 << 6) / scale, (64 << 6) / scale, (1 << 10) / scale, (1 << 10) / scale);
+            G_TX_RENDERTILE, (32 << 6), (32 << 6), (1 << 10) / scale, (1 << 10) / scale);
 
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
 }
@@ -1930,7 +1931,7 @@ void print_credits_str_ascii(s16 x, s16 y, const char *str) {
         c = str[pos];
     }
 
-    creditStr[pos] = GLOBAR_CHAR_TERMINATOR;
+    creditStr[pos] = GLOBAL_CHAR_TERMINATOR;
 
     print_credits_string(x, y, creditStr);
 }
@@ -2065,27 +2066,33 @@ u8 sShzTitleScreenStrings[][24] = {
 void render_title_screen_textures(void) {
     s16 xPosStr1;
     s16 xPosStr2;
-
+    s16 alpha;
+    s16 colorFade = gGlobalTimer << 11;
+    
     gInGameLanguage = eu_get_language();
 
-    render_custom_texrect(dl_alo_pixel_shz_titlescreen, TRUE, G_TT_RGBA16, 80, 18, 32, 32, 255, 255, 255, 255);
+    render_custom_texrect(dl_alo_pixel_shz_titlescreen, TRUE, TRUE, G_TT_RGBA16, 80, 18, 32, 32, 255, 255, 255, 255);
     render_ac_base_logo_titlescreen();
-    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, G_TT_RGBA16, 184, 28, 32, 32, 255, 255, 255, 255);
+    render_custom_texrect(dl_alo_leaf64_titlescreen, TRUE, TRUE, G_TT_RGBA16, 184, 28, 32, 32, 255, 255, 255, 255);
     render_shz_names_titlescreen(92, 58, gInGameLanguage);
-    render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, G_TT_IA16, 32, 200, 256, 16, 255, 255, 255, 255);
+    render_custom_texrect(dl_alo_year_name_titlescreen, TRUE, TRUE, G_TT_IA16, 32, 194, 256, 16, 255, 255, 255, 255);
 
-    xPosStr1 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4);
-    xPosStr2 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4);
+    xPosStr1 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, 
+        sShzTitleScreenStrings[gInGameLanguage * 2 + 0], 4);
+    xPosStr2 = get_str_x_pos_from_center_custom_hex(LUT_TYPE_STR_HEX, SCREEN_HEIGHT / 2, 
+        sShzTitleScreenStrings[gInGameLanguage * 2 + 1], 4);
 
-    if ((gGlobalTimer & 0x1F) < 20) {
-        if (gControllerBits == 0) {
-            print_generic_string_shadow(HEX_PRINT_CHR, xPosStr2, 52, 230, 230, 230, 255, NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 1]);
-        } else {
-            print_generic_string_shadow(HEX_PRINT_CHR, xPosStr1, 52, 230, 230, 230, 255, NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 0]);
-        }
+    alpha = (sins(colorFade) * 90.0f + 105.0f);
+
+    if (gControllerBits == 0) {
+        print_generic_string_shadow(HEX_PRINT_CHR, xPosStr2, 54, 128, 0, 0, alpha, 
+            NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 1]);
+    } else {
+        print_generic_string_shadow(HEX_PRINT_CHR, xPosStr1, 54, 255, 255, 255, alpha, 
+        NULL, sShzTitleScreenStrings[gInGameLanguage * 2 + 0]);
     }
 
-    print_generic_string_shadow(ASCII_PRINT_CHR, 256, 4, 230, 230, 230, 255, "Ver. 1.3", NULL);
+    print_generic_string_shadow(ASCII_PRINT_CHR, GFX_DIMENSIONS_FROM_RIGHT_EDGE(64), 8, 255, 255, 255, 255, "Ver. 1.3", NULL);
     //print_generic_string_shadow(HEX_PRINT_CHR, 80, 120, 230, 230, 230, 255, NULL, textShizue64);
 
 }
@@ -2792,9 +2799,7 @@ s16 render_pause_courses_and_castle(void) {
                 case 0:
                     render_pause_my_score_coins();
 
-                    if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
-                    render_pause_course_options(99, 93, &gDialogLineNum, 15);
-                    }
+                    render_pause_course_options(99, 93, &gDialogLineNum, 15); // exit course while moving
 
                     if (gPlayer3Controller->buttonPressed & R_TRIG) {
                         play_sound(SOUND_MENU_HOVER_ACNH, gDefaultSoundArgs);
