@@ -23,13 +23,15 @@ Then after you do the step above, build the rom, running `make` and wait until i
 
 It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those or things will break.
 
-## GCC Build
+## Compiler used
 
-There's also a gcc build option, first run `make clean` if you already build using IDO, then run `make COMPILER=gcc`. 
+By default the rom will compile a gcc build, this can be changed in Makefile in `COMPILER ?= gcc`
 
-Beware that gcc rom won't work on PJ64 1.6, but it will work on PJ64 2.x and Mupen64.
+It can be changed to `ido` but remember to do `make clean` if you do so.
 
-The final version of 1.3 will still use IDO compiler to maintain old emulator compatibility. 
+The final version of 1.3 will use GCC. Tested on PJ64 1.6, PJ64 2.3, Mupen64
+
+It also works on console thanks to beta testers with Everdrive.
 
 ## Misc
 
