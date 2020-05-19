@@ -231,7 +231,6 @@ endif
 SEG_FILES := $(SEGMENT_ELF_FILES) $(ACTOR_ELF_FILES) $(LEVEL_ELF_FILES)
 
 ##################### Compiler Options #######################
-#IRIX_ROOT := tools/ido5.3_compiler
 IRIX_ROOT := tools/ido7.1_compiler
 
 ifeq ($(shell type mips-linux-gnu-ld >/dev/null 2>/dev/null; echo $$?), 0)
