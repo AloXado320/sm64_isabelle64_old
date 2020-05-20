@@ -781,7 +781,6 @@ s32 act_dive(struct MarioState *m) {
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
             drop_and_set_mario_action(m, ACT_BACKWARD_AIR_KB, 0);
             break;
-
         case AIR_STEP_HIT_LAVA_WALL:
             lava_boost_on_wall(m);
             break;

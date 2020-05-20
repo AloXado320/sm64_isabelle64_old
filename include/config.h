@@ -20,8 +20,6 @@
 #define BUGFIX_PIRANHA_PLANT_STATE_RESET (1 || VERSION_US || VERSION_EU || VERSION_SH)
 /// Fixes bug where sleeping Piranha Plants damage players that bump into them
 #define BUGFIX_PIRANHA_PLANT_SLEEP_DAMAGE (1 || VERSION_US || VERSION_SH)
-/// Fixes bug where it shows a star when you grab a key in bowser battle stages
-#define BUGFIX_STAR_BOWSER_KEY (1 || VERSION_US || VERSION_EU)
 
 // Debug things by Alo
 // Changes VCTUM warp to Bowser 3, spawns a jumbo star there and quickly fades to the credits
