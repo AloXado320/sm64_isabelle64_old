@@ -232,22 +232,18 @@ void create_dl_ortho_matrix(void) {
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(matrix), G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH)
 }
 
-void create_aio_matrix(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 aRot, f32 xRot, f32 yRot, f32 zPosRot) {
-        
-    create_dl_ortho_matrix();
+void create_aio_matrix(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 yRot) {
 
     create_dl_translation_matrix(MENU_MTX_PUSH, xPos, yPos, 0);
-    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 1.0f);
 
-    create_dl_translation_matrix(MENU_MTX_PUSH, xPos, yPos, zPosRot);
-    create_dl_rotation_matrix(MENU_MTX_NOPUSH, aRot, xRot, yRot, 1.0f);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 0);
 
-    gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    create_dl_rotation_matrix(MENU_MTX_NOPUSH, yRot, 0, 1.0f, 0);
 
+    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
     gSPDisplayList(gDisplayListHead++, displaylist);
-
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-    
+
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
@@ -256,8 +252,7 @@ void render_rotating_model(Gfx *displaylist, f32 xPos, f32 yPos, f32 scale, f32 
 
     rotation = gGlobalTimer * rotSpeed;
 
-    // 200.0f extends the z range in n64 so the model doesn't get cutoff while rotating
-    create_aio_matrix(displaylist, xPos, yPos, scale, rotation, 0, rotation, 200.0f);
+    create_aio_matrix(displaylist, xPos, yPos, scale, rotation);
 }
 
 /**
@@ -747,7 +742,7 @@ static u8 ascii_to_font_char(u8 c) {
 
 void print_generic_str_ascii(s16 x, s16 y, const char *str) {
     s16 i;
-    u8  buf[36];
+    u8  buf[40];
     for (i = 0; str[i] != 0; i++)
         buf[i] = ascii_to_font_char(str[i]);
     buf[i] = DIALOG_CHAR_TERMINATOR;
@@ -897,7 +892,7 @@ s16 get_hud_str_width_ascii(char *str) {
 
 s16 get_string_width_ascii(char *str) {
     s16 i;
-    u8  buf[36];
+    u8  buf[40];
     s16 bufPos = 0;
     s16 width = 0;
 
@@ -1159,13 +1154,13 @@ void render_acnl_dialog_border(s16 x, s16 y, s16 scale) {
 
     // left part
     xPos = x;
-    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_IA, 64, 64, 0,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_CI, 64, 64, 0,
             G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, xPos << 2, y << 2, (xPos + 64 * scale) << 2, (y + 64 * scale) << 2,
             G_TX_RENDERTILE, 0 << 6, 0 << 6, (1 << 10) / scale, (1 << 10) / scale);
     // right part - rotated with mirror
     xPos = (x + 64 * scale);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_IA, 64, 64, 0,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_dialog_border_ci4, G_IM_FMT_CI, 64, 64, 0,
             G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gDisplayListHead++, xPos << 2, y << 2, (xPos + 64 * scale) << 2, (y + 64 * scale) << 2,
             G_TX_RENDERTILE, (32 << 6), (32 << 6), (1 << 10) / scale, (1 << 10) / scale);
@@ -1339,11 +1334,9 @@ void handle_dialog_text_and_pages(struct DialogEntry *dialog) {
 
     strIdx = gDialogTextPos;
 
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
-
     totalLines = linesPerBox + 1;
 
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     while (pageState == DIALOG_PAGE_STATE_NONE) {
 
@@ -1735,8 +1728,8 @@ s8 gDialogCameraAngleIndex = CAM_SELECTION_MARIO;
 s8 gDialogCourseActNum = 1;
 
 // TODO: this is really messy, dialog states need to change a lot because of new rendering
-// something like "open, scrolling, idle, close"
-// but other functions also rely on dialog state so i might as well rewrite it
+// Probably new name states to something like "open, scrolling, idle, close"
+// but other functions also rely on dialog state so i might as well reorganize it
 void render_dialog_entries(void) {
     void **dialogTable;
     struct DialogEntry *dialog;
@@ -1848,8 +1841,9 @@ void render_dialog_entries(void) {
         render_acnl_dialog_top_npc_name(dialog, ACNL_DIALOG_X, ACNL_DIALOG_Y);
     }
 
-    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0,
-        SCREEN_WIDTH, ensure_nonnegative(SCREEN_HEIGHT + (dialog->linesPerBox * 16)));
+#ifdef TARGET_N64
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, ensure_nonnegative(SCREEN_HEIGHT + (dialog->linesPerBox * 16)));
+#endif
 
     if (gAcnlDialogAlpha >= 20) {
         handle_dialog_text_and_pages(dialog);

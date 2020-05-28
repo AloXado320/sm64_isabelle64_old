@@ -292,7 +292,7 @@ void render_hud_red_coins(void) {
 
         redCountLvl = count_objects_with_behavior(bhvRedCoin);
 
-        render_rotating_model(sm64ds_red_coin_dl, GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(16), sRedCoinY - 8, 0.3f, 7.0f);
+        render_rotating_model(sm64ds_red_coin_dl, GFX_DIMENSIONS_FROM_LEFT_EDGE(20), sRedCoinY, 0.3f, 7.0f);
         print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(32), sRedCoinY, "*");
         print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(48), sRedCoinY, "%d", redCollected);
         print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(60), sRedCoinY, "&");
@@ -354,14 +354,14 @@ void render_hud_coins(void) {
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(52), (HUD_TOP_Y-16)-sHudMoveY, "%d", gHudDisplay.coins);
 }
 
-#define HUD_STARS_X 96
+#define HUD_STARS_X 104
 
 void render_hud_stars(void) {
 
     if (gHudFlash == 1 && gGlobalTimer & 0x08)
         return;
 
-    render_rotating_model(gold_leaf_dl, GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(HUD_STARS_X + 4), 48+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
+    render_rotating_model(gold_leaf_dl, GFX_DIMENSIONS_FROM_LEFT_EDGE(HUD_STARS_X + 4), 64+HUD_TOP_Y-(sHudMoveY*1.6), 0.07f, 7.0f);
 
     print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(HUD_STARS_X + 24), 48+HUD_TOP_Y-(sHudMoveY*1.6), "*");  // 'X' glyph
 
@@ -463,9 +463,6 @@ void render_hud_camera_status(void) {
  */
 void render_hud(void) {
     s16 hudDisplayFlags;
-#ifdef VERSION_EU
-    Mtx *mtx;
-#endif
 
     hudDisplayFlags = gHudDisplay.flags;
 
@@ -474,22 +471,8 @@ void render_hud(void) {
         sPowerMeterStoredHealth = 8;
         sPowerMeterVisibleTimer = 0;
     } else {
-#ifdef VERSION_EU
-        // basically create_dl_ortho_matrix but guOrtho screen width is different
-
-        mtx = alloc_display_list(sizeof(*mtx));
-        if (mtx == NULL) {
-            return;
-        }
-        create_dl_identity_matrix();
-        guOrtho(mtx, -16.0f, SCREEN_WIDTH + 16, 0, SCREEN_HEIGHT, -10.0f, 10.0f, 1.0f);
-        gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
-        gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx),
-                G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
-
-#else
         create_dl_ortho_matrix();
-#endif
+
         handle_hud_move();
 
         if (gCurrentArea != NULL && gCurrentArea->camera->mode == CAMERA_MODE_INSIDE_CANNON) {
