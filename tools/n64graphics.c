@@ -203,7 +203,7 @@ uint8_t *ci2raw(const uint8_t *rawci, const uint8_t *palette, int width, int hei
 
 int rgba2raw(uint8_t *raw, const rgba *img, int width, int height, int depth)
 {
-   int size = width * height * depth / 8;
+   int size = (width * height * depth + 7) / 8;
    INFO("Converting RGBA%d %dx%d to raw\n", depth, width, height);
 
    if (depth == 16) {
@@ -233,7 +233,7 @@ int rgba2raw(uint8_t *raw, const rgba *img, int width, int height, int depth)
 
 int ia2raw(uint8_t *raw, const ia *img, int width, int height, int depth)
 {
-   int size = width * height * depth / 8;
+   int size = (width * height * depth + 7) / 8;
    INFO("Converting IA%d %dx%d to raw\n", depth, width, height);
 
    switch (depth) {
@@ -285,7 +285,7 @@ int ia2raw(uint8_t *raw, const ia *img, int width, int height, int depth)
 
 int i2raw(uint8_t *raw, const ia *img, int width, int height, int depth)
 {
-   int size = width * height * depth / 8;
+   int size = (width * height * depth + 7) / 8;
    INFO("Converting I%d %dx%d to raw\n", depth, width, height);
 
    switch (depth) {
@@ -813,7 +813,7 @@ int main(int argc, char *argv[])
       switch (config.format.format) {
          case IMG_FORMAT_RGBA:
             imgr = png2rgba(config.img_filename, &config.width, &config.height);
-            raw_size = config.width * config.height * config.format.depth / 8;
+            raw_size = (config.width * config.height * config.format.depth + 7) / 8;
             raw = malloc(raw_size);
             if (!raw) {
                ERROR("Error allocating %u bytes\n", raw_size);
@@ -822,7 +822,7 @@ int main(int argc, char *argv[])
             break;
          case IMG_FORMAT_IA:
             imgi = png2ia(config.img_filename, &config.width, &config.height);
-            raw_size = config.width * config.height * config.format.depth / 8;
+            raw_size = (config.width * config.height * config.format.depth + 7) / 8;
             raw = malloc(raw_size);
             if (!raw) {
                ERROR("Error allocating %u bytes\n", raw_size);
@@ -831,7 +831,7 @@ int main(int argc, char *argv[])
             break;
          case IMG_FORMAT_I:
             imgi = png2ia(config.img_filename, &config.width, &config.height);
-            raw_size = config.width * config.height * config.format.depth / 8;
+            raw_size = (config.width * config.height * config.format.depth + 7) / 8;
             raw = malloc(raw_size);
             if (!raw) {
                ERROR("Error allocating %u bytes\n", raw_size);
@@ -936,7 +936,7 @@ int main(int argc, char *argv[])
          ERROR("Error opening \"%s\"\n", config.bin_filename);
          return -1;
       }
-      raw_size = config.width * config.height * config.format.depth / 8;
+      raw_size = (config.width * config.height * config.format.depth + 7) / 8;
       raw = malloc(raw_size);
       if (config.bin_offset > 0) {
          fseek(bin_fp, config.bin_offset, SEEK_SET);
