@@ -5,6 +5,11 @@
 #include "sm64.h"
 
 #ifdef TARGET_N64
+
+// alpha doesn't do anything here, is just part of the macro
+#define CRASH_BG_COLOR GPACK_RGBA5551(0, 0, 130, 255)
+#define CRASH_CH_COLOR GPACK_RGBA5551(255, 255, 255, 255)
+
 s32 _Printf(char *(*prout)(char *, const char *, size_t), char *dst, const char *fmt, va_list args);
 
 u8 gCrashScreenCharToGlyph[128] = {
@@ -16,80 +21,17 @@ u8 gCrashScreenCharToGlyph[128] = {
     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1,
 };
 
-// Bit-compressed font. '#' = 1, '.' = 0
-u32 gCrashScreenFont[7 * 9 + 1] = {
-    0x70871c30, // .###.. ..#... .###.. .###.. ..##.. ..
-    0x8988a250, // #...#. .##... #...#. #...#. .#.#.. ..
-    0x88808290, // #...#. ..#... ....#. ....#. #..#.. ..
-    0x88831c90, // #...#. ..#... ..##.. .###.. #..#.. ..
-    0x888402f8, // #...#. ..#... .#.... ....#. #####. ..
-    0x88882210, // #...#. ..#... #..... #...#. ...#.. ..
-    0x71cf9c10, // .###.. .###.. #####. .###.. ...#.. ..
-
-    0xf9cf9c70, // #####. .###.. #####. .###.. .###.. ..
-    0x8228a288, // #..... #...#. #...#. #...#. #...#. ..
-    0xf200a288, // ####.. #..... ....#. #...#. #...#. ..
-    0x0bc11c78, // ....#. ####.. ...#.. .###.. .####. ..
-    0x0a222208, // ....#. #...#. ..#... #...#. ....#. ..
-    0x8a222288, // #...#. #...#. ..#... #...#. #...#. ..
-    0x71c21c70, // .###.. .###.. ..#... .###.. .###.. ..
-
-    0x23c738f8, // ..#... ####.. .###.. ###... #####. ..
-    0x5228a480, // .#.#.. #...#. #...#. #..#.. #..... ..
-    0x8a282280, // #...#. #...#. #..... #...#. #..... ..
-    0x8bc822f0, // #...#. ####.. #..... #...#. ####.. ..
-    0xfa282280, // #####. #...#. #..... #...#. #..... ..
-    0x8a28a480, // #...#. #...#. #...#. #..#.. #..... ..
-    0x8bc738f8, // #...#. ####.. .###.. ###... #####. ..
-
-    0xf9c89c08, // #####. .###.. #...#. .###.. ....#. ..
-    0x82288808, // #..... #...#. #...#. ..#... ....#. ..
-    0x82088808, // #..... #..... #...#. ..#... ....#. ..
-    0xf2ef8808, // ####.. #.###. #####. ..#... ....#. ..
-    0x82288888, // #..... #...#. #...#. ..#... #...#. ..
-    0x82288888, // #..... #...#. #...#. ..#... #...#. ..
-    0x81c89c70, // #..... .###.. #...#. .###.. .###.. ..
-
-    0x8a08a270, // #...#. #..... #...#. #...#. .###.. ..
-    0x920da288, // #..#.. #..... ##.##. #...#. #...#. ..
-    0xa20ab288, // #.#... #..... #.#.#. ##..#. #...#. ..
-    0xc20aaa88, // ##.... #..... #.#.#. #.#.#. #...#. ..
-    0xa208a688, // #.#... #..... #...#. #..##. #...#. ..
-    0x9208a288, // #..#.. #..... #...#. #...#. #...#. ..
-    0x8be8a270, // #...#. #####. #...#. #...#. .###.. ..
-
-    0xf1cf1cf8, // ####.. .###.. ####.. .###.. #####. ..
-    0x8a28a220, // #...#. #...#. #...#. #...#. ..#... ..
-    0x8a28a020, // #...#. #...#. #...#. #..... ..#... ..
-    0xf22f1c20, // ####.. #...#. ####.. .###.. ..#... ..
-    0x82aa0220, // #..... #.#.#. #.#... ....#. ..#... ..
-    0x82492220, // #..... #..#.. #..#.. #...#. ..#... ..
-    0x81a89c20, // #..... .##.#. #...#. .###.. ..#... ..
-
-    0x8a28a288, // #...#. #...#. #...#. #...#. #...#. ..
-    0x8a28a288, // #...#. #...#. #...#. #...#. #...#. ..
-    0x8a289488, // #...#. #...#. #...#. .#.#.. #...#. ..
-    0x8a2a8850, // #...#. #...#. #.#.#. ..#... .#.#.. ..
-    0x894a9420, // #...#. .#.#.. #.#.#. .#.#.. ..#... ..
-    0x894aa220, // #...#. .#.#.. #.#.#. #...#. ..#... ..
-    0x70852220, // .###.. ..#... .#.#.. #...#. ..#... ..
-
-    0xf8011000, // #####. ...... ...#.. .#.... ...... ..
-    0x08020800, // ....#. ...... ..#... ..#... ...... ..
-    0x10840400, // ...#.. ..#... .#.... ...#.. ...... ..
-    0x20040470, // ..#... ...... .#.... ...#.. .###.. ..
-    0x40840400, // .#.... ..#... .#.... ...#.. ...... ..
-    0x80020800, // #..... ...... ..#... ..#... ...... ..
-    0xf8011000, // #####. ...... ...#.. .#.... ...... ..
-
-    0x70800000, // .###.. ..#... ...... ...... ...... ..
-    0x88822200, // #...#. ..#... ..#... #...#. ...... ..
-    0x08820400, // ....#. ..#... ..#... ...#.. ...... ..
-    0x108f8800, // ...#.. ..#... #####. ..#... ...... ..
-    0x20821000, // ..#... ..#... ..#... .#.... ...... ..
-    0x00022200, // ...... ...... ..#... #...#. ...... ..
-    0x20800020, // ..#... ..#... ...... ...... ..#... ..
-    0x00000000,
+// really u32, but texture output is u8, so allocate 4x
+u8 gCrashScreenFont[(7 * 9 + 1) * 4] = {
+    #include "textures/crash_screen/crash_font_01234.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_56789.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_ABCDE.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_FGHIJ.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_KLMNO.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_PQRST.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_UVWXY.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_Zsym1.ia1.inc.c"
+    #include "textures/crash_screen/crash_font_sym2.ia1.inc.c"
 };
 
 
@@ -141,7 +83,7 @@ void crash_screen_draw_rect(s32 x, s32 y, s32 w, s32 h) {
     for (i = 0; i < h; i++) {
         for (j = 0; j < w; j++) {
             // 0xe738 = 0b1110011100111000
-            *ptr = ((*ptr & 0xe738) >> 2) | 1;
+            *ptr = ((*ptr & 0xe738) >> 2) | CRASH_BG_COLOR;
             ptr++;
         }
         ptr += gCrashScreen.width - w;
@@ -155,7 +97,8 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
     u32 rowMask;
     s32 i, j;
 
-    data = &gCrashScreenFont[glyph / 5 * 7];
+    // TODO: output u32 for these textures and remove this ugly cast
+    data = &((u32*)gCrashScreenFont)[glyph / 5 * 7];
     ptr = gCrashScreen.framebuffer + gCrashScreen.width * y + x;
 
     for (i = 0; i < 7; i++) {
@@ -163,7 +106,7 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
         rowMask = *data++;
 
         for (j = 0; j < 6; j++) {
-            *ptr++ = (bit & rowMask) ? 0xffff : 1; // first value is the char, second is the transparency
+            *ptr++ = (bit & rowMask) ? CRASH_CH_COLOR : CRASH_BG_COLOR;
             bit >>= 1;
         }
         ptr += gCrashScreen.width - 6;
@@ -257,12 +200,16 @@ void draw_crash_screen(OSThread *thread) {
 
     osWritebackDCacheAll();
 
-    crash_screen_draw_rect(25, 20, 270, 25);
+    crash_screen_draw_rect(0, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    crash_screen_draw_rect(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+
+    crash_screen_draw_rect(0, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    crash_screen_draw_rect(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+   
     crash_screen_print(30, 15, "ISABELLE 64 1.3 HAS CRASHED");
     crash_screen_print(30, 25, "THREAD:%d  (%s)", thread->id, gCauseDesc[cause]);
     crash_screen_print(30, 35, "PC:%08XH   SR:%08XH   VA:%08XH", tc->pc, tc->sr, tc->badvaddr);
     crash_screen_sleep(2000);
-    crash_screen_draw_rect(25, 45, 270, 185);
     crash_screen_print(30, 50, "AT:%08XH   V0:%08XH   V1:%08XH", (u32) tc->at, (u32) tc->v0,
                        (u32) tc->v1);
     crash_screen_print(30, 60, "A0:%08XH   A1:%08XH   A2:%08XH", (u32) tc->a0, (u32) tc->a1,

@@ -118,3 +118,6 @@ Makefile_pc
 
 # General Textures
 !/textures/segment2/*
+
+# Crash Screen Textures
+!/textures/crash_screen/*
