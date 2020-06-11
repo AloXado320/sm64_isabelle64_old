@@ -53,7 +53,7 @@ Gfx *geo_update_projectile_pos_from_parent(s32 callContext, UNUSED struct GraphN
 Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
-    struct GraphNodeGenerated *sp30;
+    struct GraphNodeGenerated *currentGraphNode;
     UNUSED struct GraphNodeGenerated *sp2C;
     s32 objectOpacity;
 
@@ -61,7 +61,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
 
     if (callContext == GEO_CONTEXT_RENDER) {
         objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
-        sp30 = (struct GraphNodeGenerated *) node;
+        currentGraphNode = (struct GraphNodeGenerated *) node;
         sp2C = (struct GraphNodeGenerated *) node;
 
         if (gCurGraphNodeHeldObject) {
@@ -74,24 +74,28 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
         dlHead = dlStart;
 
         if (objectOpacity == 0xFF) {
-            if (sp30->parameter == 20) {
-                sp30->fnNode.node.flags = 0x600 | (sp30->fnNode.node.flags & 0xFF);
+            if (currentGraphNode->parameter == 20) {
+                currentGraphNode->fnNode.node.flags = 
+                0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
             } else {
-                sp30->fnNode.node.flags = 0x100 | (sp30->fnNode.node.flags & 0xFF);
+                currentGraphNode->fnNode.node.flags = 
+                0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
             }
 
             objectGraphNode->oAnimState = 0;
         } else {
-            if (sp30->parameter == 20) {
-                sp30->fnNode.node.flags = 0x600 | (sp30->fnNode.node.flags & 0xFF);
+            if (currentGraphNode->parameter == 20) {
+                currentGraphNode->fnNode.node.flags = 
+                0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
             } else {
-                sp30->fnNode.node.flags = 0x500 | (sp30->fnNode.node.flags & 0xFF);
+                currentGraphNode->fnNode.node.flags = 
+                0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
             }
 
             objectGraphNode->oAnimState = 1;
 
 #ifdef VERSION_JP
-            if (sp30->parameter == 10) {
+            if (currentGraphNode->parameter == 10) {
                 if (gDebugInfo[DEBUG_PAGE_ENEMYINFO][3]) {
                     gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
                 }
@@ -107,7 +111,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
             // the debug info check was removed in US. so we need to
             // perform the only necessary check instead of the debuginfo
             // one.
-            if (sp30->parameter != 10) {
+            if (currentGraphNode->parameter != 10) {
                 if (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA) {
                     gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
                 }
@@ -116,7 +120,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
         }
 
         gDPSetEnvColor(dlHead++, 255, 255, 255, objectOpacity);
-        gSPEndDisplayList(dlHead    );
+        gSPEndDisplayList(dlHead);
     }
 
     return dlStart;
