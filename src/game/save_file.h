@@ -1,5 +1,7 @@
-#ifndef _SAVE_FILE_H_
-#define _SAVE_FILE_H_
+#ifndef SAVE_FILE_H
+#define SAVE_FILE_H
+
+#include <PR/ultratypes.h>
 
 #include "types.h"
 #include "area.h"
@@ -75,8 +77,6 @@ struct SaveBuffer
     struct MainMenuSaveData menuData[2];
 };
 
-struct WarpNode;
-
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
 extern s8 sUnusedGotGlobalCoinHiScore;
@@ -148,8 +148,8 @@ void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
 void save_file_move_cap_to_default_location(void);
 void disable_warp_checkpoint(void);
-void check_if_should_set_warp_checkpoint(struct WarpNode *a);
-s32 check_warp_checkpoint(struct WarpNode *a);
+void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);
+s32 check_warp_checkpoint(struct WarpNode *warpNode);
 
 #ifdef MULTILANGUAGE
 enum EuMultilanguages {
@@ -167,4 +167,4 @@ u16 eu_get_language(void);
 void save_file_set_alt_costume(u16 costume);
 u16 save_file_get_alt_costume(void);
 
-#endif
+#endif // SAVE_FILE_H

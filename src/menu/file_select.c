@@ -1,29 +1,27 @@
-#include <ultra64.h>
+#include <PR/ultratypes.h>
+#include <PR/gbi.h>
 
-#include "sm64.h"
-#include "gfx_dimensions.h"
 #include "audio/external.h"
-#include "game/game_init.h"
-#include "game/ingame_menu.h"
-#include "game/object_helpers.h"
-#include "game/area.h"
-#include "game/save_file.h"
-#include "game/spawn_object.h"
-#include "game/object_list_processor.h"
-#include "game/eu_translation.h"
-#include "game/segment2.h"
-#include "game/segment7.h"
-#include "game/print.h"
+#include "behavior_data.h"
+#include "dialog_ids.h"
 #include "engine/behavior_script.h"
 #include "engine/graph_node.h"
 #include "engine/math_util.h"
-#include "behavior_data.h"
-#include "text_strings.h"
+#include "eu_translation.h"
 #include "file_select.h"
-#include "dialog_ids.h"
-#ifdef MULTILANGUAGE
+#include "game/area.h"
+#include "game/game_init.h"
+#include "game/ingame_menu.h"
+#include "game/object_helpers.h"
+#include "game/object_list_processor.h"
+#include "game/print.h"
+#include "game/save_file.h"
+#include "game/segment2.h"
 #include "game/segment7.h"
-#endif
+#include "game/spawn_object.h"
+#include "gfx_dimensions.h"
+#include "sm64.h"
+#include "text_strings.h"
 
 /**
  * @file file_select.c
@@ -1602,7 +1600,7 @@ void print_file_select_texrects(void) {
 /**
  * Geo function that prints file select strings and the cursor.
  */
-Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct GraphNode *node, UNUSED f32 mtx[4][4]) {
+Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 mtx) {
     if (callContext == GEO_CONTEXT_RENDER) {
         print_file_select_texrects();
         

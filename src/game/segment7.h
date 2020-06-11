@@ -1,7 +1,8 @@
-#ifndef SEGMENT_7_H
-#define SEGMENT_7_H
+#ifndef SEGMENT7_H
+#define SEGMENT7_H
 
-#include "types.h"
+#include <PR/ultratypes.h>
+#include <PR/gbi.h>
 
 // from main menu segment 7
 extern u8 dl_menu_idle_hand[];
@@ -34,4 +35,4 @@ extern u8 texture_64_words_pallete[];
 extern u8 texture_64_words_ci4[];
 extern Gfx *dl_main_aloxado_intro;
 
-#endif /* SEGMENT_7_H */
+#endif // SEGMENT7_H

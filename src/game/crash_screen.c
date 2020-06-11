@@ -10,7 +10,7 @@
 #define CRASH_BG_COLOR GPACK_RGBA5551(0, 0, 130, 255)
 #define CRASH_CH_COLOR GPACK_RGBA5551(255, 255, 255, 255)
 
-s32 _Printf(char *(*prout)(char *, const char *, size_t), char *dst, const char *fmt, va_list args);
+#include "lib/src/printf.h"
 
 u8 gCrashScreenCharToGlyph[128] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,

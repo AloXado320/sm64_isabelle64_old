@@ -33,4 +33,4 @@
 // Border Height Define for NTSC Versions
 #define BORDER_HEIGHT 0
 
-#endif
+#endif // CONFIG_H

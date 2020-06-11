@@ -1,33 +1,33 @@
-#include <ultra64.h>
+#include <PR/ultratypes.h>
+#include <PR/gbi.h>
 
-#include "sm64.h"
-#include "gfx_dimensions.h"
-#include "memory.h"
-#include "types.h"
+#include "actors/common1.h"
+#include "alternate_costume.h"
+#include "area.h"
 #include "audio/external.h"
-#include "seq_ids.h"
-#include "dialog_ids.h"
-#include "game_init.h"
-#include "save_file.h"
-#include "level_update.h"
 #include "camera.h"
-#include "text_strings.h"
+#include "course_table.h"
+#include "dialog_ids.h"
+#include "engine/math_util.h"
+#include "eu_translation.h"
+#include "game_init.h"
+#include "gfx_dimensions.h"
+#include "ingame_menu.h"
+#include "level_update.h"
+#include "levels/castle_grounds/header.h"
+#include "memory.h"
+#include "print.h"
+#include "save_file.h"
 #include "segment2.h"
 #include "segment7.h"
-#include "game/eu_translation.h"
-#include "ingame_menu.h"
-#include "print.h"
-#include "engine/math_util.h"
-#include "course_table.h"
-#include "menu/level_select_menu.h"
-#include "alternate_costume.h"
+#include "seq_ids.h"
+#include "sm64.h"
+#include "text_strings.h"
+#include "types.h"
 
 extern Gfx *gDisplayListHead;
 extern s16 gCurrCourseNum;
 extern s16 gCurrSaveFileNum;
-
-extern u8 main_menu_seg7_table_0700ABD0[];
-extern Gfx castle_grounds_seg7_dl_0700EA58[];
 
 u16 gDialogColorFadeTimer;
 s8 gLastDialogLineNum;
@@ -377,7 +377,7 @@ enum MultiStringIDs { STRING_THE, STRING_YOU };
  * 0: 'the'
  * 1: 'you'
  */
-void render_multi_text_string(s16 *xPos, s16 *yPos, s8 multiTextID) // EU: 802AD650
+void render_multi_text_string(s16 *xPos, s16 *yPos, s8 multiTextID)
 {
     s8 i;
     struct MultiTextEntry textLengths[2] = {
@@ -2133,10 +2133,6 @@ s32 lvl_render_cake_screen_strings(UNUSED s16 arg0, UNUSED s32 arg1) {
     return 1;
 }
 
-#ifndef VERSION_JP
-extern Gfx castle_grounds_seg7_us_dl_0700F2E8[];
-#endif
-
 #define PEACH_MESSAGE_TIMER 170
 // "Dear Mario" message handler
 void print_peach_letter_message(void) {
@@ -2319,7 +2315,7 @@ void render_pause_red_coins(void) {
  */
 
 #ifdef MULTILANGUAGE
-u8 gTextCourseArr[][7] = { // D_802FDA10
+u8 gTextCourseArr[][7] = {
     { TEXT_COURSE },
     { TEXT_COURSE_FR },
     { TEXT_COURSE_DE },
@@ -3285,10 +3281,9 @@ s16 render_menus_and_dialogs() {
 
         gDialogColorFadeTimer = (s16) gDialogColorFadeTimer + 0x1000;
     } else if (gDialogID != -1) {
-        // Peach message "Dear Mario" new game dialog
+        // The Peach "Dear Mario" message needs to be repositioned separately
         if (gDialogID == 20) {
-            print_peach_letter_message(); // the peach message needs to be
-                                          // repositioned seperately
+            print_peach_letter_message();
             return mode;
         }
 

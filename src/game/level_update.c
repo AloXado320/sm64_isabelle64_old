@@ -22,7 +22,8 @@
 #include "debug_course.h"
 #ifdef MULTILANGUAGE
 #include "memory.h"
-#include "game/eu_translation.h"
+#include "eu_translation.h"
+#include "segment_symbols.h"
 #endif
 #include "level_table.h"
 #include "course_table.h"
@@ -125,8 +126,6 @@ u8 unused1[4] = { 0 };
 s8 D_8032C9E0 = 0;
 u8 unused3[4];
 u8 unused4[2];
-
-void basic_update(s16 *arg);
 
 u16 level_control_timer(s32 timerOp) {
     switch (timerOp) {
@@ -585,7 +584,7 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 arg3) {
 #define PAINTING_WARP_INDEX_END 0x2D   // Value less than Surface 0xFD
 
 /**
- * Check if mario is above and close to a painting warp floor, and return the
+ * Check if Mario is above and close to a painting warp floor, and return the
  * corresponding warp node.
  */
 struct WarpNode *get_painting_warp_node(void) {
@@ -603,7 +602,7 @@ struct WarpNode *get_painting_warp_node(void) {
 }
 
 /**
- * Check is mario has entered a painting, and if so, initiate a warp.
+ * Check is Mario has entered a painting, and if so, initiate a warp.
  */
 void initiate_painting_warp(void) {
     if (gCurrentArea->paintingWarpNodes != NULL && gMarioState->floor != NULL) {
@@ -643,7 +642,7 @@ void initiate_painting_warp(void) {
 
 /**
  * If there is not already a delayed warp, schedule one. The source node is
- * based on the warp operation and sometimes mario's used object.
+ * based on the warp operation and sometimes Mario's used object.
  * Return the time left until the delayed warp is initiated.
  */
 s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
@@ -919,7 +918,7 @@ void update_hud_values(void) {
 }
 
 /**
- * Update objects, hud, and camera. This update function excludes things like
+ * Update objects, HUD, and camera. This update function excludes things like
  * endless staircase, warps, pausing, etc. This is used when entering a painting,
  * presumably to allow painting and camera updating while avoiding triggering the
  * warp twice.
@@ -1088,8 +1087,7 @@ s32 play_mode_change_level(void) {
 }
 
 /**
- * Unused play mode. Doesn't call transition update and doesn't reset transition
- * at the end.
+ * Unused play mode. Doesn't call transition update and doesn't reset transition at the end.
  */
 static s32 play_mode_unused(void) {
     if (--sTransitionTimer == -1) {
@@ -1212,8 +1210,7 @@ s32 init_level(void) {
 }
 
 /**
- * Initialize the current level if initOrUpdate is 0, or update the level if it
- * is 1.
+ * Initialize the current level if initOrUpdate is 0, or update the level if it is 1.
  */
 s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
     s32 result = 0;

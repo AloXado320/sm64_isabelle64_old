@@ -320,4 +320,4 @@
 #define CLEAR_DEMO_PTR() \
     CMD_BBH(0x3E, 0x04, 0x0000)
 
-#endif
+#endif // LEVEL_COMMANDS_H

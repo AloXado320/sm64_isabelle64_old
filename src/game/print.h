@@ -1,7 +1,7 @@
-#ifndef _PRINT_H
-#define _PRINT_H
+#ifndef PRINT_H
+#define PRINT_H
 
-#include "types.h"
+#include <PR/ultratypes.h>
 
 #define TEXRECT_MIN_X 10
 #define TEXRECT_MAX_X 300
@@ -25,11 +25,10 @@
 //#define GLYPH_DOUBLE_QUOTE    57
 #define GLYPH_UMLAUT          58
 
-extern void print_text_fmt_int(s32 x, s32 y, const char *str, s32 n);
-extern void print_text(s32 x, s32 y, const char *str);
-extern void print_text_centered(s32 x, s32 y, const char *str);
-extern void render_custom_texrect(Gfx *dltexture, s16 configDls, s16 usesCi, u16 ttCiType, 
-        s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 a);
-extern void render_text_labels(void);
+void print_text_fmt_int(s32 x, s32 y, const char *str, s32 n);
+void print_text(s32 x, s32 y, const char *str);
+void print_text_centered(s32 x, s32 y, const char *str);
+void render_text_labels(void);
+void render_custom_texrect(Gfx *dltexture, s16 configDls, s16 usesCi, u16 ttCiType, s16 x, s16 y, s16 width, s16 height, u8 r, u8 g, u8 b, u8 a);
 
-#endif /* _PRINT_H */
+#endif // PRINT_H

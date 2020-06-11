@@ -1,15 +1,16 @@
-#include "ultra64.h"
-#include "sm64.h"
-#include "prevent_bss_reordering.h"
-#include "types.h"
+#include <PR/ultratypes.h>
+
+#include "engine/graph_node.h"
+#include "game/game_init.h"
+#include "game/ingame_menu.h"
 #include "game/memory.h"
 #include "game/segment2.h"
 #include "game/segment7.h"
 #include "intro_geo.h"
-#include "game/game_init.h"
-#include "game/area.h"
-#include "game/print.h"
-#include "game/ingame_menu.h"
+#include "sm64.h"
+#include "textures.h"
+#include "types.h"
+#include "prevent_bss_reordering.h"
 
 // background types
 #define INTRO_BACKGROUND_SUPER_MARIO 0
@@ -21,17 +22,6 @@ struct GraphNodeMore {
     /*0x18*/ u32 unk18;
 };
 
-// title screen segment A
-extern Gfx title_screen_bg_dl_0A000118[];
-extern Gfx title_screen_bg_dl_0A000100[];
-extern Gfx title_screen_bg_dl_0A000130[];
-extern Gfx title_screen_bg_dl_0A000148[];
-extern Gfx title_screen_bg_dl_0A000160[];
-extern Gfx title_screen_bg_dl_0A000178[];
-extern Gfx title_screen_bg_dl_0A000190[];
-extern const u8 *const mario_title_texture_table[];
-extern const u8 *const game_over_texture_table[];
-
 // intro geo bss
 int gGameOverFrameCounter;
 int gGameOverTableIndex;
@@ -40,8 +30,8 @@ s32 gTitleN64AlphaCounter;
 s16 gTitleInitMessageCounter;
 
 // intro screen background display lists for each of four 80x20 textures
-Gfx *introBackgroundDlRows[] = { title_screen_bg_dl_0A000130, title_screen_bg_dl_0A000148,
-                                 title_screen_bg_dl_0A000160, title_screen_bg_dl_0A000178 };
+const Gfx *introBackgroundDlRows[] = { title_screen_bg_dl_0A000130, title_screen_bg_dl_0A000148,
+                                       title_screen_bg_dl_0A000160, title_screen_bg_dl_0A000178 };
 
 // intro screen background texture X offsets
 float introBackgroundOffsetX[] = {

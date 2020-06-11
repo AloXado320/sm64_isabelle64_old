@@ -1,5 +1,5 @@
-#ifndef _OBJECT_CONSTANTS_H
-#define _OBJECT_CONSTANTS_H
+#ifndef OBJECT_CONSTANTS_H
+#define OBJECT_CONSTANTS_H
 
 // This file contains macros that provide descriptive names for
 // field-specific and object-specific constants, e.g. actions.
@@ -971,4 +971,4 @@
     #define BOWSER_PUZZLE_ACT_WAIT_FOR_COMPLETE 1
     #define BOWSER_PUZZLE_ACT_DONE 2
 
-#endif
+#endif // OBJECT_CONSTANTS_H

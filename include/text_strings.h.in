@@ -815,6 +815,6 @@
 #define TEXT_MENU_SA_IT _("   L'AQUARIO SEGRETO")
 #define TEXT_MENU_NONE_IT _("")
 #define TEXT_MENU_STARS_IT _("   STELLE NASCOSTE")
-#endif
+#endif // VERSION_EU
 
-#endif
+#endif // TEXT_STRINGS_H
