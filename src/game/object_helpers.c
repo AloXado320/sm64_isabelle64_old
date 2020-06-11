@@ -55,7 +55,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
     struct Object *objectGraphNode;
     struct GraphNodeGenerated *sp30;
     UNUSED struct GraphNodeGenerated *sp2C;
-    s32 sp28;
+    s32 objectOpacity;
 
     dlStart = NULL;
 
@@ -68,12 +68,12 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
 
-        sp28 = objectGraphNode->oOpacity;
+        objectOpacity = objectGraphNode->oOpacity;
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
 
         dlHead = dlStart;
 
-        if (sp28 == 0xFF) {
+        if (objectOpacity == 0xFF) {
             if (sp30->parameter == 20) {
                 sp30->fnNode.node.flags = 0x600 | (sp30->fnNode.node.flags & 0xFF);
             } else {
@@ -101,7 +101,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
                 }
             }
 #else // gDebugInfo accesses were removed in all non-JP versions.
-            if (sp28 == 0 && segmented_to_virtual(bhvBowser) == objectGraphNode->behavior) {
+            if (objectOpacity == 0 && segmented_to_virtual(bhvBowser) == objectGraphNode->behavior) {
                 objectGraphNode->oAnimState = 2;
             }
             // the debug info check was removed in US. so we need to
@@ -115,8 +115,8 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
 #endif
         }
 
-        gDPSetEnvColor(dlHead++, 255, 255, 255, sp28);
-        gSPEndDisplayList(dlHead);
+        gDPSetEnvColor(dlHead++, 255, 255, 255, objectOpacity);
+        gSPEndDisplayList(dlHead    );
     }
 
     return dlStart;
