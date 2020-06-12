@@ -42,7 +42,7 @@ static struct Object *link_objects_with_behavior(const BehaviorScript *behavior)
 
     obj = (struct Object *) listHead->next;
     while (obj != (struct Object *) listHead) {
-        if (obj->behavior == behaviorAddr && obj->activeFlags != ACTIVE_FLAGS_DEACTIVATED) {
+        if (obj->behavior == behaviorAddr && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
             obj->parentObj = lastObject;
             lastObject = obj;
         }

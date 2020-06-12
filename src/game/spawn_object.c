@@ -187,7 +187,7 @@ static void unused_delete_leaf_nodes(struct Object *obj) {
  * Free the given object.
  */
 void unload_object(struct Object *obj) {
-    obj->activeFlags = ACTIVE_FLAGS_DEACTIVATED;
+    obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     obj->prevObj = NULL;
 
     obj->header.gfx.throwMatrix = NULL;
@@ -358,5 +358,5 @@ struct Object *create_object(const BehaviorScript *bhvScript) {
  */
 void mark_obj_for_deletion(struct Object *obj) {
     //! Same issue as obj_mark_for_deletion
-    obj->activeFlags = ACTIVE_FLAGS_DEACTIVATED;
+    obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
