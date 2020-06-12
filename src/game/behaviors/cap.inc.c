@@ -254,7 +254,7 @@ void bhv_normal_cap_loop(void) {
     if ((s32) o->oForwardVel != 0)
         save_file_set_cap_pos(o->oPosX, o->oPosY, o->oPosZ);
 
-    if (o->activeFlags == 0)
+    if (o->activeFlags == ACTIVE_FLAG_DEACTIVATED)
         normal_cap_set_save_flags();
 
     if (cap_set_hitbox() == 1)
