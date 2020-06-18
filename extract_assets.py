@@ -254,7 +254,7 @@ def main():
                             ],
                             check=True,
                         )
-                    remove_file(png_file.name)
+                    os.remove(png_file.name)
             else:
                 with open(asset, "wb") as f:
                     f.write(input)
