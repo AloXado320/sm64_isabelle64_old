@@ -25,13 +25,15 @@ It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those
 
 ## Compiler used
 
-By default the rom will compile a gcc build, this can be changed in Makefile in `COMPILER ?= gcc`
+GCC is used, ido support was dropped
 
-It can be changed to `ido` but remember to do `make clean` if you do so.
-
-The final version of 1.3 will use GCC. Tested on PJ64 1.6, PJ64 2.3, Mupen64
+Tested on PJ64 1.6, PJ64 2.3, Mupen64
 
 It also works on console thanks to beta testers with Everdrive.
+
+## Bugs
+* For some reason `Makefile` doesn't define `NON_MATCHING`, so it's defined in `macros.h`
+* Koopa the Quick dialog is broken somehow
 
 ## Misc
 
