@@ -31,9 +31,15 @@ Tested on PJ64 1.6, PJ64 2.3, Mupen64
 
 It also works on console thanks to beta testers with Everdrive.
 
+## PC Port
+
+Support for it has been added sometime using widescreen and no draw distance but pc code was private until devs actually decided to release it
+
+Only tested DX11-DX12 on Windows 10
+
 ## Bugs
 * For some reason `Makefile` doesn't define `NON_MATCHING`, so it's defined in `macros.h`
-* Koopa the Quick dialog is broken somehow
+* Trying to move when Koopa the Quick race starts crashes the game (Doesn't happen on PC Port) (Audio issue?)
 
 ## Misc
 

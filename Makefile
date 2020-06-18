@@ -242,33 +242,16 @@ ULTRA_BIN_DIRS := lib/bin
 MIPSISET := -mips2
 MIPSBIT := -32
 
+OPT_FLAGS := -O2
+
 ifeq ($(COMPILER),gcc)
   MIPSISET := -mips3
 endif
 
-ifeq ($(TARGET_N64),1)
-
-ifeq ($(VERSION),eu)
-  OPT_FLAGS := -O2
-else
-ifeq ($(VERSION),sh)
-  OPT_FLAGS := -O2
-else
-  OPT_FLAGS := -g
-endif
-endif
-
-  # Use a default opt flag for gcc
-  ifeq ($(COMPILER),gcc)
-    OPT_FLAGS := -O2
-  endif
-
-else
 ifeq ($(TARGET_WEB),1)
   OPT_FLAGS := -O2 -g4 --source-map-base http://localhost:8080/
 else
   OPT_FLAGS := -O2
-endif
 endif
 
 # File dependencies and variables for specific files

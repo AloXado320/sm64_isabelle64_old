@@ -1054,6 +1054,11 @@ void reset_dialog_render_state(void) {
     gDialogBoxState = DIALOG_STATE_OPENING;
     gDialogID = -1;
     gDialogTextPos = 0;
+    gDialogCharDisplay = 0;
+    gSkipTypewriteEffect = FALSE;
+    gAllTextinPageRendered = FALSE;
+    gAcnlDialogAlpha = 0;
+    gAcnlDialogTextAlpha = 0;
     gLastDialogResponse = 0;
     gLastDialogPageStrPos = 0;
     gDialogResponse = 0;
@@ -1803,28 +1808,29 @@ void render_dialog_entries(void) {
             gAcnlDialogAlpha -= 20;
             gAcnlDialogTextAlpha -= 20;
 
-            if (gAcnlDialogAlpha == 160) {
+            if (gAcnlDialogAlpha == 120) {
                 level_set_transition(0, 0);
                 play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
 
                 if (gDialogBoxType == DIALOG_TYPE_ZOOM) {
                     trigger_cutscene_dialog(2);
                 }
+                
+                gDialogResponse = gDialogLineNum;
             }
 
             if (gAcnlDialogAlpha == 60) {
-                gDialogResponse = gDialogLineNum;
                 gDialogBoxState = DIALOG_STATE_OPENING;
                 gDialogID = -1;
                 gDialogTextPos = 0;
-                gLastDialogResponse = 0;
-                gLastDialogPageStrPos = 0;
-                gDialogResponse = 0;
                 gDialogCharDisplay = 0;
                 gSkipTypewriteEffect = FALSE;
                 gAllTextinPageRendered = FALSE;
                 gAcnlDialogAlpha = 0;
                 gAcnlDialogTextAlpha = 0;
+                gLastDialogResponse = 0;
+                gLastDialogPageStrPos = 0;
+                gDialogResponse = 0;
             }
             break;
     }
