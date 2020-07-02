@@ -25,21 +25,20 @@ It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those
 
 ## Compiler used
 
-GCC is used, ido support was dropped
+GCC is used, can be compiled back to ido in Makefile in `COMPILER ?= ido` but remember to do `make clean` if you do so.
 
-Tested on PJ64 1.6, PJ64 2.3, Mupen64
+Tested on PJ64 1.6, PJ64 2.3, Mupen64, CEN64
 
 It also works on console thanks to beta testers with Everdrive.
 
 ## PC Port
 
-Support for it has been added sometime using widescreen and no draw distance but pc code was private until devs actually decided to release it
+Support for it has been added sometime using widescreen and no draw distance but pc code was private until devs actually decided to release it.
 
 Only tested DX11-DX12 on Windows 10
 
 ## Bugs
 * For some reason `Makefile` doesn't define `NON_MATCHING`, so it's defined in `macros.h`
-* Trying to move when Koopa the Quick race starts crashes the game (Doesn't happen on PC Port) (Audio issue?)
 
 ## Misc
 

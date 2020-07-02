@@ -25,7 +25,7 @@ MULTILANGUAGE ?= 1
 TARGET_N64 ?= 1
 # Build for Emscripten/WebGL
 TARGET_WEB ?= 0
-# Compiler to use (ido or gcc) - ido was dropped
+# Compiler to use (ido or gcc)
 COMPILER ?= gcc
 
 # Automatic settings only for ports
@@ -337,7 +337,7 @@ INCLUDE_CFLAGS := -I include -I $(BUILD_DIR) -I $(BUILD_DIR)/include -I src -I .
 ENDIAN_BITWIDTH := $(BUILD_DIR)/endian-and-bitwidth
 
 ifeq ($(TARGET_N64),1)
-IRIX_ROOT := tools/ido5.3_compiler
+IRIX_ROOT := tools/ido7.1_compiler
 
 ifeq ($(shell type mips-linux-gnu-ld >/dev/null 2>/dev/null; echo $$?), 0)
   CROSS := mips-linux-gnu-
