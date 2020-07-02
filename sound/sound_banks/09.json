@@ -22,12 +22,6 @@
             [30, 10000],
             [30, 32700],
             ["goto", 2]
-        ],
-        "envelope3": [
-            [2, 32700],
-            [1, 32700],
-            [32700, 29430],
-            "hang"
         ]
     },
     "instruments": {
@@ -99,8 +93,13 @@
         },
         "instD": {
             "release_rate": 208,
-            "envelope": "envelope3",
+            "envelope": "envelope0",
             "sound": "0D"
+        },
+        "instE": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "0E"
         }
     },
     "instrument_list": [
@@ -117,6 +116,7 @@
         "instA",
         "instB",
         "instC",
-        "instD"
+        "instD",
+        "instE"
     ]
 }

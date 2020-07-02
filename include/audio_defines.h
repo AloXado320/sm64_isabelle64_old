@@ -510,8 +510,8 @@
 #define SOUND_MENU_BOWSER_LAUGH                             SOUND_ARG_LOAD(7, 0, 0x18, 0x80, 8)
 #define SOUND_MENU_ENTER_HOLE                               SOUND_ARG_LOAD(7, 1, 0x19, 0x80, 8)
 /* not verified */ #define SOUND_MENU_CLICK_CHANGE_VIEW     SOUND_ARG_LOAD(7, 0, 0x1A, 0x80, 8)
-#define SOUND_MENU_N64_INTRO_SCREEN                         SOUND_ARG_LOAD(7, 0, 0x1B, 0xA0, 8)
-/* not verified */ #define SOUND_MENU_CAMERA_UNUSED2        0x701C
+#define SOUND_MENU_N64_INTRO_SCREEN                         SOUND_ARG_LOAD(7, 0, 0x1B, 0xB0, 8)
+#define SOUND_MENU_RACE_FANFARE                             SOUND_ARG_LOAD(7, 0, 0x1C, 0xB0, 8)
 /* not verified */ #define SOUND_MENU_MARIO_CASTLE_WARP     SOUND_ARG_LOAD(7, 0, 0x1D, 0xB0, 8)
 #define SOUND_MENU_STAR_SOUND                               SOUND_ARG_LOAD(7, 0, 0x1E, 0xFF, 8)
 #define SOUND_MENU_THANK_YOU_PLAYING_MY_GAME                SOUND_ARG_LOAD(7, 0, 0x1F, 0xFF, 8)

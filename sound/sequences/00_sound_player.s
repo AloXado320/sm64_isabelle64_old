@@ -6966,7 +6966,7 @@ sound_ref .sound_menu_bowser_laugh
 sound_ref .sound_menu_enter_hole
 sound_ref .sound_menu_click_change_view
 sound_ref .sound_menu_n64_intro_screen
-sound_ref .sound_menu_camera_unused2
+sound_ref .sound_menu_race_fanfare
 sound_ref .sound_menu_mario_castle_warp
 sound_ref .sound_menu_star_sound
 sound_ref .sound_menu_thank_you_playing_my_game
@@ -6983,7 +6983,7 @@ sound_ref .sound_menu_mario_castle_warp2
   sound_ref .sound_menu_enter_hole
   sound_ref .sound_menu_click_change_view
   sound_ref .sound_menu_n64_intro_screen
-  sound_ref .sound_menu_camera_unused2
+  sound_ref .sound_menu_race_fanfare
   sound_ref .sound_menu_mario_castle_warp
   sound_ref .sound_menu_star_sound
   sound_ref .sound_menu_change_select
@@ -7537,18 +7537,16 @@ chan_end
 layer_note1 39, 400, 150
 layer_end
 
-.sound_menu_camera_unused2:
+.sound_menu_race_fanfare:
+chan_setmutebhv 0x0
+chan_setnotepriority 14
 chan_setbank 9
-chan_setinstr 3
-chan_setlayer 0, .layer_2F97
-chan_setenvelope .envelope_32D4
+chan_setinstr 0xE
+chan_setlayer 0, .layer_racefanfare
 chan_end
 
-.layer_2F97:
-layer_portamento 0x81, 3, 255
-layer_note1 15, 0xc, 127
-layer_portamento 0x81, 39, 255
-layer_note1 3, 0x64, 127
+.layer_racefanfare:
+layer_note1 39, 400, 150
 layer_end
 
 .sound_menu_mario_castle_warp:

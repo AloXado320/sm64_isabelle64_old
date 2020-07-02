@@ -2422,12 +2422,7 @@ void play_power_star_jingle(u8 arg0) {
 }
 
 void play_race_fanfare(void) {
-    play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_RACE, 0);
-    D_8033211C = 0x80 | 20;
-#ifdef VERSION_EU
-    D_EU_80300558 = 2;
-#endif
-    func_803200E4(50);
+    play_sound(SOUND_MENU_RACE_FANFARE, gDefaultSoundArgs);
 }
 
 void play_toads_jingle(void) {
