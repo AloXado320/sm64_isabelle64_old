@@ -157,7 +157,8 @@ enum EuMultilanguages {
     LANGUAGE_FRENCH,
     LANGUAGE_GERMAN,
     LANGUAGE_ITALIAN,
-    LANGUAGE_SPANISH
+    LANGUAGE_SPANISH,
+    LANGUAGE_MAX
 };
 
 void eu_set_language(u16 language);
