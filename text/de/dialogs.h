@@ -53,7 +53,7 @@ herunterfallende\n\
 Wasserbomben.\n\
 König Bob-Omb ist\n\
 äußerst gefährlich.\n\
-Laß Dich nicht von\n\
+Lass Dich nicht von\n\
 ihm erwischen.\n\
 Wir sind die wahren\n\
 Bob-Ombs und werden Dir\n\
@@ -69,7 +69,7 @@ erst begonnen.\n\
 Andere Fieslinge besitzen\n\
 weitere Sterne, die Dir\n\
 die Wege zu neuen Welten\n\
-öffnen. Allerdings mußt\n\
+öffnen. Allerdings musst\n\
 Du sie zuerst besiegen.\n\
 Meine Bob-Omb-Kollegen\n\
 wissen bereits Bescheid.\n\
@@ -90,7 +90,7 @@ Guten Flug!!!"))
 
 DEFINE_DIALOG(DIALOG_005, NPCNAME_KTQ, 4, _("\
 Hey Melinda! Stimmt es,\n\
-daß Du König Bob-Omb\n\
+dass Du König Bob-Omb\n\
 während eines harten\n\
 Kampfes besiegt hast?\n\
 Du scheinst ganz schön\n\
@@ -261,7 +261,7 @@ Vorsicht, die Fliesen\n\
 sind frisch gebohnert!"))
 
 DEFINE_DIALOG(DIALOG_020, NPCNAME_NONE, 6, _("\
-Lieber Melinda!\n\
+Liebe Melinda!\n\
 Komm mich doch einmal\n\
 im Schloss besuchen!\n\
 Der Kuchen steht bereit!\n\
@@ -293,25 +293,25 @@ einmal die Wandgemälde!"))
 DEFINE_DIALOG(DIALOG_025, NPCNAME_NONE, 4, _("\
 Zum Öffnen dieser Tür\n\
 benötigst Du drei Sterne.\n\
-Du mußt also noch [%]\n\
+Du musst also noch [%]\n\
 von ihnen finden!"))
 
 DEFINE_DIALOG(DIALOG_026, NPCNAME_NONE, 4, _("\
 Zum Öffnen dieser Tür\n\
 benötigst Du acht Sterne.\n\
-Du mußt also noch [%]\n\
+Du musst also noch [%]\n\
 von ihnen finden!"))
 
 DEFINE_DIALOG(DIALOG_027, NPCNAME_NONE, 4, _("\
 Zum Öffnen dieser Tür\n\
 benötigst Du 30 Sterne.\n\
-Du mußt also noch [%]\n\
+Du musst also noch [%]\n\
 von ihnen finden."))
 
 DEFINE_DIALOG(DIALOG_028, NPCNAME_NONE, 4, _("\
 Zum Öffnen dieser Tür\n\
 benötigst Du 50 Sterne.\n\
-Du mußt also noch [%]\n\
+Du musst also noch [%]\n\
 von ihnen finden."))
 
 DEFINE_DIALOG(DIALOG_029, NPCNAME_BOWSER, 4, _("\
@@ -422,7 +422,7 @@ die Kamera mit dem\n\
 Analog-Stick zu bewegen.\n\
 Normalerweise sorgt ein\n\
 Angestellter der Lakitu\n\
-AG dafür, daß Du Melinda\n\
+AG dafür, dass Du Melinda\n\
 siehst. Das ist die\n\
 Standardeinstellung.\n\
 Diese Kamera steuerst Du\n\
@@ -517,7 +517,7 @@ Möchtest Du wieder nach\n\
 oben klettern, drücke\n\
 den Analog-Stick in\n\
 Melindas Blickrichtung.\n\
-Melinda läßt die Kante los,\n\
+Melinda lässt die Kante los,\n\
 wenn Du den Analog-Stick\n\
 in Richtung seines Rückens\n\
 bewegst oder [Z] drückst.\n\
@@ -550,25 +550,25 @@ Burg?\n\
 Befinde ich mich direkt\n\
 über Dir, springe und\n\
 halte den Sprungknopf\n\
-gedrückt. Laß ihn los,\n\
+gedrückt. Lass ihn los,\n\
 um wieder frei zu sein.\n\
 Ich transportiere Dich,\n\
 solange es meine Kraft\n\
-zuläßt. Beobachte meinen\n\
+zulässt. Beobachte meinen\n\
 Schatten, um Dich zu\n\
 orientieren."))
 
 DEFINE_DIALOG(DIALOG_045, NPCNAME_HOOT, 6, _("\
 Hey, Mann, Melinda! Mir\n\
 geht die Puste aus.\n\
-Du ißt zuviel Pasta!\n\
-Bitte, laß los, ich muß\n\
+Du isst zuviel Pasta!\n\
+Bitte, lass los, ich mus\n\
 mich erholen...sofooort!\n\
 Bis später...vielleicht."))
 
 DEFINE_DIALOG(DIALOG_046, NPCNAME_SIGN, 4, _("\
 Es gibt drei verschiedene\n\
-Sprungtechniken. Du mußt\n\
+Sprungtechniken. Du musst\n\
 sie alle beherrschen, um\n\
 die Aufgaben zu meistern.\n\
 Versuche zuerst den\n\
@@ -579,13 +579,13 @@ Mit dem richtigen Timing\n\
 wird jeder Sprung höher\n\
 als der vorherige sein.\n\
 Weiter zum Weitsprung!\n\
-Während Du rennst, mußt\n\
+Während Du rennst, musst\n\
 Du den [Z]-Knopf und dann\n\
 den [A]-Knopf drücken.\n\
 Und nun der Wandsprung!\n\
 Springe gegen eine Wand.\n\
 Sobald Du die Wand\n\
-berührst, mußt Du wieder\n\
+berührst, musst Du wieder\n\
 den Sprungknopf drücken.\n\
 Alles verstanden?\n\
 Dreisprung? Weitsprung?\n\
@@ -780,9 +780,9 @@ indem Du an einer Kante\n\
 den Analog-Stick abwärts\n\
 drückst und springst.\n\
 Achte jedoch darauf,\n\
-daß Du den Analog-Stick\n\
+dass Du den Analog-Stick\n\
 während des Sprungs\n\
-losläßt!"))
+loslässt!"))
 
 DEFINE_DIALOG(DIALOG_061, NPCNAME_SIGN, 5, _("\
 Wer baden möchte, sollte\n\
@@ -860,11 +860,11 @@ Ach ja: Türen, die sich\n\
 unter Wasser befinden,\n\
 kannst Du nicht öffnen.\n\
 Aber vielleicht findest\n\
-Du ja einen Abfluß!!!"))
+Du ja einen Abfluss!!!"))
 
 DEFINE_DIALOG(DIALOG_066, NPCNAME_SIGN, 5, _("\
 Hallo Melinda, ich bin's,\n\
-Peach! Paß auf Dich auf!\n\
+Peach! Pass auf Dich auf!\n\
 Bowser wird versuchen,\n\
 Dich mit seinem Feueratem\n\
 zu versengen.\n\
@@ -880,7 +880,7 @@ Du Dich drehst, desto\n\
 weiter wird Dein Wurf.\n\
 Benutze die [C]-Knöpfe, um\n\
 Dich zu orientieren. Du\n\
-mußt Bowser gegen eine\n\
+musst Bowser gegen eine\n\
 der Bomben am Rand der\n\
 Plattform werfen.\n\
 Drücke den [B]-Knopf, um\n\
@@ -937,7 +937,7 @@ Bleibe stehen, drücke\n\
 START, um das Spiel\n\
 zu pausieren, und wähle\n\
 „Kurs verlassen『!\n\
-Du mußt nicht alle Sterne\n\
+Du musst nicht alle Sterne\n\
 einer Welt finden, um\n\
 den nächsten Abschnitt\n\
 betreten zu können.\n\
@@ -949,7 +949,7 @@ Findest Du einen Stern,\n\
 erhältst Du einen Hinweis,\n\
 wo sich der nächste\n\
 Fundort befindet.\n\
-Aber Du mußt die Sterne\n\
+Aber Du musst die Sterne\n\
 in keiner bestimmten\n\
 Reihenfolge finden.\n\
 Die Wahl liegt bei Dir!"))
@@ -977,11 +977,11 @@ Gipfel wiederfinden."))
 
 DEFINE_DIALOG(DIALOG_073, NPCNAME_SIGN, 5, _("\
 Ahoi, Landratte! Es ist\n\
-doch wohl logisch, daß\n\
+doch wohl logisch, dass\n\
 sich hier unten ein\n\
 sagenhafter Schatz\n\
 befindet!\n\
-Zur Bergung mußt Du die\n\
+Zur Bergung musst Du die\n\
 Kisten in der richtigen\n\
 Reihenfolge öffnen, klar?\n\
 Aber ich sage nicht, wie\n\
@@ -1002,7 +1002,7 @@ preisgeben!"))
 DEFINE_DIALOG(DIALOG_075, NPCNAME_SIGN, 5, _("\
 Hilfe, Melinda! Mein Schloss\n\
 befindet sich in großer\n\
-Gefahr. Ich weiß, daß der\n\
+Gefahr. Ich weiß, dass der\n\
 widerliche Bowser seine\n\
 Hände im Spiel hat.\n\
 Er hat alle Türen des\n\
@@ -1036,7 +1036,7 @@ Hallo Melinda! Du hast\n\
 bereits einiges zur\n\
 Rettung des Schlosses\n\
 getan.\n\
-Aber Du mußt noch\n\
+Aber Du musst noch\n\
 viele Geheimnisse\n\
 der Wandgemälde\n\
 lüften.\n\
@@ -1070,23 +1070,23 @@ niedriger!"))
 DEFINE_DIALOG(DIALOG_078, NPCNAME_SIGN, 5, _("\
 Diesen Schalter kannst Du\n\
 durch eine Stampfattacke\n\
-auslösen. Er läßt einige\n\
+auslösen. Er lässt einige\n\
 blaue Münzen erscheinen,\n\
 die je fünf gelbe\n\
 Münzen wert sind.\n\
-Allerdings mußt Du Dich\n\
+Allerdings musst Du Dich\n\
 beeilen, denn die blauen\n\
 Münzen erscheinen nur\n\
 für kurze Zeit."))
 
 DEFINE_DIALOG(DIALOG_079, NPCNAME_UKIKI, 4, _("\
-Auuuuuaaa! Hey, laß mich\n\
+Auuuuuaaa! Hey, lass mich\n\
 los! Das war doch nur\n\
 Spaß! Du hast wohl keinen\n\
 Humor, was?\n\
 Okay, ich mache Dir einen\n\
 Vorschlag: Wenn Du mich\n\
-losläßt, habe ich eine\n\
+loslässt, habe ich eine\n\
 Überraschung für Dich!\n\
 Na, wie sieht's aus?\n\
 \n\
@@ -1137,13 +1137,13 @@ dieser Stern!"))
 DEFINE_DIALOG(DIALOG_084, NPCNAME_MIPS, 5, _("\
 Hey, Du Rüpel, ich\n\
 bekomme ja blaue Flecken.\n\
-Laß mich sofort los!\n\
+Lass mich sofort los!\n\
 Bowser hat mir diesen\n\
 Stern geschenkt.\n\
 Er wäre ziemlich böse,\n\
 wenn er das wüßte, aber\n\
 ich bin in Eile. Also\n\
-nimm ihn und laß mich\n\
+nimm ihn und lass mich\n\
 runter!"))
 
 DEFINE_DIALOG(DIALOG_085, NPCNAME_SIGN, 4, _("\
@@ -1177,8 +1177,8 @@ Links:/Schwarzes Loch\n\
 ////Höhlensee"))
 
 DEFINE_DIALOG(DIALOG_090, NPCNAME_BOWSER, 5, _("\
-Hua, hua, hua, ich wußte,\n\
-daß Du mir in die Falle\n\
+Hua, hua, hua, ich wusste,\n\
+dass Du mir in die Falle\n\
 gehen würdest. Du solltest\n\
 öfter auf Deine ulkigen\n\
 Füße schauen!"))
@@ -1259,7 +1259,7 @@ Jippiiiiieee, ich hab' sie!\n\
 Jetzt gehört sie mir!!!"))
 
 DEFINE_DIALOG(DIALOG_101, NPCNAME_UKIKI, 5, _("\
-Hgggnnnhhh! Laß...mich...\n\
+Hgggnnnhhh! Lass...mich...\n\
 los!!! Diese Mütze? Na\n\
 gut, ich gebe sie Dir,\n\
 obwohl sie mir besser\n\
@@ -1349,7 +1349,7 @@ Sammle so viele Münzen,\n\
 wie Du finden kannst.\n\
 Sie geben Dir verlorene\n\
 Energie zurück.\n\
-Die Bestleistung jeder\n\
+Die Highscores jeder\n\
 Welt wird gespeichert.\n\
 Du kannst sie jederzeit\n\
 abrufen.\n\
@@ -1366,7 +1366,7 @@ DEFINE_DIALOG(DIALOG_113, NPCNAME_SIGN, 6, _("\
 In den roten, blauen und\n\
 grünen Blöcken befinden\n\
 sich verschiedene Mützen.\n\
-Du mußt die versteckten\n\
+Du musst die versteckten\n\
 Schalter finden, um die\n\
 Blöcke öffnen zu können."))
 
@@ -1391,7 +1391,7 @@ Waaaaa...wie? Du hast\n\
 mich besiegt...\n\
 Ich verneige mein Haupt\n\
 vor Deiner Größe!\n\
-Aber Du mußt Dich\n\
+Aber Du musst Dich\n\
 vorsehen!\n\
 Bowser wird nicht so\n\
 leicht zu besiegen sein.\n\
@@ -1409,13 +1409,13 @@ Schritte? Grabräuber?\n\
 Wer wagt es, den ewigen\n\
 Frieden unseres Grabes\n\
 zu stören?\n\
-Jenem sei gewiß, daß\n\
+Jenem sei gewiss, dass\n\
 wir diesen Frevel mit\n\
 aller Härte bestrafen\n\
 werden!\n\
 Unser Zorn wird ihn\n\
 zermalmen und Ra stehe\n\
-ihm bei, daß es schnell\n\
+ihm bei, dass es schnell\n\
 gehen wird..."))
 
 DEFINE_DIALOG(DIALOG_118, NPCNAME_EYEROK, 6, _("\
@@ -1434,7 +1434,7 @@ die Prinzessin und die\n\
 Power-Sterne in meiner\n\
 Gewalt!\n\
 Ich werde dafür sorgen,\n\
-daß Du keine weiteren\n\
+dass Du keine weiteren\n\
 Sterne erlangen wirst.\n\
 Unser nächstes Treffen\n\
 wird einen anderen Sieger\n\
@@ -1577,7 +1577,7 @@ entwendet und benutzt\n\
 sie, um seine eigenen\n\
 Welten in den Gemälden\n\
 zu erschaffen.\n\
-Du mußt die Power-Sterne\n\
+Du musst die Power-Sterne\n\
 finden. Mit ihrer Hilfe\n\
 kannst Du Bowsers Siegel\n\
 an den Türen des Schlosses\n\
@@ -1642,7 +1642,7 @@ rote Münzen zwei und\n\
 blaue Münzen sogar fünf\n\
 Energieeinheiten zurück.\n\
 Damit die blauen Münzen\n\
-sichtbar werden, mußt\n\
+sichtbar werden, musst\n\
 Du ihre Schalter in den\n\
 Boden stampfen.\n\
 Halte Verletzungen gering,\n\
@@ -1656,8 +1656,8 @@ schon sehr viele Sterne\n\
 gesammelt und Bowser in\n\
 ein höheres Stockwerk\n\
 verbannt.\n\
-Wußtest Du eigentlich,\n\
-daß Du in jeder Welt\n\
+Wusstest Du eigentlich,\n\
+dass Du in jeder Welt\n\
 einen geheimen Stern\n\
 erhältst, wenn Du\n\
 100 Münzen sammelst?"))
@@ -1676,7 +1676,7 @@ in Bewegung.\n\
 Sie folgt einem\n\
 programmierten Kurs und\n\
 verschwindet automatisch,\n\
-wenn Du sie verläßt."))
+wenn Du sie verlässt."))
 
 DEFINE_DIALOG(DIALOG_140, NPCNAME_SIGN, 6, _("\
 Arbeitsplattform\n\
@@ -1711,7 +1711,7 @@ Jetzt kannst Du jede Tür\n\
 Drei trägt.\n\
 Du kannst die Türen so oft\n\
 passieren, wie Du willst.\n\
-Aber paß auf: In höheren\n\
+Aber pass auf: In höheren\n\
 Stockwerken werden die\n\
 Gegner viel stärker!"))
 
@@ -1734,7 +1734,7 @@ in den Boden gestampft?\n\
 Und Du hast doch wohl\n\
 nicht Deine Mütze\n\
 verloren, oder?\n\
-Wenn ja, mußt Du den\n\
+Wenn ja, musst Du den\n\
 Riesengeier mit einer\n\
 Stampfattacke besiegen!\n\
 Ach ja: Bowser hält sich\n\
@@ -1771,7 +1771,7 @@ In roten Blöcken findest\n\
 Du Federkappen, in\n\
 grünen Titanenkappen\n\
 und in blauen Tarnkappen.\n\
-Allerdings mußt Du bereits\n\
+Allerdings musst Du bereits\n\
 einige Sterne besitzen, um\n\
 die Schalterpaläste finden\n\
 zu können!"))
@@ -1843,7 +1843,7 @@ Aber mein Eisatem wird\n\
 mich davon befreien!"))
 
 DEFINE_DIALOG(DIALOG_154, NPCNAME_TOAD, 6, _("\
-Paß gut auf Deine Mütze\n\
+Pass gut auf Deine Mütze\n\
 auf - ohne sie bist Du\n\
 leicht verletzbar!\n\
 Wenn Du sie verloren hast,\n\
@@ -1854,7 +1854,7 @@ DEFINE_DIALOG(DIALOG_155, NPCNAME_TOAD, 3, _("\
 Hi, Melinda! Ich erzähle\n\
 Dir einige Geheimnisse\n\
 des Schlosses:\n\
-Es heißt, daß der Spiegel\n\
+Es heißt, dass der Spiegel\n\
 des Spiegelsaals magische\n\
 Fähigkeiten besitzt.\n\
 Er soll Dinge zeigen, die\n\
@@ -1903,7 +1903,7 @@ effektive Methode, um\n\
 hohe Stellen zu erreichen.\n\
 Springe an eine Wand.\n\
 Sobald Du sie berührst,\n\
-mußt Du erneut springen!"))
+musst Du erneut springen!"))
 
 DEFINE_DIALOG(DIALOG_159, NPCNAME_SIGN, 4, _("\
 Gehst Du in die Hocke und\n\
@@ -1929,7 +1929,7 @@ unserem letzten Abenteuer\n\
 ist viel Zeit vergangen.\n\
 Ich freue mich, Dich\n\
 wiederzusehen.\n\
-Man erzählte mir, daß ich\n\
+Man erzählte mir, dass ich\n\
 Dich hier treffen könnte,\n\
 aber ich hatte die\n\
 Hoffnung schon fast\n\
@@ -1941,13 +1941,13 @@ zurückerobert?\n\
 Unglaublich!!!\n\
 Und die Prinzessin?\n\
 Du hast sie gerettet?\n\
-Cool! Aber ich wußte\n\
-natürlich, daß Du es\n\
+Cool! Aber ich wusste\n\
+natürlich, dass Du es\n\
 schaffen würdest.\n\
 Nun habe ich noch eine\n\
 ganz spezielle Nachricht\n\
 für Dich:\n\
-Danke, daß Du SUPER\n\
+Danke, dass Du SUPER\n\
 Melinda 64 gespielt hast.\n\
 Du hast jetzt alle Sterne\n\
 gefunden und damit das\n\
@@ -1959,7 +1959,7 @@ gefallen, denn du kannst\n\
 das Spiel nochmals unter\n\
 veränderten Bedingungen\n\
 spielen. Viel Spaß!\n\
-Es könnte sein, daß Du\n\
+Es könnte sein, dass Du\n\
 dabei neue Entdeckungen\n\
 machst, die Dir bis jetzt\n\
 verborgen geblieben sind.\n\
@@ -1970,7 +1970,7 @@ Nein, nein, nein! Nicht\n\
 Du schon wieder! Ich habe\n\
 jetzt wirklich keine Zeit,\n\
 über Sterne zu quatschen!\n\
-Hier, nimm ihn und laß\n\
+Hier, nimm ihn und lass\n\
 mich runter. Ich habe noch\n\
 wichtige Geschäfte zu\n\
 erledigen!"))
@@ -2043,7 +2043,7 @@ davor stehst."))
 
 DEFINE_DIALOG(DIALOG_168, NPCNAME_WIGGLER, 4, _("\
 Bist Du immer noch hier?\n\
-Findest Du nicht, daß\n\
+Findest Du nicht, dass\n\
 Du bereits genug Schaden\n\
 angerichtet hast?"))
 

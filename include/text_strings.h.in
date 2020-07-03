@@ -143,7 +143,7 @@
 // alternate costume
 #define TEXT_ALT_COSTUME_TITLE _("Select a costume")
 #define TEXT_ALT_COSTUME_TITLE_FR _("Choisir un costume")
-#define TEXT_ALT_COSTUME_TITLE_DE _("Wähle ein Kostüm")
+#define TEXT_ALT_COSTUME_TITLE_DE _("Wähle ein Kostüm aus")
 #define TEXT_ALT_COSTUME_TITLE_IT _("Seleziona un costume")
 #define TEXT_ALT_COSTUME_TITLE_ES _("Elije un disfraz")
 
@@ -200,7 +200,7 @@
 #define TEXT_TITLE_NO_CONTROLLER_FR _("Manette debranchee")
 
 #define TEXT_TITLE_PRESS_START_DE _("Drücke den Startknopf")
-#define TEXT_TITLE_NO_CONTROLLER_DE _("Controller fehlt")
+#define TEXT_TITLE_NO_CONTROLLER_DE _("Kein Controller")
 
 #define TEXT_TITLE_PRESS_START_IT _("Premi il pulsante Start")
 #define TEXT_TITLE_NO_CONTROLLER_IT _("Nessun controller")
@@ -437,7 +437,7 @@
 #define TEXT_RETURN_ES _(" Regresar")
 
 #define TEXT_CHECK_SCORE_FR _(" Score")
-#define TEXT_CHECK_SCORE_DE _(" Leistung")
+#define TEXT_CHECK_SCORE_DE _(" Score")
 #define TEXT_CHECK_SCORE_IT _(" Punteggio")
 #define TEXT_CHECK_SCORE_ES _(" Ver puntos")
 
@@ -457,7 +457,7 @@
 #define TEXT_SELECT_FILE_ES _("ELEGIR ARCHIVO")
 
 #define TEXT_SCORE_FR _(" Score")
-#define TEXT_SCORE_DE _(" Leistung")
+#define TEXT_SCORE_DE _(" Score")
 #define TEXT_SCORE_IT _(" Punteggi")
 #define TEXT_SCORE_ES _(" Puntos")
 
@@ -577,12 +577,12 @@
 #define TEXT_ESPANOL _("Español")
 
 #define TEXT_HI_SCORE_FR _("MEILLEUR SCORE")
-#define TEXT_HI_SCORE_DE _("BESTLEISTUNG")
+#define TEXT_HI_SCORE_DE _("HIGHSCORE")
 #define TEXT_HI_SCORE_IT _("MIGLIORE PUNTI")
 #define TEXT_HI_SCORE_ES _("RECORD")
 
 #define TEXT_MY_SCORE_FR _("MON SCORE")
-#define TEXT_MY_SCORE_DE _("LEISTUNG")
+#define TEXT_MY_SCORE_DE _("SCORE")
 #define TEXT_MY_SCORE_IT _("MIO PUNTI")
 #define TEXT_MY_SCORE_ES _("MI PUNTAJE")
 
@@ -605,7 +605,7 @@
 #define TEXT_CAMERA_ANGLE_R_FR          _("RÉGLAGE CAMÉRA AVEC [R]")
 // German
 #define TEXT_COURSE_DE                  _("KURS")
-#define TEXT_MY_SCORE_DE                _("LEISTUNG")
+#define TEXT_MY_SCORE_DE                _("SCORE")
 #define TEXT_CONTINUE_DE                _("WEITER")
 #define TEXT_EXIT_COURSE_DE             _("KURS VERLASSEN")
 #define TEXT_CAMERA_ANGLE_R_DE          _("KAMERA MIT [R] VERSTELLEN")
@@ -642,7 +642,7 @@
 #define TEXT_HUD_HI_SCORE_FR            _("MEILLEUR SCORE")
 #define TEXT_HUD_CONGRATULATIONS_FR     _("FELICITATIONS")
 // German
-#define TEXT_HUD_HI_SCORE_DE            _("BESTLEISTUNG")
+#define TEXT_HUD_HI_SCORE_DE            _("HIGHSCORE")
 #define TEXT_HUD_CONGRATULATIONS_DE     _("GRATULATION")
 // Italian
 #define TEXT_HUD_HI_SCORE_IT            _("MIGLIORE PUNTI")
@@ -686,7 +686,7 @@
 #define TEXT_THANK_YOU_MARIO_DE      _("Vielen Dank, Mario!")
 #define TEXT_SOMETHING_SPECIAL_DE    _("Wir haben eine Überraschung für Dich...")
 #define TEXT_COME_ON_EVERYBODY_DE    _("Hört alle her...")
-#define TEXT_LETS_HAVE_CAKE_DE       _("Laßt uns einen leckeren Kuchen backen...")
+#define TEXT_LETS_HAVE_CAKE_DE       _("Lasst uns einen leckeren Kuchen backen...")
 #define TEXT_FOR_MARIO_DE            _("...für Mario...")
 // Italian
 #define TEXT_POWER_STARS_RESTORED_IT _("Il castello gode nuovamente del potere delle Stelle...")
