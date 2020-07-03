@@ -23,8 +23,11 @@
 /**
  * The maximum number of objects that can be loaded at once.
  */
+#ifdef NODRAWINGDISTANCE
+#define OBJECT_POOL_CAPACITY 960
+#else
 #define OBJECT_POOL_CAPACITY 240
-
+#endif
 /**
  * Every object is categorized into an object list, which controls the order
  * they are processed and which objects they can collide with.
