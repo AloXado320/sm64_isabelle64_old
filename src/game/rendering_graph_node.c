@@ -159,7 +159,7 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     // Mario silhouette 
     // Idea by Kaze Emanuar, coded by FramePerfection and fixed by AloXado320
     for (i = 0; i < GFX_NUM_MASTER_LISTS; i++) {
-        if (i == 5) {  //Render Mario silhouette
+        if (i == 5) {  // Render Mario silhouette
             if ((currList = node->listHeads[8]) != NULL) {   
                 while (currList != NULL) {
                     gSPSetGeometryMode(gDisplayListHead++, G_FOG);

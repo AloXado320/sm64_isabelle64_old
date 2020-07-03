@@ -1046,7 +1046,7 @@ void print_file_select_strings(void) {
         print_menu_generic_string(38, 130, textMarioC);
         print_menu_generic_string(38, 170, textMarioD);
         gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
-}
+    }
 
     switch (sFileSelectMenuID) {
         case MENU_BUTTON_NONE:
