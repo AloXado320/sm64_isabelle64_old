@@ -1970,7 +1970,7 @@ Nein, nein, nein! Nicht\n\
 Du schon wieder! Ich habe\n\
 jetzt wirklich keine Zeit,\n\
 über Sterne zu quatschen!\n\
-Hier, nimm ihn und las\n\
+Hier, nimm ihn und lass\n\
 mich runter. Ich habe noch\n\
 wichtige Geschäfte zu\n\
 erledigen!"))
