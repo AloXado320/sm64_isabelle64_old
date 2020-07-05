@@ -15,6 +15,14 @@ branch, make your changes to the code (but do not commit), then run `tools/creat
 
 The following enhancements are included in this directory:
 
+## 60 FPS (PC Port only) - `60fps_pc.patch`
+
+This patch is only supported when not targeting N64. It also currently requires a 64-bit platform. If compiled for a 32-bit platform, the game will run out of memory and crash.
+
+This allows the game to be rendered at 60 FPS instead of 30 FPS by interpolation.
+
+The Mario head intro is the only exception which is still rendered at 30 FPS.
+
 ## Debug Box - `debug_box.patch`
 
 This allows you to draw 3D boxes for debugging purposes.

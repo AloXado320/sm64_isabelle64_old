@@ -253,7 +253,7 @@ index 1a86477b..52a23e5e 100644
 +
 +        sp20 = *(unkStruct2 *) sp2c;
 +        sp34 = (sp20.unk01 & 0xc0) >> 4;
-+    } else if (gConsoleType == CONSOLE_N64) {
++    } else if (gConsoleType == CONSOLE_IQUE) {
 +        u8 *__osBbEepromAddress = * (u8**) 0x8000035C;
 +        s32 i;
  
