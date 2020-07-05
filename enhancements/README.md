@@ -15,10 +15,6 @@ branch, make your changes to the code (but do not commit), then run `tools/creat
 
 The following enhancements are included in this directory:
 
-## Crash Screen - `crash.patch`
-
-This enhancement provides a crash screen that is displayed when the code throws a hardware exception. This may be useful for diagnosing crashes in game code.
-
 ## Debug Box - `debug_box.patch`
 
 This allows you to draw 3D boxes for debugging purposes.
