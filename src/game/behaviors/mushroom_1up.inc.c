@@ -20,6 +20,9 @@ void bhv_1up_interact(void) {
             }
         }
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+#ifdef VERSION_SH
+        queue_rumble_data(5, 80);
+#endif
     }
 }
 
