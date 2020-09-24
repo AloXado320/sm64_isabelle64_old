@@ -42,7 +42,7 @@ s16 sSoundTextX;
 s16 sSoundTextY;
 #endif
 
-//! @Bug (UB Array Access) For PAL, more buttons were added than the array was extended.
+//! @Bug (UB Array Access) For EU, more buttons were added than the array was extended.
 //! This causes no currently known issues on console (as the other variables are not changed
 //! while this is used) but can cause issues with other compilers.
 #ifdef MULTILANGUAGE
@@ -402,7 +402,7 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
     s16 xNew;
 
     if (save_file_exists(fileIndex) == TRUE) {
-        starCount = save_file_get_total_star_count(fileIndex, 0, 24);
+        starCount = save_file_get_total_star_count(fileIndex, COURSE_MIN - 1, COURSE_MAX - 1);
         // Print star icon
         print_hud_lut_string(HUD_LUT_GLOBAL, x, y, starIcon);
         // If star count is less than 100, print x icon and move
@@ -849,7 +849,7 @@ void print_score_file_castle_secret_stars(s8 fileIndex, s16 x, s16 y) {
     // Print "[star] x"
     print_menu_generic_string(x, y, textStarX);
     // Print number of castle secret stars
-    int_to_str(save_file_get_total_star_count(fileIndex, 15, 24), secretStarsText);
+    int_to_str(save_file_get_total_star_count(fileIndex, COURSE_BONUS_STAGES - 1, COURSE_MAX - 1), secretStarsText);
     print_menu_generic_string(x + 16, y, secretStarsText);
 }
 

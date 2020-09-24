@@ -206,7 +206,7 @@ s32 render_textured_transition(s8 fadeTimer, s8 transTime, struct WarpTransition
     return set_and_reset_transition_fade_timer(fadeTimer, transTime);
 }
 
-int render_screen_transition(s8 fadeTimer, s8 transType, u8 transTime, struct WarpTransitionData *transData) {
+s32 render_screen_transition(s8 fadeTimer, s8 transType, u8 transTime, struct WarpTransitionData *transData) {
     switch (transType) {
         case WARP_TRANSITION_FADE_FROM_COLOR:
             return render_fade_transition_from_color(fadeTimer, transTime, transData);
@@ -274,12 +274,14 @@ Gfx *render_cannon_circle_base(void) {
         gSPVertex(g++, VIRTUAL_TO_PHYSICAL(verts), 4, 0);
         gSPDisplayList(g++, dl_draw_quad_verts_0123);
         gSPTexture(g++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
+
 #ifdef WIDESCREEN
         gDPSetCombineMode(g++, G_CC_SHADE, G_CC_SHADE);
         gSPVertex(g++, VIRTUAL_TO_PHYSICAL(verts + 4), 4, 4);
         gSP2Triangles(g++, 4, 0, 3, 0, 4, 3, 7, 0);
         gSP2Triangles(g++, 1, 5, 6, 0, 1, 6, 2, 0);
 #endif
+
         gSPDisplayList(g++, dl_screen_transition_end);
         gSPEndDisplayList(g);
     } else {

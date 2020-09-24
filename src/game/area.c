@@ -24,6 +24,8 @@
 #include "level_table.h"
 #include "menu/intro_geo.h"
 
+#include "gfx_dimensions.h"
+
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
 struct Area gAreaData[8];
@@ -62,7 +64,6 @@ s16 gRenderN64Text = FALSE;
  * the spawn behavior executed, the index of that behavior is used with sSpawnTypeFromWarpBhv
 */
 
-// D_8032CE9C
 const BehaviorScript *sWarpBhvSpawnTable[] = {
     bhvDoorWarp,                bhvStar,                   bhvExitPodiumWarp,          bhvWarp,
     bhvWarpPipe,                bhvFadingWarp,             bhvInstantActiveWarp,       bhvAirborneWarp,
@@ -226,7 +227,6 @@ void clear_area_graph_nodes(void) {
 }
 
 void load_area(s32 index) {
-       
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;
@@ -289,7 +289,7 @@ void change_area(s32 index) {
     }
 
     if (areaFlags & 0x01) {
-        gMarioObject->header.gfx.unk18 = index, gMarioSpawnInfo->areaIndex = index;
+        gMarioObject->header.gfx.areaIndex = index, gMarioSpawnInfo->areaIndex = index;
     }
 }
 
@@ -373,7 +373,7 @@ void render_game(void) {
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
-                      
+         
         if (gCurrDemoInput == NULL) {
             render_hud();
         }
@@ -381,19 +381,19 @@ void render_game(void) {
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
         do_cutscene_handler();
-
-        if (gTitleInitMessage != FALSE) {
+        
+        if (gTitleInitMessage) {
             render_initial_intro_message();
         }
         
-        if (gRenderN64Text != FALSE) {
+        if (gRenderN64Text) {
             render_nintendo_64_textures();
         }
 
         if (gCurrDemoInput != NULL) {
             render_title_screen_textures();
         }
-        
+
         print_displaying_credits_entry();
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
@@ -412,7 +412,7 @@ void render_game(void) {
         if (gWarpTransition.isActive) {
             if (gWarpTransDelay == 0) {
                 gWarpTransition.isActive = !render_screen_transition(0, gWarpTransition.type, gWarpTransition.time,
-                                                          &gWarpTransition.data);
+                                                                     &gWarpTransition.data);
                 if (!gWarpTransition.isActive) {
                     if (gWarpTransition.type & 1) {
                         gWarpTransition.pauseRendering = TRUE;
@@ -426,7 +426,7 @@ void render_game(void) {
         }
     } else {
         render_text_labels();
-        if (D_8032CE78 != 0) {
+        if (D_8032CE78 != NULL) {
             clear_viewport(D_8032CE78, gWarpTransFBSetColor);
         } else {
             clear_frame_buffer(gWarpTransFBSetColor);
@@ -434,5 +434,5 @@ void render_game(void) {
     }
 
     D_8032CE74 = NULL;
-    D_8032CE78 = 0;
+    D_8032CE78 = NULL;
 }

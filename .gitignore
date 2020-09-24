@@ -7,11 +7,16 @@
 *.ilk
 *.exp
 
+# Patch and wiggle related residdue
+*.rej
+*.porig
+
 # Precompiled Headers
 *.gch
 *.pch
 
 # Libraries
+*.lib
 *.a
 *.la
 *.lo
@@ -40,8 +45,10 @@
 # Text editor remnants
 *.swp
 .vscode/*
+.idea/*
 
 # General project-specific ignores
+__pycache__/*
 doxygen/doxygen/*
 build/*
 texconvert/*
@@ -49,9 +56,8 @@ texconvert/*
 *.mio0
 *.z64
 *.map
+*.sav
 .assets-local.txt
-
-# PC Port
 sm64_save_file.bin
 sm64config.txt
 
@@ -83,22 +89,16 @@ sm64config.txt
 !/actors/bowser_key/*
 # SM64DS Coins
 !/actors/coin/*
-# Exclamation Box Outline (from RGBA16 to IA4)
-!/actors/exclamation_box_outline/*
 # Isabelle model
 !/actors/isabelle/*
 # Mushroom 1-up and Chocolate
 !/actors/mushroom_1up/*
 # Power Meter
 !/actors/power_meter/*
-# Sparkle (from RGBA16 to CI4)
-!/actors/sparkle/*
 # Gold Leaf
 !/actors/star/*
 # Transparent Gold Leaf
 !/actors/transparent_star/*
-# Water Splash (from RGBA16 to CI4)
-!/actors/water_splash/*
 
 # levels folder
 

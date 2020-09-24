@@ -1,8 +1,8 @@
 OUTPUT_ARCH (mips)
 
-/* include/segments.h defines SEG_POOL_START, SEG_POOL_END, SEG_BUFFERS,
- * SEG_GODDARD, SEG_MAIN, SEG_ENGINE, SEG_FRAMEBUFFERS */
+#define LINKER /* Removes externs from preprocessed script */
 #include "segments.h"
+#undef LINKER
 
 #define BEGIN_SEG(name, addr) \
     _##name##SegmentStart = ADDR(.name); \
@@ -25,14 +25,6 @@ OUTPUT_ARCH (mips)
    BEGIN_SEG(name##_mio0, segAddr) \
    { \
       BUILD_DIR/bin/name.mio0.o(.data); \
-      . = ALIGN(0x10); \
-   } \
-   END_SEG(name##_mio0)
-
-#define MIO0_EU_SEG(name, segAddr) \
-   BEGIN_SEG(name##_mio0, segAddr) \
-   { \
-      BUILD_DIR/bin/eu/name.mio0.o(.data); \
       . = ALIGN(0x10); \
    } \
    END_SEG(name##_mio0)
@@ -79,7 +71,26 @@ SECTIONS
    BEGIN_NOLOAD(zbuffer) {
       BUILD_DIR/src/buffers/zbuffer.o(.bss*);
    }
+   END_NOLOAD(zbuffer)
 
+   . = _zbufferSegmentNoloadEnd;
+   BEGIN_NOLOAD(buffers)
+   {
+      BUILD_DIR/src/buffers/buffers.o(.bss*);
+      BUILD_DIR/src/audio/globals_start.o(.bss*);
+      BUILD_DIR/src/audio/synthesis.o(.bss*);
+      BUILD_DIR/src/audio/heap.o(.bss*);
+      BUILD_DIR/src/audio/load.o(.bss*);
+      BUILD_DIR/src/audio/data.o(.bss*);
+      BUILD_DIR/src/audio*.o(.bss*);
+      . = ALIGN(0x100);
+      BUILD_DIR/src/buffers/gfx_output_buffer.o(.bss*);
+   }
+   END_NOLOAD(buffers)
+
+   /*ASSERT((. <= SEG_MAIN), "Error: buffers segment extended into main")*/
+
+   . = _buffersSegmentNoloadEnd;
    /* lib/src/__osDevMgrMain.c and lib/src/osCreateViManager.c contain infinite
     * loops compiled without -g, which cause the return statements and the .o
     * files themselves to be aligned to 32-byte boundaries. But the linker
@@ -87,7 +98,7 @@ SECTIONS
     * only to 16 bytes, in some cases misaligning them. We force the same to
     * happen using the SUBALIGN directive. This is harmless; the alignment is
     * just an optimization. */
-   BEGIN_SEG(main, SEG_MAIN) SUBALIGN(16)
+   BEGIN_SEG(main, .) SUBALIGN(16)
    {
       BUILD_DIR/asm/entry.o(.text);
       BUILD_DIR/src/game/crash_screen.o(.text);
@@ -138,7 +149,7 @@ SECTIONS
       BUILD_DIR/src/game/paintings.o(.text);
       BUILD_DIR/src/game/print.o(.text);
       BUILD_DIR/src/game/ingame_menu.o(.text);
-      BUILD_DIR/src/game/alternate_costume.o(.text);
+      BUILD_DIR/src/game/alternate_costume.o(.text);                                              
       BUILD_DIR/src/game/envfx_snow.o(.text);
       BUILD_DIR/src/game/envfx_bubbles.o(.text);
       BUILD_DIR/src/game/macro_special_objects.o(.text);
@@ -158,7 +169,7 @@ SECTIONS
       BUILD_DIR/libultra.a:string.o(.text);
       BUILD_DIR/libultra.a:_Printf.o(.text);
       BUILD_DIR/libultra.a:llmuldiv.o(.text);
-      BUILD_DIR/libultra.a:llmuldiv_gcc.o(.text);
+      BUILD_DIR/libultra.a:llmuldiv_gcc.o(.text);                                           
       BUILD_DIR/libultra.a:osInitialize.o(.text);
       BUILD_DIR/libultra.a:osSetTime.o(.text);
       BUILD_DIR/libultra.a:osGetTime.o(.text);
@@ -200,7 +211,7 @@ SECTIONS
       BUILD_DIR/libultra.a:guOrthoF.o(.text)
       BUILD_DIR/libultra.a:guPerspectiveF.o(.text)
       BUILD_DIR/libultra.a:llconv.o(.text)
-      BUILD_DIR/libultra.a:cosf.o(.text);
+      BUILD_DIR/libultra.a:cosf.o(.text)
       BUILD_DIR/libultra.a:sinf.o(.text)
       BUILD_DIR/libultra.a:guTranslateF.o(.text)
       BUILD_DIR/libultra.a:guRotateF.o(.text)
@@ -211,7 +222,7 @@ SECTIONS
       BUILD_DIR/libultra.a:osAiSetNextBuffer.o(.text)
       BUILD_DIR/libultra.a:_Litob.o(.text)
       BUILD_DIR/libultra.a:_Ldtob.o(.text)
-      BUILD_DIR/libultra.a:kdebugserver.o(.text);
+      BUILD_DIR/libultra.a:kdebugserver.o(.text)                                           
       BUILD_DIR/libultra.a:__osSetSR.o(.text)
       BUILD_DIR/libultra.a:__osGetSR.o(.text)
       BUILD_DIR/libultra.a:__osSetFpcCsr.o(.text)
@@ -254,7 +265,7 @@ SECTIONS
       BUILD_DIR/libultra.a:guNormalize.o(.text)
       BUILD_DIR/libultra.a:__osAiDeviceBusy.o(.text);
       BUILD_DIR/libultra.a:ldiv.o(.text)
-      BUILD_DIR/libultra.a:__osGetCause.o(.text);
+      BUILD_DIR/libultra.a:__osGetCause.o(.text);                                           
       BUILD_DIR/libultra.a:__osSiDeviceBusy.o(.text);
       BUILD_DIR/libultra.a:osSetIntMask.o(.text)
       BUILD_DIR/libultra.a:osDestroyThread.o(.text)
@@ -262,6 +273,7 @@ SECTIONS
       BUILD_DIR/libultra.a:__osSetCompare.o(.text)
       BUILD_DIR/libultra.a:__osProbeTLB.o(.text)
       BUILD_DIR/libultra.a:__osDequeueThread.o(.text)
+      BUILD_DIR/libultra.a:guLookAtRef.o(.text); /* Fast3DEX2 only */
       BUILD_DIR/libultra.a:func_802F7140.o(.text)
       BUILD_DIR/libultra.a:func_802F71A0.o(.text)
       BUILD_DIR/libultra.a:func_802F71F0.o(.text)
@@ -293,7 +305,7 @@ SECTIONS
       BUILD_DIR/libultra.a:osSetThreadPri.o(.text);
       BUILD_DIR/libultra.a:osInitialize.o(.text);
       BUILD_DIR/libultra.a:osViSwapBuffer.o(.text);
-      BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
+      BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);                                                       
       BUILD_DIR/libultra.a:sqrtf.o(.text);
       BUILD_DIR/libultra.a:osContStartReadData.o(.text);
       BUILD_DIR/libultra.a:osContInit.o(.text);
@@ -349,9 +361,7 @@ SECTIONS
       BUILD_DIR/libultra.a:__osSiRawWriteIo.o(.text);
       BUILD_DIR/libultra.a:osMapTLBRdb.o(.text);
       BUILD_DIR/libultra.a:osPiRawReadIo.o(.text);
-#if VERSION_JP
-      . += 0x40;
-#endif
+
       BUILD_DIR/libultra.a:__osSiCreateAccessQueue.o(.text);
       BUILD_DIR/libultra.a:__osSiRawStartDma.o(.text);
       BUILD_DIR/libultra.a:osSetTimer.o(.text);
@@ -415,7 +425,7 @@ SECTIONS
       BUILD_DIR/src/game/paintings.o(.data*);
       BUILD_DIR/src/game/print.o(.data*);
       BUILD_DIR/src/game/ingame_menu.o(.data*);
-      BUILD_DIR/src/game/alternate_costume.o(.data*);
+      BUILD_DIR/src/game/alternate_costume.o(.data*);                                               
       BUILD_DIR/src/game/envfx_snow.o(.data*);
       BUILD_DIR/src/game/envfx_bubbles.o(.data*);
       BUILD_DIR/src/game/macro_special_objects.o(.data*);
@@ -426,6 +436,12 @@ SECTIONS
       /* wildcard doesn't match on EU due to files being moved to engine/ */
       BUILD_DIR/src/game*.o(.data*);
 #endif
+      BUILD_DIR/src/audio/synthesis.o(.data*);
+      BUILD_DIR/src/audio/heap.o(.data*);
+      BUILD_DIR/src/audio/load.o(.data*);
+      BUILD_DIR/src/audio/playback.o(.data*);
+      BUILD_DIR/src/audio/effects.o(.data*);
+      BUILD_DIR/src/audio/seqplayer.o(.data*);
       BUILD_DIR/src/audio/external.o(.data*);
       BUILD_DIR/src/audio/port_eu.o(.data*);
       BUILD_DIR/src/audio/data.o(.data*);
@@ -447,7 +463,7 @@ SECTIONS
       BUILD_DIR/libultra.a:__osPiCreateAccessQueue.o(.data*);
       BUILD_DIR/libultra.a:__osSiCreateAccessQueue.o(.data*);
       BUILD_DIR/libultra.a:osViData.o(.data*);
-      BUILD_DIR/libultra.a:__osSyncPutChars.o(.data*);
+      BUILD_DIR/libultra.a:__osSyncPutChars.o(.data*);                                                
 #else
       BUILD_DIR/libultra.a:osViTable.o(.data*);
       BUILD_DIR/libultra.a:osCreateViManager.o(.data*);
@@ -496,7 +512,7 @@ SECTIONS
       BUILD_DIR/src/game/object_helpers.o(.rodata*);
 #endif
       BUILD_DIR/src/game/behavior_actions.o(.rodata*);
-      BUILD_DIR/src/game/platform_displacement.o(.rodata*);
+      BUILD_DIR/src/game/platform_displacement.o(.rodata*);                                                     
 #ifndef VERSION_EU
       BUILD_DIR/src/game/object_collision.o(.rodata*);
       BUILD_DIR/src/game/spawn_object.o(.rodata*);
@@ -511,7 +527,7 @@ SECTIONS
       BUILD_DIR/src/game/paintings.o(.rodata*);
       BUILD_DIR/src/game/print.o(.rodata*);
       BUILD_DIR/src/game/ingame_menu.o(.rodata*);
-      BUILD_DIR/src/game/alternate_costume.o(.rodata*);
+      BUILD_DIR/src/game/alternate_costume.o(.rodata*);                                                 
       BUILD_DIR/src/game/envfx_snow.o(.rodata*);
       BUILD_DIR/src/game/envfx_bubbles.o(.rodata*);
       BUILD_DIR/src/game/macro_special_objects.o(.rodata*);
@@ -603,7 +619,7 @@ SECTIONS
       BUILD_DIR/src/game/paintings.o(.bss*);
       BUILD_DIR/src/game/print.o(.bss*);
       BUILD_DIR/src/game/ingame_menu.o(.bss*);
-      BUILD_DIR/src/game/alternate_costume.o(.bss*);
+      BUILD_DIR/src/game/alternate_costume.o(.bss*);                                              
       BUILD_DIR/src/game/envfx_snow.o(.bss*);
       BUILD_DIR/src/game/envfx_bubbles.o(.bss*);
       BUILD_DIR/src/game/macro_special_objects.o(.bss*)
@@ -662,9 +678,11 @@ SECTIONS
    _mainSegmentNoloadSizeLo = SIZEOF (.main.noload) & 0xffff;
    _mainSegmentNoloadSizeHi = SIZEOF (.main.noload) >> 16;
 
-   ASSERT((. <= SEG_ENGINE), "Error: main segment extended into engine.")
+   /*ASSERT((. <= SEG_ENGINE), "Error: main segment extended into engine.")*/
 
-   BEGIN_SEG(engine, SEG_ENGINE)
+   . = _mainSegmentNoloadEnd;
+
+   BEGIN_SEG(engine, .)
    {
       BUILD_DIR/src/engine/math_util.o(.text);
       BUILD_DIR/src/engine/graph_node.o(.text);
@@ -723,15 +741,17 @@ SECTIONS
       BUILD_DIR/src/game/object_helpers.o(.bss*);
 #endif
       BUILD_DIR/src/engine*.o(.bss*);
+      . = ALIGN(0x100);
    }
    END_NOLOAD(engine)
 
-   ASSERT((. <= SEG_FRAMEBUFFERS), "Error: engine segment extended into framebuffers.")
+   /*ASSERT((. <= SEG_FRAMEBUFFERS), "Error: engine segment extended into framebuffers.")*/
 
-   . = SEG_FRAMEBUFFERS;
+   . = _engineSegmentNoloadEnd;
    BEGIN_NOLOAD(framebuffers)
    {
       BUILD_DIR/src/buffers/framebuffers.o(.bss*);
+      . = ALIGN(0x100);
    }
    END_NOLOAD(framebuffers)
 
@@ -794,6 +814,7 @@ SECTIONS
       BUILD_DIR/src/menu/file_select.o(.text);
       BUILD_DIR/src/menu/star_select.o(.text);
       BUILD_DIR/src/menu*.o(.text);
+      /* data, rodata, per file */
       BUILD_DIR/src/menu/level_select_menu.o(.data*);
       BUILD_DIR/src/menu/level_select_menu.o(.rodata*);
       BUILD_DIR/src/menu/intro_geo.o(.data*);
@@ -814,24 +835,10 @@ SECTIONS
    }
    END_NOLOAD(goddard)
 
-   ASSERT((. <= SEG_POOL_END), "Error: extended past pool end.")
+   ASSERT((. <= (SEG_POOL_START + POOL_SIZE)), "Error: extended past pool end.")
 
-   . = SEG_BUFFERS;
-   BEGIN_NOLOAD(buffers)
-   {
-      BUILD_DIR/src/buffers/buffers.o(.bss*);
-      BUILD_DIR/src/audio/globals_start.o(.bss*);
-      BUILD_DIR/src/audio/synthesis.o(.bss*);
-      BUILD_DIR/src/audio/heap.o(.bss*);
-      BUILD_DIR/src/audio/load.o(.bss*);
-      BUILD_DIR/src/audio/data.o(.bss*);
-      BUILD_DIR/src/audio*.o(.bss*);
-
-      BUILD_DIR/src/buffers/gfx_output_buffer.o(.bss*);
-   }
-   END_NOLOAD(buffers)
-
-   ASSERT((. <= SEG_MAIN), "Error: buffers segment extended into main.")
+   __mainPoolStart = .;
+   __mainPoolSize = RAM_END - .;
 
    /* 0x268020 0x268020-0 [0] */
    BEGIN_SEG(intro, 0x14000000)
@@ -849,6 +856,7 @@ SECTIONS
 
    MIO0_SEG(debug_level_select, 0x07000000)
    MIO0_SEG(title_screen_bg, 0x0A000000)
+
    gMainLevels = __romPos;
 
    BEGIN_SEG(menu, 0x14000000)

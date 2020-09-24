@@ -38,6 +38,7 @@
  *      Finally, each painting has two display lists, normal and rippling, which are defined in the same
  *      level data file as the Painting itself. See levels/castle_inside/painting.inc.c.
  *
+ *
  * Painting state machine:
  * Paintings spawn in the PAINTING_IDLE state
  *      From IDLE, paintings can change to PAINTING_RIPPLE or PAINTING_ENTERED
@@ -576,7 +577,7 @@ void painting_update_ripple_state(struct Painting *painting) {
         //! After ~6.47 days, paintings with RIPPLE_TRIGGER_CONTINUOUS will increment this to
         //! 16777216 (1 << 24), at which point it will freeze (due to floating-point
         //! imprecision?) and the painting will stop rippling. This happens to HMC, DDD, and
-        //! CotMC. This happens on Wii VC. Untested on N64 and Wii U VC.
+        //! CotMC.
         painting->rippleTimer += 1.0;
     }
     if (painting->rippleTrigger == RIPPLE_TRIGGER_PROXIMITY) {
@@ -746,7 +747,7 @@ s8 normalize_component(f32 comp) {
     } else if (comp < 0.0) {
         rounded = comp * 128.0 - 0.5; // round down
     } else {
-        rounded = 0; // don't round 0
+        rounded = 0;                  // don't round 0
     }
     return rounded;
 }
@@ -1061,7 +1062,7 @@ void reset_painting(struct Painting *painting) {
     painting->marioWentUnder = 0;
 
     gRipplingPainting = NULL;
-    
+
 #ifdef NO_SEGMENTED_MEMORY
     // Make sure all variables are reset correctly.
     // With segmented memory the segments that contain the relevant
@@ -1127,7 +1128,6 @@ void move_ddd_painting(struct Painting *painting, f32 frontPos, f32 backPos, f32
         gDddPaintingStatus = BOWSERS_SUB_BEATEN | DDD_BACK;
     }
 }
-
 /**
  * Set the painting's node's layer based on its alpha
  */

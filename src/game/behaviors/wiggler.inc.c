@@ -10,7 +10,7 @@
 /**
  * Hitbox for wiggler's non-head body parts.
  */
-struct ObjectHitbox sWigglerBodyPartHitbox = {
+static struct ObjectHitbox sWigglerBodyPartHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 3,
@@ -25,7 +25,7 @@ struct ObjectHitbox sWigglerBodyPartHitbox = {
 /**
  * Hitbox for wiggler's head.
  */
-struct ObjectHitbox sWigglerHitbox = {
+static struct ObjectHitbox sWigglerHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 3,
@@ -40,7 +40,7 @@ struct ObjectHitbox sWigglerHitbox = {
 /**
  * Attack handler for wiggler while in the walking action.
  */
-u8 sWigglerAttackHandlers[] = {
+static u8 sWigglerAttackHandlers[] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON,
@@ -52,7 +52,7 @@ u8 sWigglerAttackHandlers[] = {
 /**
  * Target speed while walking when wiggler has health 1, 2, 3, and 4.
  */
-f32 sWigglerSpeeds[] = { 2.0f, 40.0f, 30.0f, 16.0f };
+static f32 sWigglerSpeeds[] = { 2.0f, 40.0f, 30.0f, 16.0f };
 
 /**
  * Update function for bhvWigglerBody.
@@ -137,7 +137,7 @@ void wiggler_init_segments(void) {
             (segments + i)->yaw = o->oFaceAngleYaw;
         }
 
-        o->header.gfx.unk38.animFrame = -1;
+        o->header.gfx.animInfo.animFrame = -1;
 
         // Spawn each body part
         for (i = 1; i <= 3; i++) {
@@ -145,13 +145,14 @@ void wiggler_init_segments(void) {
                 spawn_object_relative(i, 0, 0, 0, o, MODEL_WIGGLER_BODY, bhvWigglerBody);
             if (bodyPart != NULL) {
                 obj_init_animation_with_sound(bodyPart, wiggler_seg5_anims_0500C874, 0);
-                bodyPart->header.gfx.unk38.animFrame = (23 * i) % 26 - 1;
+                bodyPart->header.gfx.animInfo.animFrame = (23 * i) % 26 - 1;
             }
         }
 
         o->oAction = WIGGLER_ACT_WALK;
         cur_obj_unhide();
     }
+
 #if defined(VERSION_EU) || defined(AVOID_UB)
     o->oHealth = 4; // This fixes Wiggler reading UB on his first frame of his acceleration, as his health is not set.
 #endif
@@ -164,7 +165,7 @@ void wiggler_init_segments(void) {
  * for a body part to get stuck on geometry and separate from the rest of the
  * body.
  */
-void wiggler_update_segments(void) {
+ void wiggler_update_segments(void) {
     struct ChainSegment *prevBodyPart;
     struct ChainSegment *bodyPart;
     f32 dx;
@@ -213,7 +214,7 @@ void wiggler_update_segments(void) {
  * otherwise wander in random directions.
  * If attacked by mario, enter either the jumped on or knockback action.
  */
-void wiggler_act_walk(void) {
+static void wiggler_act_walk(void) {
     s16 yawTurnSpeed;
 
     o->oWigglerWalkAnimSpeed = 0.06f * o->oForwardVel;
@@ -283,12 +284,11 @@ void wiggler_act_walk(void) {
         }
     }
 }
-
 /**
  * Squish and unsquish, then show text and enter either the walking or shrinking
  * action.
  */
-void wiggler_act_jumped_on(void) {
+static void wiggler_act_jumped_on(void) {
     // Text to show on first, second, and third attack.
     s32 attackText[3] = { DIALOG_152, DIALOG_168, DIALOG_151 };
 
@@ -332,7 +332,7 @@ void wiggler_act_jumped_on(void) {
 /**
  * Decelerate to a stop and then enter the walk action.
  */
-void wiggler_act_knockback(void) {
+static void wiggler_act_knockback(void) {
     if (o->oVelY > 0.0f) {
         o->oFaceAnglePitch -= o->oVelY * 30.0f;
     } else {
@@ -350,7 +350,7 @@ void wiggler_act_knockback(void) {
 /**
  * Shrink, then spawn the star and enter the fall through floor action.
  */
-void wiggler_act_shrink(void) {
+static void wiggler_act_shrink(void) {
     if (o->oTimer >= 20) {
         if (o->oTimer == 20) {
             cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEFEAT_SHRINK);
@@ -369,7 +369,7 @@ void wiggler_act_shrink(void) {
 /**
  * Fall through floors until y < 1700, then enter the walking action.
  */
-void wiggler_act_fall_through_floor(void) {
+static void wiggler_act_fall_through_floor(void) {
     if (o->oTimer == 60) {
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
         o->oWigglerFallThroughFloorsHeight = 1700.0f;

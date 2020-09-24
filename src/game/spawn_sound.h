@@ -5,7 +5,7 @@
 
 struct SoundState
 {
-    s16 cur_obj_play_sound_1; // if this is 1, the info below will
+    s16 playSound; // if this is 1, the info below will
                    // be used to determine the sound behavior
                    // for the object. if 0, this is skipped.
     s8 animFrame1; // the sound state provides 2 anim frames for

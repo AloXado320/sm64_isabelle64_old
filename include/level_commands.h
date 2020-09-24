@@ -30,10 +30,6 @@
 #define WHIRLPOOL_COND_BOWSER2_BEATEN 2
 #define WHIRLPOOL_COND_AT_LEAST_SECOND_STAR 3
 
-// Head defines
-#define REGULAR_FACE 0x0002
-#define DIZZY_FACE 0x0003
-
 #ifdef NO_SEGMENTED_MEMORY
 #define EXECUTE(seg, script, scriptEnd, entry) \
     CMD_BBH(0x00, 0x10, 0x0000), \
@@ -313,7 +309,7 @@
 
 #define GET_OR_SET(op, var) \
     CMD_BBBB(0x3C, 0x04, op, var)
-    
+
 #define ADV_DEMO() \
     CMD_BBH(0x3D, 0x04, 0x0000)
     

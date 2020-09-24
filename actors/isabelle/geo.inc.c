@@ -1,4 +1,4 @@
-#define LAYER_SHZ_SILLOUETE LAYER_8_CUSTOM
+#define LAYER_SHZ_SILLOUETE LAYER_OPAQUE
 
 const GeoLayout geo_isabelle_face_and_wings[] = {
    GEO_ASM(0, geo_mario_head_rotation),

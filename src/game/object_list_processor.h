@@ -23,11 +23,13 @@
 /**
  * The maximum number of objects that can be loaded at once.
  */
+
 #ifdef NODRAWINGDISTANCE
 #define OBJECT_POOL_CAPACITY 960
 #else
 #define OBJECT_POOL_CAPACITY 240
 #endif
+
 /**
  * Every object is categorized into an object list, which controls the order
  * they are processed and which objects they can collide with.
@@ -117,6 +119,7 @@ extern s16 gNumRoomedObjectsInMarioRoom;
 extern s16 gNumRoomedObjectsNotInMarioRoom;
 extern s16 gWDWWaterLevelChanging;
 extern s16 gMarioOnMerryGoRound;
+
 
 void bhv_mario_update(void);
 void set_object_respawn_info_bits(struct Object *obj, u8 bits);

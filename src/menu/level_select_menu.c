@@ -39,7 +39,7 @@ static s16 gameOverNotPlayed = 1;
 // don't shift this function from being the first function in the segment.
 // the level scripts assume this function is the first, so it cant be moved.
 /**
-int run_press_start_demo_timer(s32 timer) {
+s32 run_press_start_demo_timer(s32 timer) {
     gCurrDemoInput = NULL;
 
     if (timer == 0) {
@@ -73,7 +73,7 @@ int run_press_start_demo_timer(s32 timer) {
 extern u16 gDemoInputListIDForIntro;
 extern int gPressedStart;
 
-int start_demo(int timer)
+s32 start_demo(int timer)
 {
 	gCurrDemoInput = NULL;
 	gPressedStart = 0;
@@ -149,7 +149,7 @@ s16 level_select_input_loop(void) {
         // ... the level select quit combo is being pressed, which uses START. If this
         // is the case, quit the menu instead.
         if (gPlayer1Controller->buttonDown == QUIT_LEVEL_SELECT_COMBO) {
-            gDebugLevelSelect = 0;
+            gDebugLevelSelect = FALSE;
             return -1;
         }
         play_sound(SOUND_MENU_STAR_SOUND, gDefaultSoundArgs);
@@ -159,7 +159,7 @@ s16 level_select_input_loop(void) {
 }
 
 /**
-int intro_default(void) {
+s32 intro_default(void) {
     s32 sp1C = 0;
 
 #ifndef VERSION_JP
@@ -182,7 +182,7 @@ int intro_default(void) {
 }
 
 
-int intro_game_over(void) {
+s32 intro_game_over(void) {
     s32 sp1C = 0;
 
 #ifndef VERSION_JP
@@ -205,25 +205,24 @@ int intro_game_over(void) {
 }
  */
 
-int intro_screen_message_init(void) {
+s32 intro_screen_message_init(void) {
     gTitleInitMessage = TRUE;
     return 1;
 }
 
-
-int intro_screen_n64_logo_init(void) {
+s32 intro_screen_n64_logo_init(void) {
     gRenderN64Text = TRUE;
     play_sound(SOUND_MENU_N64_INTRO_SCREEN, gDefaultSoundArgs);
     return 1;
 }
 
-int intro_screen_aloxado_logo_init(void) {
+s32 intro_screen_aloxado_logo_init(void) {
     set_background_music(0, SEQ_EVENT_GUNBOUND_FANFARE, 0);
     return 1;
 }
 
 
-int disable_texrect_rendering_intros(void) {
+s32 disable_texrect_rendering_intros(void) {
     if (gTitleInitMessage == TRUE)
         gTitleInitMessage = FALSE;
 

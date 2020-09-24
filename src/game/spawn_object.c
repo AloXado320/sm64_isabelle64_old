@@ -112,12 +112,11 @@ void unused_deallocate(struct LinkedList *freeList, struct LinkedList *node) {
     node->next = freeList->next;
     freeList->next = node;
 }
-
 /**
  * Remove the given object from the object list that it's currently in, and
  * insert it at the beginning of the free list (singly linked).
  */
-void deallocate_object(struct ObjectNode *freeList, struct ObjectNode *obj) {
+static void deallocate_object(struct ObjectNode *freeList, struct ObjectNode *obj) {
     // Remove from object list
     obj->next->prev = obj->prev;
     obj->prev->next = obj->next;
@@ -161,8 +160,7 @@ void clear_object_lists(struct ObjectNode *objLists) {
 }
 
 /**
- * This function looks broken, but it appears to attempt to delete the leaf
- * graph nodes under obj and obj's siblings.
+ * Delete the leaf graph nodes under obj and obj's siblings.
  */
 static void unused_delete_leaf_nodes(struct Object *obj) {
     struct Object *children;
@@ -176,8 +174,7 @@ static void unused_delete_leaf_nodes(struct Object *obj) {
         mark_obj_for_deletion(obj);
     }
 
-    // Probably meant to be !=
-    while ((sibling = (struct Object *) obj->header.gfx.node.next) == obj0) {
+    while ((sibling = (struct Object *) obj->header.gfx.node.next) != obj0) {
         unused_delete_leaf_nodes(sibling);
         obj = (struct Object *) sibling->header.gfx.node.next;
     }
@@ -196,6 +193,7 @@ void unload_object(struct Object *obj) {
     geo_add_child(&gObjParentGraphNode, &obj->header.gfx.node);
 
     obj->header.gfx.node.flags &= ~GRAPH_RENDER_BILLBOARD;
+    obj->header.gfx.node.flags &= ~GRAPH_RENDER_CYLBOARD;
     obj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
 
     deallocate_object(&gFreeObjectList, &obj->header);
@@ -245,7 +243,7 @@ struct Object *allocate_object(struct ObjectNode *objList) {
 
 #if IS_64_BIT
     for (i = 0; i < 0x50; i++) {
-        obj->rawData.asU32[i] = 0;
+        obj->rawData.asS32[i] = 0;
         obj->ptrData.asVoidPtr[i] = NULL;
     }
 #else
@@ -297,7 +295,7 @@ struct Object *allocate_object(struct ObjectNode *objList) {
 /**
  * If the object is close to being on the floor, move it to be exactly on the floor.
  */
-void snap_object_to_floor(struct Object *obj) {
+static void snap_object_to_floor(struct Object *obj) {
     struct Surface *surface;
 
     obj->oFloorHeight = find_floor(obj->oPosX, obj->oPosY, obj->oPosZ, &surface);

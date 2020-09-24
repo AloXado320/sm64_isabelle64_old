@@ -212,7 +212,9 @@
 
 // vcutm
 #define MODEL_VCUTM_SEESAW_PLATFORM               0x36        // vcutm_geo_0001F0
-#define MODEL_VCUTM_CHECKERBOARD_PLATFORM_SPAWNER MODEL_NONE  // fix the crash
+#define MODEL_VCUTM_CHECKERBOARD_PLATFORM_SPAWNER 0x37        //! @bug this object doesn't have a geo associated with it, yet is placed in vcutm.
+                                                              //  This causes a crash when the player quickly looks towards the
+                                                              //  checkerboard platforms after spawning but before it is unloaded.
 
 // bitfs
 #define MODEL_BITFS_PLATFORM_ON_TRACK             0x36        // bitfs_geo_000758
@@ -359,7 +361,7 @@
 // group 5
 #define MODEL_POKEY_HEAD                  0x54        // pokey_head_geo
 #define MODEL_POKEY_BODY_PART             0x55        // pokey_body_part_geo
-#define MODEL_TWEESTER                     0x56        // tweester_geo
+#define MODEL_TWEESTER                    0x56        // tweester_geo
 #define MODEL_KLEPTO                      0x57        // klepto_geo
 #define MODEL_EYEROK_LEFT_HAND            0x58        // eyerok_left_hand_geo
 #define MODEL_EYEROK_RIGHT_HAND           0x59        // eyerok_right_hand_geo

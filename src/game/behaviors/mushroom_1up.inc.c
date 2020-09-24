@@ -20,7 +20,7 @@ void bhv_1up_interact(void) {
             }
         }
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
 #endif
     }
@@ -36,11 +36,13 @@ void bhv_1up_common_init(void) {
 void bhv_1up_init(void) {
     bhv_1up_common_init();
     if (o->oBehParams2ndByte == 1) {
-        if ((save_file_get_flags() & 0x50) == 0)
+        if (!(save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR))) {
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+        }
     } else if (o->oBehParams2ndByte == 2) {
-        if ((save_file_get_flags() & 0xa0) == 0)
+        if (!(save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR))) {
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+        }
     }
     
     o->oAnimState = (u8)(o->oBehParams >> 24); // bparam 1

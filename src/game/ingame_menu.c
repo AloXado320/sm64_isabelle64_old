@@ -24,6 +24,16 @@
 #include "sm64.h"
 #include "text_strings.h"
 #include "types.h"
+#include "macros.h"
+#ifdef CHEATS_ACTIONS
+#include "pc/cheats.h"
+#endif
+#ifdef BETTERCAMERA
+#include "bettercamera.h"
+#endif
+#ifdef EXT_OPTIONS_MENU
+#include "options_menu.h"
+#endif
 
 extern Gfx *gDisplayListHead;
 extern s16 gCurrCourseNum;
@@ -1045,7 +1055,7 @@ void create_dialog_box_with_response(s16 dialog) {
 }
 
 void reset_dialog_render_state(void) {
-    level_set_transition(0, 0);
+    level_set_transition(0, NULL);
 
     if (gDialogBoxType == DIALOG_TYPE_ZOOM) {
         trigger_cutscene_dialog(2);
@@ -1809,7 +1819,7 @@ void render_dialog_entries(void) {
             gAcnlDialogTextAlpha -= 20;
 
             if (gAcnlDialogAlpha == 120) {
-                level_set_transition(0, 0);
+                level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
 
                 if (gDialogBoxType == DIALOG_TYPE_ZOOM) {
@@ -2581,9 +2591,7 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
         gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
         gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-    }
-
-    if (index[0] == 3) {
+    } else {
         render_pause_camera_options(x - 42, y - 42, &gDialogCameraAngleIndex, 110);
     }
 }
@@ -2771,12 +2779,14 @@ s16 render_pause_courses_and_castle(void) {
 #ifdef MULTILANGUAGE
     gInGameLanguage = eu_get_language();
 #endif
-
+#ifdef EXT_OPTIONS_MENU
+    if (optmenu_open == 0) {
+#endif
     switch (gDialogBoxState) {
         case DIALOG_STATE_OPENING:
             gDialogLineNum = 1;
             gDialogTextAlpha = 0;
-            level_set_transition(-1, 0);
+            level_set_transition(-1, NULL);
 
             play_sound(SOUND_MENU_APPOPEN_ACNH, gDefaultSoundArgs);
 
@@ -2803,7 +2813,7 @@ s16 render_pause_courses_and_castle(void) {
                     }
 
                     if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
-                        level_set_transition(0, 0);
+                        level_set_transition(0, NULL);
                         play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
                         gDialogBoxState = DIALOG_STATE_OPENING;
                         gMenuMode = -1;
@@ -2822,7 +2832,7 @@ s16 render_pause_courses_and_castle(void) {
                         render_alternate_costume_menu();
 
                         if (gPlayer3Controller->buttonPressed & START_BUTTON) {
-                            level_set_transition(0, 0);
+                            level_set_transition(0, NULL);
                             play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
                             gMenuMode = -1;
                             gDialogBoxState = DIALOG_STATE_OPENING;
@@ -2852,7 +2862,7 @@ s16 render_pause_courses_and_castle(void) {
                     }
 
                     if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
-                        level_set_transition(0, 0);
+                        level_set_transition(0, NULL);
                         play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
                         gMenuMode = -1;
                         gDialogBoxState = DIALOG_STATE_OPENING;
@@ -2865,7 +2875,7 @@ s16 render_pause_courses_and_castle(void) {
                     render_alternate_costume_menu();
 
                     if (gPlayer3Controller->buttonPressed & START_BUTTON) {
-                        level_set_transition(0, 0);
+                        level_set_transition(0, NULL);
                         play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gDefaultSoundArgs);
                         gMenuMode = -1;
                         gDialogBoxState = DIALOG_STATE_OPENING;
@@ -2887,7 +2897,14 @@ s16 render_pause_courses_and_castle(void) {
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
     }
-
+#ifdef EXT_OPTIONS_MENU
+    } else {
+        background_scene();
+        optmenu_draw();
+    }
+    optmenu_check_buttons();
+    optmenu_draw_prompt();
+#endif
     return 0;
 }
 
@@ -2969,7 +2986,7 @@ void print_hud_course_complete_coins(s16 x, s16 y) {
         gCourseCompleteCoinsEqual = 1;
         gCourseCompleteCoins = gHudDisplay.coins;
 
-        if (gGotFileCoinHiScore != 0) {
+        if (gGotFileCoinHiScore) {
             print_hud_course_complete_string(HUD_PRINT_HISCORE);
         }
     } else {
@@ -2983,7 +3000,7 @@ void print_hud_course_complete_coins(s16 x, s16 y) {
             }
         }
 
-        if (gHudDisplay.coins == gCourseCompleteCoins && gGotFileCoinHiScore != 0) {
+        if (gHudDisplay.coins == gCourseCompleteCoins && gGotFileCoinHiScore) {
             play_sound(SOUND_MENU_MARIO_CASTLE_WARP2, gDefaultSoundArgs);
         }
     }
@@ -3139,13 +3156,33 @@ void render_course_complete_lvl_info_and_hud_str(void) {
 #define TXT_SAVEOPTIONS_X xOffset
 #endif
 #if defined(VERSION_JP) || defined(VERSION_SH)
-#define TXT_SAVECONT_Y 2
-#define TXT_SAVEQUIT_Y 18
-#define TXT_CONTNOSAVE_Y 38
+#define TXT_SAVECONT_Y +2-0
+#define TXT_SAVEQUIT_Y +2-20
+
+#ifndef TARGET_N64
+#define TXT_SAVE_EXIT_GAME_Y +2-40
+#define TXT_CONTNOSAVE_Y +2-60
+#else
+#define TXT_CONTNOSAVE_Y +2-40
+#endif
+
 #else
 #define TXT_SAVECONT_Y 0
 #define TXT_SAVEQUIT_Y 20
+
+#ifndef TARGET_N64
+#define TXT_SAVE_EXIT_GAME_Y 40
+#define TXT_CONTNOSAVE_Y 60
+#else
 #define TXT_CONTNOSAVE_Y 40
+#endif
+
+#endif
+
+#ifndef TARGET_N64
+#define SAVE_CONFIRM_INDEX 4 // Increased to '4' to handle Exit Game 
+#else
+#define SAVE_CONFIRM_INDEX 3
 #endif
 
 #ifdef VERSION_EU
@@ -3171,6 +3208,17 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 sp6e)
         { TEXT_SAVE_AND_QUIT_IT },
         { TEXT_SAVE_AND_QUIT_ES }
     };
+    
+#ifndef TARGET_N64
+    u8 textSaveExitGame[][28] = { // New function to exit game
+        { TEXT_SAVE_EXIT_GAME },
+        { TEXT_SAVE_EXIT_GAME_FR },
+        { TEXT_SAVE_EXIT_GAME_DE },
+        { TEXT_SAVE_EXIT_GAME_IT },
+        { TEXT_SAVE_EXIT_GAME_ES }
+    };
+#endif
+
     u8 textContinueWithoutSaveArr[][27] = {
         { TEXT_CONTINUE_WITHOUT_SAVING },
         { TEXT_CONTINUE_WITHOUT_SAVING_FR },
@@ -3180,21 +3228,30 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 sp6e)
     };
 #define textSaveAndContinue textSaveAndContinueArr[gInGameLanguage]
 #define textSaveAndQuit textSaveAndQuitArr[gInGameLanguage]
+#ifndef TARGET_N64
+#define textSaveExitGame textSaveExitGame[gInGameLanguage]
+#endif
 #define textContinueWithoutSave textContinueWithoutSaveArr[gInGameLanguage]
     //s16 xOffset = get_str_x_pos_from_center(160, textContinueWithoutSaveArr[gInGameLanguage], 12.0f);
 #else
     u8 textSaveAndContinue[] = { TEXT_SAVE_AND_CONTINUE };
     u8 textSaveAndQuit[] = { TEXT_SAVE_AND_QUIT };
+#ifndef TARGET_N64
+    u8 textSaveExitGame[] = { TEXT_SAVE_EXIT_GAME };
+#endif
     u8 textContinueWithoutSave[] = { TEXT_CONTINUE_WITHOUT_SAVING };
 #endif
 
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 3);
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, SAVE_CONFIRM_INDEX);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     print_generic_string(TXT_SAVEOPTIONS_X, y + TXT_SAVECONT_Y, textSaveAndContinue);
     print_generic_string(TXT_SAVEOPTIONS_X, y - TXT_SAVEQUIT_Y, textSaveAndQuit);
+#ifndef TARGET_N64
+    print_generic_string(TXT_SAVEOPTIONS_X, y - TXT_SAVE_EXIT_GAME_Y, textSaveExitGame);
+#endif
     print_generic_string(TXT_SAVEOPTIONS_X, y - TXT_CONTNOSAVE_Y, textContinueWithoutSave);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
@@ -3206,6 +3263,7 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 sp6e)
 
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
+#undef SAVE_CONFIRM_INDEX
 
 s16 render_course_complete_screen(void) {
     s16 num;
@@ -3218,7 +3276,7 @@ s16 render_course_complete_screen(void) {
             render_course_complete_lvl_info_and_hud_str();
             if (gCourseDoneMenuTimer > 100 && gCourseCompleteCoinsEqual == 1) {
                 gDialogBoxState = DIALOG_STATE_VERTICAL;
-                level_set_transition(-1, 0);
+                level_set_transition(-1, NULL);
                 gDialogTextAlpha = 0;
                 gDialogLineNum = 1;
             }
@@ -3239,7 +3297,7 @@ s16 render_course_complete_screen(void) {
                  || gPlayer3Controller->buttonPressed & Z_TRIG
 #endif
                 )) {
-                level_set_transition(0, 0);
+                level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_STAR_SOUND, gDefaultSoundArgs);
                 gDialogBoxState = DIALOG_STATE_OPENING;
                 gMenuMode = -1;

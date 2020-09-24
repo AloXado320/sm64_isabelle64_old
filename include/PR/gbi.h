@@ -86,6 +86,7 @@
  * the lower 6 bits of the command byte)
  *
  */
+
 #ifdef F3DEX_GBI_2E
 # ifndef F3DEX_GBI_2
 #  define F3DEX_GBI_2
@@ -3543,8 +3544,7 @@ typedef union {
 	gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,				\
 		((width)-1) << G_TEXTURE_IMAGE_FRAC,			\
 		((height)-1) << G_TEXTURE_IMAGE_FRAC)
-
-
+        
 /* Load fix rww 27jun95 */
 /* The S at the end means odd lines are already word Swapped */
 
@@ -3915,22 +3915,6 @@ typedef union {
 		((width)-1) << G_TEXTURE_IMAGE_FRAC,			\
 		((height)-1) << G_TEXTURE_IMAGE_FRAC)			\
 }
-
-#define	gsDPLoadNonTextureBlock_4b(fmt, width, height,		\
-		pal, cms, cmt, masks, maskt, shifts, shiftt)		\
-									\
-	gsDPSetTile(fmt, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0 , cmt,	\
-		maskt, shiftt, cms, masks, shifts),			\
-	gsDPLoadSync(),							\
-	gsDPLoadBlock(G_TX_LOADTILE, 0, 0, (((width)*(height)+3)>>2)-1,	\
-		CALC_DXT_4b(width)),					\
-	gsDPPipeSync(),							\
-	gsDPSetTile(fmt, G_IM_SIZ_4b, ((((width)>>1)+7)>>3), 0,		\
-		G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,	\
-		shifts),						\
-	gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,				\
-		((width)-1) << G_TEXTURE_IMAGE_FRAC,			\
-		((height)-1) << G_TEXTURE_IMAGE_FRAC)
 
 #define	gsDPLoadTextureBlock_4b(timg, fmt, width, height,		\
 		pal, cms, cmt, masks, maskt, shifts, shiftt)		\
@@ -4507,8 +4491,8 @@ typedef union {
 }}
 #endif
 
-#ifndef F3DEX_GBI_2E
 /* like gDPFillRectangle but accepts negative arguments */
+#ifndef F3DEX_GBI_2E
 #define	gDPScisFillRectangle(pkt, ulx, uly, lrx, lry)			\
 {									\
 	Gfx *_g = (Gfx *)(pkt);						\
@@ -4718,7 +4702,6 @@ typedef union {
     gImmp1(pkt, G_RDPHALF_CONT, (_SHIFTL(dsdx, 16, 16) | _SHIFTL(dtdy, 0, 16))); \
 }
 #elif defined(F3DEX_GBI_2E)
-
 #define gSPScisTextureRectangle gSPTextureRectangle
 #define gsSPScisTextureRectangle gsSPTextureRectangle
 

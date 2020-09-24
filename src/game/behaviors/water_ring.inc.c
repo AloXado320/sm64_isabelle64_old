@@ -29,16 +29,17 @@ void water_ring_init(void) {
 
     // Adding this code will alter the ring's graphical orientation to align with the faulty
     // collision orientation:
-    //
-    // o->oFaceAngleYaw = 0;
-    // o->oFaceAngleRoll *= -1;
+#ifdef QOL_FIXES
+    o->oFaceAngleYaw = 0;
+    o->oFaceAngleRoll *= -1;
+#endif
 }
 
 void bhv_jet_stream_water_ring_init(void) {
     water_ring_init();
     o->oOpacity = 70;
     cur_obj_init_animation(0);
-    o->oFaceAnglePitch = 0;
+    o->oFaceAnglePitch = 0x8000;
 }
 
 // sp28 = arg0

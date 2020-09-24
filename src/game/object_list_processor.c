@@ -20,6 +20,7 @@
 #include "profiler.h"
 #include "spawn_object.h"
 
+
 /**
  * Flags controlling what debug info is displayed.
  */
@@ -141,6 +142,7 @@ s32 gNumStaticSurfaces;
  * A pool used by chain chomp and wiggler to allocate their body parts.
  */
 struct MemoryPool *gObjectMemoryPool;
+
 
 s16 gCheckingSurfaceCollisionsForCamera;
 s16 gFindFloorIncludeSurfaceIntangible;
@@ -438,7 +440,7 @@ void unload_objects_from_area(UNUSED s32 unused, s32 areaIndex) {
             obj = (struct Object *) node;
             node = node->next;
 
-            if (obj->header.gfx.unk19 == areaIndex) {
+            if (obj->header.gfx.activeAreaIndex == areaIndex) {
                 unload_object(obj);
             }
         }
@@ -453,7 +455,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
     gTimeStopState = 0;
 
     gWDWWaterLevelChanging = FALSE;
-    gMarioOnMerryGoRound = 0;
+    gMarioOnMerryGoRound = FALSE;
 
     //! (Spawning Displacement) On the Japanese version, Mario's platform object
     //  isn't cleared when transitioning between areas. This can cause Mario to

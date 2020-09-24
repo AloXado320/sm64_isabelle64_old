@@ -13,6 +13,9 @@
 #include "shadow.h"
 #include "sm64.h"
 
+// Avoid Z-fighting
+#define find_floor_height_and_data 0.4 + find_floor_height_and_data
+
 /**
  * @file shadow.c
  * This file implements a self-contained subsystem used to draw shadows.
@@ -424,7 +427,7 @@ void make_shadow_vertex(Vtx *vertices, s8 index, struct Shadow s, s8 shadowVerte
     f32 relX, relY, relZ;
 
     u8 solidity = s.solidity;
-    if (gShadowAboveWaterOrLava != 0) {
+    if (gShadowAboveWaterOrLava) {
         solidity = 200;
     }
 
@@ -540,8 +543,8 @@ s8 correct_shadow_solidity_for_animations(s32 isLuigi, u8 initialSolidity, struc
             break;
     }
 
-    animFrame = player->header.gfx.unk38.animFrame;
-    switch (player->header.gfx.unk38.animID) {
+    animFrame = player->header.gfx.animInfo.animFrame;
+    switch (player->header.gfx.animInfo.animID) {
         case MARIO_ANIM_IDLE_ON_LEDGE:
             ret = SHADOW_SOLIDITY_NO_SHADOW;
             break;

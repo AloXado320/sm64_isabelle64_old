@@ -480,9 +480,9 @@ static void common_swimming_step(struct MarioState *m, s16 swimStrength) {
 }
 
 static void play_swimming_noise(struct MarioState *m) {
-    s16 animFrame = m->marioObj->header.gfx.unk38.animFrame;
+    s16 animFrame = m->marioObj->header.gfx.animInfo.animFrame;
 
-    // (this need to be on one line to match on PAL)
+    // This must be one line to match on -O2
     if (animFrame == 0 || animFrame == 12) play_sound(SOUND_ACTION_UNKNOWN434, m->marioObj->header.gfx.cameraToObject);
 }
 
@@ -553,13 +553,11 @@ static s32 act_breaststroke(struct MarioState *m) {
                    m->marioObj->header.gfx.cameraToObject);
         reset_float_globals(m);
     }
-
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
     if (m->actionTimer < 6) {
-        func_sh_8024CA04();
+        queue_rumble_submerged();
     }
 #endif
-
     set_mario_animation(m, MARIO_ANIM_SWIM_PART1);
     common_swimming_step(m, sSwimStrength);
 
@@ -802,7 +800,7 @@ static s32 act_water_throw(struct MarioState *m) {
 
     if (m->actionTimer++ == 5) {
         mario_throw_held_object(m);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(3, 50);
 #endif
     }
@@ -890,7 +888,6 @@ static s32 act_forward_water_kb(struct MarioState *m) {
 
 static s32 act_water_shocked(struct MarioState *m) {
     play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
-    change_isabelle_face_expression(m, ISABELLE_EYES_SUPRISED, ISABELLE_MOUTH_OPEN);
     play_sound(SOUND_MOVING_SHOCKED, m->marioObj->header.gfx.cameraToObject);
     set_camera_shake_from_hit(SHAKE_SHOCK);
 
@@ -922,8 +919,8 @@ static s32 act_drowning(struct MarioState *m) {
 
         case 1:
             set_mario_animation(m, MARIO_ANIM_DROWNING_PART2);
-            change_isabelle_face_expression(m, ISABELLE_EYES_SUPRISED, ISABELLE_MOUTH_SAD);
-            if (m->marioObj->header.gfx.unk38.animFrame == 30) {
+            change_isabelle_face_expression(m, ISABELLE_EYES_VERY_SURPRISED, ISABELLE_MOUTH_VERY_OPEN);
+            if (m->marioObj->header.gfx.animInfo.animFrame == 30) {
                 level_trigger_warp(m, WARP_OP_DEATH);
             }
             break;
@@ -940,7 +937,7 @@ static s32 act_water_death(struct MarioState *m) {
     stationary_slow_down(m);
     perform_water_step(m);
 
-    change_isabelle_face_expression(m, ISABELLE_EYES_SUPRISED, ISABELLE_MOUTH_SAD);
+    change_isabelle_face_expression(m, ISABELLE_EYES_VERY_SURPRISED, ISABELLE_MOUTH_VERY_OPEN);
 
     set_mario_animation(m, MARIO_ANIM_WATER_DYING);
     if (set_mario_animation(m, MARIO_ANIM_WATER_DYING) == 35) {
@@ -981,11 +978,11 @@ static s32 act_water_plunge(struct MarioState *m) {
 
         m->particleFlags |= PARTICLE_WATER_SPLASH;
         m->actionState = 1;
-#ifdef VERSION_SH
         if (m->prevAction & ACT_FLAG_AIR) {
+#ifdef RUMBLE_FEEDBACK
             queue_rumble_data(5, 80);
-        }
 #endif
+        }
     }
 
     if (stepResult == WATER_STEP_HIT_FLOOR || m->vel[1] >= endVSpeed || m->actionTimer > 20) {
@@ -1090,8 +1087,8 @@ static s32 act_caught_in_whirlpool(struct MarioState *m) {
     set_mario_animation(m, MARIO_ANIM_GENERAL_FALL);
     vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
     vec3s_set(m->marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
-#ifdef VERSION_SH
-    reset_rumble_timers();
+#ifdef RUMBLE_FEEDBACK
+    reset_rumble_timers_slip();
 #endif
     return FALSE;
 }
@@ -1259,7 +1256,7 @@ static s32 act_metal_water_walking(struct MarioState *m) {
             break;
 
         case GROUND_STEP_HIT_WALL:
-            m->forwardVel = 0;
+            m->forwardVel = 0.0f;
             break;
     }
 

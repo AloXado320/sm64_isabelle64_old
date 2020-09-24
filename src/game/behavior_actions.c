@@ -199,10 +199,10 @@ void spawn_sparkle_particles(s32 n, s32 a1, s32 a2, s32 r) {
                               coss(D_8035FF10 + i * separation) * a1, o, MODEL_NONE, bhvSparkleSpawn);
     }
 
-    if (1)
-    {
-    }
-    
+  if (1)
+  {
+  }
+
     D_8035FF10 += r * 0x100;
 }
 
@@ -242,10 +242,9 @@ void vec3f_copy_2(Vec3f dest, Vec3f src) {
 #include "behaviors/piranha_plant.inc.c"
 #include "behaviors/bowser_puzzle_piece.inc.c"
 
-
 s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
     f32 sp1C;
-    if ((sp1C = o->header.gfx.unk38.animAccel / (f32) 0x10000) == 0)
+    if ((sp1C = o->header.gfx.animInfo.animAccel / (f32) 0x10000) == 0)
         sp1C = 1.0f;
     if (cur_obj_check_anim_frame_in_range(a0, sp1C) || cur_obj_check_anim_frame_in_range(a1, sp1C)) {
         cur_obj_play_sound_2(a2);

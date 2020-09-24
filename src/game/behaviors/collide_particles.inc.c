@@ -12,7 +12,7 @@ void bhv_punch_tiny_triangle_loop(void) {
         sp1E = o->oMoveAngleYaw;
         o->oCollisionParticleUnkF4 = 1.28f;
         cur_obj_set_pos_relative(gMarioObject, 0.0f, 60.0f, 100.0f);
-        o->oMoveAngleYaw = sp1E; // does cur_obj_set_pos_relative modify currentObject?
+        o->oMoveAngleYaw = sp1E;
     }
     cur_obj_move_using_fvel_and_gravity();
     o->oAnimState = 5;

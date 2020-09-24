@@ -23,7 +23,13 @@ SOFTWARE.
 */
 
 #include "exoquant.h"
+
+#ifdef __APPLE__
+// No malloc on mac
+#else
 #include <malloc.h>
+#endif
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>

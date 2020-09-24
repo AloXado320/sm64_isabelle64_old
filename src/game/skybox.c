@@ -139,14 +139,11 @@ f32 calculate_skybox_scaled_x(s8 player, f32 fov) {
     f32 yaw = sSkyBoxInfo[player].yaw;
 
     //! double literals are used instead of floats
-    f32 yawScaled = SCREEN_WIDTH * 360.0 * yaw / (fov * 65536.0);
-
-    f32 scaledX = yawScaled;
+    f32 scaledX = SCREEN_WIDTH * 360.0 * yaw / (fov * 65536.0);
 
     if (scaledX > SKYBOX_WIDTH) {
         scaledX -= (s32) scaledX / SKYBOX_WIDTH * SKYBOX_WIDTH;
     }
-
     return SKYBOX_WIDTH - scaledX;
 }
 
@@ -163,6 +160,8 @@ f32 calculate_skybox_scaled_y(s8 player, UNUSED f32 fov) {
     // Scale by 360 / fov
     f32 degreesToScale = 360.0f * pitchInDegrees / 90.0;
 
+    // Since pitch can be negative, and the tile grid starts 1 octant above the camera's focus, add
+    // 5 octants to the y position
     f32 scaledY = degreesToScale + 5 * SKYBOX_TILE_HEIGHT;
 
     if (scaledY > SKYBOX_HEIGHT) {
@@ -177,7 +176,7 @@ f32 calculate_skybox_scaled_y(s8 player, UNUSED f32 fov) {
 /**
  * Converts the upper left xPos and yPos to the index of the upper left tile in the skybox.
  */
-static int get_top_left_tile_idx(s8 player) {
+static s32 get_top_left_tile_idx(s8 player) {
     s32 tileCol = sSkyBoxInfo[player].scaledX / SKYBOX_TILE_WIDTH;
     s32 tileRow = (SKYBOX_HEIGHT - sSkyBoxInfo[player].scaledY) / SKYBOX_TILE_HEIGHT;
 

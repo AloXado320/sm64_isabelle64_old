@@ -29,7 +29,9 @@ void bhv_controllable_platform_sub_loop(void) {
 
             if (gMarioObject->platform == o) {
                 D_80331694 = o->oBehParams2ndByte;
+#if SH_CHANGES
                 o->parentObj->header.gfx.node.flags &= ~GRAPH_RENDER_CHILDREN_FIRST;
+#endif
                 o->oAction = 1;
                 cur_obj_play_sound_2(SOUND_GENERAL_MOVING_PLATFORM_SWITCH);
             }
@@ -77,7 +79,7 @@ void controllable_platform_hit_wall(s8 sp1B) {
     D_80331694 = 5;
 
     cur_obj_play_sound_2(SOUND_GENERAL_QUIET_POUND1);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
     queue_rumble_data(50, 80);
 #endif
 }

@@ -240,7 +240,7 @@ static s8 sPiranhaPlantBiteSoundFrames[] = { 12, 28, 50, 64, -1 };
  * Piranha Plant will move to the attacked state.
  */
 void piranha_plant_act_biting(void) {
-    s32 frame = o->header.gfx.unk38.animFrame;
+    s32 frame = o->header.gfx.animInfo.animFrame;
 
     cur_obj_become_tangible();
 
@@ -277,9 +277,9 @@ void piranha_plant_act_biting(void) {
  * This is called from both the "stopped biting" state and the "sleeping" state.
  */
 s32 mario_moving_fast_enough_to_make_piranha_plant_bite(void) {
-    if (gMarioStates->vel[1] > 10.0f)
+    if (gMarioStates[0].vel[1] > 10.0f)
         return 1;
-    if (gMarioStates->forwardVel > 10.0f)
+    if (gMarioStates[0].forwardVel > 10.0f)
         return 1;
     return 0;
 }
@@ -328,8 +328,7 @@ void (*TablePiranhaPlantActions[])(void) = {
  */
 void bhv_piranha_plant_loop(void) {
     cur_obj_call_action_function(TablePiranhaPlantActions);
-
-#ifndef NODRAWINGDISTANCE
+    #ifndef NODRAWINGDISTANCE
     // In WF, hide all Piranha Plants once high enough up.
     if (gCurrLevelNum == LEVEL_WF) {
         if (gMarioObject->oPosY > 3400.0f)
@@ -337,6 +336,6 @@ void bhv_piranha_plant_loop(void) {
         else
             cur_obj_unhide();
     }
-#endif
+    #endif
     o->oInteractStatus = 0;
 }

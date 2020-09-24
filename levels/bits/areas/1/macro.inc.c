@@ -28,9 +28,13 @@ const MacroObject bits_seg7_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_hidden_1up_trigger,     /*yaw*/   0, /*pos*/ -7200,  2080,  -890),
     MACRO_OBJECT(/*preset*/ macro_hidden_1up_trigger,     /*yaw*/   0, /*pos*/ -6600,  2080, -1550),
     MACRO_OBJECT_WITH_BEH_PARAM(/*preset*/ macro_hidden_1up,             /*yaw*/   0, /*pos*/ -6640,  2280,  -890, /*behParam*/ 3),
-    MACRO_OBJECT(/*preset*/ macro_goomba_triplet_spawner, /*yaw*/   0, /*pos*/ -5239,  3839,  -900),
+    #ifdef QOL_FIXES
+    MACRO_OBJECT(/*preset*/ macro_goomba_triplet_spawner, /*yaw*/  45, /*pos*/ -5476,  3839,  -930),
+    #else
+    MACRO_OBJECT(/*preset*/ macro_goomba_triplet_spawner, /*yaw*/   0, /*pos*/ -5239,  3839,  -999),
+    #endif
     MACRO_OBJECT(/*preset*/ macro_bobomb,                 /*yaw*/   0, /*pos*/ -1559,  3800, -1079),
-    MACRO_OBJECT(/*preset*/ macro_goomba_triplet_spawner, /*yaw*/  45, /*pos*/ -5476,  3839,  -930),       
+    MACRO_OBJECT(/*preset*/ macro_bobomb,                 /*yaw*/   0, /*pos*/ -1079,  3800, -1039),
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal,   /*yaw*/   0, /*pos*/  1879,  4639, -1559),
     MACRO_OBJECT(/*preset*/ macro_1up,                    /*yaw*/   0, /*pos*/  -259,  6059, -3759),
     MACRO_OBJECT(/*preset*/ macro_recovery_heart,         /*yaw*/   0, /*pos*/   359,  6099, -3219),

@@ -5,8 +5,11 @@
 
 #include "types.h"
 
-#define LEVEL_BOUNDARY_MAX 0x2000
-#define CELL_SIZE          0x400
+#define LEVEL_BOUNDARY_MAX  0x2000
+#define CELL_SIZE           0x400       
+
+#define CELL_HEIGHT_LIMIT   20000.f
+#define FLOOR_LOWER_LIMIT  -11000.f
 
 struct WallCollisionData
 {
@@ -36,5 +39,6 @@ f32 find_floor(f32 xPos, f32 yPos, f32 zPos, struct Surface **pfloor);
 f32 find_water_level(f32 x, f32 z);
 f32 find_poison_gas_level(f32 x, f32 z);
 void debug_surface_list_info(f32 xPos, f32 zPos);
+void find_surface_on_ray(Vec3f orig, Vec3f dir, struct Surface **hit_surface, Vec3f hit_pos);
 
 #endif // SURFACE_COLLISION_H

@@ -140,6 +140,14 @@ static s32 bhv_cmd_billboard(void) {
     return BHV_PROC_CONTINUE;
 }
 
+// Command 0x
+static s32 bhv_cmd_cylboard(void) {
+    gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_CYLBOARD;
+
+    gCurBhvCommand++;
+    return BHV_PROC_CONTINUE;
+}
+
 // Command 0x1B: Sets the current model ID of the object.
 // Usage: SET_MODEL(modelID)
 static s32 bhv_cmd_set_model(void) {
@@ -844,62 +852,63 @@ void stub_behavior_script_2(void) {
 
 typedef s32 (*BhvCommandProc)(void);
 static BhvCommandProc BehaviorCmdTable[] = {
-    bhv_cmd_begin,
-    bhv_cmd_delay,
-    bhv_cmd_call,
-    bhv_cmd_return,
-    bhv_cmd_goto,
-    bhv_cmd_begin_repeat,
-    bhv_cmd_end_repeat,
-    bhv_cmd_end_repeat_continue,
-    bhv_cmd_begin_loop,
-    bhv_cmd_end_loop,
-    bhv_cmd_break,
-    bhv_cmd_break_unused,
-    bhv_cmd_call_native,
-    bhv_cmd_add_float,
-    bhv_cmd_set_float,
-    bhv_cmd_add_int,
-    bhv_cmd_set_int,
-    bhv_cmd_or_int,
-    bhv_cmd_bit_clear,
-    bhv_cmd_set_int_rand_rshift,
-    bhv_cmd_set_random_float,
-    bhv_cmd_set_random_int,
-    bhv_cmd_add_random_float,
-    bhv_cmd_add_int_rand_rshift,
-    bhv_cmd_nop_1,
-    bhv_cmd_nop_2,
-    bhv_cmd_nop_3,
-    bhv_cmd_set_model,
-    bhv_cmd_spawn_child,
-    bhv_cmd_deactivate,
-    bhv_cmd_drop_to_floor,
-    bhv_cmd_sum_float,
-    bhv_cmd_sum_int,
-    bhv_cmd_billboard,
-    bhv_cmd_hide,
-    bhv_cmd_set_hitbox,
-    bhv_cmd_nop_4,
-    bhv_cmd_delay_var,
-    bhv_cmd_begin_repeat_unused,
-    bhv_cmd_load_animations,
-    bhv_cmd_animate,
-    bhv_cmd_spawn_child_with_param,
-    bhv_cmd_load_collision_data,
-    bhv_cmd_set_hitbox_with_offset,
-    bhv_cmd_spawn_obj,
-    bhv_cmd_set_home,
-    bhv_cmd_set_hurtbox,
-    bhv_cmd_set_interact_type,
-    bhv_cmd_set_obj_physics,
-    bhv_cmd_set_interact_subtype,
-    bhv_cmd_scale,
-    bhv_cmd_parent_bit_clear,
-    bhv_cmd_animate_texture,
-    bhv_cmd_disable_rendering,
-    bhv_cmd_set_int_unused,
-    bhv_cmd_spawn_water_droplet,
+    bhv_cmd_begin, //00
+    bhv_cmd_delay, //01
+    bhv_cmd_call,  //02
+    bhv_cmd_return, //03
+    bhv_cmd_goto, //04
+    bhv_cmd_begin_repeat, //05
+    bhv_cmd_end_repeat, //06
+    bhv_cmd_end_repeat_continue, //07
+    bhv_cmd_begin_loop, //08
+    bhv_cmd_end_loop, //09
+    bhv_cmd_break, //0A
+    bhv_cmd_break_unused, //0B
+    bhv_cmd_call_native, //0C
+    bhv_cmd_add_float, //0D
+    bhv_cmd_set_float, //0E
+    bhv_cmd_add_int, //0F
+    bhv_cmd_set_int, //10
+    bhv_cmd_or_int, //11
+    bhv_cmd_bit_clear, //12
+    bhv_cmd_set_int_rand_rshift, //13
+    bhv_cmd_set_random_float, //14
+    bhv_cmd_set_random_int, //15
+    bhv_cmd_add_random_float, //16
+    bhv_cmd_add_int_rand_rshift, //17
+    bhv_cmd_nop_1, //18
+    bhv_cmd_nop_2, //19
+    bhv_cmd_nop_3, //1A
+    bhv_cmd_set_model, //1B
+    bhv_cmd_spawn_child, //1C
+    bhv_cmd_deactivate, //1D
+    bhv_cmd_drop_to_floor, //1E
+    bhv_cmd_sum_float, //1F
+    bhv_cmd_sum_int, //20
+    bhv_cmd_billboard, //21
+    bhv_cmd_hide, //22
+    bhv_cmd_set_hitbox, //23
+    bhv_cmd_nop_4, //24
+    bhv_cmd_delay_var, //25
+    bhv_cmd_begin_repeat_unused, //26
+    bhv_cmd_load_animations, //27
+    bhv_cmd_animate, //28
+    bhv_cmd_spawn_child_with_param, //29
+    bhv_cmd_load_collision_data, //2A
+    bhv_cmd_set_hitbox_with_offset, //2B
+    bhv_cmd_spawn_obj, //2C
+    bhv_cmd_set_home, //2D
+    bhv_cmd_set_hurtbox, //2E
+    bhv_cmd_set_interact_type, //2F
+    bhv_cmd_set_obj_physics, //30
+    bhv_cmd_set_interact_subtype, //31
+    bhv_cmd_scale, //32
+    bhv_cmd_parent_bit_clear, //33
+    bhv_cmd_animate_texture, //34
+    bhv_cmd_disable_rendering, //35
+    bhv_cmd_set_int_unused, //36
+    bhv_cmd_spawn_water_droplet, //37
+    bhv_cmd_cylboard //38
 };
 
 // Execute the behavior script of the current object, process the object flags, and other miscellaneous code for updating objects.

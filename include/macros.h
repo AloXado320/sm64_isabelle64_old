@@ -7,7 +7,11 @@
 #define GLOBAL_ASM(...)
 #endif
 
-#define NON_MATCHING 1 // for some reason Makefile doesn't define it
+#if !defined(__sgi) && (!defined(NON_MATCHING) || !defined(AVOID_UB))
+// asm-process isn't supported outside of IDO, and undefined behavior causes
+// crashes.
+#error Matching build is only possible on IDO; please build with NON_MATCHING=1.
+#endif
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
@@ -59,10 +63,29 @@
 // another way of converting virtual to physical
 #define VIRTUAL_TO_PHYSICAL2(addr)  ((u8 *)(addr) - 0x80000000U)
 #else
-// no conversion needed other than cast
+// no conversion for pc port other than cast
 #define VIRTUAL_TO_PHYSICAL(addr)   ((uintptr_t)(addr))
 #define PHYSICAL_TO_VIRTUAL(addr)   ((uintptr_t)(addr))
 #define VIRTUAL_TO_PHYSICAL2(addr)  ((void *)(addr))
+#endif
+
+// Byteswap macros
+#define BSWAP16(x) (((x) & 0xFF) << 8 | (((x) >> 8) & 0xFF))
+#define BSWAP32(x) \
+    ( (((x) >> 24) & 0x000000FF) | (((x) >>  8) & 0x0000FF00) | \
+      (((x) <<  8) & 0x00FF0000) | (((x) << 24) & 0xFF000000) )
+
+// Convenience macros for endian conversions
+#if IS_BIG_ENDIAN
+# define BE_TO_HOST16(x) (x)
+# define BE_TO_HOST32(x) (x)
+# define LE_TO_HOST16(x) BSWAP16(x)
+# define LE_TO_HOST32(x) BSWAP32(x)
+#else
+# define BE_TO_HOST16(x) BSWAP16(x)
+# define BE_TO_HOST32(x) BSWAP32(x)
+# define LE_TO_HOST16(x) (x)
+# define LE_TO_HOST32(x) (x)
 #endif
 
 #endif // MACROS_H

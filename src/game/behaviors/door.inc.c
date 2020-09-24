@@ -45,6 +45,7 @@ void play_warp_door_open_noise(void) {
 
 void bhv_door_loop(void) {
     s32 sp1C = 0;
+    
     while (D_8032F300[sp1C].flag != (u32)~0) {
         if (cur_obj_clear_interact_status_flag(D_8032F300[sp1C].flag)) {
             set_door_camera_event();
@@ -52,7 +53,7 @@ void bhv_door_loop(void) {
         }
         sp1C++;
     }
-    
+
     switch (o->oAction) {
         case 0:
             cur_obj_init_animation_with_sound(0);

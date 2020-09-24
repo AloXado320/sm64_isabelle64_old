@@ -114,7 +114,7 @@ const Gfx dirt_seg3_dl_0302C238[] = {
     gsSP2Triangles( 0,  5,  3, 0x0,  6,  7,  0, 0x0),
     gsSP2Triangles( 2,  8,  6, 0x0,  1,  9,  2, 0x0),
     gsSP2Triangles( 0,  3,  1, 0x0,  2,  6,  0, 0x0),
-//    gsSPSetGeometryMode(G_CULL_BACK),
+    gsSPSetGeometryMode(G_CULL_BACK),
     gsSPEndDisplayList(),
 };
 
@@ -122,7 +122,7 @@ const Gfx dirt_seg3_dl_0302C238[] = {
 const Gfx dirt_seg3_dl_0302C298[] = {
     gsSPLight(&dirt_seg3_lights_0302BD68.l, 1),
     gsSPLight(&dirt_seg3_lights_0302BD68.a, 2),
-//    gsSPDisplayList(dirt_seg3_dl_0302C238),
+    gsSPDisplayList(dirt_seg3_dl_0302C238),
     gsSPEndDisplayList(),
 };
 
@@ -158,7 +158,7 @@ const Gfx dirt_seg3_dl_0302C318[] = {
     gsSP2Triangles( 0,  5,  3, 0x0,  6,  7,  0, 0x0),
     gsSP2Triangles( 2,  8,  6, 0x0,  1,  9,  2, 0x0),
     gsSP2Triangles( 0,  3,  1, 0x0,  2,  6,  0, 0x0),
-//    gsSPSetGeometryMode(G_LIGHTING | G_CULL_BACK),
+    gsSPSetGeometryMode(G_LIGHTING | G_CULL_BACK),
     gsSPEndDisplayList(),
 };
 

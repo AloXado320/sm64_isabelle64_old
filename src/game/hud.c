@@ -1,3 +1,7 @@
+#ifndef TARGET_N64
+#include <stdbool.h>
+#endif
+
 #include <PR/ultratypes.h>
 
 #include "sm64.h"
@@ -16,6 +20,9 @@
 #include "actors/common1.h"
 #include "object_helpers.h"
 #include "behavior_data.h"
+#ifndef TARGET_N64
+#include "pc/configfile.h"
+#endif
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -480,28 +487,52 @@ void render_hud(void) {
             render_hud_cannon_reticle();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES
+#ifdef EXT_OPTIONS_MENU
+        && configHUD
+#endif
+        ) {
             render_hud_mario_lives();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT
+#ifdef EXT_OPTIONS_MENU
+        && configHUD
+#endif
+        ) {
             render_hud_coins();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT
+#ifdef EXT_OPTIONS_MENU
+        && configHUD
+#endif
+        ) {
             render_hud_stars();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS
+#ifdef EXT_OPTIONS_MENU
+        && configHUD
+#endif
+        ) {
             render_hud_keys();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER
+#ifdef EXT_OPTIONS_MENU
+        && configHUD
+#endif
+        ) {
             render_hud_power_meter();
             render_hud_camera_status();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER
+#ifdef EXT_OPTIONS_MENU
+        && configHUD
+#endif
+        ) {
             render_hud_timer();
         }
     }

@@ -74,13 +74,13 @@ char *sShzIntroScreenText[] = {
     "",
     "Super Mario 64 - Animal Crossing",
     "and related characters made by",
-    "Nintendo (EAD and EPD)",
+    "Nintendo and it's developers",
     "All rights reserved",
     "",
     "This mod was made for entertainment",
     "purposes and as a Smash Tribute",
     "SM64 Decomp Project by Clever Folks",
-    "Not Licensed by Nintendo (obviously)",
+    "Misc Ports made by various people.",
 };
 
 void render_initial_intro_message(void) {

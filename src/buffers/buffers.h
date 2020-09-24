@@ -10,7 +10,7 @@ extern u8 gDecompressionHeap[];
 
 extern u8 gAudioHeap[];
 
-extern u8 gAudioSPTaskYieldBuffer[];
+extern u8 gUnusedThread2Stack[];
 
 extern u8 gIdleThreadStack[];
 extern u8 gThread3Stack[];
@@ -31,6 +31,7 @@ extern u8 gGfxSPTaskStack[];
 #else
 #define GFX_NUM_POOLS 1
 #endif
+
 extern struct GfxPool gGfxPools[GFX_NUM_POOLS];
 
 #endif // BUFFERS_H

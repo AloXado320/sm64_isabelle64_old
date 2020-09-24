@@ -32,7 +32,7 @@ static u8 sPlayingInfiniteStairs = FALSE;
 static u8 unused8032C6D8[16] = { 0 };
 static s16 sSoundMenuModeToSoundMode[] = { SOUND_MODE_STEREO, SOUND_MODE_MONO, SOUND_MODE_HEADSET };
 // Only the 20th array element is used.
-static u32 menuSoundsExtra[] = {
+static u32 sMenuSoundsExtra[] = {
     SOUND_MOVING_TERRAIN_SLIDE + (0 << 16),
     SOUND_MOVING_TERRAIN_SLIDE + (1 << 16),
     SOUND_MOVING_TERRAIN_SLIDE + (2 << 16),
@@ -70,9 +70,9 @@ static u32 menuSoundsExtra[] = {
     SOUND_AIR_BLOW_FIRE,
     SOUND_ENV_ELEVATOR4,
 };
-static s8 paintingEjectSoundPlayed = FALSE;
+static s8 sPaintingEjectSoundPlayed = FALSE;
 
-void play_menu_sounds_extra(int a, void *b);
+void play_menu_sounds_extra(s32 a, void *b);
 
 void reset_volume(void) {
     D_8032C6C0 = 0;
@@ -131,6 +131,7 @@ void set_sound_mode(u16 soundMode) {
  * Wrapper method by menu used to set the sound via flags.
  */
 void play_menu_sounds(s16 soundMenuFlags) {
+
     if (soundMenuFlags & SOUND_MENU_FLAG_HANDAPPEAR) {
         play_sound(SOUND_MENU_HAND_APPEAR, gDefaultSoundArgs);
     } else if (soundMenuFlags & SOUND_MENU_FLAG_HANDISAPPEAR) {
@@ -138,7 +139,7 @@ void play_menu_sounds(s16 soundMenuFlags) {
     } else if (soundMenuFlags & SOUND_MENU_FLAG_UNKNOWN1) {
         play_sound(SOUND_MENU_UNK0C, gDefaultSoundArgs);
     } else if (soundMenuFlags & SOUND_MENU_FLAG_PINCHMARIOFACE) {
-        play_sound(SOUND_MENU_PINCH_MARIO_FACE, gDefaultSoundArgs); //! changed to click sound because no goddard
+        play_sound(SOUND_MENU_PINCH_MARIO_FACE, gDefaultSoundArgs);
     } else if (soundMenuFlags & SOUND_MENU_FLAG_PINCHMARIOFACE2) {
         play_sound(SOUND_MENU_PINCH_MARIO_FACE, gDefaultSoundArgs);
     } else if (soundMenuFlags & SOUND_MENU_FLAG_LETGOMARIOFACE) {
@@ -152,7 +153,7 @@ void play_menu_sounds(s16 soundMenuFlags) {
     if (soundMenuFlags & 0x100) {
         play_menu_sounds_extra(20, NULL);
     }
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
     if ((soundMenuFlags & 0x20) != 0) {
         queue_rumble_data(10, 60);
     }
@@ -165,13 +166,13 @@ void play_menu_sounds(s16 soundMenuFlags) {
 void play_painting_eject_sound(void) {
     if (gRipplingPainting != NULL && gRipplingPainting->state == PAINTING_ENTERED) {
         // ripple when Mario enters painting
-        if (paintingEjectSoundPlayed == FALSE) {
+        if (!sPaintingEjectSoundPlayed) {
             play_sound(SOUND_GENERAL_PAINTING_EJECT,
                        gMarioStates[0].marioObj->header.gfx.cameraToObject);
         }
-        paintingEjectSoundPlayed = TRUE;
+        sPaintingEjectSoundPlayed = TRUE;
     } else {
-        paintingEjectSoundPlayed = FALSE;
+        sPaintingEjectSoundPlayed = FALSE;
     }
 }
 
@@ -199,13 +200,13 @@ void play_infinite_stairs_music(void) {
 
 void set_background_music(u16 a, u16 seqArgs, s16 fadeTimer) {
     if (gResetTimer == 0 && seqArgs != sCurrentMusic) {
-        if (gCurrCreditsEntry != 0) {
+        if (gCurrCreditsEntry != NULL) {
             sound_reset(7);
         } else {
             sound_reset(a);
         }
 
-        if (!(gShouldNotPlayCastleMusic && seqArgs == SEQ_LEVEL_INSIDE_CASTLE)) {
+        if (!gNeverEnteredCastle || seqArgs != SEQ_LEVEL_INSIDE_CASTLE) {
             play_music(SEQ_PLAYER_LEVEL, seqArgs, fadeTimer);
             sCurrentMusic = seqArgs;
         }
@@ -220,7 +221,7 @@ void fadeout_music(s16 fadeOutTime) {
 }
 
 void fadeout_level_music(s16 fadeTimer) {
-    sequence_player_fade_out(SEQ_PLAYER_LEVEL, fadeTimer);
+    sequence_player_fade_out(0, fadeTimer);
     sCurrentMusic = MUSIC_NONE;
     sCurrentShellMusic = MUSIC_NONE;
     sCurrentCapMusic = MUSIC_NONE;
@@ -265,7 +266,7 @@ void stop_cap_music(void) {
 }
 
 void play_menu_sounds_extra(s32 a, void *b) {
-    play_sound(menuSoundsExtra[a], b);
+    play_sound(sMenuSoundsExtra[a], b);
 }
 
 void audio_game_loop_tick(void) {

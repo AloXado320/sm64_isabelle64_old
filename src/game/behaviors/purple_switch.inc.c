@@ -16,7 +16,7 @@ void bhv_purple_switch_loop(void) {
         case PURPLE_SWITCH_IDLE:
             cur_obj_set_model(MODEL_PURPLE_SWITCH);
             cur_obj_scale(1.5f);
-            if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13)) {
+            if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
                 if (lateral_dist_between_objects(o, gMarioObject) < 127.5) {
                     o->oAction = PURPLE_SWITCH_PRESSED;
                 }
@@ -32,7 +32,7 @@ void bhv_purple_switch_loop(void) {
                 cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
                 o->oAction = PURPLE_SWITCH_TICKING;
                 cur_obj_shake_screen(SHAKE_POS_SMALL);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
                 queue_rumble_data(5, 80);
 #endif
             }

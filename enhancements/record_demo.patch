@@ -182,3 +182,4 @@ index a4302124..5ffbf3ed 100644
 +        recordingDemo();
          addr = level_script_execute(addr);
          display_and_vsync();
+ 

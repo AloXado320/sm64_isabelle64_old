@@ -54,8 +54,8 @@ void bhv_bowser_flame_spawn_loop(void) {
     f32 sp20 = sins(bowser->oMoveAngleYaw);
     s16 *sp1C = segmented_to_virtual(bowser_seg6_unkmoveshorts_060576FC);
     if (bowser->oSoundStateID == 6) {
-        sp30 = bowser->header.gfx.unk38.animFrame + 1.0f;
-        if (bowser->header.gfx.unk38.curAnim->unk08 == sp30)
+        sp30 = bowser->header.gfx.animInfo.animFrame + 1.0f;
+        if (bowser->header.gfx.animInfo.curAnim->loopEnd == sp30)
             sp30 = 0;
         if (sp30 > 45 && sp30 < 85) {
             cur_obj_play_sound_1(SOUND_AIR_BOWSER_SPIT_FIRE);
@@ -398,7 +398,7 @@ void bowser_act_spit_fire_into_sky(void) // only in sky
 {
     s32 frame;
     cur_obj_init_animation_with_sound(11);
-    frame = o->header.gfx.unk38.animFrame;
+    frame = o->header.gfx.animInfo.animFrame;
     if (frame > 24 && frame < 36) {
         cur_obj_play_sound_1(SOUND_AIR_BOWSER_SPIT_FIRE);
         if (frame == 35)
@@ -458,7 +458,7 @@ s32 bowser_land(void) {
         o->oVelY = 0;
         spawn_mist_particles_variable(0, 0, 60.0f);
         cur_obj_init_animation_with_sound(8);
-        o->header.gfx.unk38.animFrame = 0;
+        o->header.gfx.animInfo.animFrame = 0;
         cur_obj_start_cam_event(o, CAM_EVENT_BOWSER_JUMP);
         if (BITDW) {
             if (o->oDistanceToMario < 850.0f)
@@ -837,7 +837,7 @@ s32 bowser_dead_not_bits_end(void) {
             o->oBowserUnkF8++;
             cur_obj_play_sound_2(SOUND_GENERAL2_BOWSER_EXPLODE);
             sequence_player_unlower(SEQ_PLAYER_LEVEL, 60);
-            sequence_player_fade_out(SEQ_PLAYER_LEVEL, 1);
+            sequence_player_fade_out(0, 1);
         }
     } else if (bowser_dead_twirl_into_trophy()) {
         bowser_dead_hide();
@@ -865,7 +865,7 @@ s32 bowser_dead_bits_end(void) {
         if (cur_obj_update_dialog(2, 18, dialogID, 0)) {
             cur_obj_set_model(MODEL_BOWSER2);
             sequence_player_unlower(SEQ_PLAYER_LEVEL, 60);
-            sequence_player_fade_out(SEQ_PLAYER_LEVEL, 1);
+            sequence_player_fade_out(0, 1);
             bowser_spawn_grand_star_key();
             o->oBowserUnkF8++;
         }
@@ -1033,7 +1033,7 @@ void bowser_free_update(void) {
     struct Object *platform;
     UNUSED f32 floorHeight;
     if ((platform = o->platform) != NULL)
-        apply_platform_displacement(0, platform);
+        apply_platform_displacement(FALSE, platform);
     o->oBowserUnk10E = 0;
     cur_obj_update_floor_and_walls();
     cur_obj_call_action_function(sBowserActions);

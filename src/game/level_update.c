@@ -1,4 +1,7 @@
 #include <ultra64.h>
+#ifndef TARGET_N64
+#include <stdbool.h>
+#endif
 
 #include "sm64.h"
 #include "seq_ids.h"
@@ -28,6 +31,13 @@
 #include "level_table.h"
 #include "course_table.h"
 #include "thread6.h"
+#include "../../include/libc/stdlib.h"
+
+#ifndef TARGET_N64
+#include "pc/pc_main.h"
+#include "pc/cliopts.h"
+#include "pc/configfile.h"
+#endif
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -58,12 +68,12 @@ const char *credits05[] = { "2Character Importer", "Fast 64", "by kurethedead" }
 const char *credits06[] = { "3Importing help", "kurethedead", "GlitchyPSIX", "PrufStudent" };
 const char *credits07[] = { "2Isabelle voices", "imported from", "Mario Kart 8" };
 const char *credits08[] = { "2SM64 Decompilation", "Project by a bunch", "of clever folks" };
-const char *credits09[] = { "5Special Mentions", "aglab2", "Davideesk", "mountainflaw", "nim", "devwizard" };
-const char *credits10[] = { "5Special Mentions", "PastaPower", "Fazana", "eddio0141", "Kaze", "Blake" };
-const char *credits11[] = { "5Special Mentions", "Emil", "buu342", "Revo", "Pidgey", "someone2639" };
+const char *credits09[] = { "5Extra Mentions", "aglab2", "Davideesk", "mountainflaw", "nim", "devwizard" };
+const char *credits10[] = { "5Extra Mentions", "PastaPower", "Fazana", "eddio0141", "Kaze", "Blake" };
+const char *credits11[] = { "5Extra Mentions", "Emil", "buu342", "Revo", "Pidgey", "someone2639" };
 const char *credits12[] = { "3Console Testers", "CrashOverride", "jesusyoshi54", "streams" };
-const char *credits13[] = { "5Grettings to", "Erica Murphy", "Asbel Alexander", "Federico Ramos", "Franco Sanchez", "Sebastian Briceño" };
-const char *credits14[] = { "3Best Friends", "Charli Mendoza", "Mauricio Garcia", "Christian Manuel" };
+const char *credits13[] = { "5Grettings to", "Johnny Murphiny", "Asbel Alexander", "Federico Ramos", "Franco Sanchez", "Mauricio Garcia" };
+const char *credits14[] = { "3Best Friend", "Charli Mendoza" };
 const char *credits15[] = { "2Thank you for", "playing this", "SM64 character mod" };
 const char *credits16[] = { "1 ", " "};
 const char *credits17[] = { "1 ", " "};
@@ -71,59 +81,67 @@ const char *credits18[] = { "1 ", " "};
 const char *credits19[] = { "1 ", " "};
 const char *credits20[] = { "1 ", " "};
 
+// Screen top left - Bottom text
+#define CREDITS_POS_ONE 0*16
+// Screen top right - Bottom text
+#define CREDITS_POS_TWO 1*16
+// Screen bottom left - Top text
+#define CREDITS_POS_THREE 2*16
+// Screen bottom right - Top text
+#define CREDITS_POS_FOUR 3*16
+
 struct CreditsEntry sCreditsSequence[] = {
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
-    { LEVEL_BOB, 1, 1, 117, { 713, 3918, -3889 }, credits01 },
-    { LEVEL_WF, 1, 50, 46, { 347, 5376, 326 }, credits02 },
-    { LEVEL_JRB, 1, 18, 22, { 3800, -4840, 2727 }, credits03 },
-    { LEVEL_CCM, 2, 34, 25, { -5464, 6656, -6575 }, credits04 },
-    { LEVEL_BBH, 1, 1, 60, { 257, 1922, 2580 }, credits05 },
-    { LEVEL_HMC, 1, -15, 123, { -6469, 1616, -6054 }, credits06 },
-    { LEVEL_THI, 3, 17, -32, { 508, 1024, 1942 }, credits07 },
-    { LEVEL_LLL, 2, 33, 124, { -73, 82, -1467 }, credits08 },
-    { LEVEL_SSL, 1, 65, 98, { -5906, 1024, -2576 }, credits09 },
-    { LEVEL_DDD, 1, 50, 47, { -4884, -4607, -272 }, credits10 },
-    { LEVEL_SL, 1, 17, -34, { 1925, 3328, 563 }, credits11 },
-    { LEVEL_WDW, 1, 33, 105, { -537, 1850, 1818 }, credits12 },
-    { LEVEL_TTM, 1, 2, -33, { 2613, 313, 1074 }, credits13 },
-    { LEVEL_THI, 1, 51, 54, { -2609, 512, 856 }, credits14 },
-    { LEVEL_TTC, 1, 17, -72, { -1304, -71, -967 }, credits15 },
-    { LEVEL_RR, 1, 33, 64, { 1565, 1024, -148 }, credits16 },
-    { LEVEL_SA, 1, 1, 24, { -1050, -1330, -1559 }, credits17 },
-    { LEVEL_COTMC, 1, 49, -16, { -254, 415, -6045 }, credits18 },
-    { LEVEL_DDD, 2, -111, -64, { 3948, 1185, -104 }, credits19 },
-    { LEVEL_CCM, 1, 33, 31, { 3169, -4607, 5240 }, credits20 },
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 906, -1200 }, NULL },
-    { LEVEL_NONE, 0, 1, 0, { 0, 0, 0 }, NULL },
+    { LEVEL_CASTLE_GROUNDS, 
+        1, CREDITS_POS_ONE, 1, -128, { 0, 8000, 0 }, NULL },
+    // Start Level Credits Sequence
+    { LEVEL_BOB,   1, CREDITS_POS_ONE,   1, 117, { 713, 3918, -3889 },    credits01 },
+    { LEVEL_WF,    1, CREDITS_POS_FOUR,  2,  46, { 347, 5376, 326 },      credits02 },
+    { LEVEL_JRB,   1, CREDITS_POS_TWO,   2,  22, { 3800, -4840, 2727 },   credits03 },
+    { LEVEL_CCM,   2, CREDITS_POS_THREE, 2,  25, { -5464, 6656, -6575 },  credits04 },
+    { LEVEL_BBH,   1, CREDITS_POS_ONE,   1,  60, { 257, 1922, 2580 },     credits05 },
+    { LEVEL_HMC,   1, CREDITS_POS_FOUR,  1,  45, { -6469, 1616, -6054 },  credits06 },
+    { LEVEL_THI,   3, CREDITS_POS_TWO,   1, -32, { 508, 1024, 1942 },     credits07 },
+    { LEVEL_LLL,   2, CREDITS_POS_THREE, 1, 124, { -73, 82, -1467 },      credits08 },
+    { LEVEL_SSL,   1, CREDITS_POS_ONE,   1,  98, { -5906, 1024, -2576 },  credits09 },
+    { LEVEL_DDD,   1, CREDITS_POS_FOUR,  2,  47, { -4884, -4607, -272 },  credits10 },
+    { LEVEL_SL,    1, CREDITS_POS_TWO,   1, -34, { 1925, 3328, 563 },     credits11 },
+    { LEVEL_WDW,   1, CREDITS_POS_THREE, 1, 105, { -537, 1850, 1818 },    credits12 },
+    { LEVEL_TTM,   1, CREDITS_POS_ONE,   2, -33, { 2613, 313, 1074 },     credits13 },
+    { LEVEL_THI,   1, CREDITS_POS_FOUR,  3,  54, { -2609, 512, 856 },     credits14 },
+    { LEVEL_TTC,   1, CREDITS_POS_TWO,   1, -72, { -1304, -71, -967 },    credits15 },
+    { LEVEL_RR,    1, CREDITS_POS_THREE, 1,  64, { 1565, 1024, -148 },    credits16 },
+    { LEVEL_SA,    1, CREDITS_POS_ONE,   1,  24, { -1050, -1330, -1559 }, credits17 },
+    { LEVEL_COTMC, 1, CREDITS_POS_FOUR,  1, -16, { -254, 415, -6045 },    credits18 },
+    { LEVEL_DDD,   2, CREDITS_POS_TWO,   1, -64, { 3948, 1185, -104 },    credits19 },
+    { LEVEL_CCM,   1, CREDITS_POS_THREE, 1,  31, { 3169, -4607, 5240 },   credits20 },
+    // End Level Credits Sequence
+    { LEVEL_CASTLE_GROUNDS, 
+        1, CREDITS_POS_ONE, 1, -128, { 0, 906, -1200 }, NULL },
+    { LEVEL_NONE, 
+        0, CREDITS_POS_ONE, 1,    0, { 0, 0, 0 }, NULL },
 };
 
 struct MarioState gMarioStates[1];
 struct HudDisplay gHudDisplay;
-
 s16 sCurrPlayMode;
 u16 D_80339ECA;
-
 s16 sTransitionTimer;
 void (*sTransitionUpdate)(s16 *);
-
 struct WarpDest sWarpDest;
-
 s16 D_80339EE0;
-
 s16 sDelayedWarpOp;
 s16 sDelayedWarpTimer;
 s16 sSourceWarpNodeId;
 s32 sDelayedWarpArg;
-
 #ifdef VERSION_EU
 s16 unusedEULevelUpdateBss1;
 #endif
 s8 sTimerRunning;
-s8 gShouldNotPlayCastleMusic;
+s8 gNeverEnteredCastle;
 
 struct MarioState *gMarioState = &gMarioStates[0];
 u8 unused1[4] = { 0 };
-s8 D_8032C9E0 = 0;
+s8 sWarpCheckpointActive = FALSE;
 u8 unused3[4];
 u8 unused4[2];
 
@@ -151,6 +169,27 @@ u16 level_control_timer(s32 timerOp) {
     }
 
     return gHudDisplay.timer;
+}
+
+extern Gfx isabelle_metal_pallete_block_dl[];
+
+extern u8 isabelle_texture_metal_pal[];
+extern u8 isabelle_texture_goldmetal_pal[];
+
+extern u16 gGoldMetalMode;
+
+void metal_to_golden_cap(void) {
+    if (gMarioState->numCoins >= 100) {
+        gGoldMetalMode = TRUE;
+    } else {
+        gGoldMetalMode = FALSE;
+    }
+        
+    if (gGoldMetalMode == TRUE) {
+        gDPSetTextureImage(segmented_to_virtual(isabelle_metal_pallete_block_dl), G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, isabelle_texture_goldmetal_pal);
+    } else {
+        gDPSetTextureImage(segmented_to_virtual(isabelle_metal_pallete_block_dl), G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, isabelle_texture_metal_pal);
+    }
 }
 
 u32 pressed_pause(void) {
@@ -385,7 +424,7 @@ void init_mario_after_warp(void) {
 #ifndef VERSION_JP
         if (gCurrLevelNum == LEVEL_BOB
             && get_current_background_music() != SEQUENCE_ARGS(4, SEQ_LEVEL_SLIDE)
-            && sTimerRunning != 0) {
+            && sTimerRunning) {
             play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_LEVEL_SLIDE), 0);
         }
 #endif
@@ -616,7 +655,7 @@ void initiate_painting_warp(void) {
                 warpNode = *pWarpNode;
 
                 if (!(warpNode.destLevel & 0x80)) {
-                    D_8032C9E0 = check_warp_checkpoint(&warpNode);
+                    sWarpCheckpointActive = check_warp_checkpoint(&warpNode);
                 }
 
                 initiate_warp(warpNode.destLevel & 0x7F, warpNode.destArea, warpNode.destNode, 0);
@@ -631,9 +670,9 @@ void initiate_painting_warp(void) {
 
                 play_sound(SOUND_MENU_STAR_SOUND, gDefaultSoundArgs);
                 fadeout_music(398);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
                 queue_rumble_data(80, 70);
-                func_sh_8024C89C(1);
+                queue_rumble_decay(1);
 #endif
             }
         }
@@ -655,8 +694,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 
         switch (warpOp) {
             case WARP_OP_DEMO_NEXT:
-            case WARP_OP_DEMO_END:
-                do {sDelayedWarpTimer = 20;} while (0);
+            case WARP_OP_DEMO_END: sDelayedWarpTimer = 20; // Must be one line to match on -O2
                 sSourceWarpNodeId = WARP_NODE_F0;
                 gSavedCourseNum = COURSE_NONE;
                 val04 = FALSE;
@@ -807,7 +845,7 @@ void initiate_delayed_warp(void) {
                     sound_banks_disable(2, 0x03FF);
 
                     gCurrCreditsEntry += 1;
-                    gCurrActNum = gCurrCreditsEntry->unk02 & 0x07;
+                    gCurrActNum = gCurrCreditsEntry->actNum;
                     if ((gCurrCreditsEntry + 1)->levelNum == LEVEL_NONE) {
                         destWarpNode = WARP_NODE_CREDITS_END;
                     } else {
@@ -834,33 +872,11 @@ void initiate_delayed_warp(void) {
     }
 }
 
-
-extern Gfx isabelle_metal_pallete_block_dl[];
-
-extern u8 isabelle_texture_metal_pal[];
-extern u8 isabelle_texture_goldmetal_pal[];
-
-extern u16 gGoldMetalMode;
-
-void metal_to_golden_cap(void) {
-    if (gMarioState->numCoins >= 100) {
-        gGoldMetalMode = TRUE;
-    } else {
-        gGoldMetalMode = FALSE;
-    }
-        
-    if (gGoldMetalMode == TRUE) {
-        gDPSetTextureImage(segmented_to_virtual(isabelle_metal_pallete_block_dl), G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, isabelle_texture_goldmetal_pal);
-    } else {
-        gDPSetTextureImage(segmented_to_virtual(isabelle_metal_pallete_block_dl), G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, isabelle_texture_metal_pal);
-    }
-}
-
 void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-        if (gCurrCourseNum > 0) {
+        if (gCurrCourseNum >= COURSE_MIN) {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_COIN_COUNT;
         } else {
             gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_COIN_COUNT;
@@ -879,9 +895,9 @@ void update_hud_values(void) {
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
             }
         }
-
+    
         metal_to_golden_cap();
-        
+
         if (gMarioState->numLives > 100) {
             gMarioState->numLives = 100;
         }
@@ -973,7 +989,7 @@ s32 play_mode_normal(void) {
             set_play_mode(PLAY_MODE_CHANGE_AREA);
         } else if (pressed_pause()) {
             lower_background_noise(1);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
             cancel_rumble();
 #endif
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
@@ -991,9 +1007,12 @@ s32 play_mode_paused(void) {
         raise_background_noise(1);
         gCameraMovementFlags &= ~CAM_MOVE_PAUSE_SCREEN;
         set_play_mode(PLAY_MODE_NORMAL);
-    } else {
+    } else
+#ifndef TARGET_N64
+        if (gPauseScreenMode == 2)
+#endif
+        {
         // Exit level
-
         if (gDebugLevelSelect) {
             fade_into_special_warp(-9, 1);
         } else {
@@ -1001,9 +1020,17 @@ s32 play_mode_paused(void) {
             fade_into_special_warp(0, 0);
             gSavedCourseNum = COURSE_NONE;
         }
-
+        
         gCameraMovementFlags &= ~CAM_MOVE_PAUSE_SCREEN;
+    } 
+#ifndef TARGET_N64
+    else if (gPauseScreenMode == 3) {
+        // We should only be getting "int 3" to here
+        initiate_warp(LEVEL_CASTLE, 1, 0x1F, 0);
+        fade_into_special_warp(0, 0);
+        game_exit();
     }
+#endif
 
     return 0;
 }
@@ -1053,7 +1080,6 @@ s32 play_mode_change_area(void) {
         sTransitionTimer -= 1;
     }
 
-    //! If sTransitionTimer is -1, this will miss.
     if (sTransitionTimer == 0) {
         sTransitionUpdate = NULL;
         set_play_mode(PLAY_MODE_NORMAL);
@@ -1070,7 +1096,6 @@ s32 play_mode_change_level(void) {
         sTransitionUpdate(&sTransitionTimer);
     }
 
-    //! If sTransitionTimer is -1, this will miss.
     if (--sTransitionTimer == -1) {
         gHudDisplay.flags = HUD_DISPLAY_NONE;
         sTransitionTimer = 0;
@@ -1132,8 +1157,9 @@ s32 update_level(void) {
     return changeLevel;
 }
 
-
-#define SKIP_CUTSCENE FALSE
+#if DEBUG_TEST_ENDCUTSCENE
+#define ACT_IDLE ACT_JUMBO_STAR_CUTSCENE
+#endif
 
 s32 init_level(void) {
     s32 val4 = 0;
@@ -1150,7 +1176,7 @@ s32 init_level(void) {
         gHudDisplay.flags = HUD_DISPLAY_NONE;
     }
 
-    sTimerRunning = 0;
+    sTimerRunning = FALSE;
 
     if (sWarpDest.type != WARP_TYPE_NOT_WARPING) {
         if (sWarpDest.nodeId >= WARP_NODE_CREDITS_MIN) {
@@ -1169,21 +1195,30 @@ s32 init_level(void) {
 
             if (gCurrDemoInput != NULL) {
                 set_mario_action(gMarioState, ACT_IDLE, 0);
-            } else if (gDebugLevelSelect == 0) {
+            } else if (!gDebugLevelSelect) {
                 if (gMarioState->action != ACT_UNINITIALIZED) {
-                #if SKIP_CUTSCENE
-                    set_mario_action(gMarioState, ACT_IDLE, 0);
-                #else
                     if (save_file_exists(gCurrSaveFileNum - 1)) {
                         set_mario_action(gMarioState, ACT_IDLE, 0);
-                    } else {
+                    } else
+#ifndef TARGET_N64
+                        if (gCLIOpts.SkipIntro == 0 && configSkipIntro == 0) {
+                            set_mario_action(gMarioState, ACT_INTRO_CUTSCENE, 0);
+                            val4 = 0;
+#else
+                        {
+#if !SKIP_INTRO_CUTSCENE
                         set_mario_action(gMarioState, ACT_INTRO_CUTSCENE, 0);
                         val4 = 1;
+#else
+                        set_mario_action(gMarioState, ACT_IDLE, 0);
+                        val4 = 0;
+#endif
+#endif
                     }
-                #endif
                 }
             }
         }
+
 
         if (val4 != 0) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x5A, 0xFF, 0xFF, 0xFF);
@@ -1195,13 +1230,11 @@ s32 init_level(void) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
         }
     }
-
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
     if (gCurrDemoInput == NULL) {
         cancel_rumble();
     }
 #endif
-
     if (gMarioState->action == ACT_INTRO_CUTSCENE) {
         sound_banks_disable(2, 0x0330);
     }
@@ -1255,13 +1288,22 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
 #endif
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
-    gShouldNotPlayCastleMusic = !save_file_exists(gCurrSaveFileNum - 1);
+    gNeverEnteredCastle =
+#if !SKIP_INTRO_CUTSCENE
+    !save_file_exists(gCurrSaveFileNum - 1) 
+#else
+    TRUE
+#endif
+#ifndef TARGET_N64
+    && gCLIOpts.SkipIntro == 0 && configSkipIntro == 0
+#endif
+    ;
 
     gCurrLevelNum = levelNum;
     gCurrCourseNum = COURSE_NONE;
     gSavedCourseNum = COURSE_NONE;
     gCurrCreditsEntry = NULL;
-    gSpecialTripleJump = 0;
+    gSpecialTripleJump = FALSE;
 
     init_mario_from_save_file();
     disable_warp_checkpoint();
@@ -1269,13 +1311,17 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     select_mario_cam_mode();
     set_yoshi_as_not_dead();
 
+#if DEBUG_TEST_ENDCUTSCENE
+    return LEVEL_BOWSER_3;
+#else
     return levelNum;
+#endif
 }
 
 s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
-    s32 val4 = D_8032C9E0;
+    s32 warpCheckpointActive = sWarpCheckpointActive;
 
-    D_8032C9E0 = 0;
+    sWarpCheckpointActive = FALSE;
     gCurrLevelNum = levelNum;
     gCurrCourseNum = gLevelToCourseNumTable[levelNum - 1];
 
@@ -1296,13 +1342,21 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
         disable_warp_checkpoint();
     }
 
-    if (gCurrCourseNum > COURSE_STAGES_MAX || val4 != 0) {
+    if (gCurrCourseNum > COURSE_STAGES_MAX || warpCheckpointActive) {
         return 0;
     }
 
-    if (gDebugLevelSelect != 0 && gShowProfiler == 0) {
+    if (gDebugLevelSelect && !gShowProfiler) {
         return 0;
     }
 
+    return 1;
+}
+
+/**
+ * Play the "thank you so much for to playing my game" sound.
+ */
+s32 lvl_play_the_end_screen_sound(UNUSED s16 arg0, UNUSED s32 arg1) {
+    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gDefaultSoundArgs);
     return 1;
 }

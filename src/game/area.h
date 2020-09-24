@@ -137,7 +137,6 @@ extern struct Area *gCurrentArea;
 
 extern s16 gCurrSaveFileNum;
 extern s16 gCurrLevelNum;
-
 extern s16 gRenderN64Text;
 extern s16 gTitleInitMessage;
 

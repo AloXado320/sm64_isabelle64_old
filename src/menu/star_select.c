@@ -1,5 +1,5 @@
 #include <PR/ultratypes.h>
- 
+
 #include "audio/external.h"
 #include "behavior_data.h"
 #include "engine/behavior_script.h"
@@ -15,6 +15,7 @@
 #include "game/save_file.h"
 #include "game/segment2.h"
 #include "game/segment7.h"
+#include "game/thread6.h"
 #include "sm64.h"
 #include "star_select.h"
 #include "text_strings.h"
@@ -203,12 +204,35 @@ void bhv_act_selector_loop(void) {
 /**
  * Print the course number selected with the wood rgba16 course texture.
  */
-static void print_course_number(void) { // Rgba16 image would only show texture, text would be generic strings (In Isabelle 64 1.3 case)
+#ifdef VERSION_EU
+void print_course_number(s16 language) {
+#else
+void print_course_number(void) {
+#endif
     u8 courseNum[4];
 
     create_dl_translation_matrix(MENU_MTX_PUSH, 158.0f, 81.0f, 0.0f);
 
+    // Full wood texture in JP & US, lower part of it on EU
     gSPDisplayList(gDisplayListHead++, dl_menu_rgba16_wood_course);
+
+#ifdef VERSION_EU
+    // Change upper part of the wood texture depending of the language defined
+    switch (language) {
+        case LANGUAGE_ENGLISH:
+            gSPDisplayList(gDisplayListHead++, dl_menu_texture_course_upper);
+            break;
+        case LANGUAGE_FRENCH:
+            gSPDisplayList(gDisplayListHead++, dl_menu_texture_niveau_upper);
+            break;
+        case LANGUAGE_GERMAN:
+            gSPDisplayList(gDisplayListHead++, dl_menu_texture_kurs_upper);
+            break;
+    }
+
+    gSPDisplayList(gDisplayListHead++, dl_menu_rgba16_wood_course_end);
+#endif
+
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
@@ -223,6 +247,12 @@ static void print_course_number(void) { // Rgba16 image would only show texture,
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
+
+#if defined(VERSION_JP) || defined(VERSION_SH)
+#define ACT_NAME_X 158
+#else
+#define ACT_NAME_X 163
+#endif
 
 /**
  * Print act selector strings, some with special checks.
@@ -340,10 +370,8 @@ s32 lvl_init_act_selector_values_and_stars(UNUSED s32 arg, UNUSED s32 unused) {
     sInitSelectedActNum = 0;
     sVisibleStars = 0;
     sActSelectorMenuTimer = 0;
-#ifdef NO_SEGMENTED_MEMORY
     sSelectedActIndex = 0;
     sSelectableStarIndex = 0;
-#endif
     sObtainedStars = save_file_get_course_star_count(gCurrSaveFileNum - 1, gCurrCourseNum - 1);
 
     // Don't count 100 coin star
@@ -364,11 +392,21 @@ s32 lvl_init_act_selector_values_and_stars(UNUSED s32 arg, UNUSED s32 unused) {
 s32 lvl_update_obj_and_load_act_button_actions(UNUSED s32 arg, UNUSED s32 unused) {
     if (sActSelectorMenuTimer >= 11) {
         // If any of these buttons are pressed, play sound and go to course act
-        if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | B_BUTTON)) {
+#ifndef Z_TRIG_EXTRA_ACT
+        if ((gPlayer3Controller->buttonPressed & A_BUTTON)
+         || (gPlayer3Controller->buttonPressed & START_BUTTON)
+         || (gPlayer3Controller->buttonPressed & B_BUTTON)) {
+#else
+        if ((gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | B_BUTTON | Z_TRIG))) {
+#endif
 #if defined(VERSION_JP) || defined(VERSION_SH)
             play_sound(SOUND_MENU_STAR_SOUND, gDefaultSoundArgs);
 #else
             play_sound(SOUND_MENU_STAR_SOUND_LETS_A_GO, gDefaultSoundArgs);
+#endif
+#ifdef RUMBLE_FEEDBACK
+            queue_rumble_data(60, 70);
+            queue_rumble_decay(1);
 #endif
             if (sInitSelectedActNum >= sSelectedActIndex + 1) {
                 sLoadedActNum = sSelectedActIndex + 1;

@@ -4,11 +4,15 @@
 
 .include "macros.inc"
 
-#.ifdef VERSION_SH
-#.set VERSION_EU, 1 # HACK, someone fix this file, its poorly diff'd!
-#.endif
+.ifdef VERSION_SH
+.set VERSION_EU, 1 # HACK, someone fix this file, its poorly diff'd!
+.endif
 
 .section .text, "ax"
+
+.ifdef AVOID_UB
+.set D_80334890, D_80334890_fix
+.endif
 
 glabel __osExceptionPreamble
     lui   $k0, %hi(__osException)
@@ -60,8 +64,8 @@ glabel __osException
 .ifndef VERSION_EU
     sw    $zero, %lo(D_80334938)($at)
 .endif
-    lui   $k0, %hi(D_80334890_fix + 0x10)
-    lw    $k0, %lo(D_80334890_fix + 0x10)($k0)
+    lui   $k0, %hi(D_80334890 + 0x10)
+    lw    $k0, %lo(D_80334890 + 0x10)($k0)
     ld    $t1, 0x20($t0)
     sd    $t1, 0x20($k0)
     ld    $t1, 0x118($t0)
@@ -409,8 +413,8 @@ glabel L80326AE8
     sw    $t2, ($t1)
     jal   send_mesg
      li    $a0, 112
-    lui   $t2, %hi(D_80334890_fix + 0x8)
-    lw    $t2, %lo(D_80334890_fix + 0x8)($t2)
+    lui   $t2, %hi(D_80334890 + 0x8)
+    lw    $t2, %lo(D_80334890 + 0x8)($t2)
     li    $at, -4097
     and   $s0, $s0, $at
     lw    $k1, 0x118($t2)
@@ -445,23 +449,23 @@ glabel L80326B64
 
 .L80326B9C:
 glabel L80326B9C
-    lui   $t2, %hi(D_80334890_fix + 0x8)
-    lw    $t2, %lo(D_80334890_fix + 0x8)($t2)
+    lui   $t2, %hi(D_80334890 + 0x8)
+    lw    $t2, %lo(D_80334890 + 0x8)($t2)
     lw    $t1, 4($k0)
     lw    $t3, 4($t2)
     slt   $at, $t1, $t3
     beqz  $at, .L80326BD0
      nop
-    lui   $a0, %hi(D_80334890_fix + 0x8)
+    lui   $a0, %hi(D_80334890 + 0x8)
     move  $a1, $k0
     jal   __osEnqueueThread
-     addiu $a0, %lo(D_80334890_fix + 0x8)
+     addiu $a0, %lo(D_80334890 + 0x8)
     j     __osDispatchThread
      nop
 
 .L80326BD0:
-    lui   $t1, %hi(D_80334890_fix + 0x8)
-    addiu $t1, %lo(D_80334890_fix + 0x8)
+    lui   $t1, %hi(D_80334890 + 0x8)
+    addiu $t1, %lo(D_80334890 + 0x8)
     lw    $t2, ($t1)
     sw    $t2, ($k0)
     j     __osDispatchThread
@@ -469,8 +473,8 @@ glabel L80326B9C
 
 .L80326BE8:
 glabel L80326BE8
-    lui   $at, %hi(D_80334890_fix + 0x14)
-    sw    $k0, %lo(D_80334890_fix + 0x14)($at)
+    lui   $at, %hi(D_80334890 + 0x14)
+    sw    $k0, %lo(D_80334890 + 0x14)($at)
     li    $t1, 1
     sh    $t1, 0x10($k0)
     li    $t1, 2
@@ -524,10 +528,10 @@ glabel send_mesg
     jal   __osPopThread
      move  $a0, $t1
     move  $t2, $v0
-    lui   $a0, %hi(D_80334890_fix + 0x8)
+    lui   $a0, %hi(D_80334890 + 0x8)
     move  $a1, $t2
     jal   __osEnqueueThread
-     addiu $a0, %lo(D_80334890_fix + 0x8)
+     addiu $a0, %lo(D_80334890 + 0x8)
 .L80326CC4:
     jr    $s2
      nop
@@ -548,8 +552,8 @@ glabel send_mesg
 
 
 glabel __osEnqueueAndYield
-    lui   $a1, %hi(D_80334890_fix + 0x10)
-    lw    $a1, %lo(D_80334890_fix + 0x10)($a1)
+    lui   $a1, %hi(D_80334890 + 0x10)
+    lw    $a1, %lo(D_80334890 + 0x10)($a1)
     mfc0  $t0, $12
     lw    $k1, 0x18($a1)
     ori   $t0, $t0, 2
@@ -652,11 +656,11 @@ glabel __osPopThread
      sw    $t9, ($a0)
 
 glabel __osDispatchThread
-    lui   $a0, %hi(D_80334890_fix + 0x8)
+    lui   $a0, %hi(D_80334890 + 0x8)
     jal   __osPopThread
-     addiu $a0, %lo(D_80334890_fix + 0x8)
-    lui   $at, %hi(D_80334890_fix + 0x10)
-    sw    $v0, %lo(D_80334890_fix + 0x10)($at)
+     addiu $a0, %lo(D_80334890 + 0x8)
+    lui   $at, %hi(D_80334890 + 0x10)
+    sw    $v0, %lo(D_80334890 + 0x10)($at)
     li    $t0, 4
     sh    $t0, 0x10($v0)
     move  $k0, $v0

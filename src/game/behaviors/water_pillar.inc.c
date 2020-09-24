@@ -40,8 +40,8 @@ void water_level_pillar_undrained(void) {
                     (s32) approach_f32_symmetric(gEnvironmentLevels[2], -2450.0f, 5.0f);
                 gEnvironmentLevels[0] =
                     (s32) approach_f32_symmetric(gEnvironmentLevels[0], -2450.0f, 5.0f);
-#ifdef VERSION_SH
-                reset_rumble_timers_2(2);
+#ifdef RUMBLE_FEEDBACK
+                reset_rumble_timers_viblate(2);
 #endif
             } else
                 o->oAction++;
@@ -61,11 +61,11 @@ void water_level_pillar_drained(void) {
 
 void bhv_water_level_pillar_init(void) {
     if (save_file_get_flags() & SAVE_FLAG_MOAT_DRAINED)
-        o->oWaterLevelPillarUnkF8 = 1;
+        o->oWaterLevelPillarDrained = 1;
 }
 
 void bhv_water_level_pillar_loop(void) {
-    if (o->oWaterLevelPillarUnkF8)
+    if (o->oWaterLevelPillarDrained)
         water_level_pillar_drained();
     else
         water_level_pillar_undrained();

@@ -12,141 +12,12 @@
 #include "game/camera.h"
 #include "seq_ids.h"
 #include "dialog_ids.h"
+#include "level_table.h"
 
 #ifdef VERSION_EU
 #define EU_FLOAT(x) x ## f
 #else
 #define EU_FLOAT(x) x
-#endif
-
-#ifdef VERSION_EU
-u8 audioString1[] = "pitch %x: delaybytes %d : olddelay %d\n";
-u8 audioString2[] = "cont %x: delaybytes %d : olddelay %d\n";
-u8 audioString3[] = "Warning:Kill Note  %x \n";
-u8 audioString4[] = "Kill Voice %d (ID %d) %d\n";
-u8 audioString5[] = "Warning: Running Sequence's data disappear!\n";
-u8 audioString6[] = "Heap OverFlow : Not Allocate %d!\n";
-u8 audioString7[] = "DataHeap Not Allocate \n";
-u8 audioString8[] = "StayHeap Not Allocate %d\n";
-u8 audioString9[] = "AutoHeap Not Allocate %d\n";
-u8 audioString10[] = "WARNING: NO FREE AUTOSEQ AREA.\n";
-u8 audioString11[] = "WARNING: NO STOP AUTO AREA.\n";
-u8 audioString12[] = "         AND TRY FORCE TO STOP SIDE \n";
-u8 audioString13[] = "TWO SIDES ARE LOADING... ALLOC CANCELED.\n";
-u8 audioString14[] = "WARNING: Before Area Overlaid After.";
-u8 audioString15[] = "WARNING: After Area Overlaid Before.";
-u8 audioString16[] = "MEMORY:SzHeapAlloc ERROR: sza->side %d\n";
-u8 audioString17[] = "MEMORY:StayHeap OVERFLOW.";
-u8 audioString18[] = "MEMORY:StayHeap OVERFLOW (REQ:%d)";
-u8 audioString19[] = "Auto Heap Unhit for ID %d\n";
-u8 audioString20[] = "Cache hit %d at stay %d\n";
-u8 audioString20_[] = "%d ";
-u8 audioString20__[] = "\n";
-u8 audioString20___[] = "%d ";
-u8 audioString20____[] = "\n";
-u8 audioString21[] = "Heap Reconstruct Start %x\n";
-u8 audioString22[] = "SFrame Sample %d %d %d\n";
-u8 audioString23[] = "AHPBASE %x\n";
-u8 audioString24[] = "AHPCUR  %x\n";
-u8 audioString25[] = "HeapTop %x\n";
-u8 audioString26[] = "SynoutRate %d / %d \n";
-u8 audioString27[] = "FXSIZE %d\n";
-u8 audioString28[] = "FXCOMP %d\n";
-u8 audioString29[] = "FXDOWN %d\n";
-u8 audioString30[] = "WaveCacheLen: %d\n";
-u8 audioString31[] = "SpecChange Finished\n";
-u8 audioString31_[] = "";
-u8 audioString32[] = "Romcopy %x -> %x ,size %x\n";
-u8 audioString33[] = "Romcopyend\n";
-u8 audioString34[] = "CAUTION:WAVE CACHE FULL %d";
-u8 audioString35[] = "BASE %x %x\n";
-u8 audioString36[] = "LOAD %x %x %x\n";
-u8 audioString37[] = "INSTTOP    %x\n";
-u8 audioString38[] = "INSTMAP[0] %x\n";
-u8 audioString39[] = "already flags %d\n";
-u8 audioString40[] = "already flags %d\n";
-u8 audioString41[] = "ERR:SLOW BANK DMA BUSY\n";
-u8 audioString42[] = "ERR:SLOW DMA BUSY\n";
-u8 audioString43[] = "Check %d  bank %d\n";
-u8 audioString44[] = "Cache Check\n";
-u8 audioString45[] = "NO BANK ERROR\n";
-u8 audioString46[] = "BANK %d LOADING START\n";
-u8 audioString47[] = "BANK %d LOAD MISS (NO MEMORY)!\n";
-u8 audioString48[] = "BANK %d ALREADY CACHED\n";
-u8 audioString49[] = "BANK LOAD MISS! FOR %d\n";
-u8 audioString50[] = "Seq %d Loading Start\n";
-u8 audioString51[] = "Heap Overflow Error\n";
-u8 audioString52[] = "SEQ  %d ALREADY CACHED\n";
-u8 audioString53[] = "Ok,one bank slow load Start \n";
-u8 audioString54[] = "Sorry,too many %d bank is none.fast load Start \n";
-u8 audioString55[] = "Seq %d:Default Load Id is %d\n";
-u8 audioString56[] = "Seq Loading Start\n";
-u8 audioString57[] = "Error:Before Sequence-SlowDma remain.\n";
-u8 audioString58[] = "      Cancel Seq Start.\n";
-u8 audioString59[] = "SEQ  %d ALREADY CACHED\n";
-u8 audioString60[] = "Clear Workarea %x -%x size %x \n";
-u8 audioString61[] = "AudioHeap is %x\n";
-u8 audioString62[] = "Heap reset.Synth Change %x \n";
-u8 audioString63[] = "Heap %x %x %x\n";
-u8 audioString64[] = "Main Heap Initialize.\n";
-u8 audioString65[] = "---------- Init Completed. ------------\n";
-u8 audioString66[] = " Syndrv    :[%6d]\n";
-u8 audioString67[] = " Seqdrv    :[%6d]\n";
-u8 audioString68[] = " audiodata :[%6d]\n";
-u8 audioString69[] = "---------------------------------------\n";
-u8 audioString69_[] = "";
-u8 audioString70[] = "Audio: setvol: volume minus %f\n";
-u8 audioString71[] = "Audio: setvol: volume overflow %f\n";
-u8 audioString72[] = "Audio: setpitch: pitch minus %f\n";
-u8 audioString73[] = "Audio: voiceman: No bank error %d\n";
-u8 audioString74[] = "Audio: voiceman: progNo. overflow %d,%d\n";
-u8 audioString75[] = "Audio: voiceman: progNo. undefined %d,%d\n";
-u8 audioString76[] = "Audio: voiceman: BAD Voicepointer %x,%d,%d\n";
-u8 audioString77[] = "Audio: voiceman: Percussion Overflow %d,%d\n";
-u8 audioString78[] = "Percussion Pointer Error\n";
-u8 audioString79[] = "Audio: voiceman: Percpointer NULL %d,%d\n";
-u8 audioString80[] = "CAUTION:SUB IS SEPARATED FROM GROUP";
-u8 audioString81[] = "Error:Wait Track disappear\n";
-u8 audioString82[] = "Slow Release Batting\n";
-u8 audioString83[] = "Audio:Wavemem: Bad voiceno (%d)\n";
-u8 audioString84[] = "Audio: C-Alloc : Dealloc voice is NULL\n";
-u8 audioString85[] = "Alloc Error:Dim voice-Alloc %d";
-u8 audioString86[] = "Error:Same List Add\n";
-u8 audioString87[] = "Already Cut\n";
-u8 audioString88[] = "Audio: C-Alloc : lowerPrio is NULL\n";
-u8 audioString89[] = "Sub Limited Warning: Drop Voice";
-u8 audioString90[] = "Warning: Drop Voice";
-u8 audioString91[] = "Warning: Drop Voice";
-u8 audioString92[] = "Warning: Drop Voice";
-u8 audioString93[] = "Audio:Envp: overflow  %f\n";
-u8 audioString93_[] = "";
-u8 audioString94[] = "Audio:Track:Warning: No Free Notetrack\n";
-u8 audioString95[] = "SUBTRACK DIM\n";
-u8 audioString96[] = "Audio:Track: Warning SUBTRACK PARENT CHANGED\n";
-u8 audioString97[] = "GROUP 0:";
-u8 audioString98[] = "GROUP 1:";
-u8 audioString99[] = "SEQID %d,BANKID %d\n";
-u8 audioString100[] = "ERR:SUBTRACK %d NOT ALLOCATED\n";
-u8 audioString101[] = "Error:Same List Add\n";
-u8 audioString102[] = "Macro Level Over Error!\n";
-u8 audioString103[] = "Macro Level Over Error!\n";
-u8 audioString104[] = "WARNING: NPRG: cannot change %d\n";
-u8 audioString105[] = "Audio:Track:NOTE:UNDEFINED NOTE COM. %x\n";
-u8 audioString106[] = "Audio: Note:Velocity Error %d\n";
-u8 audioString107[] = "Error: Your assignchannel is stolen.\n";
-u8 audioString108[] = "Audio:Track :Call Macro Level Over Error!\n";
-u8 audioString109[] = "Audio:Track :Loops Macro Level Over Error!\n";
-u8 audioString110[] = "SUB:ERR:BANK %d NOT CACHED.\n";
-u8 audioString111[] = "SUB:ERR:BANK %d NOT CACHED.\n";
-u8 audioString112[] = "Audio:Track: CTBLCALL Macro Level Over Error!\n";
-u8 audioString113[] = "Err :Sub %x ,address %x:Undefined SubTrack Function %x";
-u8 audioString114[] = "Disappear Sequence or Bank %d\n";
-u8 audioString115[] = "Macro Level Over Error!\n";
-u8 audioString116[] = "Macro Level Over Error!\n";
-u8 audioString117[] = "Group:Undefine upper C0h command (%x)\n";
-u8 audioString118[] = "Group:Undefined Command\n";
-u8 audioString118_[] = "";
-u8 audioString118__[] = "";
 #endif
 
 // N.B. sound banks are different from the audio banks referred to in other
@@ -159,15 +30,6 @@ u8 audioString118__[] = "";
 
 #define SAMPLES_TO_OVERPRODUCE 0x10
 #define EXTRA_BUFFERED_AI_SAMPLES_TARGET 0x40
-
-// No-op printf macro which leaves string literals in rodata in IDO. (IDO
-// doesn't support variadic macros, so instead they let the parameter list
-// expand to a no-op comma expression.) See also goddard/gd_main.h.
-#ifdef __sgi
-#define stubbed_printf
-#else
-#define stubbed_printf(...)
-#endif
 
 struct Sound {
     s32 soundBits;
@@ -736,6 +598,7 @@ void func_8031D838(s32 player, FadeT fadeInTime, u8 targetVolume) {
     }
     seqPlayer->fadeVelocity =
         (((f32)(FLOAT_CAST(targetVolume) / EU_FLOAT(127.0)) - seqPlayer->fadeVolume) / (f32) fadeInTime);
+
 #ifdef VERSION_EU
     seqPlayer->state = 0;
 #else
@@ -852,16 +715,8 @@ struct SPTask *create_next_audio_frame_task(void) {
     task->output_buff_size = NULL;
     task->data_ptr = gAudioCmdBuffers[index];
     task->data_size = writtenCmds * sizeof(u64);
-
-    // The audio task never yields, so having a yield buffer is pointless.
-    // This wastefulness was fixed in US.
-#ifdef VERSION_JP
-    task->yield_data_ptr = (u64 *) gAudioSPTaskYieldBuffer;
-    task->yield_data_size = OS_YIELD_AUDIO_SIZE;
-#else
     task->yield_data_ptr = NULL;
     task->yield_data_size = 0;
-#endif
 
     decrease_sample_dma_ttls();
     return gAudioTask;
@@ -2159,6 +2014,10 @@ void play_dialog_sound(u8 dialogID) {
 #endif
 }
 
+void set_sequence_player_volume(s32 player, f32 volume) {
+    gSequencePlayers[player].volumeScale = volume;
+}
+
 void play_music(u8 player, u16 seqArgs, u16 fadeTimer) {
     u8 seqId = seqArgs & 0xff;
     u8 priority = seqArgs >> 8;
@@ -2167,11 +2026,12 @@ void play_music(u8 player, u16 seqArgs, u16 fadeTimer) {
 
     // Except for the background music player, we don't support queued
     // sequences. Just play them immediately, stopping any old sequence.
+
     if (player != 0) {
         play_sequence(player, seqId, fadeTimer);
         return;
     }
-
+    
     // Abort if the queue is already full.
     if (sBackgroundMusicQueueSize == MAX_BG_MUSIC_QUEUE_SIZE) {
         return;
@@ -2422,7 +2282,16 @@ void play_power_star_jingle(u8 arg0) {
 }
 
 void play_race_fanfare(void) {
+#ifndef TARGET_N64
+    play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_RACE, 0);
+    D_8033211C = 0x80 | 20;
+#ifdef VERSION_EU
+    D_EU_80300558 = 2;
+#endif
+    func_803200E4(50);
+#else // hacky workaround because adding more sounds makes sequence not work
     play_sound(SOUND_MENU_RACE_FANFARE, gDefaultSoundArgs);
+#endif
 }
 
 void play_toads_jingle(void) {

@@ -58,7 +58,6 @@ static const LevelScript script_L5[4];
 #undef DEFINE_LEVEL
 #undef STUB_LEVEL
 
-
 const LevelScript level_main_scripts_entry[] = {
     LOAD_MIO0(/*seg*/ 0x04, _group0_mio0SegmentRomStart, _group0_mio0SegmentRomEnd),
     LOAD_MIO0(/*seg*/ 0x03, _common1_mio0SegmentRomStart, _common1_mio0SegmentRomEnd),
@@ -233,7 +232,7 @@ const LevelScript script_func_global_5[] = {
 const LevelScript script_func_global_6[] = {
     LOAD_MODEL_FROM_GEO(MODEL_POKEY_HEAD,              pokey_head_geo),
     LOAD_MODEL_FROM_GEO(MODEL_POKEY_BODY_PART,         pokey_body_part_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_TWEESTER,                 tweester_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_TWEESTER,                tweester_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KLEPTO,                  klepto_geo),
     LOAD_MODEL_FROM_GEO(MODEL_EYEROK_LEFT_HAND,        eyerok_left_hand_geo),
     LOAD_MODEL_FROM_GEO(MODEL_EYEROK_RIGHT_HAND,       eyerok_right_hand_geo),

@@ -20,22 +20,28 @@
 .word  0x74757C24               /* Checksum 2 */
 .word  0x00000000               /* Unknown */
 .word  0x00000000               /* Unknown */
-.ascii "Shz-Belle 64 ver1.3 "   /* Internal ROM name */
+.if VERSION_SH == 1
+.ascii "SUPERMARIO64        "   /* Internal ROM name */
+.else
+.ascii "SUPER MARIO 64      "   /* Internal ROM name */
+.endif
 .word  0x00000000               /* Unknown */
 .word  0x0000004E               /* Cartridge */
 .ascii "SM"                     /* Cartridge ID */
 
 /* Region */
-.if VERSION_US == 1
-    .ascii "E"                  /* NTSC-U (North America) */
-.elseif VERSION_JP == 1
+.if VERSION_EU == 1
+    .ascii "P"                  /* PAL (Europe) */
+.elseif (VERSION_JP == 1 || VERSION_SH == 1)
     .ascii "J"                  /* NTSC-J (Japan) */
 .else
-    .ascii "P"                  /* PAL (Europe) */
+    .ascii "E"                  /* NTSC-U (North America) */
 .endif
 
+/* Undefined versions 1 and 2 are NTSC-U (North America) and PAL (Europe) respectively */
 .if VERSION_SH == 1
     .byte 0x03                  /* Version (Shindou) */
 .else
-    .byte  0x00                 /* Version */
+    .byte 0x00                  /* Version */
 .endif
+

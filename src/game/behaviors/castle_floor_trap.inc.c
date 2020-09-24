@@ -14,8 +14,8 @@ void bhv_castle_floor_trap_init(void) {
 }
 
 void bhv_castle_floor_trap_open_detect(void) {
-    if (gMarioStates->action == ACT_SPECIAL_EXIT_AIRBORNE
-        || gMarioStates->action == ACT_SPECIAL_DEATH_EXIT)
+    if (gMarioStates[0].action == ACT_SPECIAL_EXIT_AIRBORNE
+        || gMarioStates[0].action == ACT_SPECIAL_DEATH_EXIT)
         o->oAction = 4; // rotates trapdoor so it looks always open
     else {
         o->oAngleVelRoll = 0x400;
@@ -26,7 +26,11 @@ void bhv_castle_floor_trap_open_detect(void) {
 
 void bhv_castle_floor_trap_open(void) {
     if (o->oTimer == 0)
+#ifdef QOL_FIXES
         play_sound(SOUND_GENERAL_CASTLE_TRAP_OPEN, gDefaultSoundArgs);
+#else
+        cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
+#endif
     o->oAngleVelRoll -= 0x100;
     o->oFaceAngleRoll += o->oAngleVelRoll;
     if (o->oFaceAngleRoll < -0x4000) {

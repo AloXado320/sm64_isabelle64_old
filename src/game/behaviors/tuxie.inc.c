@@ -197,6 +197,7 @@ void small_penguin_act_4(void) {
 
 void small_penguin_act_0(void) {
     s32 sp1C;
+
     sp1C = 0;
     cur_obj_init_animation_with_sound(3);
     if (o->oTimer == 0) {
@@ -291,14 +292,29 @@ Gfx *geo_switch_tuxie_mother_eyes(s32 run, struct GraphNode *node, UNUSED Mat4 *
         obj = (struct Object *) gCurGraphNodeObject;
         switchCase = (struct GraphNodeSwitchCase *) node;
 
+        #ifdef QOL_FIXES
         int bapDelivered = obj->oAction == 2;
-
-        switchCase->selectedCase = bapDelivered ? 0 : 4;
+        if (obj->behavior == segmented_to_virtual(bhvRacingPenguin)) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = bapDelivered ? 0 : 4;
+        }
+        #else
+        switchCase->selectedCase = 0;
+        #endif
 
         // timer logic for blinking. uses cases 0-2.
         timer = gGlobalTimer % 50;
         if (timer < 43)
-            switchCase->selectedCase = bapDelivered ? 0 : 4;
+            #ifdef QOL_FIXES
+            if (obj->behavior == segmented_to_virtual(bhvRacingPenguin)) {
+                switchCase->selectedCase = 0;
+            } else {
+                switchCase->selectedCase = bapDelivered ? 0 : 4;
+            }
+            #else
+            switchCase->selectedCase = 0;
+            #endif
         else if (timer < 45)
             switchCase->selectedCase = 1;
         else if (timer < 47)

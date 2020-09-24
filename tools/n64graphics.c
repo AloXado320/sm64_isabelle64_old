@@ -155,7 +155,10 @@ ia *raw2i(const uint8_t *raw, int width, int height, int depth)
                bits >>= 4;
             }
             img[i].intensity = SCALE_4_8(bits);
-            img[i].alpha     = 0xFF;
+            img[i].alpha     = img[i].intensity; // alpha copy intensity
+            // TODO: modes
+            // img[i].alpha     = 0xFF; // alpha = 1
+            // img[i].alpha     = img[i].intensity ? 0xFF : 0x00; // binary
          }
          break;
       default:

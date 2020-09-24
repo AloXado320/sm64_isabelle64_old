@@ -4,6 +4,7 @@
 #include "gfx_dimensions.h"
 #include "audio/external.h"
 #include "buffers/buffers.h"
+#include "gfx_dimensions.h"
 #include "buffers/gfx_output_buffer.h"
 #include "buffers/framebuffers.h"
 #include "buffers/zbuffer.h"
@@ -19,6 +20,10 @@
 #include "segment2.h"
 #include "segment_symbols.h"
 #include "thread6.h"
+#include <prevent_bss_reordering.h>
+#ifdef BETTERCAMERA
+#include "bettercamera.h"
+#endif
 
 // FIXME: I'm not sure all of these variables belong in this file, but I don't
 // know of a good way to split them
@@ -40,12 +45,11 @@ uintptr_t gPhysicalFrameBuffers[3];
 uintptr_t gPhysicalZBuffer;
 void *D_80339CF0;
 void *D_80339CF4;
-
 struct MarioAnimation D_80339D10;
 struct MarioAnimation gDemo;
 UNUSED u8 filler80339D30[0x90];
 
-int unused8032C690 = 0;
+s32 unused8032C690 = 0;
 u32 gGlobalTimer = 0;
 
 static u16 sCurrFBNum = 0;
@@ -85,8 +89,9 @@ void my_rdp_init(void) {
     gDPSetColorDither(gDisplayListHead++, G_CD_MAGICSQ);
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
 
-    gDPSetAlphaDither(gDisplayListHead++, G_AD_PATTERN); // shindou
-
+#ifdef VERSION_SH
+    gDPSetAlphaDither(gDisplayListHead++, G_AD_PATTERN);
+#endif
     gDPPipeSync(gDisplayListHead++);
 }
 
@@ -226,7 +231,7 @@ void create_task_structure(void) {
     gGfxSPTask->task.t.flags = 0;
     gGfxSPTask->task.t.ucode = rspF3DStart;
     gGfxSPTask->task.t.ucode_data = rspF3DDataStart;
-#endif
+#endif  
     gGfxSPTask->task.t.ucode_size = SP_UCODE_SIZE; // (this size is ignored)
     gGfxSPTask->task.t.ucode_data_size = SP_UCODE_DATA_SIZE;
     gGfxSPTask->task.t.dram_stack = (u64 *) gGfxSPTaskStack;
@@ -279,7 +284,7 @@ void draw_reset_bars(void) {
         sp18 += D_8032C648++ * (SCREEN_WIDTH / 4);
 
         for (sp24 = 0; sp24 < ((SCREEN_HEIGHT / 16) + 1); sp24++) {
-            // Must be on one line to match -O2
+            // Loop must be one line to match on -O2
             for (sp20 = 0; sp20 < (SCREEN_WIDTH / 4); sp20++) *sp18++ = 0;
             sp18 += ((SCREEN_WIDTH / 4) * 14);
         }
@@ -482,9 +487,6 @@ void read_controller_inputs(void) {
     if (gControllerBits) {
         osRecvMesg(&gSIEventMesgQueue, &D_80339BEC, OS_MESG_BLOCK);
         osContGetReadData(&gControllerPads[0]);
-#ifdef VERSION_SH
-        release_rumble_pak_control();
-#endif
     }
     run_demo_inputs();
 
@@ -496,15 +498,19 @@ void read_controller_inputs(void) {
         if (controller->controllerData != NULL) {
             controller->rawStickX = controller->controllerData->stick_x;
             controller->rawStickY = controller->controllerData->stick_y;
+            controller->extStickX = controller->controllerData->ext_stick_x;
+            controller->extStickY = controller->controllerData->ext_stick_y;
             controller->buttonPressed = controller->controllerData->button
                                         & (controller->controllerData->button ^ controller->buttonDown);
             // 0.5x A presses are a good meme
             controller->buttonDown = controller->controllerData->button;
             adjust_analog_stick(controller);
-        } else // otherwise, if the controllerData is NULL, 0 out all of the inputs.
-        {
+        } else {
+            // otherwise, if the controllerData is NULL, 0 out all of the inputs.
             controller->rawStickX = 0;
             controller->rawStickY = 0;
+            controller->extStickX = 0;
+            controller->extStickY = 0;
             controller->buttonPressed = 0;
             controller->buttonDown = 0;
             controller->stickX = 0;
@@ -551,13 +557,16 @@ void init_controllers(void) {
             // into any port in order to play the game. this was probably
             // so if any of the ports didn't work, you can have controllers
             // plugged into any of them and it will work.
-#ifdef VERSION_SH
             gControllers[cont].port = port;
-#endif
             gControllers[cont].statusData = &gControllerStatuses[port];
             gControllers[cont++].controllerData = &gControllerPads[port];
         }
     }
+
+#ifdef BETTERCAMERA
+    // load bettercam settings from the config file
+    newcam_init_settings();
+#endif
 }
 
 void setup_game_memory(void) {
@@ -580,16 +589,13 @@ void setup_game_memory(void) {
     load_segment_decompress(2, _segment2_mio0SegmentRomStart, _segment2_mio0SegmentRomEnd);
 }
 
-#ifndef TARGET_N64
+
 static struct LevelCommand *levelCommandAddr;
-#endif
 
 // main game loop thread. runs forever as long as the game
 // continues.
 void thread5_game_loop(UNUSED void *arg) {
-#ifdef TARGET_N64
-    struct LevelCommand *levelCommandAddr;
-#endif
+
     setup_game_memory();
 #ifdef VERSION_SH
     init_rumble_pak_scheduler_queue();
@@ -607,11 +613,11 @@ void thread5_game_loop(UNUSED void *arg) {
 
     play_music(SEQ_PLAYER_SFX, SEQUENCE_ARGS(0, SEQ_SOUND_PLAYER), 0);
     set_sound_mode(save_file_get_sound_mode());
-    
+
 #ifdef TARGET_N64
     rendering_init();
 
-    while (1) {
+    while (TRUE) {
 #else
     gGlobalTimer++;
 }

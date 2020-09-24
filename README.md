@@ -1,12 +1,14 @@
-# Isabelle 64 - More than just a SM64 character edit
+# Isabelle 64 - A SM64 Character mod
 
-A SM64 Decomp Mod that let's you play as the yellow dog from Animal Crossing, Isabelle.
+This Mod that let's you play as the yellow dog from Animal Crossing, Isabelle.
+
+It also has some AC visual style things to fit the environment of the character.
 
 Source code contains progress of the next release (Isabelle 64 version 1.3)
 
-<img src="https://i.imgur.com/9S7fnCr.png"/></a>
+<img src="https://i.imgur.com/knWGGxP.png"/></a>
 
-<img src="https://i.imgur.com/PGH0Sq6.png"/></a>
+<img src="https://i.imgur.com/ansuxgs.png"/></a>
 
 ## Info
 * Initially made as a tribute for her reveal in Smash Ultimate (September 2018).
@@ -15,15 +17,9 @@ Source code contains progress of the next release (Isabelle 64 version 1.3)
 
 ## Quick Installation
 
-If is the first time doing this you first need to run these commands:
+Follow the instructions in this [readme](https://github.com/n64decomp/sm64/blob/master/README.md).
 
-`make -C tools` then `./extract_assets.py us`
-
-Then after you do the step above, build the rom, running `make` and wait until it's done.
-
-It defaults to `VERSION_US` and `F3DZEX` due to changes. No need to change those or things will break.
-
-## Compiler used
+## Compiler used in N64
 
 GCC is used, can be compiled back to ido in Makefile in `COMPILER ?= ido` but remember to do `make clean` if you do so.
 
@@ -31,14 +27,9 @@ Tested on PJ64 1.6, PJ64 2.3, Mupen64, CEN64
 
 It also works on console thanks to beta testers with Everdrive.
 
-## PC Port
+## Ports
 
-Support for it has been added sometime using widescreen and no draw distance but pc code was private until devs actually decided to release it.
-
-Only tested DX11-DX12 on Windows 10
-
-## Bugs
-* For some reason `Makefile` doesn't define `NON_MATCHING`, so it's defined in `macros.h`
+Uses an [special repo of sm64ex](https://github.com/AloXado320/sm64ex-alo). so it supports targets of that repo and probably more.
 
 ## Misc
 

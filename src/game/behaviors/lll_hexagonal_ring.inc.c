@@ -1,6 +1,5 @@
 // lll_hexagonal_ring.c.inc
 
-
 void hexagonal_ring_spawn_flames(void) {
     struct Object *sp1C;
     f32 size;

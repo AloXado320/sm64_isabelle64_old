@@ -44,8 +44,7 @@ void bhv_fire_piranha_plant_init(void) {
             o->oNumLootCoins = 2;
         }
     }
-
-    sNumKilledFirePiranhaPlants = sNumActiveFirePiranhaPlants = 0;
+    sNumActiveFirePiranhaPlants = sNumKilledFirePiranhaPlants = 0;
 }
 
 static void fire_piranha_plant_act_hide(void) {

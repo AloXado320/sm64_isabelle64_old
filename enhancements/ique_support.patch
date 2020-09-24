@@ -116,7 +116,7 @@ index ea784b2c..116dae2d 100644
 +#include <PR/console_type.h>
  
  extern u8 _osLastSentSiCmd;
-
+ 
 @@ -42,33 +43,44 @@ s32 osEepromRead(OSMesgQueue *mq, u8 address, u8 *buffer) {
          return -1;
      }
@@ -300,7 +300,7 @@ index 3275819f..6f97698f 100755
 +      BUILD_DIR/libultra.a:skGetId.o(.text)
        BUILD_DIR/lib/rsp.o(.text);
  #else
-       BUILD_DIR/src/game*.o(.text); 
+       BUILD_DIR/src/game*.o(.text);
 @@ -371,6 +373,8 @@ SECTIONS
        BUILD_DIR/libultra.a:__osGetCause.o(.text);
        BUILD_DIR/libultra.a:__osAtomicDec.o(.text);
@@ -309,3 +309,4 @@ index 3275819f..6f97698f 100755
 +      BUILD_DIR/libultra.a:skGetId.o(.text);
        BUILD_DIR/lib/rsp.o(.text);
  #endif
+ 

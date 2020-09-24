@@ -31,7 +31,7 @@ static s32 klepto_set_and_check_if_anim_at_end(void) {
     } else if (o->oSoundStateID == 5) {
         if (cur_obj_set_anim_if_at_end(0)) {
             cur_obj_play_sound_2(SOUND_GENERAL_SWISH_WATER);
-            o->header.gfx.unk38.animFrame = 9;
+            o->header.gfx.animInfo.animFrame = 9;
         }
     } else {
         if (cur_obj_check_anim_frame(9)) {
@@ -75,11 +75,15 @@ static void klepto_anim_dive(void) {
 
 void bhv_klepto_init(void) {
     if (o->oBehParams2ndByte != 0) {
+#ifdef QOL_FIXES
         if (save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_SSL) & 1) {
             o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_BLUE_STAR;
         } else {
             o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_STAR;
         }
+#else
+        o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_STAR;
+#endif
     } else {
         o->oKleptoStartPosX = o->oPosX;
         o->oKleptoStartPosY = o->oPosY;
@@ -363,7 +367,11 @@ void bhv_klepto_update(void) {
             if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_CAP) {
                 save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO);
                 spawn_object(o, MODEL_MARIOS_CAP, bhvNormalCap);
-            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR || o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_BLUE_STAR) {
+            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR
+            #ifdef QOL_FIXES
+            || o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_BLUE_STAR
+            #endif
+            ) {
                 spawn_default_star(-5550.0f, 300.0f, -930.0f);
             }
 

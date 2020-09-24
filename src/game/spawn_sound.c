@@ -18,7 +18,7 @@
 void exec_anim_sound_state(struct SoundState *soundStates) {
     s32 stateIdx = gCurrentObject->oSoundStateID;
 
-    switch (soundStates[stateIdx].cur_obj_play_sound_1) {
+    switch (soundStates[stateIdx].playSound) {
         // since we have an array of sound states corresponding to
         // various behaviors, not all entries intend to play sounds. the
         // boolean being 0 for unused entries skips these states.
@@ -65,11 +65,10 @@ void cur_obj_play_sound_1(s32 soundMagic) {
     }
 }
 
-// duplicate function, but its the used one
 void cur_obj_play_sound_2(s32 soundMagic) {
     if (gCurrentObject->header.gfx.node.flags & GRAPH_RENDER_ACTIVE) {
         play_sound(soundMagic, gCurrentObject->header.gfx.cameraToObject);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         if (soundMagic == SOUND_OBJ_BOWSER_WALK) {
             queue_rumble_data(3, 60);
         }
@@ -94,7 +93,7 @@ void cur_obj_play_sound_2(s32 soundMagic) {
  * Technically, these functions are only educated guesses. Trust these
  * interpretations at your own discretion.
  */
-int calc_dist_to_volume_range_1(f32 distance) // range from 60-124
+s32 calc_dist_to_volume_range_1(f32 distance) // range from 60-124
 {
     s32 volume;
 
@@ -109,7 +108,7 @@ int calc_dist_to_volume_range_1(f32 distance) // range from 60-124
     return volume;
 }
 
-int calc_dist_to_volume_range_2(f32 distance) // range from 79.2-143.2
+s32 calc_dist_to_volume_range_2(f32 distance) // range from 79.2-143.2
 {
     s32 volume;
 

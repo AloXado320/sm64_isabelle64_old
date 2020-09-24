@@ -13,12 +13,13 @@
 #define GRAPH_RENDER_Z_BUFFER       (1 << 3)
 #define GRAPH_RENDER_INVISIBLE      (1 << 4)
 #define GRAPH_RENDER_HAS_ANIMATION  (1 << 5)
+#define GRAPH_RENDER_CYLBOARD       (1 << 6)
 
 // Whether the node type has a function pointer of type GraphNodeFunc
 #define GRAPH_NODE_TYPE_FUNCTIONAL            0x100
 
 // Type used for Bowser and an unused geo function in obj_behaviors.c
-#define GRAPH_NODE_TYPE_400                   0x400				
+#define GRAPH_NODE_TYPE_400                   0x400
 
 // The discriminant for different types of geo nodes
 #define GRAPH_NODE_TYPE_ROOT                  0x001
@@ -46,7 +47,7 @@
 
 // The number of master lists. A master list determines the order and render
 // mode with which display lists are drawn.
-#define GFX_NUM_MASTER_LISTS 9
+#define GFX_NUM_MASTER_LISTS 8
 
 // Passed as first argument to a GraphNodeFunc to give information about in
 // which context it was called and what it is expected to do.
@@ -420,7 +421,7 @@ void geo_obj_init_animation_accel(struct GraphNodeObject *graphNode, struct Anim
 
 s32 retrieve_animation_index(s32 frame, u16 **attributes);
 
-s16 geo_update_animation_frame(struct GraphNodeObject_sub *obj, s32 *accelAssist);
+s16 geo_update_animation_frame(struct AnimInfo *obj, s32 *accelAssist);
 void geo_retreive_animation_translation(struct GraphNodeObject *obj, Vec3f position);
 
 struct GraphNodeRoot *geo_find_root(struct GraphNode *graphNode);

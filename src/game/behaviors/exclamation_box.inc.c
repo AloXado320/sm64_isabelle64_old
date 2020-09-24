@@ -78,7 +78,7 @@ void exclamation_box_act_2(void) {
         o->oGravity = -8.0f;
         o->oFloorHeight = o->oPosY;
         o->oAction = 3;
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
 #endif
     }
@@ -113,7 +113,7 @@ void exclamation_box_spawn_contents(struct Struct802C0DF0 *a0, u8 a1) {
             sp1C->oForwardVel = 3.0f;
             sp1C->oMoveAngleYaw = gMarioObject->oMoveAngleYaw;
             o->oBehParams |= a0->unk2 << 24;
-            if (a0->model == MODEL_STAR)
+            if (a0->model == 122)
                 o->oFlags |= 0x4000;
             break;
         }

@@ -136,8 +136,8 @@ def main():
         try:
             with open(fname, "rb") as f:
                 roms[lang] = f.read()
-        except:
-            print("Failed to open " + fname + ". Please ensure it exists!")
+        except Exception as e:
+            print("Failed to open " + fname + "! " + str(e))
             sys.exit(1)
         sha1 = hashlib.sha1(roms[lang]).hexdigest()
         with open("sm64." + lang + ".sha1", "r") as f:
@@ -215,7 +215,8 @@ def main():
             input = image[pos : pos + size]
             os.makedirs(os.path.dirname(asset), exist_ok=True)
             if asset.endswith(".png"):
-                with tempfile.NamedTemporaryFile(prefix="asset", delete=False) as png_file:
+                png_file = tempfile.NamedTemporaryFile(prefix="asset", delete=False)
+                try:
                     png_file.write(input)
                     png_file.flush()
                     png_file.close()
@@ -254,6 +255,8 @@ def main():
                             ],
                             check=True,
                         )
+                finally:
+                    png_file.close()
                     os.remove(png_file.name)
             else:
                 with open(asset, "wb") as f:

@@ -38,7 +38,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
     switch (m->actionArg) {
         case 0:
             play_sound(SOUND_MARIO_PUNCH_YAH, m->marioObj->header.gfx.cameraToObject);
-            // intentional fall through
+            // Fall-through:
         case 1:
             set_mario_animation(m, MARIO_ANIM_FIRST_PUNCH);
             if (is_anim_past_end(m)) {
@@ -47,7 +47,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
                 m->actionArg = 1;
             }
 
-            if (m->marioObj->header.gfx.unk38.animFrame >= 2) {
+            if (m->marioObj->header.gfx.animInfo.animFrame >= 2) {
                 if (mario_check_object_grab(m)) {
                     return TRUE;
                 }
@@ -63,7 +63,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
         case 2:
             set_mario_animation(m, MARIO_ANIM_FIRST_PUNCH_FAST);
 
-            if (m->marioObj->header.gfx.unk38.animFrame <= 0) {
+            if (m->marioObj->header.gfx.animInfo.animFrame <= 0) {
                 m->flags |= MARIO_PUNCHING;
             }
 
@@ -78,7 +78,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
 
         case 3:
             play_sound(SOUND_MARIO_PUNCH_WAH, m->marioObj->header.gfx.cameraToObject);
-            // intentional fall through
+            // Fall-through:
         case 4:
             set_mario_animation(m, MARIO_ANIM_SECOND_PUNCH);
             if (is_anim_past_end(m)) {
@@ -87,7 +87,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
                 m->actionArg = 4;
             }
 
-            if (m->marioObj->header.gfx.unk38.animFrame > 0) {
+            if (m->marioObj->header.gfx.animInfo.animFrame > 0) {
                 m->flags |= MARIO_PUNCHING;
             }
 
@@ -98,7 +98,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
 
         case 5:
             set_mario_animation(m, MARIO_ANIM_SECOND_PUNCH_FAST);
-            if (m->marioObj->header.gfx.unk38.animFrame <= 0) {
+            if (m->marioObj->header.gfx.animInfo.animFrame <= 0) {
                 m->flags |= MARIO_PUNCHING;
             }
 
@@ -130,7 +130,7 @@ s32 mario_update_punch_sequence(struct MarioState *m) {
         case 9:
             play_mario_action_sound(m, SOUND_MARIO_PUNCH_HOO, 1);
             set_mario_animation(m, MARIO_ANIM_BREAKDANCE);
-            animFrame = m->marioObj->header.gfx.unk38.animFrame;
+            animFrame = m->marioObj->header.gfx.animInfo.animFrame;
 
             if (animFrame >= 2 && animFrame < 8) {
                 m->flags |= MARIO_TRIPPING;
@@ -200,7 +200,6 @@ s32 act_picking_up(struct MarioState *m) {
             if (is_anim_at_end(m)) {
                 change_isabelle_face_expression(m, ISABELLE_EYES_WORRIED, 
                     sIsabelleWalkedHeavyObj ? ISABELLE_MOUTH_VERY_OPEN : ISABELLE_MOUTH_SAD);
-
                 set_mario_action(m, ACT_HOLD_HEAVY_IDLE, 0);
             }
         } else {
@@ -270,7 +269,7 @@ s32 act_throwing(struct MarioState *m) {
         mario_throw_held_object(m);
         play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
         play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(3, 50);
 #endif
     }
@@ -278,8 +277,6 @@ s32 act_throwing(struct MarioState *m) {
     animated_stationary_ground_step(m, MARIO_ANIM_GROUND_THROW, ACT_IDLE);
     return FALSE;
 }
-
-extern s16 sIsabelleWalkedHeavyObj;
 
 s32 act_heavy_throw(struct MarioState *m) {
     if (m->input & INPUT_UNKNOWN_10) {
@@ -294,8 +291,7 @@ s32 act_heavy_throw(struct MarioState *m) {
         mario_drop_held_object(m);
         play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
         play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
-        sIsabelleWalkedHeavyObj = FALSE;
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(3, 50);
 #endif
     }
@@ -327,7 +323,7 @@ s32 act_picking_up_bowser(struct MarioState *m) {
         m->angleVel[1] = 0;
         m->marioBodyState->grabPos = GRAB_POS_BOWSER;
         mario_grab_used_object(m);
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
 #endif
         play_sound(SOUND_MARIO_HRMM, m->marioObj->header.gfx.cameraToObject);
@@ -405,13 +401,13 @@ s32 act_holding_bowser(struct MarioState *m) {
 
     // play sound on overflow
     if (m->angleVel[1] <= -0x100 && spin < m->faceAngle[1]) {
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(4, 20);
 #endif
         play_sound(SOUND_OBJ_BOWSER_SPINNING, m->marioObj->header.gfx.cameraToObject);
     }
     if (m->angleVel[1] >= 0x100 && spin > m->faceAngle[1]) {
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
         queue_rumble_data(4, 20);
 #endif
         play_sound(SOUND_OBJ_BOWSER_SPINNING, m->marioObj->header.gfx.cameraToObject);
@@ -430,12 +426,12 @@ s32 act_holding_bowser(struct MarioState *m) {
 s32 act_releasing_bowser(struct MarioState *m) {
     if (++m->actionTimer == 1) {
         if (m->actionArg == 0) {
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
             queue_rumble_data(4, 50);
 #endif
             mario_throw_held_object(m);
         } else {
-#ifdef VERSION_SH
+#ifdef RUMBLE_FEEDBACK
             queue_rumble_data(4, 50);
 #endif
             mario_drop_held_object(m);

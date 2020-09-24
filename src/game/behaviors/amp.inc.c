@@ -77,7 +77,7 @@ static void homing_amp_appear_loop(void) {
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, targetYaw, 0x1000);
 
     // For 30 frames, make the amp "appear" by increasing its size by 0.03 each frame,
-    // except for the first frame (when oTimer == 0) because the expression in obj_scale
+    // except for the first frame (when oTimer == 0) because the expression in cur_obj_scale
     // evaluates to 0.1, which is the same as it was before. After 30 frames, it ends at
     // a scale factor of 0.97. The amp remains at 97% of its real height for 60 more frames.
     if (o->oTimer < 30) {
@@ -146,7 +146,7 @@ static void homing_amp_chase_loop(void) {
     check_amp_attack();
 
     // Give up if Mario goes further than 1500 units from the amp's original position
-    if (is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1500) == FALSE) {
+    if (!is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
         o->oAction = HOMING_AMP_ACT_GIVE_UP;
     }
 }
@@ -178,7 +178,7 @@ static void homing_amp_give_up_loop(void) {
  */
 static void amp_attack_cooldown_loop(void) {
     // Turn intangible and wait for 90 frames before chasing Mario again after hitting him.
-    o->header.gfx.unk38.animFrame += 2;
+    o->header.gfx.animInfo.animFrame += 2;
     o->oForwardVel = 0;
 
     cur_obj_become_intangible();

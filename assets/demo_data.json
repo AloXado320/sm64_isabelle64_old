@@ -18,7 +18,9 @@
  */
 
 {
-    "table": [
+    "table": [        
+        /* Whomp's Fortress has the wrong size.
+           The original entries probably manually input the sizes. */
         {"demofile":"wf", "extraSize":368},
         
         {"demofile":"ccm"},

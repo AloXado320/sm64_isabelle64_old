@@ -40,8 +40,12 @@ DECLARE_SEGMENT(engine)
 DECLARE_SEGMENT(behavior)
 DECLARE_SEGMENT(scripts)
 DECLARE_SEGMENT(goddard)
-
+DECLARE_SEGMENT(framebuffers)
 extern u8 _goddardSegmentStart[];
+extern u8 _engineSegmentStart[];
+extern u8 _engineSegmentNoloadEnd[];
+extern u8 _engineSegmentEnd[];
+extern u8 _framebuffersSegmentNoloadEnd[];
 
 DECLARE_LEVEL_SEGMENT(menu)
 DECLARE_LEVEL_SEGMENT(intro)
@@ -85,11 +89,13 @@ DECLARE_SEGMENT(title_screen_bg_mio0)
 
 DECLARE_SEGMENT(debug_level_select_mio0)
 
-DECLARE_SEGMENT(translation_de_mio0)
+//#ifdef MULTILANGUAGE
 DECLARE_SEGMENT(translation_en_mio0)
+DECLARE_SEGMENT(translation_de_mio0)
 DECLARE_SEGMENT(translation_fr_mio0)
 DECLARE_SEGMENT(translation_it_mio0)
 DECLARE_SEGMENT(translation_es_mio0)
+//#endif
 
 #endif
 

@@ -1,4 +1,4 @@
-// spawn_star.c.inc
+// spawn_default_star.c.inc
 
 static struct ObjectHitbox sCollectStarHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,

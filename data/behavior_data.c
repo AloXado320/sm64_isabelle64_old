@@ -219,6 +219,9 @@
 #define BILLBOARD() \
     BC_B(0x21)
 
+#define CYLBOARD() \
+    BC_B(0x38)
+
 // Hides the current object.
 #define HIDE() \
     BC_B(0x22)
@@ -328,6 +331,7 @@
     BC_B(0x37), \
     BC_PTR(dropletParams)
 
+#define COIN_MODEL_ROTATION_SPEED 0x0C00
 
 const BehaviorScript bhvStarDoor[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -874,15 +878,13 @@ const BehaviorScript bhvMrIBlueCoin[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oIntangibleTimer, 0),
     SET_FLOAT(oMrIUnk110, 20),
-    SET_INT(oAnimState, -1),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_coin_init),
     SET_INT(oDamageOrCoinValue, 5),
     SET_HITBOX(/*Radius*/ 120, /*Height*/ 64),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_coin_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -895,8 +897,7 @@ const BehaviorScript bhvCoinInsideBoo[] = {
     CALL_NATIVE(bhv_init_room),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_coin_inside_boo_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -905,7 +906,7 @@ const BehaviorScript bhvCoinFormationSpawn[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_coin_formation_spawn_loop),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -931,7 +932,7 @@ const BehaviorScript bhvYellowCoin[] = {
     CALL_NATIVE(bhv_yellow_coin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_yellow_coin_loop),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -941,7 +942,7 @@ const BehaviorScript bhvTemporaryYellowCoin[] = {
     CALL_NATIVE(bhv_yellow_coin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_temp_coin_loop),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -970,8 +971,7 @@ const BehaviorScript bhvSingleCoinGetsSpawned[] = {
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_coin_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -2834,11 +2834,9 @@ const BehaviorScript bhvHiddenBlueCoin[] = {
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 64),
     SET_INT(oDamageOrCoinValue, 5),
     SET_INT(oIntangibleTimer, 0),
-    SET_INT(oAnimState, -1),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_blue_coin_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -3180,7 +3178,11 @@ const BehaviorScript bhvFloorTrapInCastle[] = {
 
 const BehaviorScript bhvTree[] = {
     BEGIN(OBJ_LIST_POLELIKE),
+    #ifdef BETTERCAMERA
+    CYLBOARD(),
+    #else
     BILLBOARD(),
+    #endif
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oInteractType, INTERACT_POLE),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 500),
@@ -3631,12 +3633,10 @@ const BehaviorScript bhvMovingYellowCoin[] = {
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 64),
     SET_INT(oInteractType, INTERACT_COIN),
     SET_INT(oIntangibleTimer, 0),
-    SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_moving_yellow_coin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_moving_yellow_coin_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -3644,12 +3644,10 @@ const BehaviorScript bhvMovingBlueCoin[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oIntangibleTimer, 0),
-    SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_moving_blue_coin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_moving_blue_coin_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -3657,12 +3655,10 @@ const BehaviorScript bhvBlueCoinSliding[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_INT(oIntangibleTimer, 0),
-    SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_blue_coin_sliding_jumping_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blue_coin_sliding_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -3670,12 +3666,10 @@ const BehaviorScript bhvBlueCoinJumping[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_INT(oIntangibleTimer, 0),
-    SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_blue_coin_sliding_jumping_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blue_coin_jumping_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -4603,13 +4597,11 @@ const BehaviorScript bhvRedCoin[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oIntangibleTimer, 0),
-    SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_init_room),
     CALL_NATIVE(bhv_red_coin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_red_coin_loop),
-        ADD_INT(oAnimState, 1),
-        ADD_INT(oFaceAngleYaw, 0x0C00),
+        ADD_INT(oFaceAngleYaw, COIN_MODEL_ROTATION_SPEED),
     END_LOOP(),
 };
 
@@ -6075,5 +6067,3 @@ const BehaviorScript bhvIntroScene[] = {
         CALL_NATIVE(bhv_intro_scene_loop),
     END_LOOP(),
 };
-
-

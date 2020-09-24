@@ -63,7 +63,7 @@ void bhv_beta_chest_lid_loop(void) {
                 o->oAction++; // Set to BETA_CHEST_ACT_IDLE_OPEN
             }
 
-            break;
+            // Fall-through
         case BETA_CHEST_ACT_IDLE_OPEN:
             break;
     }

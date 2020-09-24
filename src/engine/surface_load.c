@@ -21,8 +21,8 @@ s32 unused8038BE90;
  * Partitions for course and object surfaces. The arrays represent
  * the 16x16 cells that each level is split into.
  */
-SpatialPartitionCell gStaticSurfacePartition[16][16];
-SpatialPartitionCell gDynamicSurfacePartition[16][16];
+SpatialPartitionCell gStaticSurfacePartition[NUM_CELLS][NUM_CELLS];
+SpatialPartitionCell gDynamicSurfacePartition[NUM_CELLS][NUM_CELLS];
 
 /**
  * Pools of data to contain either surface nodes or surfaces.
@@ -40,7 +40,7 @@ u8 unused8038EEA8[0x30];
 /**
  * Allocate the part of the surface node pool to contain a surface node.
  */
-struct SurfaceNode *alloc_surface_node(void) {
+static struct SurfaceNode *alloc_surface_node(void) {
     struct SurfaceNode *node = &sSurfaceNodePool[gSurfaceNodesAllocated];
     gSurfaceNodesAllocated++;
 
@@ -59,7 +59,7 @@ struct SurfaceNode *alloc_surface_node(void) {
  * Allocate the part of the surface pool to contain a surface and
  * initialize the surface.
  */
-struct Surface *alloc_surface(void) {
+static struct Surface *alloc_surface(void) {
 
     struct Surface *surface = &sSurfacePool[gSurfacesAllocated];
     gSurfacesAllocated++;
@@ -82,8 +82,8 @@ struct Surface *alloc_surface(void) {
 /**
  * Iterates through the entire partition, clearing the surfaces.
  */
-void clear_spatial_partition(SpatialPartitionCell *cells) {
-    register s32 i = 16 * 16;
+static void clear_spatial_partition(SpatialPartitionCell *cells) {
+    register s32 i = NUM_CELLS * NUM_CELLS;
 
     while (i--) {
         (*cells)[SPATIAL_PARTITION_FLOORS].next = NULL;
@@ -95,9 +95,9 @@ void clear_spatial_partition(SpatialPartitionCell *cells) {
 }
 
 /**
- * Clears the (level) surface partitions for new use.
+ * Clears the static (level) surface partitions for new use.
  */
-void clear_static_surfaces(void) {
+static void clear_static_surfaces(void) {
     clear_spatial_partition(&gStaticSurfacePartition[0][0]);
 }
 
@@ -108,7 +108,7 @@ void clear_static_surfaces(void) {
  * @param cellZ The Z position of the cell in which the surface resides
  * @param surface The surface to add
  */
-void add_surface_to_cell(s16 dynamic, s16 cellX, s16 cellZ, struct Surface *surface) {
+static void add_surface_to_cell(s16 dynamic, s16 cellX, s16 cellZ, struct Surface *surface) {
     struct SurfaceNode *newNode = alloc_surface_node();
     struct SurfaceNode *list;
     s16 surfacePriority;
@@ -165,7 +165,7 @@ void add_surface_to_cell(s16 dynamic, s16 cellX, s16 cellZ, struct Surface *surf
 /**
  * Returns the lowest of three values.
  */
-s16 min_3(s16 a0, s16 a1, s16 a2) {
+static s16 min_3(s16 a0, s16 a1, s16 a2) {
     if (a1 < a0) {
         a0 = a1;
     }
@@ -180,7 +180,7 @@ s16 min_3(s16 a0, s16 a1, s16 a2) {
 /**
  * Returns the highest of three values.
  */
-s16 max_3(s16 a0, s16 a1, s16 a2) {
+static s16 max_3(s16 a0, s16 a1, s16 a2) {
     if (a1 > a0) {
         a0 = a1;
     }
@@ -197,22 +197,22 @@ s16 max_3(s16 a0, s16 a1, s16 a2) {
  * time). This function determines the lower cell for a given x/z position.
  * @param coord The coordinate to test
  */
-s16 lower_cell_index(s16 coord) {
+static s16 lower_cell_index(s16 coord) {
     s16 index;
 
     // Move from range [-0x2000, 0x2000) to [0, 0x4000)
-    coord += 0x2000;
+    coord += LEVEL_BOUNDARY_MAX;
     if (coord < 0) {
         coord = 0;
     }
 
     // [0, 16)
-    index = coord / 0x400;
+    index = coord / CELL_SIZE;
 
     // Include extra cell if close to boundary
     //! Some wall checks are larger than the buffer, meaning wall checks can
     //  miss walls that are near a cell border.
-    if (coord % 0x400 < 50) {
+    if (coord % CELL_SIZE < 50) {
         index -= 1;
     }
 
@@ -229,27 +229,27 @@ s16 lower_cell_index(s16 coord) {
  * time). This function determines the upper cell for a given x/z position.
  * @param coord The coordinate to test
  */
-s16 upper_cell_index(s16 coord) {
+static s16 upper_cell_index(s16 coord) {
     s16 index;
 
     // Move from range [-0x2000, 0x2000) to [0, 0x4000)
-    coord += 0x2000;
+    coord += LEVEL_BOUNDARY_MAX;
     if (coord < 0) {
         coord = 0;
     }
 
     // [0, 16)
-    index = coord / 0x400;
+    index = coord / CELL_SIZE;
 
     // Include extra cell if close to boundary
     //! Some wall checks are larger than the buffer, meaning wall checks can
     //  miss walls that are near a cell border.
-    if (coord % 0x400 > 0x400 - 50) {
+    if (coord % CELL_SIZE > CELL_SIZE - 50) {
         index += 1;
     }
 
-    if (index > 15) {
-        index = 15;
+    if (index > (NUM_CELLS - 1)) {
+        index = (NUM_CELLS - 1);
     }
 
     // Potentially < 0, but since lower index is >= 0, not exploitable
@@ -263,7 +263,7 @@ s16 upper_cell_index(s16 coord) {
  * @param surface The surface to check
  * @param dynamic Boolean determining whether the surface is static or dynamic
  */
-void add_surface(struct Surface *surface, s32 dynamic) {
+static void add_surface(struct Surface *surface, s32 dynamic) {
     // minY/maxY maybe? s32 instead of s16, though.
     UNUSED s32 unused1, unused2;
     s16 minX, minZ, maxX, maxZ;
@@ -291,7 +291,7 @@ void add_surface(struct Surface *surface, s32 dynamic) {
     }
 }
 
-void stub_surface_load_1(void) {
+static void stub_surface_load_1(void) {
 }
 
 /**
@@ -299,7 +299,7 @@ void stub_surface_load_1(void) {
  * @param vertexData The raw data containing vertex positions
  * @param vertexIndices Helper which tells positions in vertexData to start reading vertices
  */
-struct Surface *read_surface_data(s16 *vertexData, s16 **vertexIndices) {
+static struct Surface *read_surface_data(s16 *vertexData, s16 **vertexIndices) {
     struct Surface *surface;
     register s32 x1, y1, z1;
     register s32 x2, y2, z2;
@@ -387,7 +387,7 @@ struct Surface *read_surface_data(s16 *vertexData, s16 **vertexIndices) {
  * Returns whether a surface has exertion/moves Mario
  * based on the surface type.
  */
-s32 surface_has_force(s16 surfaceType) {
+static s32 surface_has_force(s16 surfaceType) {
     s32 hasForce = FALSE;
 
     switch (surfaceType) {
@@ -411,7 +411,7 @@ s32 surface_has_force(s16 surfaceType) {
  * Returns whether a surface should have the
  * SURFACE_FLAG_NO_CAM_COLLISION flag.
  */
-s32 surf_has_no_cam_collision(s16 surfaceType) {
+static s32 surf_has_no_cam_collision(s16 surfaceType) {
     s32 flags = 0;
 
     switch (surfaceType) {
@@ -433,7 +433,7 @@ s32 surf_has_no_cam_collision(s16 surfaceType) {
  * Load in the surfaces for a given surface type. This includes setting the flags,
  * exertion, and room.
  */
-void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s8 **surfaceRooms) {
+static void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s8 **surfaceRooms) {
     s32 i;
     s32 numSurfaces;
     struct Surface *surface;
@@ -475,7 +475,7 @@ void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s8 **sur
 /**
  * Read the data for vertices for reference by triangles.
  */
-s16 *read_vertex_data(s16 **data) {
+static s16 *read_vertex_data(s16 **data) {
     s32 numVertices;
     UNUSED s16 unused1[3];
     UNUSED s16 unused2[3];
@@ -493,7 +493,7 @@ s16 *read_vertex_data(s16 **data) {
 /**
  * Loads in special environmental regions, such as water, poison gas, and JRB fog.
  */
-void load_environmental_regions(s16 **data) {
+static void load_environmental_regions(s16 **data) {
     s32 numRegions;
     s32 i;
 
@@ -652,7 +652,7 @@ void clear_dynamic_surfaces(void) {
     }
 }
 
-void unused_80383604(void) {
+static void unused_80383604(void) {
 }
 
 /**
