@@ -592,6 +592,8 @@ void setup_game_memory(void) {
 
 static struct LevelCommand *levelCommandAddr;
 
+void print_displaying_credits_entry(void);
+
 // main game loop thread. runs forever as long as the game
 // continues.
 void thread5_game_loop(UNUSED void *arg) {

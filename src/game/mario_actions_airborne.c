@@ -982,6 +982,8 @@ s32 act_ground_pound(struct MarioState *m) {
             set_mario_action(m, ACT_BACKWARD_AIR_KB, 0);
         }
     }
+    
+    level_trigger_warp(m, WARP_OP_CREDITS_START);
 
     return FALSE;
 }
