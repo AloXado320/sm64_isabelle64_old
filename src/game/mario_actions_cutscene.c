@@ -32,8 +32,6 @@
 #include "pc/pc_main.h"
 #endif
 
-#include "segment2.h"
-
 // TODO: put this elsewhere
 enum SaveOption { SAVE_OPT_SAVE_AND_CONTINUE = 1, SAVE_OPT_SAVE_AND_QUIT, SAVE_OPT_SAVE_EXIT_GAME, SAVE_OPT_CONTINUE_DONT_SAVE };
 
@@ -114,8 +112,6 @@ s32 get_credits_str_width(char *str) {
  * as a counter, and increase the Y value by either the constant 16 (JP only) or
  * by the value of lineHeight.
  */
-
-#if 0
 void print_displaying_credits_entry(void) {
     char **currStrPtr;
     char *titleStr;
@@ -172,24 +168,7 @@ void print_displaying_credits_entry(void) {
         sDispCreditsEntry = NULL;
     }
 }
-#else
 
-void print_displaying_credits_entry(void) {
-    s16 i, y;
-    s16 xPos;
-
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-
-    //for (i = 0, y = -32; i < ARRAY_COUNT(sDispCreditsEntry->string); y -= 16, i++) {
-        //xPos = get_str_x_pos_from_center_custom_ascii(LUT_TYPE_STR_ASCII, SCREEN_WIDTH / 2, gCurrCreditsEntry->string[i], 2);
-        //print_generic_string_shadow(TRUE, xPos, y, 255, 255, 255, 255, gCurrCreditsEntry->string[i], NULL);
-    //}  
-    
-    print_generic_string_shadow(TRUE, 20, 20, 255, 255, 255, 255, gCurrCreditsEntry->string[0], NULL);
-    
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-}
-#endif
 void bhv_end_peach_loop(void) {
     cur_obj_init_animation_with_sound(sEndPeachAnimation);
     if (cur_obj_check_if_near_animation_end()) {
@@ -2481,14 +2460,10 @@ static void end_peach_cutscene_run_to_castle(struct MarioState *m) {
     }
 }
 
-extern s16 gMovingCreditsTextActive;
-
 static void end_peach_cutscene_fade_out(struct MarioState *m) {
     if (m->actionState == 0) {
-        play_cutscene_music(SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_CREDITS));
         level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
         gPaintingMarioYEntry = 1500.0f; // ensure medium water level in WDW credits cutscene
-        gMovingCreditsTextActive = TRUE;
         m->actionState = 1;
     }
 }
@@ -2515,7 +2490,7 @@ static s32 act_end_peach_cutscene(struct MarioState *m) {
 #if DEBUG_TEST_CREDITS
             end_peach_cutscene_fade_out(m);
 #else
-            end_peach_cutscene_fade_out(m);
+            end_peach_cutscene_mario_falling(m);
 #endif
             break;
         case END_PEACH_CUTSCENE_MARIO_LANDING:
@@ -2567,9 +2542,15 @@ static s32 act_end_peach_cutscene(struct MarioState *m) {
     return FALSE;
 }
 
-#define TIMER_CREDITS_SHOW      61
-#define TIMER_CREDITS_PROGRESS  90
-#define TIMER_CREDITS_WARP     200
+#ifdef VERSION_EU
+    #define TIMER_CREDITS_SHOW      51
+    #define TIMER_CREDITS_PROGRESS  80
+    #define TIMER_CREDITS_WARP     160
+#else
+    #define TIMER_CREDITS_SHOW      61
+    #define TIMER_CREDITS_PROGRESS  90
+    #define TIMER_CREDITS_WARP     200
+#endif
 
 static s32 act_credits_cutscene(struct MarioState *m) {
     s32 width;
@@ -2597,7 +2578,7 @@ static s32 act_credits_cutscene(struct MarioState *m) {
         if (m->actionState < 40) {
             m->actionState += 2;
         }
-/**
+
         width = m->actionState * (SCREEN_WIDTH * 2) / 100;
         height = m->actionState * (SCREEN_HEIGHT * 2) / 100;
 
@@ -2608,7 +2589,7 @@ static s32 act_credits_cutscene(struct MarioState *m) {
         sEndCutsceneVp.vp.vtrans[1] =
             (gCurrCreditsEntry->posVpAndText & 32 ? height : -height) * 66 / 100 + (SCREEN_HEIGHT * 2);
 
-        override_viewport_and_clip(&sEndCutsceneVp, 0, 0, 0, 0); */
+        override_viewport_and_clip(&sEndCutsceneVp, 0, 0, 0, 0);
     }
 
     if (m->actionTimer == TIMER_CREDITS_PROGRESS) {

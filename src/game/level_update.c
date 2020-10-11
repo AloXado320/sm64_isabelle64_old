@@ -81,35 +81,44 @@ const char *credits18[] = { "1 ", " "};
 const char *credits19[] = { "1 ", " "};
 const char *credits20[] = { "1 ", " "};
 
+// Screen top left - Bottom text
+#define CREDITS_POS_ONE 0*16
+// Screen top right - Bottom text
+#define CREDITS_POS_TWO 1*16
+// Screen bottom left - Top text
+#define CREDITS_POS_THREE 2*16
+// Screen bottom right - Top text
+#define CREDITS_POS_FOUR 3*16
+
 struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 
-        1, 1, -128, 30, NULL, { 0, 8000, 0 } },
+        1, CREDITS_POS_ONE, 1, -128, { 0, 8000, 0 }, NULL },
     // Start Level Credits Sequence
-    { LEVEL_BOB,   1,  1, 117, 30, credits01, { 713, 3918, -3889 } },
-    { LEVEL_WF,    1,  2,  46, 30, credits02, { 347, 5376, 326 } },
-    { LEVEL_JRB,   1,  2,  22, 30, credits03, { 3800, -4840, 2727 } },
-    { LEVEL_CCM,   2,  2,  25, 30, credits04, { -5464, 6656, -6575 } },
-    { LEVEL_BBH,   1,  1,  60, 30, credits05, { 257, 1922, 2580 } },
-    { LEVEL_HMC,   1,  1,  45, 30, credits06, { -6469, 1616, -6054 } },
-    { LEVEL_THI,   3,  1, -32, 30, credits07, { 508, 1024, 1942 } },
-    { LEVEL_LLL,   2,  1, 124, 30, credits08, { -73, 82, -1467 } },
-    { LEVEL_SSL,   1,  1,  98, 30, credits09, { -5906, 1024, -2576 } },
-    { LEVEL_DDD,   1,  2,  47, 30, credits01, { -4884, -4607, -272 } },
-    { LEVEL_SL,    1,  1, -34, 30, credits01, { 1925, 3328, 563 } },
-    { LEVEL_WDW,   1,  1, 105, 30, credits01, { -537, 1850, 1818 } },
-    { LEVEL_TTM,   1,  2, -33, 30, credits01, { 2613, 313, 1074 } },
-    { LEVEL_THI,   1,  3,  54, 30, credits01, { -2609, 512, 856 } },
-    { LEVEL_TTC,   1,  1, -72, 30, credits01, { -1304, -71, -967 } },
-    { LEVEL_RR,    1,  1,  64, 30, credits01, { 1565, 1024, -148 } },
-    { LEVEL_SA,    1,  1,  24, 30, credits01, { -1050, -1330, -1559 } },
-    { LEVEL_COTMC, 1,  1, -16, 30, credits01, { -254, 415, -6045 } },
-    { LEVEL_DDD,   2,  1, -64, 30, credits01, { 3948, 1185, -104 } },
-    { LEVEL_CCM,   1,  1,  31, 30, credits01, { 3169, -4607, 5240 } },
+    { LEVEL_BOB,   1, CREDITS_POS_ONE,   1, 117, { 713, 3918, -3889 },    credits01 },
+    { LEVEL_WF,    1, CREDITS_POS_FOUR,  2,  46, { 347, 5376, 326 },      credits02 },
+    { LEVEL_JRB,   1, CREDITS_POS_TWO,   2,  22, { 3800, -4840, 2727 },   credits03 },
+    { LEVEL_CCM,   2, CREDITS_POS_THREE, 2,  25, { -5464, 6656, -6575 },  credits04 },
+    { LEVEL_BBH,   1, CREDITS_POS_ONE,   1,  60, { 257, 1922, 2580 },     credits05 },
+    { LEVEL_HMC,   1, CREDITS_POS_FOUR,  1,  45, { -6469, 1616, -6054 },  credits06 },
+    { LEVEL_THI,   3, CREDITS_POS_TWO,   1, -32, { 508, 1024, 1942 },     credits07 },
+    { LEVEL_LLL,   2, CREDITS_POS_THREE, 1, 124, { -73, 82, -1467 },      credits08 },
+    { LEVEL_SSL,   1, CREDITS_POS_ONE,   1,  98, { -5906, 1024, -2576 },  credits09 },
+    { LEVEL_DDD,   1, CREDITS_POS_FOUR,  2,  47, { -4884, -4607, -272 },  credits10 },
+    { LEVEL_SL,    1, CREDITS_POS_TWO,   1, -34, { 1925, 3328, 563 },     credits11 },
+    { LEVEL_WDW,   1, CREDITS_POS_THREE, 1, 105, { -537, 1850, 1818 },    credits12 },
+    { LEVEL_TTM,   1, CREDITS_POS_ONE,   2, -33, { 2613, 313, 1074 },     credits13 },
+    { LEVEL_THI,   1, CREDITS_POS_FOUR,  3,  54, { -2609, 512, 856 },     credits14 },
+    { LEVEL_TTC,   1, CREDITS_POS_TWO,   1, -72, { -1304, -71, -967 },    credits15 },
+    { LEVEL_RR,    1, CREDITS_POS_THREE, 1,  64, { 1565, 1024, -148 },    credits16 },
+    { LEVEL_SA,    1, CREDITS_POS_ONE,   1,  24, { -1050, -1330, -1559 }, credits17 },
+    { LEVEL_COTMC, 1, CREDITS_POS_FOUR,  1, -16, { -254, 415, -6045 },    credits18 },
+    { LEVEL_DDD,   2, CREDITS_POS_TWO,   1, -64, { 3948, 1185, -104 },    credits19 },
+    { LEVEL_CCM,   1, CREDITS_POS_THREE, 1,  31, { 3169, -4607, 5240 },   credits20 },
     // End Level Credits Sequence
     { LEVEL_CASTLE_GROUNDS, 
-        1, 1, -128, 30, credits01, { 0, 906, -1200 } },
+        1, CREDITS_POS_ONE, 1, -128, { 0, 906, -1200 }, NULL },
     { LEVEL_NONE, 
-        0, 1,    0, 30, credits01, { 0, 0, 0 } },
+        0, CREDITS_POS_ONE, 1,    0, { 0, 0, 0 }, NULL },
 };
 
 struct MarioState gMarioStates[1];
@@ -499,7 +508,7 @@ void warp_credits(void) {
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
 
-    //play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x14, 0x00, 0x00, 0x00);
+    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x14, 0x00, 0x00, 0x00);
 
     if (gCurrCreditsEntry == NULL || gCurrCreditsEntry == sCreditsSequence) {
         set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
@@ -775,10 +784,10 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
             case WARP_OP_CREDITS_NEXT:
                 if (gCurrCreditsEntry == &sCreditsSequence[0]) {
                     sDelayedWarpTimer = 60;
-                    //play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x3C, 0x00, 0x00, 0x00);
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x3C, 0x00, 0x00, 0x00);
                 } else {
                     sDelayedWarpTimer = 20;
-                    //play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0x00, 0x00, 0x00);
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0x00, 0x00, 0x00);
                 }
                 val04 = FALSE;
                 break;

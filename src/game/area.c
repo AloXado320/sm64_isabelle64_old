@@ -56,7 +56,6 @@ s16 gCurrSaveFileNum = 1;
 s16 gCurrLevelNum = LEVEL_MIN;
 s16 gTitleInitMessage = FALSE;
 s16 gRenderN64Text = FALSE;
-s16 gMovingCreditsTextActive = FALSE;
 
 /*
  * The following two tables are used in get_mario_spawn_type() to determine spawn type
@@ -394,10 +393,10 @@ void render_game(void) {
         if (gCurrDemoInput != NULL) {
             render_title_screen_textures();
         }
-        
+
+        print_displaying_credits_entry();
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
-        
         gPauseScreenMode = render_menus_and_dialogs();
 
         if (gPauseScreenMode != 0) {
@@ -425,11 +424,6 @@ void render_game(void) {
                 gWarpTransDelay--;
             }
         }
-        
-        if (gMovingCreditsTextActive) {
-            print_displaying_credits_entry();
-        }
-
     } else {
         render_text_labels();
         if (D_8032CE78 != NULL) {

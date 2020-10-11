@@ -54,11 +54,11 @@ struct CreditsEntry
 {
     u8 levelNum;
     u8 areaIndex;
+    u8 posVpAndText;
     u8 actNum;
     s8 marioAngle;
-    s16 yPos;
-    const char *string;
     Vec3s marioPos;
+    const char **string;
 };
 
 extern struct CreditsEntry *gCurrCreditsEntry;

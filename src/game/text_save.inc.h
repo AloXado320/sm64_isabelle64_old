@@ -81,7 +81,7 @@ static s32 write_text_save(s32 fileIndex) {
     struct MainMenuSaveData *menudata;
     char filename[SYS_MAX_PATH] = { 0 };
     char value[64];
-    u32 i, bit, flags, coins, stars, starFlags, cannonFlag;
+    u32 i, bit, flags, coins, stars, starFlags;
 
     if (snprintf(filename, sizeof(filename), FILENAME_FORMAT, fs_writepath, fileIndex) < 0)
         return -1;
@@ -133,10 +133,9 @@ static s32 write_text_save(s32 fileIndex) {
     for (i = 0; i < NUM_COURSES; i++) {
         stars = save_file_get_star_flags(fileIndex, i);
         coins = save_file_get_course_coin_score(fileIndex, i);
-        cannonFlag = save_file_get_cannon_flags(fileIndex, i);
         starFlags = int_to_bin(stars);      // 63 -> 111111
             
-        fprintf(file, "%s = \"%d, %07d, %d\"\n", sav_courses[i], coins, starFlags, cannonFlag);
+        fprintf(file, "%s = \"%d, %07d\"\n", sav_courses[i], coins, starFlags);
     }
 
     fprintf(file, "\n[bonus]\n");
@@ -209,7 +208,7 @@ static s32 read_text_save(s32 fileIndex) {
     const char *value;
     ini_t *savedata;
     
-    u32 i, flag, coins, stars, starFlags, cannonFlag;
+    u32 i, flag, coins, stars, starFlags;
     u32 capArea;
     
     if (snprintf(filename, sizeof(filename), FILENAME_FORMAT, fs_writepath, fileIndex) < 0)
@@ -256,11 +255,9 @@ static s32 read_text_save(s32 fileIndex) {
     for (i = 0; i < NUM_COURSES; i++) {
         value = ini_get(savedata, "courses", sav_courses[i]);
         if (value) {
-            sscanf(value, "%d, %d, %d", &coins, &stars, &cannonFlag); 
+            sscanf(value, "%d, %d", &coins, &stars); 
             starFlags = bin_to_int(stars);      // 111111 -> 63
 
-            cannonFlag <<= 7; //Shifts the bit to the most significant bit.
-            save_file_set_star_flags(fileIndex, i+1, cannonFlag); //
             save_file_set_star_flags(fileIndex, i, starFlags);
             gSaveBuffer.files[fileIndex][0].courseCoinScores[i] = coins;
         }
