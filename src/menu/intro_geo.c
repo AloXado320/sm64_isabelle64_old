@@ -98,7 +98,7 @@ void render_initial_intro_message(void) {
     gSPDisplayList(gDisplayListHead++, dl_alo_texrect_block_start);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
-    for (i = 0, y = 208; i < 13; y -= 16, i++) {
+    for (i = 0, y = 208; i < ARRAY_COUNT(sShzIntroScreenText); y -= 16, i++) {
         xPos = get_str_x_pos_from_center_custom_ascii(LUT_TYPE_STR_ASCII, SCREEN_WIDTH / 2, sShzIntroScreenText[i], 2);
         print_generic_str_ascii(xPos, y, sShzIntroScreenText[i]);
     }
