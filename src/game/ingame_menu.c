@@ -153,11 +153,12 @@ s32 gInGameLanguage = 0;
 #endif
 s8 gDialogLineNum = 1;
 s8 gLastDialogResponse = 0;
-u8 gMenuHoldKeyIndex = 0;
-u8 gMenuHoldKeyTimer = 0;
 s32 gDialogResponse = 0;
 s8 gSkipTypewriteEffect = FALSE;
 s8 gAllTextinPageRendered = FALSE;
+
+u8 gMenuHoldKeyIndex = 0;
+u8 gMenuHoldKeyTimer = 0;
 
 s16 gDialogTextXPosition = 62;
 s16 gDialogTextYPosition = 102;
@@ -828,6 +829,62 @@ void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8
 
     if ((index & 3) == 0) {
         gMenuHoldKeyTimer = 0;
+    }
+}
+
+// Same as handle_menu_scrolling but with slot support so it doesn't break scrolling when called twice
+void handle_menu_scrolling_slots(u8 slot, s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8 maxIndex) {
+    u8 index = 0;
+    static u8 holdKeyIndex[2];
+    static u8 holdKeyTimer[2];
+
+    if (scrollDirection == MENU_SCROLL_VERTICAL) {
+        if (gPlayer3Controller->rawStickY > 60) {
+            index++;
+        }
+
+        if (gPlayer3Controller->rawStickY < -60) {
+            index += 2;
+        }
+    } else if (scrollDirection == MENU_SCROLL_HORIZONTAL) {
+        if (gPlayer3Controller->rawStickX > 60) {
+            index += 2;
+        }
+
+        if (gPlayer3Controller->rawStickX < -60) {
+            index++;
+        }
+    }
+
+    if (((index ^ holdKeyIndex[slot]) & index) == 2) {
+        if (currentIndex[0] == maxIndex) {
+            //! Probably originally a >=, but later replaced with an == and an else statement.
+            currentIndex[0] = maxIndex;
+        } else {
+            play_sound(SOUND_MENU_HOVER_ACNH, gDefaultSoundArgs);
+            currentIndex[0]++;
+        }
+    }
+
+    if (((index ^ holdKeyIndex[slot]) & index) == 1) {
+        if (currentIndex[0] == minIndex) {
+            // Same applies to here as above
+        } else {
+            play_sound(SOUND_MENU_HOVER_ACNH, gDefaultSoundArgs);
+            currentIndex[0]--;
+        }
+    }
+
+    if (holdKeyTimer[slot] == 10) {
+        holdKeyTimer[slot] = 8;
+        holdKeyIndex[slot] = 0;
+    } else {
+        holdKeyTimer[slot]++;
+        holdKeyIndex[slot] = index;
+    }
+
+    if ((index & 3) == 0) {
+        holdKeyTimer[slot] = 0;
     }
 }
 
@@ -1516,12 +1573,13 @@ extern u8 alo_menu_arrows_ci4[];
 
 void render_arrow_texture_menu(s16 move, s16 arrowTexture, s16 x, s16 y) {
     s16 movePos = 0;
-    s32 timer = gGlobalTimer;
     u8 textureIndex;
     u8 r, g, b;
     s16 xPos, yPos;
 
-    if (move == TRUE) timer & 4 ? movePos++: movePos--;
+    if (move == TRUE) {
+        movePos = sins(gGlobalTimer * 5000) * 2;
+    }
 
     switch (arrowTexture) {
         case ARROW_TEXTURE_SELECT:

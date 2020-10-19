@@ -187,6 +187,7 @@ void print_hud_lut_string(s8 fontLut, s16 x, s16 y, const u8 *str);
 void print_menu_generic_string(s16 x, s16 y, const u8 *str);
 void print_generic_string_shadow(s8 isAscii, s16 x, s16 y, u8 r, u8 g, u8 b, u8 alpha, const char *strAscii, const u8 *strHex);
 void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8 maxIndex);
+void handle_menu_scrolling_slots(u8 slot, s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8 maxIndex);
 
 #if defined(VERSION_US) || defined(VERSION_EU)
 s16 get_str_x_pos_from_center(s16 centerPos, u8 *str, f32 scale);

@@ -1448,9 +1448,11 @@ void handle_options_menu_actions(void) {
         sIsMenuButtonSelected = TRUE;
     }
 
+    handle_menu_scrolling_slots(0, MENU_SCROLL_HORIZONTAL, &sOptionMenuSelection, 0, 1);
+
     switch (sOptionMenuSelection) {                        
         case 0: // Sound
-            handle_menu_scrolling(MENU_SCROLL_VERTICAL, &sOptionMenuSoundHover, 0, 2); // 3 sound modes - index
+            handle_menu_scrolling_slots(1, MENU_SCROLL_VERTICAL, &sOptionMenuSoundHover, 0, 2); // 3 sound modes - index
             render_arrow_texture_menu(TRUE, ARROW_TEXTURE_SELECT, 28, (sOptionMenuSoundHover * 16) + 64);
             
             if (gPlayer1Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
@@ -1458,24 +1460,16 @@ void handle_options_menu_actions(void) {
                 save_file_set_sound_mode(sSoundMode);
             }
 
-            if (gPlayer3Controller->buttonPressed & R_TRIG) {
-                play_sound(SOUND_MENU_HOVER_ACNH, gDefaultSoundArgs);
-                sOptionMenuSelection += 1;
-            }              
             break;
         case 1: // Language 
-            handle_menu_scrolling(MENU_SCROLL_VERTICAL, &sOptionMenuLangHover, 0, 4); // 5 languages - index
+            handle_menu_scrolling_slots(1, MENU_SCROLL_VERTICAL, &sOptionMenuLangHover, 0, 4); // 5 languages - index
             render_arrow_texture_menu(TRUE, ARROW_TEXTURE_SELECT, 128, (sOptionMenuLangHover * 16) + 64);
             
             if (gPlayer1Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
                 sLanguageMode = sOptionMenuLangHover;
                 eu_set_language(sLanguageMode);
             }
-
-            if (gPlayer3Controller->buttonPressed & L_TRIG) {
-                play_sound(SOUND_MENU_HOVER_ACNH, gDefaultSoundArgs);
-                sOptionMenuSelection -= 1;
-            }            
+         
             break;
     }
 } 
