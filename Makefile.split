@@ -171,8 +171,13 @@ $(BUILD_DIR)/levels/ending/cake_eu.inc.c: levels/ending/cake_eu.png
 # Texture Bin Rules
 # --------------------------------------
 
+# Segment 2 Folders
+SEG2_MISC_FILES := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
+
 # Others
-SEGMENT2_FILES               := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/*.png))
+SEGMENT2_FILES               := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/*.png)) \
+    $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
+
 TITLE_SCREEN_BG_FILES        := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/title_screen_bg/*.png))
 SPOOKY_FILES                 := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/spooky/*.png))
 GENERIC_FILES                := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/generic/*.png))

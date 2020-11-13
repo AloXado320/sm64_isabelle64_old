@@ -1512,37 +1512,71 @@ const Gfx dl_alo_texrect_block_end[] = {
  **************************************************/
 
 /**
- * Dialog balloon border
+ * Dialog background
  */
-ALIGNED8 const u8 alo_ac_dialog_border_ci4_pal[] = {
-#include "textures/segment2/alo_ac_dialog_border_ci4_pal.rgba16.inc.c"
+ALIGNED8 static const u8 alo_ac_dialog_render_part1[] = {
+#include "textures/segment2/dialog/part1.ia8.inc.c"
 };
 
-ALIGNED8 const u8 alo_ac_dialog_border_ci4[] = { // texture called twice with rotation
-#include "textures/segment2/alo_ac_dialog_border_ci4.inc.c"
+ALIGNED8 static const u8 alo_ac_dialog_render_part2[] = {
+#include "textures/segment2/dialog/part2.ia8.inc.c"
 };
 
-/**
- * Dialog balloon background
- */
-ALIGNED8 const u8 alo_ac_dialog_bg_ia4[] = { // texture called twice with rotation
-#include "textures/segment2/alo_ac_dialog_bg.ia4.inc.c"
+ALIGNED8 static const u8 alo_ac_dialog_render_part3[] = {
+#include "textures/segment2/dialog/part3.ia8.inc.c"
 };
 
+ALIGNED8 static const u8 alo_ac_dialog_render_part4[] = {
+#include "textures/segment2/dialog/part4.ia8.inc.c"
+};
+
+ALIGNED8 static const u8 alo_ac_dialog_render_part5[] = {
+#include "textures/segment2/dialog/part5.ia8.inc.c"
+};
+
+ALIGNED8 static const u8 alo_ac_dialog_render_part6[] = {
+#include "textures/segment2/dialog/part6.ia8.inc.c"
+};
+
+ALIGNED8 static const u8 alo_ac_dialog_render_part7[] = {
+#include "textures/segment2/dialog/part7.ia8.inc.c"
+};
+
+ALIGNED8 static const u8 alo_ac_dialog_render_part8[] = {
+#include "textures/segment2/dialog/part8.ia8.inc.c"
+};
+
+const u8 *const alo_ac_dialog_render_lut[] = {
+    alo_ac_dialog_render_part1,
+    alo_ac_dialog_render_part2,
+    alo_ac_dialog_render_part3,
+    alo_ac_dialog_render_part4,
+    alo_ac_dialog_render_part5,
+    alo_ac_dialog_render_part6,
+    alo_ac_dialog_render_part7,
+    alo_ac_dialog_render_part8,
+};
+    
 /**
  * Dialog balloon top name
  */
-ALIGNED8 static const u8 alo_ac_dialog_top_npc_name_ci4_pal[] = {
-#include "textures/segment2/alo_ac_dialog_top_npc_name_ci4_pal.ia16.inc.c"
+ALIGNED8 static const u8 alo_ac_dialog_top_part[] = {
+#include "textures/segment2/dialog/toppart.ia8.inc.c"
 };
 
-ALIGNED8 static const u8 alo_ac_dialog_top_npc_name_ci4[] = {
-#include "textures/segment2/alo_ac_dialog_top_npc_name_ci4.inc.c"
+static const Vtx vertex_balloon_dialog_top_npc_name[] = {
+    {{{     0,      0,      0}, 0, {      0,  32<<6}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   128,      0,      0}, 0, { 128<<6,  32<<6}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   128,     32,      0}, 0, { 128<<6,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     0,     32,      0}, 0, {      0,      0}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
-const Gfx dl_balloon_dialog_top_npc_name[] = {
-    gsDPLoadTLUT_pal16(0, alo_ac_dialog_top_npc_name_ci4_pal),
-    gsDPLoadTextureBlock_4b(alo_ac_dialog_top_npc_name_ci4, G_IM_FMT_CI, 64, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 4, G_TX_NOLOD, G_TX_NOLOD),
+const Gfx dl_balloon_dialog_top_part[] = {
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(alo_ac_dialog_top_part, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 32, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 6, 5, 0, 0),
+    gsSPVertex(vertex_balloon_dialog_top_npc_name, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0, 0,  2,  3, 0x0),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
 
@@ -1553,14 +1587,14 @@ const Gfx dl_balloon_dialog_top_npc_name[] = {
 /**
  * Menu Arrows
  */
-ALIGNED8 const u8 alo_menu_arrows_ci4_pallete[] = {
-#include "textures/segment2/alo_menu_arrows_ci4_pallete.ia16.inc.c"
-};
- 
-ALIGNED8 const u8 alo_menu_arrows_ci4[] = {
-#include "textures/segment2/alo_menu_arrows_ci4.inc.c"
+ALIGNED8 const u8 alo_menu_arrows_hand[] = {
+#include "textures/segment2/dialog/handselect.ia8.inc.c"
 };
 
+ALIGNED8 const u8 alo_menu_arrows_next_page[] = {
+#include "textures/segment2/dialog/arrownextpage.ia8.inc.c"
+};
+ 
 /**
  * Background Menu
  */
@@ -1784,6 +1818,13 @@ const Gfx dl_draw_text_bg_box[] = {
     gsSPEndDisplayList(),
 };
 
+static const Vtx vertex_ia_char[] = {
+    {{{     0,      0,      0}, 0, {     0,  16<<6}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{    16,      0,      0}, 0, { 16<<6,  16<<6}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{    16,     16,      0}, 0, { 16<<6,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     0,     16,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+};
+
 const Gfx dl_ia_text_begin[] = {
     gsDPPipeSync(),
     gsDPSetTexturePersp(G_TP_NONE),
@@ -1796,6 +1837,15 @@ const Gfx dl_ia_text_begin[] = {
 
 const Gfx dl_ia_text_tex_settings[] = {
     gsDPLoadNonTextureBlock(G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+const Gfx dl_ia_text_tex_settings_tris[] = {
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadNonTextureBlock(G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, 4, 4, 0, 0),
+    gsSPVertex(vertex_ia_char, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0, 0,  2,  3, 0x0),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
 

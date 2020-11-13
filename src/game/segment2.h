@@ -49,7 +49,9 @@ extern u8* main_hud_lut[58];
 extern Gfx dl_alo_texrect_block_start[];
 extern Gfx dl_alo_texrect_block_end[];
 
-extern Gfx dl_balloon_dialog_top_npc_name[];
+extern u8* alo_ac_dialog_render_lut[];
+
+extern Gfx dl_balloon_dialog_top_part[];
 
 extern u8 texture_hud_rgba16_isabelle[];
 extern u8 texture_hud_rgba16_bells[];
@@ -70,6 +72,7 @@ extern Gfx dl_hud_img_end[];
 extern void *main_font_lut[];
 extern Gfx dl_rgba_text_tex_settings[];
 extern Gfx dl_ia_text_tex_settings[];
+extern Gfx dl_ia_text_tex_settings_tris[];
 extern Gfx dl_rgba16_load_tex_block[];
 extern void *main_credits_font_lut[];
 extern u8* main_hud_camera_lut[6];

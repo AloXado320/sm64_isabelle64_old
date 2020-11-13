@@ -115,7 +115,7 @@ sm64config.txt
 !/sound/samples/sfx_mario_peach/*
 
 # General Textures
-!/textures/segment2/*
+!/textures/segment2/**
 
 # Crash Screen Textures
 !/textures/crash_screen/*
