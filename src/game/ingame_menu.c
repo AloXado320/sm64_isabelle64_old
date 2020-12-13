@@ -2385,7 +2385,7 @@ void background_scene(void) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     gDPLoadTLUT_pal16(gDisplayListHead++, 0, alo_ac_bg_menus_pal);
-    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_bg_menus_ci4, G_IM_FMT_IA, 64, 64, 0,
+    gDPLoadTextureBlock_4b(gDisplayListHead++, alo_ac_bg_menus_ci4, G_IM_FMT_CI, 64, 64, 0,
         G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 6, 6, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPScisTextureRectangle(gDisplayListHead++, GFX_DIMENSIONS_FROM_LEFT_EDGE(0) * 4, 0 << 2, GFX_DIMENSIONS_FROM_RIGHT_EDGE(0) * 4, SCREEN_HEIGHT << 2, G_TX_RENDERTILE,
