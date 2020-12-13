@@ -172,7 +172,7 @@ $(BUILD_DIR)/levels/ending/cake_eu.inc.c: levels/ending/cake_eu.png
 # --------------------------------------
 
 # Segment 2 Folders
-SEG2_DIALOG_FILES := (patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
+SEG2_DIALOG_FILES := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
 
 # Others
 SEGMENT2_FILES               := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/*.png))
