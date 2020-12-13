@@ -35,10 +35,6 @@
 #include "options_menu.h"
 #endif
 
-extern Gfx *gDisplayListHead;
-extern s16 gCurrCourseNum;
-extern s16 gCurrSaveFileNum;
-
 u16 gDialogColorFadeTimer;
 s8 gLastDialogLineNum;
 s32 gDialogVariable;

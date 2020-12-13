@@ -55,6 +55,10 @@ static s16 sScriptStatus;
 static s32 sRegister;
 static struct LevelCommand *sCurrentCmd;
 
+#ifdef USE_SYSTEM_MALLOC
+static struct MemoryPool *sMemPoolForGoddard;
+#endif
+
 static s32 eval_script_op(s8 op, s32 arg) {
     s32 result = 0;
 
@@ -309,8 +313,12 @@ static void level_cmd_clear_level(void) {
 
 static void level_cmd_alloc_level_pool(void) {
     if (sLevelPool == NULL) {
+#ifdef USE_SYSTEM_MALLOC
+        sLevelPool = alloc_only_pool_init();
+#else
         sLevelPool = alloc_only_pool_init(main_pool_available() - sizeof(struct AllocOnlyPool),
                                           MEMORY_POOL_LEFT);
+#endif
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -319,7 +327,9 @@ static void level_cmd_alloc_level_pool(void) {
 static void level_cmd_free_level_pool(void) {
     s32 i;
 
+#ifndef USE_SYSTEM_MALLOC
     alloc_only_pool_resize(sLevelPool, sLevelPool->usedSpace);
+#endif
     sLevelPool = NULL;
 
     for (i = 0; i < 8; i++) {
