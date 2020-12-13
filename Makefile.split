@@ -5,7 +5,7 @@
 # obtain a list of segments from the *.c files in bin directory
 SEGMENTS := $(notdir $(basename $(wildcard bin/*.c))) $(addprefix $(VERSION)/,$(notdir $(basename $(wildcard bin/$(VERSION)/*.c)))) $(addsuffix _skybox,$(notdir $(basename $(wildcard textures/skyboxes/*.png))))
 ACTORS := $(filter %/,$(wildcard actors/*/))
-TEXTURE_DIRS := $(addprefix textures/,$(SEGMENTS)) $(ACTORS) textures/crash_screen textures/intro_raw textures/ipl3_raw textures/skybox_tiles
+TEXTURE_DIRS := $(addprefix textures/,$(SEGMENTS)) $(ACTORS) textures/crash_screen textures/intro_raw textures/ipl3_raw textures/skybox_tiles textures/segment2/dialog
 
 # NOTE: textures assume naming convention "texture.<encoding>.png" generates "texture.<encoding>"
 
@@ -172,12 +172,10 @@ $(BUILD_DIR)/levels/ending/cake_eu.inc.c: levels/ending/cake_eu.png
 # --------------------------------------
 
 # Segment 2 Folders
-SEG2_MISC_FILES := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
+SEG2_DIALOG_FILES := (patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
 
 # Others
-SEGMENT2_FILES               := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/*.png)) \
-    $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/dialog/*.png))
-
+SEGMENT2_FILES               := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/segment2/*.png))
 TITLE_SCREEN_BG_FILES        := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/title_screen_bg/*.png))
 SPOOKY_FILES                 := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/spooky/*.png))
 GENERIC_FILES                := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/generic/*.png))
@@ -194,7 +192,9 @@ MOUNTAIN_FILES               := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DI
 GRASS_FILES                  := $(patsubst %.png,%.inc.c,$(wildcard $(TEXTURE_DIR)/grass/*.png))
 
 # Texture Files
-$(BUILD_DIR)/bin/segment2.o: $(addprefix $(BUILD_DIR)/,$(SEGMENT2_FILES))
+$(BUILD_DIR)/bin/segment2.o: $(addprefix $(BUILD_DIR)/,$(SEGMENT2_FILES)) \
+                             $(addprefix $(BUILD_DIR)/,$(SEG2_DIALOG_FILES))
+
 $(BUILD_DIR)/bin/title_screen_bg.o: $(addprefix $(BUILD_DIR)/,$(TITLE_SCREEN_BG_FILES))
 $(BUILD_DIR)/bin/spooky.o: $(addprefix $(BUILD_DIR)/,$(SPOOKY_FILES))
 $(BUILD_DIR)/bin/generic.o: $(addprefix $(BUILD_DIR)/,$(GENERIC_FILES))
